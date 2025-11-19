@@ -6,8 +6,8 @@
 \usage{
 match_couples(
   left,
-  right,
-  vars,
+  right = NULL,
+  vars = NULL,
   distance = "euclidean",
   weights = NULL,
   scale = FALSE,
