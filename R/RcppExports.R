@@ -2,82 +2,154 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 lap_prepare_cost_matrix <- function(cost, maximize) {
-    .Call(`_lapr_lap_prepare_cost_matrix`, cost, maximize)
+    .Call(`_couplr_lap_prepare_cost_matrix`, cost, maximize)
 }
 
 lap_solve_bruteforce <- function(cost, maximize) {
-    .Call(`_lapr_lap_solve_bruteforce`, cost, maximize)
+    .Call(`_couplr_lap_solve_bruteforce`, cost, maximize)
 }
 
 lap_solve_jv <- function(cost, maximize) {
-    .Call(`_lapr_lap_solve_jv`, cost, maximize)
+    .Call(`_couplr_lap_solve_jv`, cost, maximize)
 }
 
 lap_kbest_murty <- function(cost, k, maximize, single_method = "jv") {
-    .Call(`_lapr_lap_kbest_murty`, cost, k, maximize, single_method)
+    .Call(`_couplr_lap_kbest_murty`, cost, k, maximize, single_method)
 }
 
 lap_solve_auction <- function(cost, maximize, eps = NULL) {
-    .Call(`_lapr_lap_solve_auction`, cost, maximize, eps)
+    .Call(`_couplr_lap_solve_auction`, cost, maximize, eps)
 }
 
 lap_solve_auction_scaled <- function(cost, maximize, schedule = "alpha7") {
-    .Call(`_lapr_lap_solve_auction_scaled`, cost, maximize, schedule)
+    .Call(`_couplr_lap_solve_auction_scaled`, cost, maximize, schedule)
 }
 
 lap_solve_auction_scaled_params <- function(cost, maximize, initial_epsilon_factor = 1.0, alpha = 7.0, final_epsilon = NULL) {
-    .Call(`_lapr_lap_solve_auction_scaled_params`, cost, maximize, initial_epsilon_factor, alpha, final_epsilon)
+    .Call(`_couplr_lap_solve_auction_scaled_params`, cost, maximize, initial_epsilon_factor, alpha, final_epsilon)
 }
 
 lap_solve_auction_gs <- function(cost, maximize, eps = NULL) {
-    .Call(`_lapr_lap_solve_auction_gs`, cost, maximize, eps)
+    .Call(`_couplr_lap_solve_auction_gs`, cost, maximize, eps)
 }
 
 lap_solve_ssp <- function(cost, maximize) {
-    .Call(`_lapr_lap_solve_ssp`, cost, maximize)
+    .Call(`_couplr_lap_solve_ssp`, cost, maximize)
 }
 
 lap_solve_hungarian <- function(cost, maximize) {
-    .Call(`_lapr_lap_solve_hungarian`, cost, maximize)
+    .Call(`_couplr_lap_solve_hungarian`, cost, maximize)
 }
 
 lap_solve_csflow <- function(cost, maximize) {
-    .Call(`_lapr_lap_solve_csflow`, cost, maximize)
+    .Call(`_couplr_lap_solve_csflow`, cost, maximize)
 }
 
 lap_kbest_lawler <- function(cost, k, method_base = "jv", maximize = FALSE) {
-    .Call(`_lapr_lap_kbest_lawler`, cost, k, method_base, maximize)
+    .Call(`_couplr_lap_kbest_lawler`, cost, k, method_base, maximize)
 }
 
 lap_solve_hk01 <- function(cost, maximize) {
-    .Call(`_lapr_lap_solve_hk01`, cost, maximize)
+    .Call(`_couplr_lap_solve_hk01`, cost, maximize)
+}
+
+lap_solve_line_metric_cpp <- function(x, y, cost = "L1", maximize = FALSE) {
+    .Call(`_couplr_lap_solve_line_metric_cpp`, x, y, cost, maximize)
+}
+
+lap_solve_ssap_bucket <- function(cost, maximize) {
+    .Call(`_couplr_lap_solve_ssap_bucket`, cost, maximize)
+}
+
+lap_solve_gabow_tarjan <- function(cost, maximize) {
+    .Call(`_couplr_lap_solve_gabow_tarjan`, cost, maximize)
+}
+
+greedy_matching_sorted <- function(cost_matrix, maximize = FALSE) {
+    .Call(`_couplr_greedy_matching_sorted`, cost_matrix, maximize)
+}
+
+greedy_matching_row_best <- function(cost_matrix, maximize = FALSE) {
+    .Call(`_couplr_greedy_matching_row_best`, cost_matrix, maximize)
+}
+
+greedy_matching_pq <- function(cost_matrix, maximize = FALSE) {
+    .Call(`_couplr_greedy_matching_pq`, cost_matrix, maximize)
+}
+
+greedy_matching <- function(cost_matrix, maximize = FALSE, strategy = "row_best") {
+    .Call(`_couplr_greedy_matching`, cost_matrix, maximize, strategy)
 }
 
 analyze_color_overlap_cpp <- function(pixelsA, pixelsB, H, W, quantize_bits = 5L) {
-    .Call(`_lapr_analyze_color_overlap_cpp`, pixelsA, pixelsB, H, W, quantize_bits)
+    .Call(`_couplr_analyze_color_overlap_cpp`, pixelsA, pixelsB, H, W, quantize_bits)
 }
 
 compute_pixel_cost_cpp <- function(pixelsA, pixelsB, H, W, alpha, beta) {
-    .Call(`_lapr_compute_pixel_cost_cpp`, pixelsA, pixelsB, H, W, alpha, beta)
+    .Call(`_couplr_compute_pixel_cost_cpp`, pixelsA, pixelsB, H, W, alpha, beta)
 }
 
 downscale_image_cpp <- function(pixels, H, W, H_new, W_new) {
-    .Call(`_lapr_downscale_image_cpp`, pixels, H, W, H_new, W_new)
+    .Call(`_couplr_downscale_image_cpp`, pixels, H, W, H_new, W_new)
 }
 
 upscale_assignment_cpp <- function(assignment, H_orig, W_orig, H_scaled, W_scaled) {
-    .Call(`_lapr_upscale_assignment_cpp`, assignment, H_orig, W_orig, H_scaled, W_scaled)
+    .Call(`_couplr_upscale_assignment_cpp`, assignment, H_orig, W_orig, H_scaled, W_scaled)
 }
 
 morph_pixel_level_cpp <- function(pixelsA, pixelsB, assignment, H, W, n_frames) {
-    .Call(`_lapr_morph_pixel_level_cpp`, pixelsA, pixelsB, assignment, H, W, n_frames)
+    .Call(`_couplr_morph_pixel_level_cpp`, pixelsA, pixelsB, assignment, H, W, n_frames)
 }
 
 color_palette_info_cpp <- function(pixelsA, pixelsB, H, W, quantize_bits = 5L) {
-    .Call(`_lapr_color_palette_info_cpp`, pixelsA, pixelsB, H, W, quantize_bits)
+    .Call(`_couplr_color_palette_info_cpp`, pixelsA, pixelsB, H, W, quantize_bits)
 }
 
 spatial_cost_matrix_cpp <- function(idxA, idxB, H, W) {
-    .Call(`_lapr_spatial_cost_matrix_cpp`, idxA, idxB, H, W)
+    .Call(`_couplr_spatial_cost_matrix_cpp`, idxA, idxB, H, W)
+}
+
+lap_solve_cycle_cancel <- function(cost, maximize) {
+    .Call(`_couplr_lap_solve_cycle_cancel`, cost, maximize)
+}
+
+gt_cost_length <- function(c_ij, in_matching) {
+    .Call(`_couplr_gt_cost_length`, c_ij, in_matching)
+}
+
+gt_is_eligible <- function(c_ij, in_matching, yu, yv) {
+    .Call(`_couplr_gt_is_eligible`, c_ij, in_matching, yu, yv)
+}
+
+gt_check_one_feasible <- function(cost_r, row_match_r, col_match_r, y_u_r, y_v_r) {
+    .Call(`_couplr_gt_check_one_feasible`, cost_r, row_match_r, col_match_r, y_u_r, y_v_r)
+}
+
+gt_build_equality_graph <- function(cost_r, row_match_r, y_u_r, y_v_r) {
+    .Call(`_couplr_gt_build_equality_graph`, cost_r, row_match_r, y_u_r, y_v_r)
+}
+
+gt_augment_along_path <- function(edges_r, row_match_r, col_match_r) {
+    .Call(`_couplr_gt_augment_along_path`, edges_r, row_match_r, col_match_r)
+}
+
+gt_find_maximal_augmenting_paths <- function(eq_graph_r, row_match_r, col_match_r) {
+    .Call(`_couplr_gt_find_maximal_augmenting_paths`, eq_graph_r, row_match_r, col_match_r)
+}
+
+gt_build_cl_matrix <- function(cost_r, row_match_r) {
+    .Call(`_couplr_gt_build_cl_matrix`, cost_r, row_match_r)
+}
+
+gt_hungarian_step_one_feasible <- function(cost_r, row_match_r, col_match_r, y_u_r, y_v_r) {
+    .Call(`_couplr_gt_hungarian_step_one_feasible`, cost_r, row_match_r, col_match_r, y_u_r, y_v_r)
+}
+
+gt_match_gt <- function(cost_r, row_match_r = NULL, col_match_r = NULL, y_u_r = NULL, y_v_r = NULL, max_iters = 1000L, check_feasible = FALSE) {
+    .Call(`_couplr_gt_match_gt`, cost_r, row_match_r, col_match_r, y_u_r, y_v_r, max_iters, check_feasible)
+}
+
+scale_match_cpp <- function(cost_r, row_match_r = NULL, col_match_r = NULL, y_u_r = NULL, y_v_r = NULL) {
+    .Call(`_couplr_scale_match_cpp`, cost_r, row_match_r, col_match_r, y_u_r, y_v_r)
 }
 

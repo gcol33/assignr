@@ -233,3 +233,64 @@ summary.lap_solve_kbest_result <- function(object, ...) {
     dplyr::summarise(n_assignments = dplyr::n(), .groups = "drop") |>
     dplyr::arrange(rank)
 }
+
+# ==============================================================================
+# Low-Level K-Best Function (Internal Helper)
+# ==============================================================================
+
+#' K-best linear assignment solutions (internal helper)
+#'
+#' Internal helper function for computing k-best solutions.
+#' Users should use `lap_solve_kbest()` instead.
+#'
+#' @param cost Cost matrix
+#' @param k Number of solutions
+#' @param maximize Maximize flag
+#' @param method Algorithm (only "murty" supported)
+#' @param single_method Base solver
+#'
+#' @return data.frame with solution details
+#' @keywords internal
+#' @noRd
+kbest_assignment <- function(cost, k = 3, maximize = FALSE,
+                             method = c("murty"),
+                             single_method = c("jv")) {
+  method <- match.arg(method)
+  single_method <- match.arg(single_method)
+  cost <- as.matrix(cost)
+  if (any(is.nan(cost))) stop("NaN not allowed in `cost`")
+
+  x <- lap_kbest_murty(cost, as.integer(k), maximize, single_method)
+
+  matches <- x$matches
+  totals  <- as.numeric(x$totals)
+  nsol <- nrow(matches)
+  n <- ncol(matches)
+
+  if (nsol == 0L) {
+    return(data.frame(
+      rank = integer(),
+      match_id = integer(),
+      row = integer(),
+      col = integer(),
+      cost_edge = double(),
+      cost_total = double()
+    ))
+  }
+
+  rows <- rep(seq_len(n), times = nsol)
+  cols <- as.integer(t(matches))
+  rank <- rep(seq_len(nsol), each = n)
+  match_id <- rep(seq_len(nsol), each = n)
+  edge_costs <- cost[cbind(rows, cols)]
+  tot <- rep(totals, each = n)
+
+  data.frame(
+    rank = rank,
+    match_id = match_id,
+    row = rows,
+    col = cols,
+    cost_edge = edge_costs,
+    cost_total = tot
+  )
+}

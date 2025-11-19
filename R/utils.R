@@ -16,14 +16,19 @@ validate_cost_data <- function(x, forbidden = NA) {
 
   cost_matrix <- as.matrix(x)
 
+  # FIX: Check for empty matrix BEFORE checking type
+  # This ensures we get "empty" error instead of "must be numeric" error
+  # when user passes matrix(nrow = 0, ncol = 0) which defaults to logical type
+  if (nrow(cost_matrix) == 0 || ncol(cost_matrix) == 0) {
+    stop("Cost matrix must have at least one row and one column.")
+  }
+
   if (!is.numeric(cost_matrix)) {
     stop("Cost matrix must be numeric.")
   }
+  
   if (any(is.nan(cost_matrix))) {
     stop("NaN values are not allowed. Use NA or Inf for forbidden assignments.")
-  }
-  if (nrow(cost_matrix) == 0 || ncol(cost_matrix) == 0) {
-    stop("Cost matrix must have at least one row and one column.")
   }
 
   cost_matrix

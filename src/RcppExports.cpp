@@ -13,7 +13,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 // lap_prepare_cost_matrix
 Rcpp::List lap_prepare_cost_matrix(NumericMatrix cost, bool maximize);
-RcppExport SEXP _lapr_lap_prepare_cost_matrix(SEXP costSEXP, SEXP maximizeSEXP) {
+RcppExport SEXP _couplr_lap_prepare_cost_matrix(SEXP costSEXP, SEXP maximizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -25,7 +25,7 @@ END_RCPP
 }
 // lap_solve_bruteforce
 Rcpp::List lap_solve_bruteforce(NumericMatrix cost, bool maximize);
-RcppExport SEXP _lapr_lap_solve_bruteforce(SEXP costSEXP, SEXP maximizeSEXP) {
+RcppExport SEXP _couplr_lap_solve_bruteforce(SEXP costSEXP, SEXP maximizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -37,7 +37,7 @@ END_RCPP
 }
 // lap_solve_jv
 Rcpp::List lap_solve_jv(NumericMatrix cost, bool maximize);
-RcppExport SEXP _lapr_lap_solve_jv(SEXP costSEXP, SEXP maximizeSEXP) {
+RcppExport SEXP _couplr_lap_solve_jv(SEXP costSEXP, SEXP maximizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -49,7 +49,7 @@ END_RCPP
 }
 // lap_kbest_murty
 Rcpp::List lap_kbest_murty(Rcpp::NumericMatrix cost, int k, bool maximize, std::string single_method);
-RcppExport SEXP _lapr_lap_kbest_murty(SEXP costSEXP, SEXP kSEXP, SEXP maximizeSEXP, SEXP single_methodSEXP) {
+RcppExport SEXP _couplr_lap_kbest_murty(SEXP costSEXP, SEXP kSEXP, SEXP maximizeSEXP, SEXP single_methodSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -63,7 +63,7 @@ END_RCPP
 }
 // lap_solve_auction
 Rcpp::List lap_solve_auction(Rcpp::NumericMatrix cost, bool maximize, Rcpp::Nullable<double> eps);
-RcppExport SEXP _lapr_lap_solve_auction(SEXP costSEXP, SEXP maximizeSEXP, SEXP epsSEXP) {
+RcppExport SEXP _couplr_lap_solve_auction(SEXP costSEXP, SEXP maximizeSEXP, SEXP epsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -76,7 +76,7 @@ END_RCPP
 }
 // lap_solve_auction_scaled
 Rcpp::List lap_solve_auction_scaled(Rcpp::NumericMatrix cost, bool maximize, std::string schedule);
-RcppExport SEXP _lapr_lap_solve_auction_scaled(SEXP costSEXP, SEXP maximizeSEXP, SEXP scheduleSEXP) {
+RcppExport SEXP _couplr_lap_solve_auction_scaled(SEXP costSEXP, SEXP maximizeSEXP, SEXP scheduleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -89,7 +89,7 @@ END_RCPP
 }
 // lap_solve_auction_scaled_params
 Rcpp::List lap_solve_auction_scaled_params(Rcpp::NumericMatrix cost, bool maximize, double initial_epsilon_factor, double alpha, Rcpp::Nullable<double> final_epsilon);
-RcppExport SEXP _lapr_lap_solve_auction_scaled_params(SEXP costSEXP, SEXP maximizeSEXP, SEXP initial_epsilon_factorSEXP, SEXP alphaSEXP, SEXP final_epsilonSEXP) {
+RcppExport SEXP _couplr_lap_solve_auction_scaled_params(SEXP costSEXP, SEXP maximizeSEXP, SEXP initial_epsilon_factorSEXP, SEXP alphaSEXP, SEXP final_epsilonSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -104,7 +104,7 @@ END_RCPP
 }
 // lap_solve_auction_gs
 Rcpp::List lap_solve_auction_gs(Rcpp::NumericMatrix cost, bool maximize, Rcpp::Nullable<double> eps);
-RcppExport SEXP _lapr_lap_solve_auction_gs(SEXP costSEXP, SEXP maximizeSEXP, SEXP epsSEXP) {
+RcppExport SEXP _couplr_lap_solve_auction_gs(SEXP costSEXP, SEXP maximizeSEXP, SEXP epsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -117,7 +117,7 @@ END_RCPP
 }
 // lap_solve_ssp
 Rcpp::List lap_solve_ssp(Rcpp::NumericMatrix cost, bool maximize);
-RcppExport SEXP _lapr_lap_solve_ssp(SEXP costSEXP, SEXP maximizeSEXP) {
+RcppExport SEXP _couplr_lap_solve_ssp(SEXP costSEXP, SEXP maximizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -129,7 +129,7 @@ END_RCPP
 }
 // lap_solve_hungarian
 Rcpp::List lap_solve_hungarian(Rcpp::NumericMatrix cost, bool maximize);
-RcppExport SEXP _lapr_lap_solve_hungarian(SEXP costSEXP, SEXP maximizeSEXP) {
+RcppExport SEXP _couplr_lap_solve_hungarian(SEXP costSEXP, SEXP maximizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -141,7 +141,7 @@ END_RCPP
 }
 // lap_solve_csflow
 Rcpp::List lap_solve_csflow(Rcpp::NumericMatrix cost, bool maximize);
-RcppExport SEXP _lapr_lap_solve_csflow(SEXP costSEXP, SEXP maximizeSEXP) {
+RcppExport SEXP _couplr_lap_solve_csflow(SEXP costSEXP, SEXP maximizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -153,7 +153,7 @@ END_RCPP
 }
 // lap_kbest_lawler
 Rcpp::List lap_kbest_lawler(Rcpp::NumericMatrix cost, int k, std::string method_base, bool maximize);
-RcppExport SEXP _lapr_lap_kbest_lawler(SEXP costSEXP, SEXP kSEXP, SEXP method_baseSEXP, SEXP maximizeSEXP) {
+RcppExport SEXP _couplr_lap_kbest_lawler(SEXP costSEXP, SEXP kSEXP, SEXP method_baseSEXP, SEXP maximizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -167,7 +167,7 @@ END_RCPP
 }
 // lap_solve_hk01
 Rcpp::List lap_solve_hk01(Rcpp::NumericMatrix cost, bool maximize);
-RcppExport SEXP _lapr_lap_solve_hk01(SEXP costSEXP, SEXP maximizeSEXP) {
+RcppExport SEXP _couplr_lap_solve_hk01(SEXP costSEXP, SEXP maximizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -177,9 +177,96 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// lap_solve_line_metric_cpp
+Rcpp::List lap_solve_line_metric_cpp(Rcpp::NumericVector x, Rcpp::NumericVector y, std::string cost, bool maximize);
+RcppExport SEXP _couplr_lap_solve_line_metric_cpp(SEXP xSEXP, SEXP ySEXP, SEXP costSEXP, SEXP maximizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< std::string >::type cost(costSEXP);
+    Rcpp::traits::input_parameter< bool >::type maximize(maximizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(lap_solve_line_metric_cpp(x, y, cost, maximize));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lap_solve_ssap_bucket
+Rcpp::List lap_solve_ssap_bucket(Rcpp::NumericMatrix cost, bool maximize);
+RcppExport SEXP _couplr_lap_solve_ssap_bucket(SEXP costSEXP, SEXP maximizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost(costSEXP);
+    Rcpp::traits::input_parameter< bool >::type maximize(maximizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(lap_solve_ssap_bucket(cost, maximize));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lap_solve_gabow_tarjan
+Rcpp::List lap_solve_gabow_tarjan(Rcpp::NumericMatrix cost, bool maximize);
+RcppExport SEXP _couplr_lap_solve_gabow_tarjan(SEXP costSEXP, SEXP maximizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost(costSEXP);
+    Rcpp::traits::input_parameter< bool >::type maximize(maximizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(lap_solve_gabow_tarjan(cost, maximize));
+    return rcpp_result_gen;
+END_RCPP
+}
+// greedy_matching_sorted
+Rcpp::List greedy_matching_sorted(Rcpp::NumericMatrix cost_matrix, bool maximize);
+RcppExport SEXP _couplr_greedy_matching_sorted(SEXP cost_matrixSEXP, SEXP maximizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_matrix(cost_matrixSEXP);
+    Rcpp::traits::input_parameter< bool >::type maximize(maximizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(greedy_matching_sorted(cost_matrix, maximize));
+    return rcpp_result_gen;
+END_RCPP
+}
+// greedy_matching_row_best
+Rcpp::List greedy_matching_row_best(Rcpp::NumericMatrix cost_matrix, bool maximize);
+RcppExport SEXP _couplr_greedy_matching_row_best(SEXP cost_matrixSEXP, SEXP maximizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_matrix(cost_matrixSEXP);
+    Rcpp::traits::input_parameter< bool >::type maximize(maximizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(greedy_matching_row_best(cost_matrix, maximize));
+    return rcpp_result_gen;
+END_RCPP
+}
+// greedy_matching_pq
+Rcpp::List greedy_matching_pq(Rcpp::NumericMatrix cost_matrix, bool maximize);
+RcppExport SEXP _couplr_greedy_matching_pq(SEXP cost_matrixSEXP, SEXP maximizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_matrix(cost_matrixSEXP);
+    Rcpp::traits::input_parameter< bool >::type maximize(maximizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(greedy_matching_pq(cost_matrix, maximize));
+    return rcpp_result_gen;
+END_RCPP
+}
+// greedy_matching
+Rcpp::List greedy_matching(Rcpp::NumericMatrix cost_matrix, bool maximize, std::string strategy);
+RcppExport SEXP _couplr_greedy_matching(SEXP cost_matrixSEXP, SEXP maximizeSEXP, SEXP strategySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_matrix(cost_matrixSEXP);
+    Rcpp::traits::input_parameter< bool >::type maximize(maximizeSEXP);
+    Rcpp::traits::input_parameter< std::string >::type strategy(strategySEXP);
+    rcpp_result_gen = Rcpp::wrap(greedy_matching(cost_matrix, maximize, strategy));
+    return rcpp_result_gen;
+END_RCPP
+}
 // analyze_color_overlap_cpp
 Rcpp::List analyze_color_overlap_cpp(Rcpp::NumericVector pixelsA, Rcpp::NumericVector pixelsB, int H, int W, int quantize_bits);
-RcppExport SEXP _lapr_analyze_color_overlap_cpp(SEXP pixelsASEXP, SEXP pixelsBSEXP, SEXP HSEXP, SEXP WSEXP, SEXP quantize_bitsSEXP) {
+RcppExport SEXP _couplr_analyze_color_overlap_cpp(SEXP pixelsASEXP, SEXP pixelsBSEXP, SEXP HSEXP, SEXP WSEXP, SEXP quantize_bitsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -194,7 +281,7 @@ END_RCPP
 }
 // compute_pixel_cost_cpp
 Rcpp::NumericMatrix compute_pixel_cost_cpp(const Rcpp::NumericVector& pixelsA, const Rcpp::NumericVector& pixelsB, int H, int W, double alpha, double beta);
-RcppExport SEXP _lapr_compute_pixel_cost_cpp(SEXP pixelsASEXP, SEXP pixelsBSEXP, SEXP HSEXP, SEXP WSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
+RcppExport SEXP _couplr_compute_pixel_cost_cpp(SEXP pixelsASEXP, SEXP pixelsBSEXP, SEXP HSEXP, SEXP WSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -210,7 +297,7 @@ END_RCPP
 }
 // downscale_image_cpp
 Rcpp::NumericVector downscale_image_cpp(Rcpp::NumericVector pixels, int H, int W, int H_new, int W_new);
-RcppExport SEXP _lapr_downscale_image_cpp(SEXP pixelsSEXP, SEXP HSEXP, SEXP WSEXP, SEXP H_newSEXP, SEXP W_newSEXP) {
+RcppExport SEXP _couplr_downscale_image_cpp(SEXP pixelsSEXP, SEXP HSEXP, SEXP WSEXP, SEXP H_newSEXP, SEXP W_newSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -225,7 +312,7 @@ END_RCPP
 }
 // upscale_assignment_cpp
 Rcpp::IntegerVector upscale_assignment_cpp(Rcpp::IntegerVector assignment, int H_orig, int W_orig, int H_scaled, int W_scaled);
-RcppExport SEXP _lapr_upscale_assignment_cpp(SEXP assignmentSEXP, SEXP H_origSEXP, SEXP W_origSEXP, SEXP H_scaledSEXP, SEXP W_scaledSEXP) {
+RcppExport SEXP _couplr_upscale_assignment_cpp(SEXP assignmentSEXP, SEXP H_origSEXP, SEXP W_origSEXP, SEXP H_scaledSEXP, SEXP W_scaledSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -240,7 +327,7 @@ END_RCPP
 }
 // morph_pixel_level_cpp
 Rcpp::List morph_pixel_level_cpp(Rcpp::NumericVector pixelsA, Rcpp::NumericVector pixelsB, Rcpp::IntegerVector assignment, int H, int W, int n_frames);
-RcppExport SEXP _lapr_morph_pixel_level_cpp(SEXP pixelsASEXP, SEXP pixelsBSEXP, SEXP assignmentSEXP, SEXP HSEXP, SEXP WSEXP, SEXP n_framesSEXP) {
+RcppExport SEXP _couplr_morph_pixel_level_cpp(SEXP pixelsASEXP, SEXP pixelsBSEXP, SEXP assignmentSEXP, SEXP HSEXP, SEXP WSEXP, SEXP n_framesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -256,7 +343,7 @@ END_RCPP
 }
 // color_palette_info_cpp
 Rcpp::List color_palette_info_cpp(Rcpp::NumericVector pixelsA, Rcpp::NumericVector pixelsB, int H, int W, int quantize_bits);
-RcppExport SEXP _lapr_color_palette_info_cpp(SEXP pixelsASEXP, SEXP pixelsBSEXP, SEXP HSEXP, SEXP WSEXP, SEXP quantize_bitsSEXP) {
+RcppExport SEXP _couplr_color_palette_info_cpp(SEXP pixelsASEXP, SEXP pixelsBSEXP, SEXP HSEXP, SEXP WSEXP, SEXP quantize_bitsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -271,7 +358,7 @@ END_RCPP
 }
 // spatial_cost_matrix_cpp
 Rcpp::NumericMatrix spatial_cost_matrix_cpp(Rcpp::IntegerVector idxA, Rcpp::IntegerVector idxB, int H, int W);
-RcppExport SEXP _lapr_spatial_cost_matrix_cpp(SEXP idxASEXP, SEXP idxBSEXP, SEXP HSEXP, SEXP WSEXP) {
+RcppExport SEXP _couplr_spatial_cost_matrix_cpp(SEXP idxASEXP, SEXP idxBSEXP, SEXP HSEXP, SEXP WSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -283,32 +370,202 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// lap_solve_cycle_cancel
+Rcpp::List lap_solve_cycle_cancel(Rcpp::NumericMatrix cost, bool maximize);
+RcppExport SEXP _couplr_lap_solve_cycle_cancel(SEXP costSEXP, SEXP maximizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost(costSEXP);
+    Rcpp::traits::input_parameter< bool >::type maximize(maximizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(lap_solve_cycle_cancel(cost, maximize));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gt_cost_length
+long long gt_cost_length(long long c_ij, bool in_matching);
+RcppExport SEXP _couplr_gt_cost_length(SEXP c_ijSEXP, SEXP in_matchingSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< long long >::type c_ij(c_ijSEXP);
+    Rcpp::traits::input_parameter< bool >::type in_matching(in_matchingSEXP);
+    rcpp_result_gen = Rcpp::wrap(gt_cost_length(c_ij, in_matching));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gt_is_eligible
+bool gt_is_eligible(long long c_ij, bool in_matching, long long yu, long long yv);
+RcppExport SEXP _couplr_gt_is_eligible(SEXP c_ijSEXP, SEXP in_matchingSEXP, SEXP yuSEXP, SEXP yvSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< long long >::type c_ij(c_ijSEXP);
+    Rcpp::traits::input_parameter< bool >::type in_matching(in_matchingSEXP);
+    Rcpp::traits::input_parameter< long long >::type yu(yuSEXP);
+    Rcpp::traits::input_parameter< long long >::type yv(yvSEXP);
+    rcpp_result_gen = Rcpp::wrap(gt_is_eligible(c_ij, in_matching, yu, yv));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gt_check_one_feasible
+bool gt_check_one_feasible(Rcpp::NumericMatrix cost_r, Rcpp::IntegerVector row_match_r, Rcpp::IntegerVector col_match_r, Rcpp::NumericVector y_u_r, Rcpp::NumericVector y_v_r);
+RcppExport SEXP _couplr_gt_check_one_feasible(SEXP cost_rSEXP, SEXP row_match_rSEXP, SEXP col_match_rSEXP, SEXP y_u_rSEXP, SEXP y_v_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type row_match_r(row_match_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type col_match_r(col_match_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y_u_r(y_u_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y_v_r(y_v_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(gt_check_one_feasible(cost_r, row_match_r, col_match_r, y_u_r, y_v_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gt_build_equality_graph
+Rcpp::List gt_build_equality_graph(Rcpp::NumericMatrix cost_r, Rcpp::IntegerVector row_match_r, Rcpp::NumericVector y_u_r, Rcpp::NumericVector y_v_r);
+RcppExport SEXP _couplr_gt_build_equality_graph(SEXP cost_rSEXP, SEXP row_match_rSEXP, SEXP y_u_rSEXP, SEXP y_v_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type row_match_r(row_match_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y_u_r(y_u_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y_v_r(y_v_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(gt_build_equality_graph(cost_r, row_match_r, y_u_r, y_v_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gt_augment_along_path
+Rcpp::List gt_augment_along_path(Rcpp::IntegerMatrix edges_r, Rcpp::IntegerVector row_match_r, Rcpp::IntegerVector col_match_r);
+RcppExport SEXP _couplr_gt_augment_along_path(SEXP edges_rSEXP, SEXP row_match_rSEXP, SEXP col_match_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type edges_r(edges_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type row_match_r(row_match_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type col_match_r(col_match_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(gt_augment_along_path(edges_r, row_match_r, col_match_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gt_find_maximal_augmenting_paths
+Rcpp::List gt_find_maximal_augmenting_paths(Rcpp::List eq_graph_r, Rcpp::IntegerVector row_match_r, Rcpp::IntegerVector col_match_r);
+RcppExport SEXP _couplr_gt_find_maximal_augmenting_paths(SEXP eq_graph_rSEXP, SEXP row_match_rSEXP, SEXP col_match_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type eq_graph_r(eq_graph_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type row_match_r(row_match_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type col_match_r(col_match_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(gt_find_maximal_augmenting_paths(eq_graph_r, row_match_r, col_match_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gt_build_cl_matrix
+Rcpp::NumericMatrix gt_build_cl_matrix(Rcpp::NumericMatrix cost_r, Rcpp::IntegerVector row_match_r);
+RcppExport SEXP _couplr_gt_build_cl_matrix(SEXP cost_rSEXP, SEXP row_match_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type row_match_r(row_match_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(gt_build_cl_matrix(cost_r, row_match_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gt_hungarian_step_one_feasible
+Rcpp::List gt_hungarian_step_one_feasible(Rcpp::NumericMatrix cost_r, Rcpp::IntegerVector row_match_r, Rcpp::IntegerVector col_match_r, Rcpp::NumericVector y_u_r, Rcpp::NumericVector y_v_r);
+RcppExport SEXP _couplr_gt_hungarian_step_one_feasible(SEXP cost_rSEXP, SEXP row_match_rSEXP, SEXP col_match_rSEXP, SEXP y_u_rSEXP, SEXP y_v_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type row_match_r(row_match_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type col_match_r(col_match_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y_u_r(y_u_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y_v_r(y_v_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(gt_hungarian_step_one_feasible(cost_r, row_match_r, col_match_r, y_u_r, y_v_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gt_match_gt
+Rcpp::List gt_match_gt(Rcpp::NumericMatrix cost_r, Rcpp::Nullable<Rcpp::IntegerVector> row_match_r, Rcpp::Nullable<Rcpp::IntegerVector> col_match_r, Rcpp::Nullable<Rcpp::NumericVector> y_u_r, Rcpp::Nullable<Rcpp::NumericVector> y_v_r, int max_iters, bool check_feasible);
+RcppExport SEXP _couplr_gt_match_gt(SEXP cost_rSEXP, SEXP row_match_rSEXP, SEXP col_match_rSEXP, SEXP y_u_rSEXP, SEXP y_v_rSEXP, SEXP max_itersSEXP, SEXP check_feasibleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::IntegerVector> >::type row_match_r(row_match_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::IntegerVector> >::type col_match_r(col_match_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::NumericVector> >::type y_u_r(y_u_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::NumericVector> >::type y_v_r(y_v_rSEXP);
+    Rcpp::traits::input_parameter< int >::type max_iters(max_itersSEXP);
+    Rcpp::traits::input_parameter< bool >::type check_feasible(check_feasibleSEXP);
+    rcpp_result_gen = Rcpp::wrap(gt_match_gt(cost_r, row_match_r, col_match_r, y_u_r, y_v_r, max_iters, check_feasible));
+    return rcpp_result_gen;
+END_RCPP
+}
+// scale_match_cpp
+Rcpp::List scale_match_cpp(Rcpp::NumericMatrix cost_r, Rcpp::Nullable<Rcpp::IntegerVector> row_match_r, Rcpp::Nullable<Rcpp::IntegerVector> col_match_r, Rcpp::Nullable<Rcpp::NumericVector> y_u_r, Rcpp::Nullable<Rcpp::NumericVector> y_v_r);
+RcppExport SEXP _couplr_scale_match_cpp(SEXP cost_rSEXP, SEXP row_match_rSEXP, SEXP col_match_rSEXP, SEXP y_u_rSEXP, SEXP y_v_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::IntegerVector> >::type row_match_r(row_match_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::IntegerVector> >::type col_match_r(col_match_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::NumericVector> >::type y_u_r(y_u_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::NumericVector> >::type y_v_r(y_v_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(scale_match_cpp(cost_r, row_match_r, col_match_r, y_u_r, y_v_r));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_lapr_lap_prepare_cost_matrix", (DL_FUNC) &_lapr_lap_prepare_cost_matrix, 2},
-    {"_lapr_lap_solve_bruteforce", (DL_FUNC) &_lapr_lap_solve_bruteforce, 2},
-    {"_lapr_lap_solve_jv", (DL_FUNC) &_lapr_lap_solve_jv, 2},
-    {"_lapr_lap_kbest_murty", (DL_FUNC) &_lapr_lap_kbest_murty, 4},
-    {"_lapr_lap_solve_auction", (DL_FUNC) &_lapr_lap_solve_auction, 3},
-    {"_lapr_lap_solve_auction_scaled", (DL_FUNC) &_lapr_lap_solve_auction_scaled, 3},
-    {"_lapr_lap_solve_auction_scaled_params", (DL_FUNC) &_lapr_lap_solve_auction_scaled_params, 5},
-    {"_lapr_lap_solve_auction_gs", (DL_FUNC) &_lapr_lap_solve_auction_gs, 3},
-    {"_lapr_lap_solve_ssp", (DL_FUNC) &_lapr_lap_solve_ssp, 2},
-    {"_lapr_lap_solve_hungarian", (DL_FUNC) &_lapr_lap_solve_hungarian, 2},
-    {"_lapr_lap_solve_csflow", (DL_FUNC) &_lapr_lap_solve_csflow, 2},
-    {"_lapr_lap_kbest_lawler", (DL_FUNC) &_lapr_lap_kbest_lawler, 4},
-    {"_lapr_lap_solve_hk01", (DL_FUNC) &_lapr_lap_solve_hk01, 2},
-    {"_lapr_analyze_color_overlap_cpp", (DL_FUNC) &_lapr_analyze_color_overlap_cpp, 5},
-    {"_lapr_compute_pixel_cost_cpp", (DL_FUNC) &_lapr_compute_pixel_cost_cpp, 6},
-    {"_lapr_downscale_image_cpp", (DL_FUNC) &_lapr_downscale_image_cpp, 5},
-    {"_lapr_upscale_assignment_cpp", (DL_FUNC) &_lapr_upscale_assignment_cpp, 5},
-    {"_lapr_morph_pixel_level_cpp", (DL_FUNC) &_lapr_morph_pixel_level_cpp, 6},
-    {"_lapr_color_palette_info_cpp", (DL_FUNC) &_lapr_color_palette_info_cpp, 5},
-    {"_lapr_spatial_cost_matrix_cpp", (DL_FUNC) &_lapr_spatial_cost_matrix_cpp, 4},
+    {"_couplr_lap_prepare_cost_matrix", (DL_FUNC) &_couplr_lap_prepare_cost_matrix, 2},
+    {"_couplr_lap_solve_bruteforce", (DL_FUNC) &_couplr_lap_solve_bruteforce, 2},
+    {"_couplr_lap_solve_jv", (DL_FUNC) &_couplr_lap_solve_jv, 2},
+    {"_couplr_lap_kbest_murty", (DL_FUNC) &_couplr_lap_kbest_murty, 4},
+    {"_couplr_lap_solve_auction", (DL_FUNC) &_couplr_lap_solve_auction, 3},
+    {"_couplr_lap_solve_auction_scaled", (DL_FUNC) &_couplr_lap_solve_auction_scaled, 3},
+    {"_couplr_lap_solve_auction_scaled_params", (DL_FUNC) &_couplr_lap_solve_auction_scaled_params, 5},
+    {"_couplr_lap_solve_auction_gs", (DL_FUNC) &_couplr_lap_solve_auction_gs, 3},
+    {"_couplr_lap_solve_ssp", (DL_FUNC) &_couplr_lap_solve_ssp, 2},
+    {"_couplr_lap_solve_hungarian", (DL_FUNC) &_couplr_lap_solve_hungarian, 2},
+    {"_couplr_lap_solve_csflow", (DL_FUNC) &_couplr_lap_solve_csflow, 2},
+    {"_couplr_lap_kbest_lawler", (DL_FUNC) &_couplr_lap_kbest_lawler, 4},
+    {"_couplr_lap_solve_hk01", (DL_FUNC) &_couplr_lap_solve_hk01, 2},
+    {"_couplr_lap_solve_line_metric_cpp", (DL_FUNC) &_couplr_lap_solve_line_metric_cpp, 4},
+    {"_couplr_lap_solve_ssap_bucket", (DL_FUNC) &_couplr_lap_solve_ssap_bucket, 2},
+    {"_couplr_lap_solve_gabow_tarjan", (DL_FUNC) &_couplr_lap_solve_gabow_tarjan, 2},
+    {"_couplr_greedy_matching_sorted", (DL_FUNC) &_couplr_greedy_matching_sorted, 2},
+    {"_couplr_greedy_matching_row_best", (DL_FUNC) &_couplr_greedy_matching_row_best, 2},
+    {"_couplr_greedy_matching_pq", (DL_FUNC) &_couplr_greedy_matching_pq, 2},
+    {"_couplr_greedy_matching", (DL_FUNC) &_couplr_greedy_matching, 3},
+    {"_couplr_analyze_color_overlap_cpp", (DL_FUNC) &_couplr_analyze_color_overlap_cpp, 5},
+    {"_couplr_compute_pixel_cost_cpp", (DL_FUNC) &_couplr_compute_pixel_cost_cpp, 6},
+    {"_couplr_downscale_image_cpp", (DL_FUNC) &_couplr_downscale_image_cpp, 5},
+    {"_couplr_upscale_assignment_cpp", (DL_FUNC) &_couplr_upscale_assignment_cpp, 5},
+    {"_couplr_morph_pixel_level_cpp", (DL_FUNC) &_couplr_morph_pixel_level_cpp, 6},
+    {"_couplr_color_palette_info_cpp", (DL_FUNC) &_couplr_color_palette_info_cpp, 5},
+    {"_couplr_spatial_cost_matrix_cpp", (DL_FUNC) &_couplr_spatial_cost_matrix_cpp, 4},
+    {"_couplr_lap_solve_cycle_cancel", (DL_FUNC) &_couplr_lap_solve_cycle_cancel, 2},
+    {"_couplr_gt_cost_length", (DL_FUNC) &_couplr_gt_cost_length, 2},
+    {"_couplr_gt_is_eligible", (DL_FUNC) &_couplr_gt_is_eligible, 4},
+    {"_couplr_gt_check_one_feasible", (DL_FUNC) &_couplr_gt_check_one_feasible, 5},
+    {"_couplr_gt_build_equality_graph", (DL_FUNC) &_couplr_gt_build_equality_graph, 4},
+    {"_couplr_gt_augment_along_path", (DL_FUNC) &_couplr_gt_augment_along_path, 3},
+    {"_couplr_gt_find_maximal_augmenting_paths", (DL_FUNC) &_couplr_gt_find_maximal_augmenting_paths, 3},
+    {"_couplr_gt_build_cl_matrix", (DL_FUNC) &_couplr_gt_build_cl_matrix, 2},
+    {"_couplr_gt_hungarian_step_one_feasible", (DL_FUNC) &_couplr_gt_hungarian_step_one_feasible, 5},
+    {"_couplr_gt_match_gt", (DL_FUNC) &_couplr_gt_match_gt, 7},
+    {"_couplr_scale_match_cpp", (DL_FUNC) &_couplr_scale_match_cpp, 5},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_lapr(DllInfo *dll) {
+RcppExport void R_init_couplr(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

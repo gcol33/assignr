@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(R:*)",
+      "Bash(powershell -File:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(for line in 43 192 350 434 474 556 623 714 749 773)",
+      "Bash(done)",
+      "Bash(Rscript:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,0 +1,22 @@
+## Makevars for couplr package
+## Handles subdirectory organization in src/
+
+CXX_STD = CXX17
+
+PKG_CPPFLAGS = -I. -Icore -Iinterface -Isolvers -Igabow_tarjan -Imorph \
+               `"${R_HOME}/bin/Rscript" -e "Rcpp:::CxxFlags()"` \
+               `"${R_HOME}/bin/Rscript" -e "RcppEigen:::CxxFlags()"`
+
+# Collect all C++ sources from subdirectories and root
+SOURCES = RcppExports.cpp rcpp_interface.cpp \
+          $(wildcard interface/*.cpp) \
+          $(wildcard core/*.cpp) \
+          $(wildcard solvers/*.cpp) \
+          $(wildcard gabow_tarjan/*.cpp) \
+          $(wildcard morph/*.cpp)
+
+# Convert to object files
+OBJECTS = $(SOURCES:.cpp=.o)
+
+PKG_LIBS = `"${R_HOME}/bin/Rscript" -e "Rcpp:::LdFlags()"` \
+           $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)

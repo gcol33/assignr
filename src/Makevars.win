@@ -1,0 +1,22 @@
+## Makevars.win for couplr package (Windows)
+## Handles subdirectory organization in src/
+
+CXX_STD = CXX17
+
+PKG_CPPFLAGS = -I. -Icore -Iinterface -Isolvers -Igabow_tarjan -Imorph \
+               $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "Rcpp:::CxxFlags()") \
+               $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "RcppEigen:::CxxFlags()")
+
+# Collect all C++ sources from subdirectories and root
+SOURCES = RcppExports.cpp rcpp_interface.cpp \
+          $(wildcard interface/*.cpp) \
+          $(wildcard core/*.cpp) \
+          $(wildcard solvers/*.cpp) \
+          $(wildcard gabow_tarjan/*.cpp) \
+          $(wildcard morph/*.cpp)
+
+# Convert to object files
+OBJECTS = $(SOURCES:.cpp=.o)
+
+PKG_LIBS = $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "Rcpp:::LdFlags()") \
+           $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)

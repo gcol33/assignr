@@ -6,13 +6,23 @@
 #include <limits>
 #include <string>
 #include <algorithm>
-#include "lap_internal.h"
-#include "lap_utils.h"
+#include "../core/lap_internal.h"
+#include "../core/lap_utils.h"
+#include "../gabow_tarjan/utils_gabow_tarjan.h"
 
 using namespace Rcpp;
 
 // =======================
+// Forward decls for greedy matching (implemented in solvers/greedy_matching.cpp)
+extern Rcpp::List greedy_matching_sorted_impl(Rcpp::NumericMatrix cost_matrix, bool maximize);
+extern Rcpp::List greedy_matching_row_best_impl(Rcpp::NumericMatrix cost_matrix, bool maximize);
+extern Rcpp::List greedy_matching_pq_impl(Rcpp::NumericMatrix cost_matrix, bool maximize);
+extern Rcpp::List greedy_matching_impl(Rcpp::NumericMatrix cost_matrix, bool maximize, std::string strategy);
+
+// =======================
 // Forward decls for LAP solvers (no [[Rcpp::export]] here)
+Rcpp::List solve_cycle_cancel_impl(Rcpp::NumericMatrix cost, bool maximize);
+Rcpp::List solve_gabow_tarjan_impl(Rcpp::NumericMatrix cost, bool maximize);
 // =======================
 Rcpp::List prepare_cost_matrix_impl(NumericMatrix cost, bool maximize);
 Rcpp::List solve_bruteforce_impl(NumericMatrix cost, bool maximize);
@@ -30,6 +40,11 @@ Rcpp::List solve_hungarian_impl(Rcpp::NumericMatrix cost, bool maximize);
 Rcpp::List solve_csflow_impl(Rcpp::NumericMatrix cost, bool maximize);
 Rcpp::List solve_kbest_lawler_impl(Rcpp::NumericMatrix cost, int k, std::string method_base, bool maximize);
 Rcpp::List solve_hk01_impl(Rcpp::NumericMatrix cost, bool maximize);
+Rcpp::List solve_line_metric_impl(const Rcpp::NumericVector& x,
+                                  const Rcpp::NumericVector& y,
+                                  const std::string& cost,
+                                  bool maximize);
+Rcpp::List solve_ssap_bucket_impl(Rcpp::NumericMatrix cost, bool maximize);
 
 // =======================
 // Pixel morphing core (implemented in morph_pixel_level.cpp)
@@ -159,6 +174,49 @@ Rcpp::List lap_solve_hk01(Rcpp::NumericMatrix cost, bool maximize) {
   return solve_hk01_impl(cost, maximize);
 }
 
+// [[Rcpp::export]]
+Rcpp::List lap_solve_line_metric_cpp(Rcpp::NumericVector x,
+                                     Rcpp::NumericVector y,
+                                     std::string cost = "L1",
+                                     bool maximize = false) {
+  return solve_line_metric_impl(x, y, cost, maximize);
+}
+
+// [[Rcpp::export]]
+Rcpp::List lap_solve_ssap_bucket(Rcpp::NumericMatrix cost, bool maximize) {
+  return solve_ssap_bucket_impl(cost, maximize);
+}
+
+// [[Rcpp::export]]
+Rcpp::List lap_solve_gabow_tarjan(Rcpp::NumericMatrix cost, bool maximize) {
+  return solve_gabow_tarjan_impl(cost, maximize);
+}
+
+// =======================
+// Greedy matching exports (implemented in solvers/greedy_matching.cpp)
+// =======================
+
+// [[Rcpp::export]]
+Rcpp::List greedy_matching_sorted(Rcpp::NumericMatrix cost_matrix, bool maximize = false) {
+  return greedy_matching_sorted_impl(cost_matrix, maximize);
+}
+
+// [[Rcpp::export]]
+Rcpp::List greedy_matching_row_best(Rcpp::NumericMatrix cost_matrix, bool maximize = false) {
+  return greedy_matching_row_best_impl(cost_matrix, maximize);
+}
+
+// [[Rcpp::export]]
+Rcpp::List greedy_matching_pq(Rcpp::NumericMatrix cost_matrix, bool maximize = false) {
+  return greedy_matching_pq_impl(cost_matrix, maximize);
+}
+
+// [[Rcpp::export]]
+Rcpp::List greedy_matching(Rcpp::NumericMatrix cost_matrix, bool maximize = false,
+                          std::string strategy = "row_best") {
+  return greedy_matching_impl(cost_matrix, maximize, strategy);
+}
+
 // =======================
 // Pixel morphing exports
 // =======================
@@ -248,3 +306,506 @@ Rcpp::NumericMatrix spatial_cost_matrix_cpp(Rcpp::IntegerVector idxA,
                                             int H, int W) {
   return spatial_cost_matrix(idxA, idxB, H, W);
 }
+
+// [[Rcpp::export]]
+Rcpp::List lap_solve_cycle_cancel(Rcpp::NumericMatrix cost, bool maximize) {
+  return solve_cycle_cancel_impl(cost, maximize);
+}
+
+
+// =======================
+// Gabow-Tarjan Module A exports (for testing)
+// =======================
+
+// [[Rcpp::export]]
+long long gt_cost_length(long long c_ij, bool in_matching) {
+    return cost_length(c_ij, in_matching);
+}
+
+// [[Rcpp::export]]
+bool gt_is_eligible(long long c_ij, bool in_matching, 
+                    long long yu, long long yv) {
+    return is_eligible(c_ij, in_matching, yu, yv);
+}
+
+// [[Rcpp::export]]
+bool gt_check_one_feasible(Rcpp::NumericMatrix cost_r,
+                           Rcpp::IntegerVector row_match_r,
+                           Rcpp::IntegerVector col_match_r,
+                           Rcpp::NumericVector y_u_r,
+                           Rcpp::NumericVector y_v_r) {
+    int n = cost_r.nrow();
+    int m = cost_r.ncol();
+    
+    // Convert R objects to C++ types
+    CostMatrix cost(n, std::vector<long long>(m));
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            cost[i][j] = static_cast<long long>(cost_r(i, j));
+        }
+    }
+    
+    // Convert to 0-based indexing (R is 1-based)
+    MatchVec row_match(n);
+    for (int i = 0; i < n; ++i) {
+        row_match[i] = row_match_r[i] - 1; // Convert 1-based to 0-based
+    }
+    
+    MatchVec col_match(m);
+    for (int j = 0; j < m; ++j) {
+        col_match[j] = col_match_r[j] - 1; // Convert 1-based to 0-based
+    }
+    
+    DualVec y_u(n);
+    for (int i = 0; i < n; ++i) {
+        y_u[i] = static_cast<long long>(y_u_r[i]);
+    }
+    
+    DualVec y_v(m);
+    for (int j = 0; j < m; ++j) {
+        y_v[j] = static_cast<long long>(y_v_r[j]);
+    }
+    
+    return check_one_feasible(cost, row_match, col_match, y_u, y_v);
+}
+
+// [[Rcpp::export]]
+Rcpp::List gt_build_equality_graph(Rcpp::NumericMatrix cost_r,
+                                    Rcpp::IntegerVector row_match_r,
+                                    Rcpp::NumericVector y_u_r,
+                                    Rcpp::NumericVector y_v_r) {
+    int n = cost_r.nrow();
+    int m = cost_r.ncol();
+    
+    // Convert R objects to C++ types
+    CostMatrix cost(n, std::vector<long long>(m));
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            cost[i][j] = static_cast<long long>(cost_r(i, j));
+        }
+    }
+    
+    // Convert to 0-based indexing (R is 1-based)
+    MatchVec row_match(n);
+    for (int i = 0; i < n; ++i) {
+        row_match[i] = row_match_r[i] - 1;
+    }
+    
+    DualVec y_u(n);
+    for (int i = 0; i < n; ++i) {
+        y_u[i] = static_cast<long long>(y_u_r[i]);
+    }
+    
+    DualVec y_v(m);
+    for (int j = 0; j < m; ++j) {
+        y_v[j] = static_cast<long long>(y_v_r[j]);
+    }
+    
+    // Build equality graph
+    std::vector<std::vector<int>> eq_graph = build_equality_graph(cost, row_match, y_u, y_v);
+    
+    // Convert to R list (convert back to 1-based indexing)
+    Rcpp::List result(n);
+    for (int i = 0; i < n; ++i) {
+        Rcpp::IntegerVector row_edges(eq_graph[i].size());
+        for (size_t k = 0; k < eq_graph[i].size(); ++k) {
+            row_edges[k] = eq_graph[i][k] + 1; // Convert to 1-based
+        }
+        result[i] = row_edges;
+    }
+    
+    return result;
+}
+
+// [[Rcpp::export]]
+Rcpp::List gt_augment_along_path(Rcpp::IntegerMatrix edges_r,
+                                  Rcpp::IntegerVector row_match_r,
+                                  Rcpp::IntegerVector col_match_r) {
+    int n_edges = edges_r.nrow();
+    int n = row_match_r.size();
+    int m = col_match_r.size();
+    
+    // Convert edges to C++ format (convert to 0-based)
+    std::vector<std::pair<int,int>> edges;
+    edges.reserve(n_edges);
+    for (int k = 0; k < n_edges; ++k) {
+        int i = edges_r(k, 0) - 1;  // Row index (convert to 0-based)
+        int j = edges_r(k, 1) - 1;  // Column index (convert to 0-based)
+        edges.emplace_back(i, j);
+    }
+    
+    // Convert matches to C++ format (convert to 0-based)
+    MatchVec row_match(n);
+    for (int i = 0; i < n; ++i) {
+        row_match[i] = row_match_r[i] - 1;
+    }
+    
+    MatchVec col_match(m);
+    for (int j = 0; j < m; ++j) {
+        col_match[j] = col_match_r[j] - 1;
+    }
+    
+    // Apply augmentation
+    augment_along_path(edges, row_match, col_match);
+    
+    // Convert back to R format (1-based)
+    Rcpp::IntegerVector row_match_out(n);
+    for (int i = 0; i < n; ++i) {
+        row_match_out[i] = row_match[i] + 1;
+    }
+    
+    Rcpp::IntegerVector col_match_out(m);
+    for (int j = 0; j < m; ++j) {
+        col_match_out[j] = col_match[j] + 1;
+    }
+    
+    return Rcpp::List::create(
+        Rcpp::Named("row_match") = row_match_out,
+        Rcpp::Named("col_match") = col_match_out
+    );
+}
+
+// [[Rcpp::export]]
+Rcpp::List gt_find_maximal_augmenting_paths(Rcpp::List eq_graph_r,
+                                             Rcpp::IntegerVector row_match_r,
+                                             Rcpp::IntegerVector col_match_r) {
+    int n = eq_graph_r.size();
+    
+    // Convert equality graph to C++ format
+    std::vector<std::vector<int>> eq_graph(n);
+    for (int i = 0; i < n; ++i) {
+        Rcpp::IntegerVector row_edges = eq_graph_r[i];
+        eq_graph[i].reserve(row_edges.size());
+        for (int k = 0; k < row_edges.size(); ++k) {
+            eq_graph[i].push_back(row_edges[k] - 1);  // Convert to 0-based
+        }
+    }
+    
+    // Convert matches to C++ format
+    MatchVec row_match(n);
+    for (int i = 0; i < n; ++i) {
+        row_match[i] = row_match_r[i] - 1;
+    }
+    
+    int m = col_match_r.size();
+    MatchVec col_match(m);
+    for (int j = 0; j < m; ++j) {
+        col_match[j] = col_match_r[j] - 1;
+    }
+    
+    // Find paths
+    auto paths = find_maximal_augmenting_paths(eq_graph, row_match, col_match);
+    
+    // Convert paths back to R format (list of matrices)
+    Rcpp::List result(paths.size());
+    for (size_t p = 0; p < paths.size(); ++p) {
+        int path_len = paths[p].size();
+        Rcpp::IntegerMatrix path_matrix(path_len, 2);
+        for (int k = 0; k < path_len; ++k) {
+            path_matrix(k, 0) = paths[p][k].first + 1;   // Convert to 1-based
+            path_matrix(k, 1) = paths[p][k].second + 1;  // Convert to 1-based
+        }
+        result[p] = path_matrix;
+    }
+    
+    return result;
+}
+
+// =======================
+// Gabow-Tarjan Module E exports (for testing)
+// =======================
+
+// [[Rcpp::export]]
+Rcpp::NumericMatrix gt_build_cl_matrix(Rcpp::NumericMatrix cost_r,
+                                       Rcpp::IntegerVector row_match_r) {
+    int n = cost_r.nrow();
+    int m = cost_r.ncol();
+    
+    // Convert R objects to C++ types
+    CostMatrix cost(n, std::vector<long long>(m));
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            cost[i][j] = static_cast<long long>(cost_r(i, j));
+        }
+    }
+    
+    // Convert to 0-based indexing (R is 1-based)
+    MatchVec row_match(n);
+    for (int i = 0; i < n; ++i) {
+        row_match[i] = row_match_r[i] - 1;
+    }
+    
+    // Build cost-length matrix
+    CostMatrix C_cl = build_cl_matrix(cost, row_match);
+    
+    // Convert back to R matrix
+    Rcpp::NumericMatrix result(n, m);
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            result(i, j) = static_cast<double>(C_cl[i][j]);
+        }
+    }
+    
+    return result;
+}
+
+// [[Rcpp::export]]
+Rcpp::List gt_hungarian_step_one_feasible(Rcpp::NumericMatrix cost_r,
+                                          Rcpp::IntegerVector row_match_r,
+                                          Rcpp::IntegerVector col_match_r,
+                                          Rcpp::NumericVector y_u_r,
+                                          Rcpp::NumericVector y_v_r) {
+    int n = cost_r.nrow();
+    int m = cost_r.ncol();
+    
+    // Convert R objects to C++ types
+    CostMatrix cost(n, std::vector<long long>(m));
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            cost[i][j] = static_cast<long long>(cost_r(i, j));
+        }
+    }
+    
+    // Convert to 0-based indexing (R is 1-based)
+    MatchVec row_match(n);
+    for (int i = 0; i < n; ++i) {
+        row_match[i] = row_match_r[i] - 1;
+    }
+    
+    MatchVec col_match(m);
+    for (int j = 0; j < m; ++j) {
+        col_match[j] = col_match_r[j] - 1;
+    }
+    
+    DualVec y_u(n);
+    for (int i = 0; i < n; ++i) {
+        y_u[i] = static_cast<long long>(y_u_r[i]);
+    }
+    
+    DualVec y_v(m);
+    for (int j = 0; j < m; ++j) {
+        y_v[j] = static_cast<long long>(y_v_r[j]);
+    }
+    
+    // Run Hungarian step
+    bool found = hungarian_step_one_feasible(cost, row_match, col_match, y_u, y_v);
+    
+    // Convert back to R format (1-based)
+    Rcpp::IntegerVector row_match_out(n);
+    for (int i = 0; i < n; ++i) {
+        row_match_out[i] = row_match[i] + 1;
+    }
+    
+    Rcpp::IntegerVector col_match_out(m);
+    for (int j = 0; j < m; ++j) {
+        col_match_out[j] = col_match[j] + 1;
+    }
+    
+    Rcpp::NumericVector y_u_out(n);
+    for (int i = 0; i < n; ++i) {
+        y_u_out[i] = static_cast<double>(y_u[i]);
+    }
+    
+    Rcpp::NumericVector y_v_out(m);
+    for (int j = 0; j < m; ++j) {
+        y_v_out[j] = static_cast<double>(y_v[j]);
+    }
+    
+    return Rcpp::List::create(
+        Rcpp::Named("found") = found,
+        Rcpp::Named("row_match") = row_match_out,
+        Rcpp::Named("col_match") = col_match_out,
+        Rcpp::Named("y_u") = y_u_out,
+        Rcpp::Named("y_v") = y_v_out
+    );
+}
+
+// =======================
+// Gabow-Tarjan Module F exports (for testing)
+// =======================
+
+// [[Rcpp::export]]
+Rcpp::List gt_match_gt(Rcpp::NumericMatrix cost_r,
+                       Rcpp::Nullable<Rcpp::IntegerVector> row_match_r = R_NilValue,
+                       Rcpp::Nullable<Rcpp::IntegerVector> col_match_r = R_NilValue,
+                       Rcpp::Nullable<Rcpp::NumericVector> y_u_r = R_NilValue,
+                       Rcpp::Nullable<Rcpp::NumericVector> y_v_r = R_NilValue,
+                       int max_iters = 1000,
+                       bool check_feasible = false) {
+    int n = cost_r.nrow();
+    int m = cost_r.ncol();
+    
+    // Convert cost matrix
+    CostMatrix cost(n, std::vector<long long>(m));
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            cost[i][j] = static_cast<long long>(cost_r(i, j));
+        }
+    }
+    
+    // Initialize or convert matching
+    MatchVec row_match(n, NIL);
+    MatchVec col_match(m, NIL);
+    
+    if (row_match_r.isNotNull()) {
+        Rcpp::IntegerVector rm = row_match_r.get();
+        for (int i = 0; i < n; ++i) {
+            row_match[i] = rm[i] - 1;  // Convert to 0-based
+        }
+    }
+    
+    if (col_match_r.isNotNull()) {
+        Rcpp::IntegerVector cm = col_match_r.get();
+        for (int j = 0; j < m; ++j) {
+            col_match[j] = cm[j] - 1;  // Convert to 0-based
+        }
+    }
+    
+    // Initialize or convert duals
+    DualVec y_u(n, 0);
+    DualVec y_v(m, 0);
+    
+    if (y_u_r.isNotNull()) {
+        Rcpp::NumericVector yu = y_u_r.get();
+        for (int i = 0; i < n; ++i) {
+            y_u[i] = static_cast<long long>(yu[i]);
+        }
+    }
+    
+    if (y_v_r.isNotNull()) {
+        Rcpp::NumericVector yv = y_v_r.get();
+        for (int j = 0; j < m; ++j) {
+            y_v[j] = static_cast<long long>(yv[j]);
+        }
+    }
+    
+    // Run match_gt
+    try {
+        match_gt(cost, row_match, col_match, y_u, y_v, max_iters, check_feasible);
+    } catch (const std::exception& e) {
+        Rcpp::stop(std::string("match_gt error: ") + e.what());
+    }
+    
+    // Convert back to R format (1-based)
+    Rcpp::IntegerVector row_match_out(n);
+    for (int i = 0; i < n; ++i) {
+        row_match_out[i] = row_match[i] + 1;
+    }
+    
+    Rcpp::IntegerVector col_match_out(m);
+    for (int j = 0; j < m; ++j) {
+        col_match_out[j] = col_match[j] + 1;
+    }
+    
+    Rcpp::NumericVector y_u_out(n);
+    for (int i = 0; i < n; ++i) {
+        y_u_out[i] = static_cast<double>(y_u[i]);
+    }
+    
+    Rcpp::NumericVector y_v_out(m);
+    for (int j = 0; j < m; ++j) {
+        y_v_out[j] = static_cast<double>(y_v[j]);
+    }
+    
+    return Rcpp::List::create(
+        Rcpp::Named("row_match") = row_match_out,
+        Rcpp::Named("col_match") = col_match_out,
+        Rcpp::Named("y_u") = y_u_out,
+        Rcpp::Named("y_v") = y_v_out
+    );
+}
+
+// =======================
+// Gabow-Tarjan Module G exports (for testing)
+// =======================
+
+// [[Rcpp::export]]
+Rcpp::List scale_match_cpp(Rcpp::NumericMatrix cost_r,
+                           Rcpp::Nullable<Rcpp::IntegerVector> row_match_r = R_NilValue,
+                           Rcpp::Nullable<Rcpp::IntegerVector> col_match_r = R_NilValue,
+                           Rcpp::Nullable<Rcpp::NumericVector> y_u_r = R_NilValue,
+                           Rcpp::Nullable<Rcpp::NumericVector> y_v_r = R_NilValue) {
+    int n = cost_r.nrow();
+    int m = cost_r.ncol();
+    
+    // Convert cost matrix
+    CostMatrix cost(n, std::vector<long long>(m));
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            cost[i][j] = static_cast<long long>(cost_r(i, j));
+        }
+    }
+    
+    // Initialize or convert matching
+    MatchVec row_match(n, NIL);
+    MatchVec col_match(m, NIL);
+    
+    if (row_match_r.isNotNull()) {
+        Rcpp::IntegerVector rm = row_match_r.get();
+        for (int i = 0; i < n; ++i) {
+            row_match[i] = rm[i] - 1;  // Convert to 0-based
+        }
+    }
+    
+    if (col_match_r.isNotNull()) {
+        Rcpp::IntegerVector cm = col_match_r.get();
+        for (int j = 0; j < m; ++j) {
+            col_match[j] = cm[j] - 1;  // Convert to 0-based
+        }
+    }
+    
+    // Initialize or convert duals
+    DualVec y_u(n, 0);
+    DualVec y_v(m, 0);
+    
+    if (y_u_r.isNotNull()) {
+        Rcpp::NumericVector yu = y_u_r.get();
+        for (int i = 0; i < n; ++i) {
+            y_u[i] = static_cast<long long>(yu[i]);
+        }
+    }
+    
+    if (y_v_r.isNotNull()) {
+        Rcpp::NumericVector yv = y_v_r.get();
+        for (int j = 0; j < m; ++j) {
+            y_v[j] = static_cast<long long>(yv[j]);
+        }
+    }
+    
+    // Run scale_match
+    try {
+        scale_match(cost, row_match, col_match, y_u, y_v);
+    } catch (const std::exception& e) {
+        Rcpp::stop(std::string("scale_match error: ") + e.what());
+    }
+    
+    // Convert back to R format (1-based)
+    Rcpp::IntegerVector row_match_out(n);
+    for (int i = 0; i < n; ++i) {
+        row_match_out[i] = row_match[i] + 1;
+    }
+    
+    Rcpp::IntegerVector col_match_out(m);
+    for (int j = 0; j < m; ++j) {
+        col_match_out[j] = col_match[j] + 1;
+    }
+    
+    Rcpp::NumericVector y_u_out(n);
+    for (int i = 0; i < n; ++i) {
+        y_u_out[i] = static_cast<double>(y_u[i]);
+    }
+    
+    Rcpp::NumericVector y_v_out(m);
+    for (int j = 0; j < m; ++j) {
+        y_v_out[j] = static_cast<double>(y_v[j]);
+    }
+    
+    return Rcpp::List::create(
+        Rcpp::Named("row_match") = row_match_out,
+        Rcpp::Named("col_match") = col_match_out,
+        Rcpp::Named("y_u") = y_u_out,
+        Rcpp::Named("y_v") = y_v_out
+    );
+}
+
+

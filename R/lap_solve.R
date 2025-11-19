@@ -1,3 +1,149 @@
+# ==============================================================================
+# Core LAP Solver (Low-Level Interface)
+# ==============================================================================
+# This section contains assignment(), the low-level matrix-based LAP solver.
+# For most users, prefer the tidy interface lap_solve() below.
+# ==============================================================================
+#' Linear assignment solver
+#'
+#' Solve the linear assignment problem (minimum- or maximum-cost matching)
+#' using several algorithms. Forbidden edges can be marked as `NA` or `Inf`.
+#'
+#' @param cost Numeric matrix; rows = tasks, columns = agents. `NA` or `Inf`
+#'   entries are treated as forbidden assignments.
+#' @param maximize Logical; if `TRUE`, maximizes the total cost instead of minimizing.
+#' @param method Character string indicating the algorithm to use.
+#'   One of `"auto"`, `"jv"`, `"hungarian"`, `"auction"`, `"auction_gs"`,
+#'   `"sap"`, `"ssp"`, `"csflow"`, `"hk01"`, or `"bruteforce"`.
+#'   `"ssp"` is accepted as an alias for `"sap"`.
+#' @param auction_eps Optional numeric epsilon for the Auction/Auction-GS methods.
+#'   If `NULL`, an internal default (e.g., `1e-9`) is used.
+#' @param eps Deprecated. Use `auction_eps`. If provided and `auction_eps` is `NULL`,
+#'   its value is used for `auction_eps`.
+#'
+#' @return An object of class `lap_solve_result`, a list with elements:
+#' \itemize{
+#'   \item `match` — integer vector of length `min(nrow(cost), ncol(cost))`
+#'         giving the assigned column for each row (0 if unassigned).
+#'   \item `total_cost` — numeric scalar, the objective value.
+#'   \item `status` — character scalar, e.g. `"optimal"`.
+#'   \item `method_used` — character scalar, the algorithm actually used.
+#' }
+#'
+#' @details
+#' `method = "auto"` selects an algorithm based on problem size/shape and data
+#' characteristics (e.g., small problems → `"bruteforce"`, binary/all-equal costs → `"hk01"`,
+#' sparse/very rectangular → `"sap"`, large dense → `"auction"`, otherwise `"jv"`/`"hungarian"`).
+#'
+#' @examples
+#' cost <- matrix(c(4,2,5, 3,3,6, 7,5,4), nrow = 3, byrow = TRUE)
+#' res  <- assignment(cost)
+#' res$match; res$total_cost
+#'
+#' @export
+assignment <- function(cost, maximize = FALSE,
+                       method = c("auto","jv","hungarian","auction","auction_gs","auction_scaled",
+                                  "sap","ssp","csflow","hk01","bruteforce",
+                                  "ssap_bucket","cycle_cancel","gabow_tarjan"),
+                       auction_eps = NULL, eps = NULL
+                       # , auction_schedule = c("alpha7","pow2","halves"),  # optional (see below)
+                       # , auction_final_eps = NULL                          # optional (see below)
+                       ) {
+  method <- match.arg(method)
+
+  # Back-compat: eps → auction_eps
+  if (!is.null(eps) && is.null(auction_eps)) auction_eps <- eps
+  if (method == "ssp") method <- "sap"
+
+  cost <- as.matrix(cost)
+  if (any(is.nan(cost))) stop("NaN not allowed in `cost`")
+
+  n <- nrow(cost); m <- ncol(cost)
+
+  # Validate non-empty matrix
+  if (n == 0 || m == 0) {
+    stop("Cost matrix must have at least one row and one column.")
+  }
+
+  if (method == "auto") {
+    hk01_candidate <- function(M) {
+      x <- as.numeric(M[is.finite(M)]); if (!length(x)) return(FALSE)
+      ux <- sort(unique(round(x, 12)))
+      if (length(ux) == 1L) return(TRUE)
+      if (length(ux) == 2L && all(ux %in% c(0,1))) return(TRUE)
+      FALSE
+    }
+    if (n <= 5 && m <= 5) {
+      method <- "bruteforce"
+    } else if (hk01_candidate(cost)) {
+      method <- "hk01"
+    } else {
+      na_rate <- mean(is.na(cost))
+      if (n <= 10 && m <= 10) {
+        method <- "jv"
+      } else if (na_rate > 0.35 || m >= 2 * n) {
+        method <- "sap"
+      } else if (n > 20 && n <= 80 && na_rate < 0.1 && n <= m) {
+        method <- "hungarian"
+      } else if (n >= 100 && n <= m) {
+        method <- "auction"
+      } else {
+        method <- "jv"
+      }
+    }
+  }
+
+  # auto-transpose if rows > cols
+  transposed <- FALSE
+  work <- cost
+  if (n > m) {
+    work <- t(cost); transposed <- TRUE
+    tmp <- n; n <- m; m <- tmp
+  }
+
+  res_raw <- switch(
+    method,
+    "bruteforce"    = lap_solve_bruteforce(work, maximize),
+    "jv"            = lap_solve_jv(work, maximize),
+    "hungarian"     = lap_solve_hungarian(work, maximize),
+    "auction"       = lap_solve_auction(work, maximize, auction_eps),
+    "auction_gs"    = lap_solve_auction_gs(work, maximize, auction_eps),
+    "auction_scaled"= lap_solve_auction_scaled(work, maximize),
+    "sap"           = lap_solve_ssp(work, maximize),
+    "csflow"        = lap_solve_csflow(work, maximize),
+    "hk01"          = lap_solve_hk01(work, maximize),
+    "ssap_bucket"   = lap_solve_ssap_bucket(work, maximize),
+    "cycle_cancel"  = lap_solve_cycle_cancel(work, maximize),
+    "gabow_tarjan"  = lap_solve_gabow_tarjan(work, maximize),
+    stop("Unknown or unimplemented method: ", method)
+  )
+
+  match_out <- as.integer(res_raw$match)
+  if (transposed) {
+    n0 <- ncol(work); m0 <- nrow(work)
+    inv <- integer(n0); inv[] <- 0L
+    for (i in seq_len(m0)) {
+      j <- match_out[i]
+      if (j > 0L) inv[j] <- i
+    }
+    match_out <- inv
+  }
+
+  out <- list(
+    match = match_out,
+    total_cost = as.numeric(res_raw$total_cost),
+    status = "optimal",
+    method_used = method
+  )
+  class(out) <- "lap_solve_result"
+  out
+}
+
+n# ==============================================================================
+# Tidy LAP Interface (User-Facing)
+# ==============================================================================
+# This section contains lap_solve() and related tidy wrappers.
+# ==============================================================================
 #' Solve linear assignment problems
 #'
 #' Provides a tidy interface for solving the linear assignment problem using
@@ -219,8 +365,27 @@ print.lap_solve_result <- function(x, ...) {
   total_cost <- attr(x, "total_cost")
   method_used <- attr(x, "method_used")
 
-  # Print the tibble
-  print(tibble::as_tibble(x), ...)
+  # Check if this is a tibble (from lap_solve) or a plain list (from assignment)
+  if (inherits(x, "tbl_df") || inherits(x, "data.frame")) {
+    # It's already a tibble/data.frame, just print it
+    print(tibble::as_tibble(x), ...)
+  } else {
+    # It's a plain list from assignment(), format nicely
+    cat("Assignments (1-based indices):\n")
+    matched <- which(x$match > 0)
+    if (length(matched) > 0) {
+      for (i in matched[1:min(10, length(matched))]) {
+        cat(sprintf("  Row %d -> Column %d\n", i, x$match[i]))
+      }
+      if (length(matched) > 10) {
+        cat(sprintf("  ... and %d more\n", length(matched) - 10))
+      }
+    } else {
+      cat("  (no assignments)\n")
+    }
+    total_cost <- x$total_cost
+    method_used <- x$method_used
+  }
 
   cat("\nTotal cost:", total_cost, "\n")
   if (!is.null(method_used)) {
@@ -230,3 +395,134 @@ print.lap_solve_result <- function(x, ...) {
   invisible(x)
 }
 
+# ============================================================================
+# Specialized 1-D Line-Metric LAP Solver
+# ============================================================================
+
+#' Solve 1-D Line Assignment Problem
+#'
+#' Solves the linear assignment problem when both sources and targets are 
+#' ordered points on a line. Uses efficient O(n*m) dynamic programming
+#' for rectangular problems and O(n) sorting for square problems.
+#'
+#' This is a specialized solver that exploits the structure of 1-dimensional
+#' assignment problems where costs depend only on the distance between points
+#' on a line. It is much faster than general LAP solvers for this special case.
+#'
+#' @param x Numeric vector of source positions (will be sorted internally)
+#' @param y Numeric vector of target positions (will be sorted internally)
+#' @param cost Cost function for distance. Either:
+#'   - "L1" (default): absolute distance (Manhattan distance)
+#'   - "L2": squared distance (squared Euclidean distance)
+#'   Can also use aliases: "abs", "manhattan" for L1; "sq", "squared", "quadratic" for L2
+#' @param maximize Logical; if TRUE, maximizes total cost instead of minimizing (default: FALSE)
+#'
+#' @details
+#' The algorithm works as follows:
+#' 
+#' **Square case (n == m):**
+#' Both vectors are sorted and matched in order: \code{x[1] -> y[1]}, \code{x[2] -> y[2]}, etc.
+#' This is optimal for any metric cost function on a line.
+#'
+#' **Rectangular case (n < m):**
+#' Uses dynamic programming to find the optimal assignment that matches all n sources
+#' to a subset of the m targets, minimizing total distance. The DP recurrence is:
+#'
+#' \code{dp[i][j] = min(dp[i][j-1], dp[i-1][j-1] + cost(x[i], y[j]))}
+#' 
+#' This finds the minimum cost to match the first i sources to the first j targets.
+#' 
+#' **Complexity:**
+#' - Time: O(n*m) for rectangular, O(n log n) for square
+#' - Space: O(n*m) for DP table
+#'
+#' @return A list with components:
+#'   - `match`: Integer vector of length n with 1-based column indices
+#'   - `total_cost`: Total cost of the assignment
+#'
+#' @examples
+#' # Square case: equal number of sources and targets
+#' x <- c(1.5, 3.2, 5.1)
+#' y <- c(2.0, 3.0, 5.5)
+#' result <- lap_solve_line_metric(x, y, cost = "L1")
+#' print(result)
+#' 
+#' # Rectangular case: more targets than sources
+#' x <- c(1.0, 3.0, 5.0)
+#' y <- c(0.5, 2.0, 3.5, 4.5, 6.0)
+#' result <- lap_solve_line_metric(x, y, cost = "L2")
+#' print(result)
+#' 
+#' # With unsorted inputs (will be sorted internally)
+#' x <- c(5.0, 1.0, 3.0)
+#' y <- c(4.5, 0.5, 6.0, 2.0, 3.5)
+#' result <- lap_solve_line_metric(x, y, cost = "L1")
+#' print(result)
+#'
+#' @export
+lap_solve_line_metric <- function(x, y, cost = "L1", maximize = FALSE) {
+  # Validate inputs
+  if (!is.numeric(x) || length(x) == 0) {
+    stop("x must be a non-empty numeric vector")
+  }
+  if (!is.numeric(y) || length(y) == 0) {
+    stop("y must be a non-empty numeric vector")
+  }
+  if (length(x) > length(y)) {
+    stop("Number of sources (length of x) must be <= number of targets (length of y)")
+  }
+  
+  # Check for NaN/Inf values
+  if (any(!is.finite(x))) {
+    stop("x must contain only finite values (no NA, NaN, or Inf)")
+  }
+  if (any(!is.finite(y))) {
+    stop("y must contain only finite values (no NA, NaN, or Inf)")
+  }
+  
+  # Validate cost parameter
+  cost_str <- as.character(cost)[1]
+  valid_costs <- c("L1", "l1", "abs", "manhattan", "L2", "l2", "sq", "squared", "quadratic")
+  if (!(cost_str %in% valid_costs)) {
+    stop("cost must be one of: 'L1', 'L2', 'abs', 'manhattan', 'sq', 'squared', 'quadratic'")
+  }
+  
+  # Call C++ implementation
+  result <- lap_solve_line_metric_cpp(
+    x = as.numeric(x),
+    y = as.numeric(y),
+    cost = cost_str,
+    maximize = as.logical(maximize)
+  )
+  
+  class(result) <- c("lap_line_metric_result", "lap_result", class(result))
+  return(result)
+}
+
+#' @export
+print.lap_line_metric_result <- function(x, ...) {
+  cat("1-D Line Assignment Result\n")
+  cat("===========================\n\n")
+  
+  n <- length(x$match)
+  cat("Assignments (1-based):\n")
+  for (i in seq_len(min(n, 10))) {
+    cat(sprintf("  Source %d -> Target %d\n", i, x$match[i]))
+  }
+  if (n > 10) {
+    cat(sprintf("  ... (%d more assignments)\n", n - 10))
+  }
+  
+  cat("\nTotal cost:", x$total_cost, "\n")
+  invisible(x)
+}
+
+# ==============================================================================
+# Note on Specialized Algorithms
+# ==============================================================================
+# For specialized algorithms like ssap_bucket, cycle_cancel, and gabow_tarjan,
+# use assignment(cost, method = "ssap_bucket"), assignment(cost, method = "cycle_cancel"),
+# or assignment(cost, method = "gabow_tarjan") respectively.
+#
+# These are accessed via the method parameter in assignment() rather than
+# separate wrapper functions to keep the API clean.
