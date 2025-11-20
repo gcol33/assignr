@@ -4,7 +4,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**couplr** (formerly lapr) is an R package providing fast solvers for Linear Assignment Problems (LAP) with modern matching capabilities. It implements 14+ algorithms (Hungarian, Jonker-Volgenant, Auction, Gabow-Tarjan, etc.) with a tidy interface, plus production-ready matching workflows with automatic preprocessing, greedy algorithms, and comprehensive balance diagnostics.
+**couplr** (formerly lapr) is an R package for solving Linear Assignment Problems (LAP) with production-ready matching workflows. The package combines:
+
+- **14+ LAP algorithms** - Hungarian, Jonker-Volgenant, Auction, Gabow-Tarjan, and more
+- **Greedy matching** - Fast approximate algorithms for large-scale problems
+- **Automatic preprocessing** - Smart scaling, variable health checks, categorical encoding
+- **Balance diagnostics** - Standardized differences, variance ratios, KS tests
+- **Distance caching** - Reusable precomputed distances for faster experimentation
+- **Parallel processing** - Distributed block matching via the future framework
+- **Joined datasets** - Analysis-ready merged output with broom-style interface
+- **Fun error messages** - Couple-themed warnings with emoji support
+
+**Current version:** 1.0.0 (released 2025-11-19)
+**Tests:** 1382 passing
+**License:** MIT
 
 ## Development Commands
 
@@ -17,7 +30,7 @@ install.packages(c("Rcpp", "RcppEigen", "tibble", "dplyr", "testthat", "devtools
 # Load package (recompiles C++ if needed)
 devtools::load_all()  # or Ctrl+Shift+L in RStudio
 
-# Run all tests (1369 tests)
+# Run all tests (1382 tests)
 devtools::test()  # or Ctrl+Shift+T
 
 # Run specific test file
@@ -34,6 +47,10 @@ devtools::check()
 
 # Build tarball
 devtools::build()
+
+# Install from source (alternative to devtools)
+# From command line: R CMD INSTALL --build .
+# Or in R: install.packages(".", repos = NULL, type = "source")
 ```
 
 ### C++ Development Workflow
@@ -55,6 +72,17 @@ devtools::test()
 ```
 
 **Critical:** C++17 required. Windows users need Rtools with g++ supporting C++17.
+
+**Troubleshooting compilation issues:**
+```powershell
+# Windows: Clean stale object files if encountering binary mismatches
+Remove-Item src\*.o, src\*.dll -Force
+
+# Then rebuild
+R CMD INSTALL --clean .
+```
+
+**Note:** The `src/` directory may contain committed object files (`*.o`, `*.dll`) which can become stale. Clean before building if behavior is unexpected.
 
 ### Git Workflow
 
@@ -97,6 +125,8 @@ git push origin v1.0.0
 - `matchmaker()` - Blocking/stratification support ([R/matching_blocks.R](R/matching_blocks.R))
 - `balance_diagnostics()` - Comprehensive balance assessment ([R/matching_diagnostics.R](R/matching_diagnostics.R))
 - `preprocess_matching_vars()` - Automatic variable health checks ([R/matching_preprocessing.R](R/matching_preprocessing.R))
+- `compute_distances()` - Precompute and cache distance matrices ([R/matching_distance_cache.R](R/matching_distance_cache.R))
+- `join_matched()` - Create analysis-ready merged datasets ([R/matching_join.R](R/matching_join.R))
 
 ### Matching Layer Architecture (v1.0.0)
 
@@ -123,14 +153,50 @@ print(balance)  # Standardized differences, variance ratios, KS tests
 balance_table(balance)  # Publication-ready table
 ```
 
-**File Organization:**
-- [R/matching_core.R](R/matching_core.R) - Main matching functions (625 lines)
-- [R/matching_distance.R](R/matching_distance.R) - Distance computation with 3 scaling methods
-- [R/matching_constraints.R](R/matching_constraints.R) - Calipers, weights, max_distance
-- [R/matching_blocks.R](R/matching_blocks.R) - Blocking/stratification
-- [R/matching_preprocessing.R](R/matching_preprocessing.R) - Auto-scaling and health checks (510 lines)
-- [R/matching_diagnostics.R](R/matching_diagnostics.R) - Balance assessment (461 lines)
-- [R/matching_utils.R](R/matching_utils.R) - Shared utilities
+**Complete R File Structure (20 files):**
+
+```
+R/
+├── couplr-package.R              # Package documentation and imports
+├── data.R                        # Dataset documentation
+├── zzz.R                         # Package startup/attach messages
+├── RcppExports.R                 # Auto-generated Rcpp bindings
+├── utils.R                       # General utility functions
+│
+├── LAP Solvers (Layer 1 & 2):
+│   ├── lap_solve.R               # Tidy LAP interface (lap_solve)
+│   ├── lap_solve_batch.R         # Batch solving for multiple problems
+│   └── lap_solve_kbest.R         # K-best solutions (Murty, Lawler)
+│
+├── Matching Core (Layer 3):
+│   ├── matching_core.R           # match_couples(), greedy_couples() (625 lines)
+│   ├── matching_distance.R       # Distance computation, 3 scaling methods
+│   ├── matching_distance_cache.R # compute_distances(), update_constraints()
+│   ├── matching_constraints.R    # Calipers, weights, max_distance
+│   ├── matching_blocks.R         # matchmaker(), blocking/stratification
+│   ├── matching_parallel.R       # Parallel processing via future
+│   ├── matching_utils.R          # Shared matching utilities
+│   └── matching_messages.R       # Fun error/warning messages (270 lines)
+│
+├── Matching Analysis:
+│   ├── matching_preprocessing.R  # Auto-scaling, health checks (510 lines)
+│   ├── matching_diagnostics.R    # Balance diagnostics (461 lines)
+│   └── matching_join.R           # join_matched(), augment() (220 lines)
+│
+└── Pixel Morphing:
+    ├── morph_pixel.R             # Pixel-level LAP morphing (modes)
+    ├── morph_tiling.R            # Recursive tiling for large images
+    └── morph_utils.R             # Morphing utilities
+```
+
+**Key file responsibilities:**
+- **[matching_core.R](R/matching_core.R)** - Main matching entry points
+- **[matching_preprocessing.R](R/matching_preprocessing.R)** - Variable health, scaling suggestions
+- **[matching_diagnostics.R](R/matching_diagnostics.R)** - Balance metrics, quality ratings
+- **[matching_join.R](R/matching_join.R)** - Analysis-ready merged datasets
+- **[matching_distance_cache.R](R/matching_distance_cache.R)** - Distance object management
+- **[matching_parallel.R](R/matching_parallel.R)** - Parallel block matching
+- **[matching_messages.R](R/matching_messages.R)** - Couple-themed error messages
 
 **Key Features:**
 
@@ -161,33 +227,47 @@ balance_table(balance)  # Publication-ready table
 
 ### C++ Code Organization
 
-**Subdirectory Structure:**
+**Complete File Structure (22 .cpp files, 3 .h files):**
+
 ```
 src/
-├── core/              # Shared utilities
-│   ├── lap_internal.h     # Function declarations
-│   ├── lap_utils.cpp      # Common helpers
-│   └── lap_utils.h
-├── interface/         # Rcpp exports
-│   └── prepare_cost_matrix.cpp
-├── solvers/           # Algorithm implementations (14 solvers)
-│   ├── greedy_matching.cpp    # NEW: Greedy strategies
-│   ├── solve_jv.cpp          # Jonker-Volgenant
-│   ├── solve_hungarian.cpp
-│   ├── solve_auction.cpp
-│   ├── solve_gabow_tarjan.cpp
-│   ├── solve_line_metric.cpp
-│   ├── solve_ssap_bucket.cpp
-│   └── ... (10 more)
-├── gabow_tarjan/      # Gabow-Tarjan specific code
-│   ├── solve_gabow_tarjan.cpp
-│   ├── utils_gabow_tarjan.cpp
-│   └── utils_gabow_tarjan.h
-├── morph/             # Pixel morphing
-│   ├── morph_pixel_level.cpp
-│   └── region_means.cpp
-└── rcpp_interface.cpp # Central export point (ALL exports here)
+├── core/                      # Shared utilities
+│   ├── lap_internal.h            # Function declarations for all solvers
+│   ├── lap_utils.cpp             # Common helpers (cost computation, validation)
+│   └── lap_utils.h               # Utility function headers
+├── interface/                 # Cost matrix preparation
+│   └── prepare_cost_matrix.cpp  # Rcpp interface for cost matrix creation
+├── solvers/                   # LAP algorithm implementations (15 files)
+│   ├── greedy_matching.cpp       # Greedy strategies (sorted, row_best, pq)
+│   ├── solve_auction.cpp         # Auction algorithm variants
+│   ├── solve_bruteforce.cpp      # Exhaustive search for tiny problems
+│   ├── solve_cost_scaling.cpp    # Gabow's cost-scaling algorithm
+│   ├── solve_csflow.cpp          # Cost-scaling flow algorithm
+│   ├── solve_cycle_cancel.cpp    # Cycle canceling with Karp's trick
+│   ├── solve_hk01.cpp            # Hopcroft-Karp for binary costs
+│   ├── solve_hungarian.cpp       # Classic Hungarian algorithm
+│   ├── solve_jv.cpp              # Jonker-Volgenant (general purpose)
+│   ├── solve_kbest_lawler.cpp    # Lawler's k-best algorithm
+│   ├── solve_line_metric.cpp     # Specialized for 1D matching
+│   ├── solve_murty.cpp           # Murty's algorithm for k-best solutions
+│   ├── solve_ssap_bucket.cpp     # Dial's algorithm for integer costs
+│   ├── solve_ssp.cpp             # Shortest augmenting path
+│   └── solve_gabow_tarjan.cpp    # (note: also in gabow_tarjan/)
+├── gabow_tarjan/              # Gabow-Tarjan specific code
+│   ├── solve_gabow_tarjan.cpp    # Main Gabow-Tarjan implementation
+│   ├── utils_gabow_tarjan.cpp    # Helper functions
+│   └── utils_gabow_tarjan.h      # Header for Gabow-Tarjan utilities
+├── morph/                     # Pixel morphing for visualization
+│   ├── morph_pixel_level.cpp     # Pixel-level LAP morphing
+│   └── region_means.cpp          # Region-based color averaging
+├── rcpp_interface.cpp         # Central export point (ALL [[Rcpp::export]] here)
+└── RcppExports.cpp            # Auto-generated by Rcpp::compileAttributes()
 ```
+
+**Key files:**
+- **[rcpp_interface.cpp](src/rcpp_interface.cpp)** - All `[[Rcpp::export]]` declarations
+- **[lap_internal.h](src/core/lap_internal.h)** - Forward declarations for all solver implementations
+- **[RcppExports.cpp](src/RcppExports.cpp)** - Auto-generated, DO NOT EDIT manually
 
 **Export Pattern (CRITICAL):**
 
@@ -261,28 +341,66 @@ Available algorithms (see [R/assignment.R](R/assignment.R)):
 
 ### Testing Strategy
 
-**Test Organization** (1369 total tests):
-- LAP solvers: `test-assignment-*.R` (one per solver)
-- Matching workflows: [tests/testthat/test-matching.R](tests/testthat/test-matching.R) (98 tests)
-  - Preprocessing: 10 tests
-  - Balance diagnostics: 11 tests
-  - Core matching: 9 tests
-  - Greedy strategies: 4 tests
-  - Integration tests: remainder
-- Gabow-Tarjan modules: `test_gabow_tarjan_moduleA.R` through `moduleH.R`
-- Pixel morphing: `test-pixel-morph.R`
+**Test Organization (1382 total tests - all passing):**
 
-**Running Subset of Tests:**
+```
+tests/testthat/
+├── LAP Solver Tests:
+│   ├── test-assignment-hungarian.R       # Hungarian algorithm tests
+│   ├── test-assignment-jv.R              # Jonker-Volgenant tests
+│   ├── test-assignment-auction.R         # Auction variants
+│   ├── test-assignment-*.R               # 14+ individual solver test files
+│   └── test-lap-solve.R                  # Tidy interface tests
+│
+├── Matching Workflow Tests (98 tests):
+│   └── test-matching.R                   # Comprehensive matching tests
+│       ├── Preprocessing: 10 tests
+│       ├── Balance diagnostics: 11 tests
+│       ├── Joined datasets: 13 tests
+│       ├── Distance caching: tests
+│       ├── Parallel processing: tests
+│       ├── Core matching: 9 tests
+│       ├── Greedy strategies: 4 tests
+│       └── Integration tests: remainder
+│
+├── Gabow-Tarjan Modular Tests:
+│   ├── test_gabow_tarjan_moduleA.R       # Component testing
+│   ├── test_gabow_tarjan_moduleB.R
+│   ├── ...
+│   └── test_gabow_tarjan_moduleH.R       # 8 module test files
+│
+├── Pixel Morphing Tests:
+│   └── test-pixel-morph.R                # Morphing algorithm tests
+│
+└── Utility Tests:
+    ├── test-utils.R                      # General utilities
+    └── test-*.R                          # Other specialized tests
+```
+
+**Running Tests:**
 ```r
-# All matching tests
+# Run all tests
+devtools::test()  # or Ctrl+Shift+T in RStudio
+
+# Run matching tests only
 devtools::test(filter = "matching")
 
-# Specific test
+# Run specific test file
 testthat::test_file("tests/testthat/test-matching.R")
 
-# Single test case
+# Run single test
 testthat::test_that("balance_diagnostics works with blocking", { ... })
+
+# Run with parallel execution
+devtools::test(parallel = TRUE)
 ```
+
+**Test Coverage Highlights:**
+- All 14+ LAP algorithms have dedicated test files
+- Edge cases: empty matches, NA handling, constant variables
+- Backward compatibility: v0.1.0 tests still pass
+- Performance: No regressions from v0.1.0
+- Integration: Cross-feature testing (preprocessing + matching + diagnostics)
 
 ## Important Conventions
 
@@ -398,24 +516,43 @@ balance_diagnostics object with:
    - Check tests, examples, vignettes
 
 7. **Object files in commits**
-   - Clean before committing: `git clean -fdX src/`
-   - Add `src/*.o` to .gitignore
+   - Clean before committing: `git clean -fdX src/` (Unix/Mac) or `Remove-Item src\*.o, src\*.dll -Force` (Windows)
+   - Note: Some object files may already be in the repo - clean them if they cause issues
+   - Consider adding `src/*.o` and `src/*.dll` to .gitignore if not already present
 
 ## Documentation Files
 
-**Implementation Guides:**
-- [IMPLEMENTATION_STEP1.md](IMPLEMENTATION_STEP1.md) - Automatic preprocessing details
-- [IMPLEMENTATION_STEP2.md](IMPLEMENTATION_STEP2.md) - Balance diagnostics details
-- [MATCHING_ENHANCEMENTS.md](MATCHING_ENHANCEMENTS.md) - Feature roadmap
-- [SETUP_REQUIRED.md](SETUP_REQUIRED.md) - Initial setup for greedy matching
-
 **Package Documentation:**
-- [CHANGELOG.md](CHANGELOG.md) - Detailed release notes
-- [NEWS.md](NEWS.md) - User-facing changes (R convention)
+- [CLAUDE.md](CLAUDE.md) - This file - comprehensive development guide
+- [CHANGELOG.md](CHANGELOG.md) - Detailed release notes (Keep a Changelog format)
+- [NEWS.md](NEWS.md) - User-facing changes (R package convention)
+- [DESCRIPTION](DESCRIPTION) - Package metadata, dependencies, authors
+- [LICENSE](LICENSE) - MIT License
 
-**Examples:**
-- [examples/auto_scale_demo.R](examples/auto_scale_demo.R) - 5 preprocessing demos
-- [examples/balance_diagnostics_demo.R](examples/balance_diagnostics_demo.R) - 6 balance demos
+**Example Files (8 demos):**
+```
+examples/
+├── auto_scale_demo.R              # 5 preprocessing demonstrations
+├── balance_diagnostics_demo.R     # 6 balance diagnostic examples
+├── join_matched_demo.R            # 8 joined dataset examples
+├── parallel_matching_demo.R       # 7 parallel processing examples
+├── error_messages_demo.R          # 10 fun error message demonstrations
+└── (3 more demo files for distance caching, etc.)
+```
+
+**Vignettes (3 comprehensive guides):**
+```
+vignettes/
+├── getting-started.Rmd            # Entry-point tutorial (394 lines)
+├── algorithms.Rmd                 # Mathematical foundations (667 lines)
+└── pixel-morphing.Rmd             # Advanced applications (884 lines)
+```
+
+**Implementation Notes (historical):**
+- IMPLEMENTATION_STEP1.md - Automatic preprocessing implementation details
+- IMPLEMENTATION_STEP2.md - Balance diagnostics implementation details
+- MATCHING_ENHANCEMENTS.md - Feature roadmap and enhancement tracking
+- SETUP_REQUIRED.md - Initial setup documentation for greedy matching
 
 ## Special Notes
 
@@ -751,16 +888,188 @@ Before submitting a new vignette:
 - [ ] Proper attribution for algorithms/methods
 - [ ] Builds successfully with `devtools::build_vignettes()`
 
+## Package Dependencies
+
+**System Requirements:**
+- **R** ≥ 3.5.0
+- **C++17** compiler (Rtools for Windows with g++ supporting C++17)
+- **RcppEigen** for matrix operations
+
+**Core Dependencies (Imports):**
+```r
+Rcpp (>= 1.0.0)           # C++ integration
+RcppEigen                 # Matrix operations
+tibble (>= 3.0.0)         # Modern data frames
+dplyr (>= 1.0.0)          # Data manipulation
+rlang (>= 0.4.0)          # Tidy evaluation
+purrr (>= 0.3.0)          # Functional programming
+magrittr (>= 2.0.0)       # Pipe operator
+```
+
+**Suggested Dependencies (Optional):**
+```r
+# Testing
+testthat (>= 3.0.0)       # Unit testing framework
+withr                     # Temporary state management
+
+# Documentation
+knitr                     # Vignette generation
+rmarkdown                 # Documentation rendering
+
+# Performance
+bench                     # Benchmarking
+parallel                  # Parallel computation
+future (>= 1.20.0)        # Async parallel framework
+future.apply (>= 1.8.0)   # Future-compatible apply functions
+
+# Image processing (for pixel morphing)
+magick                    # ImageMagick R bindings
+OpenImageR                # Image processing utilities
+farver                    # Fast color space manipulation
+av                        # Video encoding
+reticulate                # Python integration
+png                       # PNG file handling
+```
+
+**LinkingTo:**
+- Rcpp - R/C++ interface
+- RcppEigen - High-performance matrix library
+
 ## Development History
 
-- **v1.0.0 (2025-11-19):** Major release
-  - Added automatic preprocessing and scaling
-  - Added greedy matching algorithms
-  - Added comprehensive balance diagnostics
-  - Renamed from lapr to couplr
-  - 1369 tests passing
+**v1.0.0 (2025-11-19) - Major Release**
 
-- **v0.1.0:** Initial release
-  - Core LAP solvers
-  - Basic matching
-  - Pixel morphing
+Complete rewrite with 6 major enhancement steps:
+
+1. **Automatic Preprocessing** - Variable health checks, smart scaling, categorical encoding
+2. **Balance Diagnostics** - Standardized differences, variance ratios, KS tests, quality ratings
+3. **Joined Dataset Output** - `join_matched()`, `augment()` for analysis-ready data
+4. **Distance Caching** - `compute_distances()` for reusable precomputed distances
+5. **Parallel Processing** - Block matching parallelization via future framework
+6. **Fun Error Messages** - Couple-themed messages with optional emoji support
+
+**Key Metrics:**
+- 1382 tests passing (up from 1365)
+- 100% backward compatible
+- 20 R files, 22 C++ files
+- 3 vignettes, 8+ example files
+- Renamed from lapr to couplr
+
+**v0.1.0 - Initial Release**
+- 14+ LAP solver algorithms
+- Basic matching workflows
+- Pixel morphing for visualization
+- Tidy interface with tibble output
+
+---
+
+## Quick Reference: Common Workflows
+
+### 1. Basic Optimal Matching
+```r
+library(couplr)
+
+# Match with automatic preprocessing
+result <- match_couples(
+  left = treatment_df,
+  right = control_df,
+  vars = c("age", "income", "education"),
+  auto_scale = TRUE,
+  max_distance = 0.5,
+  return_diagnostics = TRUE
+)
+
+# Check balance
+balance <- balance_diagnostics(result, treatment_df, control_df, vars)
+print(balance)
+
+# Get analysis-ready dataset
+matched_data <- join_matched(result, treatment_df, control_df)
+```
+
+### 2. Fast Greedy Matching for Large Data
+```r
+# Use greedy algorithm for speed
+result <- greedy_couples(
+  left = large_treatment_df,
+  right = large_control_df,
+  vars = c("age", "income"),
+  strategy = "row_best",  # or "sorted" or "pq"
+  auto_scale = TRUE
+)
+```
+
+### 3. Matching with Blocking
+```r
+# Create blocks
+blocks <- matchmaker(
+  left_df, right_df,
+  block_type = "group",
+  block_by = "site"
+)
+
+# Match within blocks (optionally in parallel)
+result <- match_couples(
+  left_df, right_df,
+  vars = c("age", "income"),
+  block_id = blocks$block_id,
+  parallel = TRUE
+)
+```
+
+### 4. Distance Caching for Experimentation
+```r
+# Compute distances once
+dist_obj <- compute_distances(
+  left_df, right_df,
+  vars = c("age", "income", "education"),
+  scale = "robust"
+)
+
+# Try different constraints quickly
+result1 <- match_couples(dist_obj, max_distance = 0.3)
+result2 <- match_couples(dist_obj, max_distance = 0.5)
+result3 <- greedy_couples(dist_obj, strategy = "sorted")
+
+# Update constraints without recomputing
+dist_obj2 <- update_constraints(dist_obj, max_distance = 0.4)
+```
+
+### 5. LAP Solving (Low-Level)
+```r
+# Create cost matrix
+cost <- matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), nrow = 3)
+
+# Solve with specific algorithm
+result <- lap_solve(cost, method = "jv")  # Jonker-Volgenant
+
+# Or let the package choose
+result <- lap_solve(cost, method = "auto")
+```
+
+### 6. Publication Workflow
+```r
+# 1. Match
+result <- match_couples(left, right, vars, auto_scale = TRUE)
+
+# 2. Assess balance
+balance <- balance_diagnostics(result, left, right, vars)
+
+# 3. Create publication table
+balance_table(balance, digits = 3)
+
+# 4. Get matched dataset for analysis
+data <- join_matched(result, left, right,
+                     left_vars = c("outcome", "covariate1"),
+                     right_vars = c("covariate1"))
+
+# 5. Run analysis on matched data
+lm(outcome_left ~ covariate1_left + covariate1_right, data = data)
+```
+
+---
+
+**For more information:**
+- See vignettes: `browseVignettes("couplr")`
+- View examples: `?match_couples`, `?balance_diagnostics`
+- Check issues: https://github.com/gcol33/couplr/issues

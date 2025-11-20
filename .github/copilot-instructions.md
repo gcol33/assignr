@@ -1,8 +1,8 @@
-<!-- Copilot / AI agent instructions for the `lapr` codebase -->
+<!-- Copilot / AI agent instructions for the `couplr` codebase -->
 
 # Quick Orientation
 
-This repository is an R package (`lapr`) that provides linear-assignment solvers and image "pixel morphing" helpers. The project mixes R (high-level API, data handling, vignettes/tests) and C++ (many solver implementations, Rcpp exports, image routines).
+This repository is an R package (`couplr`, formerly `lapr`) that provides linear-assignment solvers, optimal matching workflows, and image "pixel morphing" helpers. The project mixes R (high-level API, data handling, vignettes/tests) and C++ (many solver implementations, Rcpp exports, image routines).
 
 Key design points AI agents should know:
 - R is the user-facing API: see `R/assignment.R` (method selection) and `R/lap_solve.R` (tidy wrappers).
@@ -56,6 +56,8 @@ Key design points AI agents should know:
 - Improve auto-selection heuristics: modify `R/assignment.R::method == 'auto'` heuristics and add tests under `tests/` demonstrating expected selection for small/sparse/dense inputs.
 
 # Contact / Issues
-- Bug reports URL in `DESCRIPTION`: `https://gitlab.com/lenznerb28/assignR/-/issues` — open an issue for ambiguous design decisions.
+- Bug reports URL in `DESCRIPTION`: `https://github.com/gcol33/couplr/issues` — open an issue for ambiguous design decisions.
 
-Please review and tell me what to clarify or expand (specific files, more examples, or CI instructions). 
+# Additional Resources
+- See `CLAUDE.md` in the repository root for comprehensive development documentation
+- This file provides quick orientation; CLAUDE.md has detailed architecture, testing strategies, and development workflows 

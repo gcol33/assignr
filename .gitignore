@@ -6,3 +6,12 @@
 .quarto
 /doc/
 /Meta/
+.claude
+
+# C++ compilation artifacts
+src/*.o
+src/*.dll
+src/*.so
+src/**/*.o
+src/**/*.dll
+src/**/*.so
