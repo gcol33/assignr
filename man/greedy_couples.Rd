@@ -20,7 +20,8 @@ greedy_couples(
   strategy = c("row_best", "sorted", "pq"),
   return_unmatched = TRUE,
   return_diagnostics = FALSE,
-  parallel = FALSE
+  parallel = FALSE,
+  check_costs = TRUE
 )
 }
 \arguments{
@@ -68,6 +69,9 @@ Requires 'future' and 'future.apply' packages. Can be:
 \item \code{TRUE}: Auto-configure parallel backend
 \item Character: Specify future plan (e.g., "multisession", "multicore")
 }}
+
+\item{check_costs}{If TRUE, check distance distribution for potential problems
+and provide helpful warnings before matching (default: TRUE)}
 }
 \value{
 A list with class "matching_result" (same structure as match_couples)

@@ -24,6 +24,8 @@
 #' @importFrom dplyr group_by group_vars group_keys group_split bind_rows bind_cols summarise first n arrange
 #' @importFrom purrr map_dfr
 #' @importFrom magrittr %>%
+#' @importFrom stats dist median quantile sd
+#' @importFrom utils type.convert
 NULL
 
 #' Re-export of dplyr::group_by

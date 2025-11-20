@@ -42,12 +42,12 @@ knitr::opts_chunk$set(
   out.width  = "100%"
 )
 
-library(lapr)
+library(couplr)
 library(knitr)
 
 # Helper function to locate example assets
 ext_demo <- function(...) {
-  system.file("extdata", ..., package = "lapr")
+  system.file("extdata", ..., package = "couplr")
 }
 ```
 
@@ -67,7 +67,7 @@ Optimal matching problems appear throughout science when we need to find corresp
 
 **Related vignettes**:
 
-- For basic `lapr` usage: `vignette("getting-started")`  
+- For basic `couplr` usage: `vignette("getting-started")`  
 - For algorithm details: `vignette("algorithms")`  
 
 ## The General Matching Problem
@@ -376,7 +376,7 @@ FUNCTION match_hierarchical(region_A, region_B, threshold, level):
 END FUNCTION
 ```
 
-The `lapr` implementation adds pragmatic details such as normalization of color and spatial distances, conversion between $(x, y)$ coordinates and raster indexing, and handling remainder patches when the grid does not divide evenly.
+The `couplr` implementation adds pragmatic details such as normalization of color and spatial distances, conversion between $(x, y)$ coordinates and raster indexing, and handling remainder patches when the grid does not divide evenly.
 
 ### Strategy 3: Resolution Reduction
 
@@ -510,7 +510,7 @@ FOR frame_idx = 1 TO n_frames DO
 END FOR
 ```
 
-The `lapr` implementation handles indexing, raster layout, and shows or saves the resulting GIFs.
+The `couplr` implementation handles indexing, raster layout, and shows or saves the resulting GIFs.
 
 Approximate performance: up to about $100 \times 100$ (10 000 pixels) on typical hardware is fine with the exact LAP.
 
@@ -780,7 +780,7 @@ The morphing implementation is provided in `inst/scripts/generate_examples.R`:
 
 ```r
 # View the source
-example_script <- system.file("scripts", "generate_examples.R", package = "lapr")
+example_script <- system.file("scripts", "generate_examples.R", package = "couplr")
 file.show(example_script)
 
 # Or source to use its helpers
@@ -831,7 +831,7 @@ $$
 \min_{\pi \in S_n} \sum_{i=1}^n c_{i,\pi(i)},
 $$
 
-which is what `lapr` solves efficiently.
+which is what `couplr` solves efficiently.
 
 ### Wasserstein Distance
 
@@ -880,4 +880,4 @@ This appears in
 
 We have seen how optimal matching problems arise in ecology, physics, and chemistry, and how they can be expressed as linear assignment problems that combine feature similarity with spatial coherence. Exact LAP solutions provide gold-standard matchings for small problems, while feature quantization, hierarchical decomposition, and resolution reduction make much larger problems tractable.
 
-Pixel morphing serves as an intuitive visual testbed for these ideas, but the same algorithms apply directly to vegetation plots, particles in videos, and atoms in molecules. Together, the methods provided by `lapr` allow you to move smoothly between exact optimal matchings and principled approximations, depending on problem size and accuracy requirements.
+Pixel morphing serves as an intuitive visual testbed for these ideas, but the same algorithms apply directly to vegetation plots, particles in videos, and atoms in molecules. Together, the methods provided by `couplr` allow you to move smoothly between exact optimal matchings and principled approximations, depending on problem size and accuracy requirements.

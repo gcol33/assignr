@@ -877,16 +877,11 @@ test_that("join_matched handles empty matches", {
   left <- data.frame(id = 1:3, x = c(1, 2, 3))
   right <- data.frame(id = 4:6, x = c(100, 200, 300))
 
-  result <- suppressWarnings(
-    match_couples(left, right, vars = "x", max_distance = 1)
+  # With strict caliper, should throw error (no valid pairs)
+  expect_error(
+    match_couples(left, right, vars = "x", max_distance = 1),
+    "No valid pairs"
   )
-
-  # Should return empty tibble with warning
-  expect_warning(
-    joined <- join_matched(result, left, right),
-    "No matched pairs"
-  )
-  expect_equal(nrow(joined), 0)
 })
 
 test_that("join_matched works with greedy matching", {

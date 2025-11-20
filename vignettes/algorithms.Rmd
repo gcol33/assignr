@@ -14,12 +14,12 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-library(lapr)
+library(couplr)
 ```
 
 ## Overview
 
-This vignette provides detailed mathematical background on the algorithms implemented in `lapr`. Understanding these algorithms can help you choose the right method for your specific problem and appreciate the theoretical foundations of assignment optimization.
+This vignette provides detailed mathematical background on the algorithms implemented in `couplr`. Understanding these algorithms can help you choose the right method for your specific problem and appreciate the theoretical foundations of assignment optimization.
 
 ## The Linear Assignment Problem
 
@@ -65,7 +65,7 @@ $$
 
 This condition means that only assignments along **tight edges** (where the dual constraint holds with equality) can be part of an optimal solution. This principle underlies most efficient LAP algorithms.
 
-## Algorithms in lapr
+## Algorithms in couplr
 
 ### Hungarian Algorithm
 
@@ -118,7 +118,7 @@ print(result)
 
 **Complexity**: $O(n^3)$ expected time, $O(n^2)$ space
 
-The Jonker-Volgenant (JV) algorithm (1987) is an optimized variant of the shortest augmenting path approach. It's the default algorithm in `lapr` and provides good performance on most problem types.
+The Jonker-Volgenant (JV) algorithm (1987) is an optimized variant of the shortest augmenting path approach. It's the default algorithm in `couplr` and provides good performance on most problem types.
 
 #### Key Ideas
 
@@ -179,7 +179,7 @@ cat("Total cost:", get_total_cost(result), "\n")
 
 **Complexity**: $O(n^2 \log(nC) / \epsilon)$ for maximum cost $C$ and $\epsilon$-optimality
 
-The auction algorithm, developed by Bertsekas (1988), takes an economic approach to the assignment problem. Sources "bid" for targets, and prices (dual variables) adjust based on competition. `lapr` implements three variants of the auction algorithm, each with different performance characteristics.
+The auction algorithm, developed by Bertsekas (1988), takes an economic approach to the assignment problem. Sources "bid" for targets, and prices (dual variables) adjust based on competition. `couplr` implements three variants of the auction algorithm, each with different performance characteristics.
 
 #### Core Auction Concept
 
@@ -648,7 +648,7 @@ For deeper mathematical treatment:
 
 ## Summary
 
-`lapr` provides multiple algorithms for the linear assignment problem:
+`couplr` provides multiple algorithms for the linear assignment problem:
 
 - **Hungarian**: Classical algorithm, pedagogically clear, good for medium problems
 - **Jonker-Volgenant**: General-purpose method, default choice for most problems  
@@ -661,6 +661,6 @@ The automatic selection (`method = "auto"`) chooses an algorithm based on proble
 
 **Learn more**:
 
-- **Basic usage**: `vignette("getting-started")` covers core `lapr` functionality and examples
+- **Basic usage**: `vignette("getting-started")` covers core `couplr` functionality and examples
 - **Applications**: `vignette("pixel-morphing")` demonstrates visual and scientific applications
 - **Function documentation**: `?lap_solve` provides detailed API documentation

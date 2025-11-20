@@ -1,10 +1,10 @@
 ---
-title: "Getting Started with lapr"
+title: "Getting Started with couplr"
 author: "Gilles Colling"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Getting Started with lapr}
+  %\VignetteIndexEntry{Getting Started with couplr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,14 +16,14 @@ knitr::opts_chunk$set(
   fig.width = 6,
   fig.height = 4
 )
-library(lapr)
+library(couplr)
 ```
 
 ## Overview
 
 The linear assignment problem (LAP) is a fundamental optimization problem with applications ranging from task scheduling and resource allocation to computer vision and bioinformatics. Given a cost matrix where entry (i,j) represents the cost of assigning source i to target j, the goal is to find the assignment that minimizes (or maximizes) the total cost, with each source assigned to at most one target.
 
-`lapr` provides a solution to the LAP with a tidy interface that integrates with the tidyverse ecosystem.
+`couplr` provides a solution to the LAP with a tidy interface that integrates with the tidyverse ecosystem.
 
 ### Key Features
 
@@ -37,11 +37,11 @@ The linear assignment problem (LAP) is a fundamental optimization problem with a
 
 ```{r eval=FALSE}
 # Install from CRAN
-install.packages("lapr")
+install.packages("couplr")
 
 # Or install development version from GitHub
 # install.packages("remotes")
-remotes::install_github("gcol33/lapr")
+remotes::install_github("gcol33/couplr")
 ```
 
 ## The Assignment Problem
@@ -64,7 +64,7 @@ The optimal assignment is: Worker 1 → Task 2 (cost 2), Worker 2 → Task 1 (co
 
 ### Matrix Input
 
-The simplest way to use `lapr` is with a numeric cost matrix:
+The simplest way to use `couplr` is with a numeric cost matrix:
 
 ```{r basic-matrix}
 # Cost matrix: 3 workers × 3 tasks
@@ -104,7 +104,7 @@ This approach is particularly useful when your data is already in long format, w
 
 ## Working with Rectangular Problems
 
-Unlike many assignment solvers, `lapr` handles rectangular problems (unequal numbers of sources and targets) without manual padding:
+Unlike many assignment solvers, `couplr` handles rectangular problems (unequal numbers of sources and targets) without manual padding:
 
 ```{r rectangular}
 # 3 workers, 5 tasks - assign each worker to one task
@@ -157,7 +157,7 @@ cat("\nTotal profit:", get_total_cost(result), "\n")
 
 ## Grouped Data Frames
 
-One of `lapr`'s most powerful features is seamless integration with grouped data frames, allowing you to solve many related problems at once:
+One of `couplr`'s most powerful features is seamless integration with grouped data frames, allowing you to solve many related problems at once:
 
 ```{r grouped}
 # Multiple assignment problems in one data frame
@@ -238,7 +238,7 @@ This is useful for:
 
 ## Extracting and Working with Results
 
-`lapr` provides several utility functions for working with results:
+`couplr` provides several utility functions for working with results:
 
 ```{r utilities}
 result <- lap_solve(cost)
@@ -258,10 +258,10 @@ is_lap_solve_result(result)
 
 ## Algorithm Selection
 
-`lapr` includes multiple algorithms optimized for different scenarios. The default `"auto"` method automatically selects the best algorithm:
+`couplr` includes multiple algorithms optimized for different scenarios. The default `"auto"` method automatically selects the best algorithm:
 
 ```{r methods}
-# Let lapr choose (default)
+# Let couplr choose (default)
 lap_solve(cost, method = "auto")
 
 # Force specific algorithm:
@@ -323,7 +323,7 @@ lap_solve(cost)  # No parallelization yet
 
 ## Real-World Example: Employee Scheduling
 
-Here's a practical example of using `lapr` to create a weekly work schedule:
+Here's a practical example of using `couplr` to create a weekly work schedule:
 
 ```{r real-world}
 set.seed(42)
@@ -366,7 +366,7 @@ optimal_schedule |>
 
 ## Performance Considerations
 
-`lapr` is designed for efficiency:
+`couplr` is designed for efficiency:
 
 - **C++ backend**: Core algorithms implemented in optimized C++ using Rcpp
 - **Automatic algorithm selection**: Chooses an efficient method for your problem
@@ -377,7 +377,7 @@ For small problems (< 100×100), setup overhead dominates and all methods are fa
 
 ## Summary
 
-`lapr` provides a solution for linear assignment problems in R:
+`couplr` provides a solution for linear assignment problems in R:
 
 - **Simple API**: Consistent interface across `lap_solve()`, `lap_solve_batch()`, and `lap_solve_kbest()`
 - **Tidy integration**: Support for data frames, tibbles, and dplyr workflows
@@ -390,4 +390,4 @@ For small problems (< 100×100), setup overhead dominates and all methods are fa
 - **Algorithm details**: `vignette("algorithms")` covers mathematical foundations of each solver
 - **Visual demonstrations**: `vignette("pixel-morphing")` shows advanced applications in computer vision and science
 - **Function documentation**: `?lap_solve`, `?lap_solve_batch`, and `?lap_solve_kbest` provide detailed API references
-- **Source code**: Visit the [GitHub repository](https://github.com/gcol33/lapr) for examples and contributions
+- **Source code**: Visit the [GitHub repository](https://github.com/gcol33/couplr) for examples and contributions
