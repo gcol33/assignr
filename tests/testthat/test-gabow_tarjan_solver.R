@@ -65,7 +65,7 @@ assignment_cost <- function(cost, row_match) {
 }
 
 test_that("Gabow-Tarjan solves simple 3x3 matrix", {
-  skip_if_not_installed("lapr")
+  skip_if_not_installed("couplr")
 
   cost <- matrix(c(
     4, 1, 3,
@@ -86,7 +86,7 @@ test_that("Gabow-Tarjan solves simple 3x3 matrix", {
 })
 
 test_that("Gabow-Tarjan handles identity-like matrix", {
-  skip_if_not_installed("lapr")
+  skip_if_not_installed("couplr")
 
   cost <- matrix(c(
     1,   100, 100,
@@ -108,7 +108,7 @@ test_that("Gabow-Tarjan handles identity-like matrix", {
 })
 
 test_that("Gabow-Tarjan handles maximization", {
-  skip_if_not_installed("lapr")
+  skip_if_not_installed("couplr")
 
   # Use a profit matrix where min and max assignments differ
   profit <- matrix(c(
@@ -189,7 +189,7 @@ test_that("Gabow-Tarjan handles maximization", {
 
 
 test_that("Gabow-Tarjan handles 4x4 matrix", {
-  skip_if_not_installed("lapr")
+  skip_if_not_installed("couplr")
 
   cost <- matrix(c(
     10, 19,  8, 15,
@@ -211,7 +211,7 @@ test_that("Gabow-Tarjan handles 4x4 matrix", {
 })
 
 test_that("Gabow-Tarjan handles 5x5 matrix", {
-  skip_if_not_installed("lapr")
+  skip_if_not_installed("couplr")
 
   cost <- matrix(c(
     7, 2, 1, 9, 4,
@@ -234,7 +234,7 @@ test_that("Gabow-Tarjan handles 5x5 matrix", {
 })
 
 test_that("Gabow-Tarjan handles negative costs", {
-  skip_if_not_installed("lapr")
+  skip_if_not_installed("couplr")
 
   cost <- matrix(c(
     -1, 5, 3,
@@ -255,7 +255,7 @@ test_that("Gabow-Tarjan handles negative costs", {
 })
 
 test_that("Gabow-Tarjan handles zero costs", {
-  skip_if_not_installed("lapr")
+  skip_if_not_installed("couplr")
 
   cost <- matrix(0, nrow = 3, ncol = 3)
 
@@ -272,7 +272,7 @@ test_that("Gabow-Tarjan handles zero costs", {
 })
 
 test_that("Gabow-Tarjan handles uniform costs", {
-  skip_if_not_installed("lapr")
+  skip_if_not_installed("couplr")
 
   cost <- matrix(5, nrow = 3, ncol = 3)
 
@@ -289,7 +289,7 @@ test_that("Gabow-Tarjan handles uniform costs", {
 })
 
 test_that("Gabow-Tarjan handles large cost differences", {
-  skip_if_not_installed("lapr")
+  skip_if_not_installed("couplr")
 
   cost <- matrix(c(
       1, 1000, 1000,
@@ -311,7 +311,7 @@ test_that("Gabow-Tarjan handles large cost differences", {
 })
 
 test_that("Gabow-Tarjan handles rectangular matrices (4x3)", {
-  skip_if_not_installed("lapr")
+  skip_if_not_installed("couplr")
 
   cost <- matrix(c(
      1,  2,  3,
@@ -327,13 +327,13 @@ test_that("Gabow-Tarjan handles rectangular matrices (4x3)", {
 })
 
 test_that("Gabow-Tarjan matches Hungarian on small matrices", {
-  skip_if_not_installed("lapr")
+  skip_if_not_installed("couplr")
 
   set.seed(42)
   cost <- matrix(sample(1:20, 9, replace = TRUE), nrow = 3)
 
   res_gt <- lap_solve_gabow_tarjan(cost, maximize = FALSE)
-  res_h  <- lapr:::lap_solve_hungarian(cost, maximize = FALSE)
+  res_h  <- couplr:::lap_solve_hungarian(cost, maximize = FALSE)
 
   cost_h <- if (!is.null(res_h$cost)) {
     res_h$cost
@@ -356,14 +356,14 @@ test_that("Gabow-Tarjan matches Hungarian on small matrices", {
 })
 
 test_that("Gabow-Tarjan matches JV on larger matrices", {
-  skip_if_not_installed("lapr")
+  skip_if_not_installed("couplr")
 
   set.seed(123)
   n <- 10
   cost <- matrix(sample(1:100, n * n, replace = TRUE), nrow = n)
 
   res_gt <- lap_solve_gabow_tarjan(cost, maximize = FALSE)
-  res_jv <- lapr:::lap_solve_jv(cost, maximize = FALSE)
+  res_jv <- couplr:::lap_solve_jv(cost, maximize = FALSE)
 
   cost_jv <- if (!is.null(res_jv$cost)) {
     res_jv$cost

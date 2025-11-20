@@ -15,7 +15,8 @@ match_couples_single(
   scale,
   max_distance,
   calipers,
-  method
+  method,
+  check_costs = TRUE
 )
 }
 \description{

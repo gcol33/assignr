@@ -12,7 +12,8 @@ match_couples_from_distance(
   require_full_matching = FALSE,
   method = "auto",
   return_unmatched = TRUE,
-  return_diagnostics = FALSE
+  return_diagnostics = FALSE,
+  check_costs = TRUE
 )
 }
 \description{
