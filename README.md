@@ -243,17 +243,42 @@ result6 <- match_couples(dist_obj,
 
 ### Treatment Effect Estimation
 ```r
+library(couplr)
+library(dplyr)
+
+# Complete workflow: matching → diagnostics → analysis
+covariates <- c("age", "income", "education", "prior_health")
+
 # 1. Match treated and control units
-result <- match_couples(treated, control, vars = covariates, auto_scale = TRUE)
+result <- treated |>
+  match_couples(
+    control,
+    vars = covariates,
+    auto_scale = TRUE,
+    max_distance = 0.25
+  )
 
 # 2. Assess balance
 balance <- balance_diagnostics(result, treated, control, vars = covariates)
+print(balance)
+#> Mean Absolute Std Diff: 0.06 (Excellent)
 
 # 3. Get matched dataset for analysis
-data <- join_matched(result, treated, control)
+matched_data <- result |>
+  join_matched(treated, control, left_vars = c("outcome", covariates))
 
-# 4. Estimate treatment effect
-lm(outcome ~ treatment + covariates, data = data)
+# 4. Estimate treatment effect with matched pairs
+# Compare outcome adjusting for baseline differences
+model <- lm(outcome_left ~ outcome_right + age_left + income_left,
+            data = matched_data)
+summary(model)
+
+# 5. Check sensitivity: Did matching improve balance?
+# Before matching
+mean(treated$age) - mean(control$age)  # e.g., 8.2 years difference
+
+# After matching
+mean(matched_data$age_left) - mean(matched_data$age_right)  # e.g., 0.3 years
 ```
 
 ### Ecological Studies
