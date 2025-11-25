@@ -18,3 +18,7 @@ src/*.so
 src/**/*.o
 src/**/*.dll
 src/**/*.so
+
+# R CMD check artifacts
+*.Rcheck/
+..Rcheck/
