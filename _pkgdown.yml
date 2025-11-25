@@ -1,11 +1,10 @@
 url: https://gcol33.github.io/couplr/
 
 template:
- bootstrap: 5
- bootswatch: flatly
- bslib:
-   primary: "#0d6efd"
-   code-bg: "#f8f9fa"
+  bootstrap: 5
+  bootswatch: sandstone
+  bslib:
+    navbar-bg: "#3e3f3a"
 
 home:
   title: "couplr: Linear Assignment Problems and Matching in R"

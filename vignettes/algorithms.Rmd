@@ -921,10 +921,10 @@ This vignette covered the mathematical foundations and practical considerations 
 
 **Key Takeaways**:
 
-1. **Algorithm selection matters** for large problems -- $O(n^3)$ adds up quickly
+1. **Algorithm selection matters** for large problems: $O(n^3)$ adds up quickly
 2. **`method = "auto"`** handles most cases well, but understanding the options helps with debugging
 3. **Numerical issues** are rare but can occur with extreme cost ranges or degenerate problems
-4. **All algorithms find optimal solutions** -- differences are in speed and edge case handling
+4. **All algorithms find optimal solutions**: differences are in speed and edge case handling
 
 **Algorithm Summary**:
 

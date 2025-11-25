@@ -1093,7 +1093,7 @@ if sparsity is high</li>
 <span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lap_solve.html">lap_solve</a></span><span class="op">(</span><span class="va">cost</span>, method <span class="op">=</span> <span class="st">"sap"</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;    0.02    0.00    0.02</span></span>
+<span><span class="co">#&gt;    0.04    0.00    0.01</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Assignments found:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Assignments found: 200</span></span>
@@ -1573,7 +1573,7 @@ considerations for LAP algorithms in <code>couplr</code>:</p>
 <p><strong>Key Takeaways</strong>:</p>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Algorithm selection matters</strong> for large problems –
+<strong>Algorithm selection matters</strong> for large problems:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math>
 adds up quickly</li>
 <li>
@@ -1583,7 +1583,7 @@ well, but understanding the options helps with debugging</li>
 <strong>Numerical issues</strong> are rare but can occur with
 extreme cost ranges or degenerate problems</li>
 <li>
-<strong>All algorithms find optimal solutions</strong> – differences
+<strong>All algorithms find optimal solutions</strong>: differences
 are in speed and edge case handling</li>
 </ol>
 <p><strong>Algorithm Summary</strong>:</p>

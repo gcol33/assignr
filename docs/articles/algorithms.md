@@ -716,7 +716,7 @@ system.time({
   result <- lap_solve(cost, method = "sap")
 })
 #>    user  system elapsed 
-#>    0.02    0.00    0.02
+#>    0.04    0.00    0.01
 
 cat("Assignments found:", nrow(result), "\n")
 #> Assignments found: 200
@@ -1053,13 +1053,13 @@ considerations for LAP algorithms in `couplr`:
 
 **Key Takeaways**:
 
-1.  **Algorithm selection matters** for large problems – $`O(n^3)`$ adds
+1.  **Algorithm selection matters** for large problems: $`O(n^3)`$ adds
     up quickly
 2.  **`method = "auto"`** handles most cases well, but understanding the
     options helps with debugging
 3.  **Numerical issues** are rare but can occur with extreme cost ranges
     or degenerate problems
-4.  **All algorithms find optimal solutions** – differences are in speed
+4.  **All algorithms find optimal solutions**: differences are in speed
     and edge case handling
 
 **Algorithm Summary**:
