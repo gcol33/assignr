@@ -76,12 +76,12 @@ test_that("Gabow-Tarjan solves simple 3x3 matrix", {
   res <- lap_solve_gabow_tarjan(cost, maximize = FALSE)
 
   expect_equal(res$n_matched, 3)
-  expect_equal(res$cost, 5)
+  expect_equal(res$total_cost, 5)
 
-  col_match <- build_col_match(res$assignment, ncol(cost))
+  col_match <- build_col_match(res$match, ncol(cost))
 
   expect_true(check_complementary_slackness(
-    cost, res$assignment, col_match, res$row_duals, res$col_duals
+    cost, res$match, col_match, res$row_duals, res$col_duals
   ))
 })
 
@@ -97,13 +97,13 @@ test_that("Gabow-Tarjan handles identity-like matrix", {
   res <- lap_solve_gabow_tarjan(cost, maximize = FALSE)
 
   expect_equal(res$n_matched, 3)
-  expect_equal(res$cost, 3)
-  expect_equal(res$assignment, c(1L, 2L, 3L))
+  expect_equal(res$total_cost, 3)
+  expect_equal(res$match, c(1L, 2L, 3L))
 
-  col_match <- build_col_match(res$assignment, ncol(cost))
+  col_match <- build_col_match(res$match, ncol(cost))
 
   expect_true(check_complementary_slackness(
-    cost, res$assignment, col_match, res$row_duals, res$col_duals
+    cost, res$match, col_match, res$row_duals, res$col_duals
   ))
 })
 
@@ -147,8 +147,8 @@ test_that("Gabow-Tarjan handles maximization", {
   expect_equal(res_gt_min$n_matched, 3)
   expect_equal(res_gt_max$n_matched, 3)
 
-  gt_min_cost <- res_gt_min$cost
-  gt_max_cost <- res_gt_max$cost
+  gt_min_cost <- res_gt_min$total_cost
+  gt_max_cost <- res_gt_max$total_cost
 
   # Costs must match the brute-force optimum for each objective
   expect_equal(gt_min_cost, ref_min_cost)
@@ -201,12 +201,12 @@ test_that("Gabow-Tarjan handles 4x4 matrix", {
   res <- lap_solve_gabow_tarjan(cost, maximize = FALSE)
 
   expect_equal(res$n_matched, 4)
-  expect_true(res$cost > 0)
+  expect_true(res$total_cost > 0)
 
-  col_match <- build_col_match(res$assignment, ncol(cost))
+  col_match <- build_col_match(res$match, ncol(cost))
 
   expect_true(check_complementary_slackness(
-    cost, res$assignment, col_match, res$row_duals, res$col_duals
+    cost, res$match, col_match, res$row_duals, res$col_duals
   ))
 })
 
@@ -224,12 +224,12 @@ test_that("Gabow-Tarjan handles 5x5 matrix", {
   res <- lap_solve_gabow_tarjan(cost, maximize = FALSE)
 
   expect_equal(res$n_matched, 5)
-  expect_true(res$cost > 0)
+  expect_true(res$total_cost > 0)
 
-  col_match <- build_col_match(res$assignment, ncol(cost))
+  col_match <- build_col_match(res$match, ncol(cost))
 
   expect_true(check_complementary_slackness(
-    cost, res$assignment, col_match, res$row_duals, res$col_duals
+    cost, res$match, col_match, res$row_duals, res$col_duals
   ))
 })
 
@@ -245,12 +245,12 @@ test_that("Gabow-Tarjan handles negative costs", {
   res <- lap_solve_gabow_tarjan(cost, maximize = FALSE)
 
   expect_equal(res$n_matched, 3)
-  expect_equal(res$cost, -6)
+  expect_equal(res$total_cost, -6)
 
-  col_match <- build_col_match(res$assignment, ncol(cost))
+  col_match <- build_col_match(res$match, ncol(cost))
 
   expect_true(check_complementary_slackness(
-    cost, res$assignment, col_match, res$row_duals, res$col_duals
+    cost, res$match, col_match, res$row_duals, res$col_duals
   ))
 })
 
@@ -262,12 +262,12 @@ test_that("Gabow-Tarjan handles zero costs", {
   res <- lap_solve_gabow_tarjan(cost, maximize = FALSE)
 
   expect_equal(res$n_matched, 3)
-  expect_equal(res$cost, 0)
+  expect_equal(res$total_cost, 0)
 
-  col_match <- build_col_match(res$assignment, ncol(cost))
+  col_match <- build_col_match(res$match, ncol(cost))
 
   expect_true(check_complementary_slackness(
-    cost, res$assignment, col_match, res$row_duals, res$col_duals
+    cost, res$match, col_match, res$row_duals, res$col_duals
   ))
 })
 
@@ -279,12 +279,12 @@ test_that("Gabow-Tarjan handles uniform costs", {
   res <- lap_solve_gabow_tarjan(cost, maximize = FALSE)
 
   expect_equal(res$n_matched, 3)
-  expect_equal(res$cost, 15)
+  expect_equal(res$total_cost, 15)
 
-  col_match <- build_col_match(res$assignment, ncol(cost))
+  col_match <- build_col_match(res$match, ncol(cost))
 
   expect_true(check_complementary_slackness(
-    cost, res$assignment, col_match, res$row_duals, res$col_duals
+    cost, res$match, col_match, res$row_duals, res$col_duals
   ))
 })
 
@@ -300,13 +300,13 @@ test_that("Gabow-Tarjan handles large cost differences", {
   res <- lap_solve_gabow_tarjan(cost, maximize = FALSE)
 
   expect_equal(res$n_matched, 3)
-  expect_equal(res$cost, 3)
-  expect_equal(res$assignment, c(1L, 2L, 3L))
+  expect_equal(res$total_cost, 3)
+  expect_equal(res$match, c(1L, 2L, 3L))
 
-  col_match <- build_col_match(res$assignment, ncol(cost))
+  col_match <- build_col_match(res$match, ncol(cost))
 
   expect_true(check_complementary_slackness(
-    cost, res$assignment, col_match, res$row_duals, res$col_duals
+    cost, res$match, col_match, res$row_duals, res$col_duals
   ))
 })
 
@@ -346,12 +346,12 @@ test_that("Gabow-Tarjan matches Hungarian on small matrices", {
   }
 
   expect_false(is.na(cost_h))
-  expect_equal(res_gt$cost, cost_h, tolerance = 1e-6)
+  expect_equal(res_gt$total_cost, cost_h, tolerance = 1e-6)
 
-  col_match <- build_col_match(res_gt$assignment, ncol(cost))
+  col_match <- build_col_match(res_gt$match, ncol(cost))
 
   expect_true(check_complementary_slackness(
-    cost, res_gt$assignment, col_match, res_gt$row_duals, res_gt$col_duals
+    cost, res_gt$match, col_match, res_gt$row_duals, res_gt$col_duals
   ))
 })
 
@@ -376,11 +376,11 @@ test_that("Gabow-Tarjan matches JV on larger matrices", {
   }
 
   expect_false(is.na(cost_jv))
-  expect_equal(res_gt$cost, cost_jv, tolerance = 1e-6)
+  expect_equal(res_gt$total_cost, cost_jv, tolerance = 1e-6)
 
-  col_match <- build_col_match(res_gt$assignment, ncol(cost))
+  col_match <- build_col_match(res_gt$match, ncol(cost))
 
   expect_true(check_complementary_slackness(
-    cost, res_gt$assignment, col_match, res_gt$row_duals, res_gt$col_duals
+    cost, res_gt$match, col_match, res_gt$row_duals, res_gt$col_duals
   ))
 })

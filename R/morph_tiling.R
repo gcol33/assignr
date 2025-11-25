@@ -16,10 +16,10 @@
 #' - Bottom strip with largest squares ≤ remaining height
 #' 
 #' @param W Image width
-#' @param H Image height  
+#' @param H Image height
 #' @param P Maximum tile size (default 3)
 #' @return List of tiles, each with (x0, y0, size)
-#' @keywords internal
+#' @noRd
 .generate_square_tiles <- function(W, H, P = 3L) {
   tiles <- list()
   covered <- matrix(FALSE, nrow = H, ncol = W)
@@ -164,7 +164,7 @@
 #' @param beta Spatial weight (default 0.1)
 #' @param method LAP method (default "jv")
 #' @return Integer vector of B indices for each A pixel in tile (1-based)
-#' @keywords internal
+#' @noRd
 .solve_tile_lap <- function(tile, A_planar, B_planar, H, W, 
                             alpha = 1, beta = 0.1, method = "jv") {
   x0 <- tile$x0
@@ -259,7 +259,7 @@
 #' @param method LAP method (default "jv")
 #' @param maximize Whether to maximize (default FALSE)
 #' @return Integer vector of assignments (1-based B indices for each A pixel)
-#' @export
+#' @noRd
 .square_tiling_solver <- function(A_planar, B_planar, H, W,
                                  max_tile_size = 3L,
                                  alpha = 1, beta = 0.1,
@@ -316,9 +316,9 @@
 # -------------------------------------------------------------------
 
 #' Replace hierarchical patch pipeline with square tiling
-#' 
+#'
 #' Drop-in replacement for .solve_hierarchical_patch_pipeline
-#' @export
+#' @noRd
 .solve_hierarchical_patch_pipeline_v2 <- function(A_planar, B_planar, H, W,
                                                   max_patch_size = 3L,
                                                   alpha = 1, beta = 0,
@@ -334,9 +334,9 @@
 # -------------------------------------------------------------------
 
 #' Analyze tiling structure
-#' 
+#'
 #' Returns statistics about the tile distribution
-#' @export
+#' @noRd
 .analyze_tiling <- function(W, H, P = 3L) {
   tiles <- .generate_square_tiles(W, H, P)
   
@@ -363,9 +363,9 @@
 }
 
 #' Visualize tiling structure
-#' 
+#'
 #' Creates a visual representation of the tiling
-#' @export
+#' @noRd
 .visualize_tiling <- function(W, H, P = 3L) {
   tiles <- .generate_square_tiles(W, H, P)
   
@@ -401,9 +401,9 @@
 # -------------------------------------------------------------------
 
 #' Compare performance: hierarchical vs square tiling
-#' 
-#' @export
-.benchmark_square_tiling <- function(A_planar, B_planar, H, W, 
+#'
+#' @noRd
+.benchmark_square_tiling <- function(A_planar, B_planar, H, W,
                                     max_patch_size = 3L,
                                     alpha = 1, beta = 0.1) {
   
@@ -419,10 +419,11 @@
   
   if (has_old) {
     # Time old hierarchical method
+    old_fn <- get(".solve_hierarchical_patch_pipeline")
     time_old <- system.time({
-      result_old <- .solve_hierarchical_patch_pipeline(A_planar, B_planar, H, W,
-                                                      max_patch_size = max_patch_size,
-                                                      alpha = alpha, beta = beta)
+      result_old <- old_fn(A_planar, B_planar, H, W,
+                           max_patch_size = max_patch_size,
+                           alpha = alpha, beta = beta)
     })
     
     # Compare results

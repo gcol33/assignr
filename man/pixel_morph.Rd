@@ -89,7 +89,7 @@ With downscaling or tiled modes, assignment may have:
 If assignment is not a bijection (due to downscaling or tiling),
 a warning will be issued. The result may contain:
 \itemize{
-\item Overlapped pixels (multiple sources → one destination)
+\item Overlapped pixels (multiple sources -> one destination)
 \item Transparent holes (some destinations unfilled)
 }
 

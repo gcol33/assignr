@@ -10,7 +10,7 @@
 #include <map>
 #include <algorithm>
 #include <stdexcept>
-#include <iostream>  // For std::cerr diagnostic output
+// #include <iostream>  // Removed for CRAN compliance (no std::cerr allowed)
 
 // ============================================================================
 // Module A: Cost-length & 1-feasibility utilities
@@ -657,8 +657,8 @@ bool hungarian_step_one_feasible(const CostMatrix& cost,
         // =====================================================================
         // ERROR: Module H produced infeasible input!
         // =====================================================================
-        std::cerr << "ERROR: hungarian_step_one_feasible received infeasible input!\n";
-        std::cerr << "This indicates Module H is not maintaining 1-feasibility across scales.\n";
+        // DEBUG: std::cerr << "ERROR: hungarian_step_one_feasible received infeasible input!\n";
+        // DEBUG: std::cerr << "This indicates Module H is not maintaining 1-feasibility across scales.\n";
         
         // Report violation details
         long long worst_unmatched = 0;
@@ -691,10 +691,10 @@ bool hungarian_step_one_feasible(const CostMatrix& cost,
             }
         }
         
-        std::cerr << "  Worst violation (y_u+y_v > c+1): " << worst_unmatched << "\n";
-        std::cerr << "  Worst violation on matched (y_u+y_v < c): " << worst_matched_lower << "\n";
-        std::cerr << "  Worst violation on matched (y_u+y_v > c+1): " << worst_matched_upper << "\n";
-        std::cerr << "  Attempting repair...\n";
+        // DEBUG: std::cerr << "  Worst violation (y_u+y_v > c+1): " << worst_unmatched << "\n";
+        // DEBUG: std::cerr << "  Worst violation on matched (y_u+y_v < c): " << worst_matched_lower << "\n";
+        // DEBUG: std::cerr << "  Worst violation on matched (y_u+y_v > c+1): " << worst_matched_upper << "\n";
+        // DEBUG: std::cerr << "  Attempting repair...\n";
         
         // =====================================================================
         // REPAIR LOGIC (defensive programming - should not be needed!)
@@ -981,8 +981,8 @@ void match_gt(const CostMatrix& cost,
         // =====================================================================
         // ERROR: match_gt received infeasible input!
         // =====================================================================
-        std::cerr << "ERROR: match_gt received infeasible input!\n";
-        std::cerr << "This indicates Module H or scale_match is not properly initializing state.\n";
+        // DEBUG: std::cerr << "ERROR: match_gt received infeasible input!\n";
+        // DEBUG: std::cerr << "This indicates Module H or scale_match is not properly initializing state.\n";
         
         // Report violation details
         long long worst_unmatched = 0;
@@ -1018,11 +1018,11 @@ void match_gt(const CostMatrix& cost,
             }
         }
         
-        std::cerr << "  Total violations: " << n_violations << "\n";
-        std::cerr << "  Worst violation (y_u+y_v > c+1): " << worst_unmatched << "\n";
-        std::cerr << "  Worst violation on matched (y_u+y_v < c): " << worst_matched_lower << "\n";
-        std::cerr << "  Worst violation on matched (y_u+y_v > c+1): " << worst_matched_upper << "\n";
-        std::cerr << "  Resetting to canonical empty matching...\n";
+        // DEBUG: std::cerr << "  Total violations: " << n_violations << "\n";
+        // DEBUG: std::cerr << "  Worst violation (y_u+y_v > c+1): " << worst_unmatched << "\n";
+        // DEBUG: std::cerr << "  Worst violation on matched (y_u+y_v < c): " << worst_matched_lower << "\n";
+        // DEBUG: std::cerr << "  Worst violation on matched (y_u+y_v > c+1): " << worst_matched_upper << "\n";
+        // DEBUG: std::cerr << "  Resetting to canonical empty matching...\n";
         
         // =====================================================================
         // RESET LOGIC (defensive programming - should not be needed!)

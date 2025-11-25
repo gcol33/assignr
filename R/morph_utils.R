@@ -5,11 +5,11 @@
 # Basic helpers
 # -------------------------------------------------------------------
 
-#' @keywords internal
+#' @noRd
 .has_namespace <- function(pkg) requireNamespace(pkg, quietly = TRUE)
 
 #' GIF delay (centiseconds) from FPS
-#' @keywords internal
+#' @noRd
 .gif_delay_from_fps <- function(fps) {
   fps <- suppressWarnings(as.integer(round(fps)))
   if (!is.finite(fps) || fps < 1L) fps <- 10L
@@ -20,8 +20,8 @@
 # Image <-> array conversions
 # -------------------------------------------------------------------
 
-#' Convert magick image to H x W x 3 integer array in 0–255
-#' @keywords internal
+#' Convert magick image to H x W x 3 integer array in 0-255
+#' @noRd
 .to_array_rgb <- function(img) {
   a <- magick::image_data(img, channels = "rgb")
   d <- dim(a)
@@ -59,7 +59,7 @@
 }
 
 #' Convert H x W x 3 array to planar format (RRR...GGG...BBB...)
-#' @keywords internal
+#' @noRd
 .to_planar_rgb <- function(rgb_arr) {
   H <- dim(rgb_arr)[1]; W <- dim(rgb_arr)[2]
   planar <- numeric(H * W * 3L)
@@ -71,7 +71,7 @@
 }
 
 #' Convert planar RGB vector (RRR...GGG...BBB...) back to H x W x 3 array
-#' @keywords internal
+#' @noRd
 .from_planar_rgb <- function(planar, H, W) {
   H <- as.integer(H)
   W <- as.integer(W)
@@ -102,7 +102,7 @@
 
 
 #' Convert planar format back to H x W x 3 array
-#' @keywords internal
+#' @noRd
 .from_planar_rgb <- function(planar, H, W) {
   HW <- as.integer(H) * as.integer(W)
   if (!is.numeric(planar) || length(planar) != HW * 3L) {
@@ -115,8 +115,8 @@
   arr
 }
 
-#' Clamp RGB values to 0–255
-#' @keywords internal
+#' Clamp RGB values to 0-255
+#' @noRd
 .clamp_rgb <- function(x) {
   d <- dim(x); x <- suppressWarnings(as.integer(round(x)))
   x[x < 0L] <- 0L; x[x > 255L] <- 255L
@@ -138,49 +138,49 @@
   }
 }
 
-#' @keywords internal
+#' @noRd
 .cpp_palette_info <- function(Ap, Bp, H, W, bits) {
   .call_or("_color_palette_info", "color_palette_info_cpp",
            Ap, Bp, as.integer(H), as.integer(W), as.integer(bits))
 }
 
-#' @keywords internal
+#' @noRd
 .cpp_spatial_cost <- function(idxA, idxB, H, W) {
   .call_or("_spatial_cost_matrix", "spatial_cost_matrix_cpp",
            as.integer(idxA), as.integer(idxB), as.integer(H), as.integer(W))
 }
 
-#' @keywords internal
+#' @noRd
 .cpp_compute_pixel_cost <- function(Ap, Bp, H, W, alpha, beta) {
   .call_or("_compute_pixel_cost", "compute_pixel_cost_cpp",
            Ap, Bp, as.integer(H), as.integer(W), as.numeric(alpha), as.numeric(beta))
 }
 
-#' @keywords internal
+#' @noRd
 .cpp_downscale <- function(planar, H, W, Hn, Wn) {
   .call_or("_downscale_image", "downscale_image_cpp",
            planar, as.integer(H), as.integer(W), as.integer(Hn), as.integer(Wn))
 }
 
-#' @keywords internal
+#' @noRd
 .cpp_upscale_assignment <- function(asg_scaled, H, W, Hs, Ws) {
   .call_or("_upscale_assignment", "upscale_assignment_cpp",
            as.integer(asg_scaled), as.integer(H), as.integer(W), as.integer(Hs), as.integer(Ws))
 }
 
-#' @keywords internal
+#' @noRd
 .cpp_render_morph <- function(Ap, Bp, asg0, H, W, nF) {
   .call_or("_morph_pixel_level_impl", "morph_pixel_level_cpp",
            Ap, Bp, as.integer(asg0), as.integer(H), as.integer(W), as.integer(nF))
 }
 
-#' @keywords internal
+#' @noRd
 .cpp_overlap <- function(Ap, Bp, H, W, bits) {
   .call_or("_analyze_color_overlap", "analyze_color_overlap_cpp",
            Ap, Bp, as.integer(H), as.integer(W), as.integer(bits))
 }
 
-#' @keywords internal
+#' @noRd
 .cpp_extract_patches <- function(P, H, W, patch) {
   .call_or("_extract_patches", "extract_patches_cpp",
            P, as.integer(H), as.integer(W), as.integer(patch))
@@ -191,7 +191,7 @@
 # -------------------------------------------------------------------
 
 #' Compute downscaled images, return both originals and downscaled with dims
-#' @keywords internal
+#' @noRd
 .downscale_both <- function(A_planar, B_planar, H, W, steps) {
   if (is.null(steps) || steps <= 0L) {
     return(list(Hs = as.integer(H), Ws = as.integer(W),
@@ -206,17 +206,17 @@
 }
 
 #' Upscale a downscaled assignment back to original resolution
-#' @keywords internal
+#' @noRd
 .upscale_assignment <- function(assign_s, H, W, Hs, Ws) {
   .cpp_upscale_assignment(assign_s, H, W, Hs, Ws)
 }
 
 # -------------------------------------------------------------------
-# LAP glue — normalize outputs
+# LAP glue -- normalize outputs
 # -------------------------------------------------------------------
 
 #' Solve LAP and return a consistent **0-based** column index per row
-#' @keywords internal
+#' @noRd
 .lap_assign <- function(C, method = "jv", maximize = FALSE) {
   if (!exists("lap_solve", mode = "function") && !exists("lap_solve_batch", mode = "function"))
     stop("No lap_solve / lap_solve_batch available")
@@ -257,7 +257,7 @@
 # -------------------------------------------------------------------
 
 #' Compute cost matrix between two sets of patches (color+spatial)
-#' @keywords internal
+#' @noRd
 .patch_cost_matrix <- function(patches_a, patches_b, alpha = 1, beta = 0.1, H = NULL, W = NULL) {
   Ca <- as.matrix(patches_a$colors) / 255
   Cb <- as.matrix(patches_b$colors) / 255
@@ -276,7 +276,7 @@
 }
 
 #' Expand patch assignment to pixel assignment (simple spatial truncation)
-#' @keywords internal
+#' @noRd
 .expand_patch_assignment <- function(patch_assign, patches_a, patches_b, N) {
   out <- rep(-1L, N)
   for (i in seq_along(patch_assign)) {
@@ -295,7 +295,7 @@
 # -------------------------------------------------------------------
 
 #' Exact pixel-level: returns **1-based** assignment (A->B)
-#' @keywords internal
+#' @noRd
 .exact_cost_and_solve <- function(A_planar, B_planar, H, W, alpha = 1, beta = 0,
                                   method = "jv", maximize = FALSE) {
   C <- .cpp_compute_pixel_cost(A_planar, B_planar, H, W, alpha, beta)
@@ -338,7 +338,7 @@
   assign
 }
 
-# Identity fill helper (kept, though color_walk won’t use it)
+# Identity fill helper (kept, though color_walk will not use it)
 .fill_unassigned_identity <- function(assign) {
   N <- length(assign)
   z <- which(assign < 0L)
@@ -414,7 +414,7 @@
     
     if (matrix_size > 1e8) {  # ~100M entries = ~800MB
       warning(sprintf(
-        "Large color group: %d A pixels × %d B pixels. Using spatial fallback to avoid memory issues.",
+        "Large color group: %d A pixels x %d B pixels. Using spatial fallback to avoid memory issues.",
         nA, nB
       ), call. = FALSE)
       # Use spatial matching as fallback for huge groups
@@ -504,7 +504,7 @@
 # - .expand_patch_assignment_spatial() - replaced by local LAP per tile
 # - .solve_hierarchical_patch_pipeline() - replaced by .square_tiling_solver()
 #
-# These functions used global LAPs with O(n³) complexity and have been
+# These functions used global LAPs with O(n^3) complexity and have been
 # replaced with efficient local LAP solving in pixel_morph.R
 # -------------------------------------------------------------------
 

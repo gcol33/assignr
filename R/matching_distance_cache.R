@@ -257,7 +257,7 @@ print.distance_object <- function(x, ...) {
   cat("Dimensions:\n")
   cat("  Left units:  ", x$metadata$n_left, "\n")
   cat("  Right units: ", x$metadata$n_right, "\n")
-  cat("  Matrix size: ", nrow(x$cost_matrix), "×", ncol(x$cost_matrix), "\n\n")
+  cat("  Matrix size: ", nrow(x$cost_matrix), "x", ncol(x$cost_matrix), "\n\n")
 
   cat("Computation:\n")
   cat("  Variables:   ", paste(x$metadata$vars, collapse = ", "), "\n")

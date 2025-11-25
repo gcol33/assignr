@@ -3,20 +3,50 @@
 
 CXX_STD = CXX17
 
-PKG_CPPFLAGS = -I. -Icore -Iinterface -Isolvers -Igabow_tarjan -Imorph \
-               $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "Rcpp:::CxxFlags()") \
-               $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "RcppEigen:::CxxFlags()")
+PKG_CPPFLAGS = -DEIGEN_NO_DEBUG -I. -Icore -Iinterface -Isolvers -Igabow_tarjan -Imorph
 
-# Collect all C++ sources from subdirectories and root
+# Explicitly list all C++ sources (avoid GNU wildcard extension)
 SOURCES = RcppExports.cpp rcpp_interface.cpp \
-          $(wildcard interface/*.cpp) \
-          $(wildcard core/*.cpp) \
-          $(wildcard solvers/*.cpp) \
-          $(wildcard gabow_tarjan/*.cpp) \
-          $(wildcard morph/*.cpp)
+          interface/prepare_cost_matrix.cpp \
+          core/lap_utils.cpp \
+          solvers/greedy_matching.cpp \
+          solvers/solve_auction.cpp \
+          solvers/solve_bruteforce.cpp \
+          solvers/solve_cost_scaling.cpp \
+          solvers/solve_csflow.cpp \
+          solvers/solve_cycle_cancel.cpp \
+          solvers/solve_hk01.cpp \
+          solvers/solve_hungarian.cpp \
+          solvers/solve_jv.cpp \
+          solvers/solve_kbest_lawler.cpp \
+          solvers/solve_line_metric.cpp \
+          solvers/solve_murty.cpp \
+          solvers/solve_ssap_bucket.cpp \
+          solvers/solve_ssp.cpp \
+          gabow_tarjan/solve_gabow_tarjan.cpp \
+          gabow_tarjan/utils_gabow_tarjan.cpp \
+          morph/morph_pixel_level.cpp \
+          morph/region_means.cpp
 
 # Convert to object files
-OBJECTS = $(SOURCES:.cpp=.o)
-
-PKG_LIBS = $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "Rcpp:::LdFlags()") \
-           $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+OBJECTS = RcppExports.o rcpp_interface.o \
+          interface/prepare_cost_matrix.o \
+          core/lap_utils.o \
+          solvers/greedy_matching.o \
+          solvers/solve_auction.o \
+          solvers/solve_bruteforce.o \
+          solvers/solve_cost_scaling.o \
+          solvers/solve_csflow.o \
+          solvers/solve_cycle_cancel.o \
+          solvers/solve_hk01.o \
+          solvers/solve_hungarian.o \
+          solvers/solve_jv.o \
+          solvers/solve_kbest_lawler.o \
+          solvers/solve_line_metric.o \
+          solvers/solve_murty.o \
+          solvers/solve_ssap_bucket.o \
+          solvers/solve_ssp.o \
+          gabow_tarjan/solve_gabow_tarjan.o \
+          gabow_tarjan/utils_gabow_tarjan.o \
+          morph/morph_pixel_level.o \
+          morph/region_means.o
