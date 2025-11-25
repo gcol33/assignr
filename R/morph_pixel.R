@@ -6,7 +6,7 @@
 #                  Global LAP for patch_size = 1, block-level LAP for patch_size > 1
 # - "color_walk" : color-driven assignment (quantize, then match by color + spatial)
 #                  Scales much better; warnings only for very large images
-# - "recursive"  : multi-scale 2×2 recursive tiling, falling back to square-tiling
+# - "recursive"  : multi-scale 2x2 recursive tiling, falling back to square-tiling
 #                  at the smallest scale, no color blending (transport only)
 
 
@@ -206,7 +206,7 @@ pixel_morph_animate <- function(imgA,
   W <- as.integer(infoA$width)
   N <- H * W
 
-  # Planar RGB buffers (0–255, column-major)
+  # Planar RGB buffers (0-255, column-major)
   arrA    <- .to_array_rgb(A)
   arrB    <- .to_array_rgb(B)
   planarA <- .to_planar_rgb(arrA)
@@ -232,7 +232,7 @@ pixel_morph_animate <- function(imgA,
         warning(sprintf(
           paste0(
             "Image is large for 'exact' global LAP: %d x %d = %d pixels (recommended max %d).\n",
-            "Computation may be slow — consider using patch_size > 1, mode='recursive',",
+            "Computation may be slow -- consider using patch_size > 1, mode='recursive',",
             " or mode='color_walk'."
           ),
           Hs, Ws, Ns, MAX_EXACT
@@ -247,7 +247,7 @@ pixel_morph_animate <- function(imgA,
         warning(sprintf(
           paste0(
             "Tile is large for LAP: patch_size=%d -> %d pixels per tile (recommended max %d).\n",
-            "Computation may be slow — reduce patch_size or use mode='color_walk'."
+            "Computation may be slow -- reduce patch_size or use mode='color_walk'."
           ),
           patch_size, tile_n, MAX_TILE_EXACT
         ), call. = FALSE)
@@ -495,7 +495,7 @@ pixel_morph_animate <- function(imgA,
 #' 
 #' If assignment is not a bijection (due to downscaling or tiling),
 #' a warning will be issued. The result may contain:
-#' - Overlapped pixels (multiple sources → one destination)
+#' - Overlapped pixels (multiple sources -> one destination)
 #' - Transparent holes (some destinations unfilled)
 #' 
 #' For guaranteed pixel-perfect results, use:
@@ -627,7 +627,7 @@ pixel_morph <- function(imgA,
         warning(sprintf(
           paste0(
             "Image is large for 'exact' global LAP: %d x %d = %d pixels (recommended max %d).\n",
-            "Computation may be slow — consider using patch_size > 1, mode='recursive',",
+            "Computation may be slow -- consider using patch_size > 1, mode='recursive',",
             " or mode='color_walk'."
           ),
           Hs, Ws, Ns, MAX_EXACT
@@ -642,7 +642,7 @@ pixel_morph <- function(imgA,
         warning(sprintf(
           paste0(
             "Tile is large for LAP: patch_size=%d -> %d pixels per tile (recommended max %d).\n",
-            "Computation may be slow — reduce patch_size or use mode='color_walk'."
+            "Computation may be slow -- reduce patch_size or use mode='color_walk'."
           ),
           patch_size, tile_n, MAX_TILE_EXACT
         ), call. = FALSE)
@@ -711,7 +711,7 @@ pixel_morph <- function(imgA,
     )
   }
 
-  # 1-based → 0-based
+  # 1-based -> 0-based
   assign_in <- as.integer(assign_s) - 1L
 
   # Upscale assignment if we computed it at a smaller resolution
@@ -932,7 +932,7 @@ pixel_morph <- function(imgA,
   assignment
 }
 
-#' Recursive tiling solver: multi-scale 2×2 splitting + square tiling at leaves
+#' Recursive tiling solver: multi-scale 2x2 splitting + square tiling at leaves
 #' @noRd
 .recursive_tiling_solver <- function(A_planar, B_planar, H, W,
                                      patch_size = 3L,
@@ -1184,7 +1184,7 @@ pixel_morph <- function(imgA,
   assignment
 }
 
-#' Reduced-palette color-walk → expand to per-pixel via spatial mini-LAP
+#' Reduced-palette color-walk -> expand to per-pixel via spatial mini-LAP
 #' @noRd
 .solve_color_walk_pipeline <- function(Ap, Bp, H, W, quantize_bits, method, maximize) {
   pal     <- color_palette_info_cpp(Ap, Bp, H, W, quantize_bits)

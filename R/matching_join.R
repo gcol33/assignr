@@ -289,6 +289,14 @@ augment.matching_result <- function(x, left, right, ...) {
   join_matched(x, left, right, ...)
 }
 
+#' Generic Augment Function
+#'
+#' S3 generic for augmenting model results with original data.
+#'
+#' @param x An object to augment
+#' @param ... Additional arguments passed to methods
+#'
+#' @return Augmented data (depends on method)
 #' @export
 augment <- function(x, ...) {
   UseMethod("augment")
