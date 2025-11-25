@@ -364,7 +364,7 @@ system.time({
   result <- lap_solve(large_cost, method = "jv")
 })
 #>    user  system elapsed 
-#>   0.001   0.001   0.002
+#>   0.001   0.000   0.002
 
 cat("Total cost:", get_total_cost(result), "\n")
 #> Total cost: 149.0911
@@ -496,7 +496,7 @@ system.time({
   result_scaled <- lap_solve(cost, method = "auction_scaled")
 })
 #>    user  system elapsed 
-#>   0.002   0.000   0.002
+#>   0.001   0.000   0.001
 
 cat("Total cost:", get_total_cost(result_scaled), "\n")
 #> Total cost: 1543862
@@ -683,7 +683,7 @@ system.time({
   result <- lap_solve(cost, method = "sap")
 })
 #>    user  system elapsed 
-#>   0.036   0.000   0.037
+#>   0.033   0.000   0.032
 
 cat("Assignments found:", nrow(result), "\n")
 #> Assignments found: 200
@@ -1014,13 +1014,13 @@ considerations for LAP algorithms in `couplr`:
 
 **Key Takeaways**:
 
-1.  **Algorithm selection matters** for large problems –
+1.  **Algorithm selection matters** for large problems:
     $O\left( n^{3} \right)$ adds up quickly
 2.  **`method = "auto"`** handles most cases well, but understanding the
     options helps with debugging
 3.  **Numerical issues** are rare but can occur with extreme cost ranges
     or degenerate problems
-4.  **All algorithms find optimal solutions** – differences are in speed
+4.  **All algorithms find optimal solutions**: differences are in speed
     and edge case handling
 
 **Algorithm Summary**:
