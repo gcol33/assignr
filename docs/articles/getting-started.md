@@ -6,10 +6,11 @@ The linear assignment problem (LAP) is a fundamental optimization
 problem: given a cost matrix where entry (i, j) represents the cost of
 assigning source i to target j, find the one-to-one assignment that
 minimizes (or maximizes) total cost. LAP appears throughout data
-science, operations research, and scientific computing – from scheduling
-and resource allocation to computer vision and bioinformatics. `couplr`
-provides efficient LAP solvers with a tidy interface that integrates
-naturally with modern R workflows.
+science, operations research, and scientific computing, including
+scheduling, resource allocation, computer vision, and bioinformatics.
+
+`couplr` provides efficient LAP solvers with a tidy interface that
+integrates naturally with modern R workflows.
 
 ### Why couplr?
 
@@ -104,7 +105,7 @@ matching that minimizes total cost (or maximizes total preference).
 
 This vignette uses a recurring **hospital staff scheduling** example
 that demonstrates increasingly complex scenarios. The same conceptual
-problem – assigning nurses to shifts – evolves to show different couplr
+problem (assigning nurses to shifts) evolves to show different couplr
 features.
 
 **Simple Example**: Three nurses can cover three shifts with the

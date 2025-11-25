@@ -22,3 +22,4 @@ src/**/*.so
 # R CMD check artifacts
 *.Rcheck/
 ..Rcheck/
+nul
