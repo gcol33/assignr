@@ -160,7 +160,11 @@ ggplot() +
         plot.subtitle = element_text(hjust = 0.5),
         axis.text = element_blank(),
         axis.title = element_blank(),
-        panel.grid = element_blank()) +
+        panel.grid = element_blank(),
+        plot.background = element_rect(fill = "transparent", color = NA),
+        panel.background = element_rect(fill = "transparent", color = NA),
+        legend.background = element_rect(fill = "transparent", color = NA),
+        legend.box.background = element_rect(fill = "transparent", color = NA)) +
   coord_fixed(ratio = 0.8)
 ```
 
@@ -214,7 +218,9 @@ ggplot() +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
         axis.text = element_blank(),
         axis.title = element_blank(),
-        panel.grid = element_blank()) +
+        panel.grid = element_blank(),
+        plot.background = element_rect(fill = "transparent", color = NA),
+        panel.background = element_rect(fill = "transparent", color = NA)) +
   coord_cartesian(xlim = c(1, 8), ylim = c(0.5, 4.5))
 ```
 
