@@ -234,7 +234,9 @@ ggplot(result$pairs, aes(x = distance)) +
     x = "Euclidean Distance (scaled)",
     y = "Count"
   ) +
-  theme_minimal()
+  theme_minimal() +
+  theme(plot.background = element_rect(fill = "transparent", color = NA),
+        panel.background = element_rect(fill = "transparent", color = NA))
 ```
 
 ![Histogram showing the distribution of match distances, with most
@@ -472,18 +474,18 @@ time_greedy <- system.time({
 cat("Optimal matching:\n")
 #> Optimal matching:
 cat("  Time:", round(time_optimal["elapsed"], 3), "seconds\n")
-#>   Time: 51.607 seconds
+#>   Time: 51.654 seconds
 cat("  Mean distance:", round(mean(result_optimal$pairs$distance), 4), "\n\n")
 #>   Mean distance: 0.3368
 
 cat("Greedy matching:\n")
 #> Greedy matching:
 cat("  Time:", round(time_greedy["elapsed"], 3), "seconds\n")
-#>   Time: 1.977 seconds
+#>   Time: 2.009 seconds
 cat("  Mean distance:", round(mean(result_greedy$pairs$distance), 4), "\n")
 #>   Mean distance: 0.4667
 cat("  Speedup:", round(time_optimal["elapsed"] / time_greedy["elapsed"], 1), "x\n")
-#>   Speedup: 26.1 x
+#>   Speedup: 25.7 x
 ```
 
 ### Greedy Strategies
@@ -566,9 +568,9 @@ comparison <- do.call(rbind, lapply(names(results), function(s) {
 
 print(comparison)
 #>          strategy time_sec mean_distance total_distance
-#> elapsed    sorted    0.083        0.0912          18.24
-#> elapsed1 row_best    0.077        0.0968          19.36
-#> elapsed2       pq    0.084        0.0912          18.24
+#> elapsed    sorted    0.086        0.0912          18.24
+#> elapsed1 row_best    0.079        0.0968          19.36
+#> elapsed2       pq    0.087        0.0912          18.24
 ```
 
 **Recommendation:**
@@ -654,7 +656,10 @@ ggplot(result_no_cal$pairs, aes(x = distance)) +
     y = "Count",
     fill = "Condition"
   ) +
-  theme_minimal()
+  theme_minimal() +
+  theme(plot.background = element_rect(fill = "transparent", color = NA),
+        panel.background = element_rect(fill = "transparent", color = NA),
+        legend.background = element_rect(fill = "transparent", color = NA))
 ```
 
 ![Overlapping histograms comparing match distances with and without
@@ -1009,6 +1014,9 @@ ggplot(balance_comparison, aes(x = variable, y = std_diff, fill = when)) +
     fill = "Timing"
   ) +
   theme_minimal() +
+  theme(plot.background = element_rect(fill = "transparent", color = NA),
+        panel.background = element_rect(fill = "transparent", color = NA),
+        legend.background = element_rect(fill = "transparent", color = NA)) +
   coord_flip()
 ```
 
