@@ -196,6 +196,15 @@ make_svg_theme_aware <- function(svg_path,
       fixed = TRUE
     )
 
+    # 3b) Replace ggplot2 theme_minimal() gridline color (#EBEBEB) with text color
+    # Gridlines have inline styles that override CSS, so we must replace directly
+    svg_content <- gsub(
+      "stroke: #EBEBEB;",
+      sprintf("stroke: %s;", light_text),
+      svg_content,
+      fixed = TRUE
+    )
+
     # 3) Modify the CSS block for lines/shapes - change stroke color
     # Use fixed = TRUE with exact pattern match
     # Keep original CSS structure but update colors

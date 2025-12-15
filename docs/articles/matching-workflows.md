@@ -251,7 +251,7 @@ ggplot(result$pairs, aes(x = distance)) +
 
 ![Histogram showing the distribution of match distances, with most
 matches having low distances indicating good match
-quality](matching-workflows_files/figure-html/inspect-output-1.png)
+quality](matching-workflows_files/figure-html/inspect-output-1.svg)
 
 **Interpretation:**
 
@@ -494,18 +494,18 @@ time_greedy <- system.time({
 cat("Optimal matching:\n")
 #> Optimal matching:
 cat("  Time:", round(time_optimal["elapsed"], 3), "seconds\n")
-#>   Time: 24.58 seconds
+#>   Time: 23.76 seconds
 cat("  Mean distance:", round(mean(result_optimal$pairs$distance), 4), "\n\n")
 #>   Mean distance: 0.3368
 
 cat("Greedy matching:\n")
 #> Greedy matching:
 cat("  Time:", round(time_greedy["elapsed"], 3), "seconds\n")
-#>   Time: 0.95 seconds
+#>   Time: 0.97 seconds
 cat("  Mean distance:", round(mean(result_greedy$pairs$distance), 4), "\n")
 #>   Mean distance: 0.4667
 cat("  Speedup:", round(time_optimal["elapsed"] / time_greedy["elapsed"], 1), "x\n")
-#>   Speedup: 25.9 x
+#>   Speedup: 24.5 x
 ```
 
 ### Greedy Strategies
@@ -591,7 +591,7 @@ print(comparison)
 #>          strategy time_sec mean_distance total_distance
 #> elapsed    sorted     0.03        0.0912          18.24
 #> elapsed1 row_best     0.03        0.0968          19.36
-#> elapsed2       pq     0.05        0.0912          18.24
+#> elapsed2       pq     0.04        0.0912          18.24
 ```
 
 **Recommendation:**
@@ -686,7 +686,7 @@ ggplot(result_no_cal$pairs, aes(x = distance)) +
 
 ![Overlapping histograms comparing match distances with and without
 caliper constraint, showing the caliper excludes distant
-matches](matching-workflows_files/figure-html/calipers-1.png)
+matches](matching-workflows_files/figure-html/calipers-1.svg)
 
 ### Choosing Caliper Width
 
@@ -1055,7 +1055,7 @@ ggplot(balance_comparison, aes(x = variable, y = std_diff, fill = when)) +
 ![Bar chart comparing standardized differences before and after
 matching, with threshold lines at 0.1 and 0.25 showing improved balance
 after
-matching](matching-workflows_files/figure-html/balance-plots-1.png)
+matching](matching-workflows_files/figure-html/balance-plots-1.svg)
 
 ## Real-World Example: Treatment Effect Estimation
 
@@ -1523,7 +1523,7 @@ training evaluation example:
 
 ![Flowchart showing recommended matching workflow with iterative
 refinement
-loop](matching-workflows_files/figure-html/workflow-diagram-1.png)
+loop](matching-workflows_files/figure-html/workflow-diagram-1.svg)
 
 ------------------------------------------------------------------------
 

@@ -95,3 +95,20 @@ svg.inline-svg .svg-bg {
   fill: #343739 !important;
   stroke: #495057 !important;
 }
+
+/* ggplot2 theme_minimal() gridlines - light grey in light mode, adapt to dark mode */
+/* Gridlines from theme_minimal() have specific grey colors */
+[data-bs-theme="dark"] svg.inline-svg .svglite line[style*="stroke: #EBEBEB"],
+[data-bs-theme="dark"] svg.inline-svg .svglite line[style*="stroke: #ebebeb"],
+[data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #EBEBEB"],
+[data-bs-theme="dark"] svg.inline-svg .svglite polyline[style*="stroke: #ebebeb"] {
+  stroke: #495057 !important;
+}
+
+/* Base R and other grey gridline variants */
+[data-bs-theme="dark"] svg.inline-svg line[style*="stroke: #EBEBEB"],
+[data-bs-theme="dark"] svg.inline-svg line[style*="stroke: #ebebeb"],
+[data-bs-theme="dark"] svg.inline-svg line[style*="stroke: grey"],
+[data-bs-theme="dark"] svg.inline-svg line[style*="stroke: gray"] {
+  stroke: #495057 !important;
+}

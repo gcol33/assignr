@@ -105,7 +105,7 @@ underlies most efficient LAP algorithms.
 The LAP corresponds to finding a minimum-weight perfect matching in a
 weighted bipartite graph:
 
-![](algorithms_files/figure-html/bipartite-graph-1.png)
+![](algorithms_files/figure-html/bipartite-graph-1.svg)
 
 The optimal solution (green edges) assigns S1→T1, S2→T2, S3→T3 with
 total cost 2 + 1 + 2 = 5.
@@ -115,7 +115,7 @@ total cost 2 + 1 + 2 = 5.
 ### Algorithm Selection Guide
 
 ![Flowchart showing algorithm selection based on cost matrix
-properties](algorithms_files/figure-html/decision-flowchart-1.png)
+properties](algorithms_files/figure-html/decision-flowchart-1.svg)
 
 #### Quick Reference
 

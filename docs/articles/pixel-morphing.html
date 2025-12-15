@@ -81,7 +81,7 @@
                         <h4 data-toc-skip class="author">Gilles
 Colling</h4>
             
-            <h4 data-toc-skip class="date">2025-11-29</h4>
+            <h4 data-toc-skip class="date">2025-12-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gcol33/couplr/blob/HEAD/vignettes/pixel-morphing.Rmd" class="external-link"><code>vignettes/pixel-morphing.Rmd</code></a></small>
       <div class="d-none name"><code>pixel-morphing.Rmd</code></div>
@@ -465,7 +465,7 @@ G_A^{(c)} = \{ i : \text{quantize}(f_i) = c \}
 <p>Solve a
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>×</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">k \times k</annotation></semantics></math>
 LAP between palette entries with costs</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><msup><mi>c</mi><mo>′</mo></msup><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mi>α</mi><mspace width="0.167em"></mspace><mi>d</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>p</mi><mi>i</mi></msub><mo>,</mo><msub><mi>p</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>β</mi><mspace width="0.167em"></mspace><mi>d</mi><mo stretchy="false" form="prefix">(</mo><msub><mover><mi>𝐱</mi><mo accent="true">‾</mo></mover><mi>i</mi></msub><mo>,</mo><msub><mover><mi>𝐱</mi><mo accent="true">‾</mo></mover><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>c</mi><mrow><mi>i</mi><mi>j</mi></mrow><mo>′</mo></msubsup><mo>=</mo><mi>α</mi><mspace width="0.167em"></mspace><mi>d</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>p</mi><mi>i</mi></msub><mo>,</mo><msub><mi>p</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>β</mi><mspace width="0.167em"></mspace><mi>d</mi><mo stretchy="false" form="prefix">(</mo><msub><mover><mi>𝐱</mi><mo accent="true">‾</mo></mover><mi>i</mi></msub><mo>,</mo><msub><mover><mi>𝐱</mi><mo accent="true">‾</mo></mover><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
 c'_{ij} = \alpha \, d(p_i, p_j) + \beta \, d(\bar{\mathbf{x}}_i, \bar{\mathbf{x}}_j),
 </annotation></semantics></math></p>
 <p>where
@@ -719,7 +719,7 @@ entities.</p>
 <p>Compute an exact LAP solution on the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mo>′</mo></msup><mo>×</mo><msup><mi>n</mi><mo>′</mo></msup></mrow><annotation encoding="application/x-tex">n' \times n'</annotation></semantics></math>
 problem:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>π</mi><mo>′</mo></msup><mo>=</mo><mrow><mi mathvariant="normal">arg</mi><mo>⁡</mo></mrow><munder><mi mathvariant="normal">min</mi><msup><mi>π</mi><mo>′</mo></msup></munder><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msup><mi>n</mi><mo>′</mo></msup></munderover><msub><msup><mi>c</mi><mo>′</mo></msup><mrow><mi>i</mi><mo>,</mo><msup><mi>π</mi><mo>′</mo></msup><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo></mrow></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>π</mi><mo>′</mo></msup><mo>=</mo><mrow><mi mathvariant="normal">arg</mi><mo>⁡</mo></mrow><munder><mi mathvariant="normal">min</mi><msup><mi>π</mi><mo>′</mo></msup></munder><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msup><mi>n</mi><mo>′</mo></msup></munderover><msubsup><mi>c</mi><mrow><mi>i</mi><mo>,</mo><msup><mi>π</mi><mo>′</mo></msup><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo></mrow><mo>′</mo></msubsup><mi>.</mi></mrow><annotation encoding="application/x-tex">
 \pi' = \arg\min_{\pi'} \sum_{i=1}^{n'} c'_{i,\pi'(i)}.
 </annotation></semantics></math></p>
 <ol start="3" style="list-style-type: decimal">
