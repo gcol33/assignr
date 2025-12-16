@@ -8,8 +8,8 @@
 ## Installation
 
 ```r
-# Install from GitHub
-remotes::install_github("gcol33/couplr")
+# install.packages("pak")
+pak::pak("gcol33/couplr")
 ```
 
 ## Quick Start

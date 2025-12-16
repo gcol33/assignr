@@ -8,7 +8,7 @@ template:
 figures:
   dev: svglite::svglite
   fig.ext: svg
-  bg: "transparent"
+  bg: "#F5F6F8"
 
 home:
   title: "couplr: Linear Assignment Problems and Matching in R"
