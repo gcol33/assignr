@@ -24,6 +24,7 @@
 | Hopcroft-Karp | `hk01` | 1973 | O(√n m) | Binary/uniform costs only |
 | Line Metric | `line_metric` | - | O(n log n) | 1D optimal transport |
 | **Ramshaw-Tarjan** | `ramshaw_tarjan` | 2012 | O(nm + n² log n) | Rectangular specialization; **NEW** |
+| **Push-Relabel** | `push_relabel` | 1988 | O(n²m) | Goldberg-Tarjan preflow-push; **NEW** |
 | Bruteforce | `bruteforce` | - | O(n!) | Exhaustive; n ≤ 8 |
 
 ### Specialized Problem Variants
@@ -183,9 +184,11 @@ Phase 1 (Completed):
 Phase 2 (Completed):
   [✓] Ramshaw-Tarjan rectangular ← DONE! 77 tests passing
 
-Phase 3:
-  [1] Push-Relabel Assignment
-  [2] Return dual variables from existing solvers
+Phase 3 (Completed):
+  [✓] Push-Relabel Assignment ← DONE! 77 tests passing
+
+Phase 4:
+  [1] Return dual variables from existing solvers
 
 Future:
   [6] Orlin's algorithm
