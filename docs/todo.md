@@ -16,19 +16,15 @@ All algorithms added to
 [`assignment()`](https://gcol33.github.io/couplr/reference/assignment.md)
 main routine
 
-## Remaining Tasks
-
 Run
 [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
 to regenerate `.Rd` documentation
 
+Update `_pkgdown.yml` with new functions (assignment_duals,
+bottleneck_assignment, sinkhorn, sinkhorn_to_assignment)
+
 Rebuild pkgdown website using `build_site.R`
 
-Commit and push all changes
+## Remaining Tasks
 
-## Notes
-
-- Documentation in `man/assignment.Rd` is outdated (missing: lapmod,
-  csa, ramshaw_tarjan, push_relabel, orlin, network_simplex)
-- Website `docs/reference/assignment.html` shows old method list
-- Network simplex files in `src/solvers/network_simplex/` are untracked
+Commit all changes (b9a3094)

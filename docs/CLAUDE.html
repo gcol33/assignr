@@ -59,7 +59,7 @@
 <h2 id="project-overview">Project Overview<a class="anchor" aria-label="anchor" href="#project-overview"></a></h2>
 <p><strong>couplr</strong> (formerly lapr) is an R package for solving Linear Assignment Problems (LAP) with production-ready matching workflows. The package combines:</p>
 <ul><li>
-<strong>12 LAP algorithms</strong> - Hungarian, Jonker-Volgenant, Auction (3 variants), Gabow-Tarjan, and more</li>
+<strong>20 LAP algorithms</strong> - Hungarian, Jonker-Volgenant, Auction (3 variants), Network Simplex, Orlin-Ahuja, Push-Relabel, and more</li>
 <li>
 <strong>Greedy matching</strong> - Fast approximate algorithms for large-scale problems</li>
 <li>
@@ -161,8 +161,12 @@
 <pre><code>src/
 ├── core/: lap_internal.h, lap_utils.cpp/.h
 ├── interface/: prepare_cost_matrix.cpp
-├── solvers/ (15 files): greedy_matching.cpp, solve_auction.cpp,
-│   solve_hungarian.cpp, solve_jv.cpp, solve_murty.cpp, etc.
+├── solvers/ (20+ files): greedy_matching.cpp, solve_auction.cpp,
+│   solve_hungarian.cpp, solve_jv.cpp, solve_murty.cpp, solve_push_relabel.cpp,
+│   solve_ramshaw_tarjan.cpp, etc.
+├── solvers/network_simplex/: ns_types.h, ns_graph.h, ns_init.h, ns_pivot.h,
+│   solve_network_simplex.cpp
+├── solvers/orlin_ahuja/: orlin_types.h, orlin_*.h
 ├── gabow_tarjan/: solve_gabow_tarjan.cpp, utils_gabow_tarjan.cpp/.h
 ├── morph/: morph_pixel_level.cpp, region_means.cpp
 ├── rcpp_interface.cpp  # ALL [[Rcpp::export]] declarations
@@ -178,35 +182,10 @@
 </div>
 <div class="section level3">
 <h3 id="lap-algorithms">LAP Algorithms<a class="anchor" aria-label="anchor" href="#lap-algorithms"></a></h3>
-<ul><li>
-<code>jv</code> - Jonker-Volgenant (general, fast)</li>
-<li>
-<code>hungarian</code> - Classic Hungarian</li>
-<li>
-<code>auction</code> / <code>auction_gs</code> / <code>auction_scaled</code> - Auction variants</li>
-<li>
-<code>ssp</code> / <code>sap</code> - Shortest augmenting path</li>
-<li>
-<code>csflow</code> - Cost-scaling flow</li>
-<li>
-<code>cost_scaling</code> - Gabow’s cost-scaling</li>
-<li>
-<code>cycle_cancel</code> - Cycle canceling with Karp</li>
-<li>
-<code>gabow_tarjan</code> - Complementary slackness</li>
-<li>
-<code>ssap_bucket</code> - Dial’s algorithm (integer costs)</li>
-<li>
-<code>line_metric</code> - 1D matching</li>
-<li>
-<code>hk01</code> - Hopcroft-Karp (binary costs)</li>
-<li>
-<code>bruteforce</code> - Exhaustive (tiny problems)</li>
-<li>
-<code>auto</code> - Automatic selection</li>
-<li>
-<code>greedy_sorted</code> / <code>greedy_row_best</code> / <code>greedy_pq</code> - Greedy variants</li>
-</ul></div>
+<p><strong>Optimal solvers (20 methods):</strong> - <code>jv</code> - Jonker-Volgenant (general, fast) - <code>hungarian</code> - Classic Hungarian - <code>auction</code> / <code>auction_gs</code> / <code>auction_scaled</code> - Auction variants - <code>ssp</code> / <code>sap</code> - Shortest augmenting path - <code>csflow</code> - Cost-scaling flow - <code>csa</code> - Goldberg-Kennedy cost-scaling (often fastest for medium-large) - <code>cycle_cancel</code> - Cycle canceling with Karp - <code>gabow_tarjan</code> - Complementary slackness - <code>ssap_bucket</code> - Dial’s algorithm (integer costs) - <code>lapmod</code> - Sparse JV variant (&gt;50% forbidden entries) - <code>network_simplex</code> - Network simplex with spanning tree - <code>orlin</code> - Orlin-Ahuja O(sqrt(n) * m * log(nC)) - <code>push_relabel</code> - Push-relabel max-flow based - <code>ramshaw_tarjan</code> - Optimized for rectangular matrices - <code>hk01</code> - Hopcroft-Karp (binary/uniform costs) - <code>line_metric</code> - 1D matching O(n log n) - <code>bruteforce</code> - Exhaustive (n ≤ 8) - <code>auto</code> - Automatic selection based on problem characteristics</p>
+<p><strong>Greedy approximations:</strong> - <code>greedy_sorted</code> / <code>greedy_row_best</code> / <code>greedy_pq</code> - 10-100x faster than optimal</p>
+<p><strong>Specialized functions:</strong> - <code><a href="reference/assignment_duals.html">assignment_duals()</a></code> - Returns dual variables (u, v) for sensitivity analysis - <code><a href="reference/bottleneck_assignment.html">bottleneck_assignment()</a></code> - Minimize maximum edge cost (minimax) - <code><a href="reference/sinkhorn.html">sinkhorn()</a></code> - Entropy-regularized optimal transport (soft assignment)</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="testing">Testing<a class="anchor" aria-label="anchor" href="#testing"></a></h2>
@@ -215,7 +194,7 @@
 ├── testthat.R           # Test runner
 └── testthat/            # ALL test files here
     ├── test-matching.R  # 98 matching tests
-    ├── test-assignment-*.R  # 14+ solver test files
+    ├── test-assignment-*.R  # 20+ solver test files
     └── test-*.R</code></pre>
 <p>❌ Test files in package root or <code>tests/</code> directly are IGNORED by <code><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">devtools::test()</a></code></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">

@@ -12,13 +12,43 @@
 #' @param cost Numeric matrix; rows = tasks, columns = agents. `NA` or `Inf`
 #'   entries are treated as forbidden assignments.
 #' @param maximize Logical; if `TRUE`, maximizes the total cost instead of minimizing.
-#' @param method Character string indicating the algorithm to use.
-#'   One of `"auto"`, `"jv"`, `"hungarian"`, `"auction"`, `"auction_gs"`,
-#'   `"sap"`, `"ssp"`, `"csflow"`, `"hk01"`, `"lapmod"`, `"csa"`, `"orlin"`, or `"bruteforce"`.
-#'   `"ssp"` is accepted as an alias for `"sap"`.
-#'   `"lapmod"` is a sparse variant of JV, faster for large matrices with >50% NA/Inf.
-#'   `"csa"` is Goldberg-Kennedy cost-scaling, often fastest for medium-large problems.
-#'   `"orlin"` is the Orlin-Ahuja scaling algorithm with O(sqrt(n) * m * log(nC)) complexity.
+#' @param method Character string indicating the algorithm to use. Options:
+#'
+#'   **General-purpose solvers:**
+#'   \itemize{
+#'     \item `"auto"` — Automatic selection based on problem characteristics (default)
+#'     \item `"jv"` — Jonker-Volgenant, fast general-purpose O(n³)
+#'     \item `"hungarian"` — Classic Hungarian algorithm O(n³)
+#'   }
+#'
+#'   **Auction-based solvers:**
+#'   \itemize{
+#'     \item `"auction"` — Bertsekas auction with adaptive epsilon
+#'     \item `"auction_gs"` — Gauss-Seidel variant, good for spatial structure
+#'     \item `"auction_scaled"` — Epsilon-scaling, fastest for large dense problems
+#'   }
+#'
+#'   **Specialized solvers:**
+#'   \itemize{
+#'     \item `"sap"` / `"ssp"` — Shortest augmenting path, handles sparsity well
+#'     \item `"lapmod"` — Sparse JV variant, faster when >50\% entries are NA/Inf
+#'     \item `"hk01"` — Hopcroft-Karp for binary (0/1) costs only
+#'     \item `"ssap_bucket"` — Dial's algorithm for integer costs
+#'     \item `"line_metric"` — O(n log n) for 1D assignment problems
+#'     \item `"bruteforce"` — Exact enumeration for tiny problems (n ≤ 8)
+#'   }
+#'
+#'   **Advanced solvers:**
+#'   \itemize{
+#'     \item `"csa"` — Goldberg-Kennedy cost-scaling, often fastest for medium-large
+#'     \item `"gabow_tarjan"` — Bit-scaling with complementary slackness O(n³ log C)
+#'     \item `"cycle_cancel"` — Cycle-canceling with Karp's algorithm
+#'     \item `"csflow"` — Cost-scaling network flow
+#'     \item `"network_simplex"` — Network simplex with spanning tree representation
+#'     \item `"orlin"` — Orlin-Ahuja scaling O(√n · m · log(nC))
+#'     \item `"push_relabel"` — Push-relabel max-flow based solver
+#'     \item `"ramshaw_tarjan"` — Optimized for rectangular matrices (n ≠ m)
+#'   }
 #' @param auction_eps Optional numeric epsilon for the Auction/Auction-GS methods.
 #'   If `NULL`, an internal default (e.g., `1e-9`) is used.
 #' @param eps Deprecated. Use `auction_eps`. If provided and `auction_eps` is `NULL`,
@@ -46,6 +76,15 @@
 #'   \item Large (n>75): `"auction_scaled"` — fastest for large dense problems
 #' }
 #' Benchmarks show auction_scaled and JV are 100-1500x faster than Hungarian at n=500.
+#'
+#' @seealso
+#' \itemize{
+#'   \item [lap_solve()] — Tidy interface returning tibbles
+#'   \item [lap_solve_kbest()] — Find k-best assignments (Murty's algorithm)
+#'   \item [assignment_duals()] — Extract dual variables for sensitivity analysis
+#'   \item [bottleneck_assignment()] — Minimize maximum edge cost (minimax)
+#'   \item [sinkhorn()] — Entropy-regularized optimal transport
+#' }
 #'
 #' @examples
 #' cost <- matrix(c(4,2,5, 3,3,6, 7,5,4), nrow = 3, byrow = TRUE)

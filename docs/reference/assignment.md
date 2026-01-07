@@ -31,14 +31,60 @@ assignment(
 
 - method:
 
-  Character string indicating the algorithm to use. One of `"auto"`,
-  `"jv"`, `"hungarian"`, `"auction"`, `"auction_gs"`, `"sap"`, `"ssp"`,
-  `"csflow"`, `"hk01"`, `"lapmod"`, `"csa"`, `"orlin"`, or
-  `"bruteforce"`. `"ssp"` is accepted as an alias for `"sap"`.
-  `"lapmod"` is a sparse variant of JV, faster for large matrices with
-  \>50% NA/Inf. `"csa"` is Goldberg-Kennedy cost-scaling, often fastest
-  for medium-large problems. `"orlin"` is the Orlin-Ahuja scaling
-  algorithm with O(sqrt(n) \* m \* log(nC)) complexity.
+  Character string indicating the algorithm to use. Options:
+
+  **General-purpose solvers:**
+
+  - `"auto"` — Automatic selection based on problem characteristics
+    (default)
+
+  - `"jv"` — Jonker-Volgenant, fast general-purpose O(n³)
+
+  - `"hungarian"` — Classic Hungarian algorithm O(n³)
+
+  **Auction-based solvers:**
+
+  - `"auction"` — Bertsekas auction with adaptive epsilon
+
+  - `"auction_gs"` — Gauss-Seidel variant, good for spatial structure
+
+  - `"auction_scaled"` — Epsilon-scaling, fastest for large dense
+    problems
+
+  **Specialized solvers:**
+
+  - `"sap"` / `"ssp"` — Shortest augmenting path, handles sparsity well
+
+  - `"lapmod"` — Sparse JV variant, faster when \>50\\
+
+  - `"hk01"` — Hopcroft-Karp for binary (0/1) costs only
+
+  - `"ssap_bucket"` — Dial's algorithm for integer costs
+
+  - `"line_metric"` — O(n log n) for 1D assignment problems
+
+  - `"bruteforce"` — Exact enumeration for tiny problems (n ≤ 8)
+
+  **Advanced solvers:**
+
+  - `"csa"` — Goldberg-Kennedy cost-scaling, often fastest for
+    medium-large
+
+  - `"gabow_tarjan"` — Bit-scaling with complementary slackness O(n³ log
+    C)
+
+  - `"cycle_cancel"` — Cycle-canceling with Karp's algorithm
+
+  - `"csflow"` — Cost-scaling network flow
+
+  - `"network_simplex"` — Network simplex with spanning tree
+    representation
+
+  - `"orlin"` — Orlin-Ahuja scaling O(√n · m · log(nC))
+
+  - `"push_relabel"` — Push-relabel max-flow based solver
+
+  - `"ramshaw_tarjan"` — Optimized for rectangular matrices (n ≠ m)
 
 - auction_eps:
 
@@ -84,6 +130,23 @@ data characteristics:
 
 Benchmarks show auction_scaled and JV are 100-1500x faster than
 Hungarian at n=500.
+
+## See also
+
+- [`lap_solve()`](https://gcol33.github.io/couplr/reference/lap_solve.md)
+  — Tidy interface returning tibbles
+
+- [`lap_solve_kbest()`](https://gcol33.github.io/couplr/reference/lap_solve_kbest.md)
+  — Find k-best assignments (Murty's algorithm)
+
+- [`assignment_duals()`](https://gcol33.github.io/couplr/reference/assignment_duals.md)
+  — Extract dual variables for sensitivity analysis
+
+- [`bottleneck_assignment()`](https://gcol33.github.io/couplr/reference/bottleneck_assignment.md)
+  — Minimize maximum edge cost (minimax)
+
+- [`sinkhorn()`](https://gcol33.github.io/couplr/reference/sinkhorn.md)
+  — Entropy-regularized optimal transport
 
 ## Examples
 
