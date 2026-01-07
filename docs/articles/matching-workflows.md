@@ -494,7 +494,7 @@ time_greedy <- system.time({
 cat("Optimal matching:\n")
 #> Optimal matching:
 cat("  Time:", round(time_optimal["elapsed"], 3), "seconds\n")
-#>   Time: 37.03 seconds
+#>   Time: 33.37 seconds
 cat("  Mean distance:", round(mean(result_optimal$pairs$distance), 4), "\n\n")
 #>   Mean distance: 0.3368
 
@@ -505,7 +505,7 @@ cat("  Time:", round(time_greedy["elapsed"], 3), "seconds\n")
 cat("  Mean distance:", round(mean(result_greedy$pairs$distance), 4), "\n")
 #>   Mean distance: 0.4667
 cat("  Speedup:", round(time_optimal["elapsed"] / time_greedy["elapsed"], 1), "x\n")
-#>   Speedup: 25.2 x
+#>   Speedup: 22.7 x
 ```
 
 ### Greedy Strategies
@@ -589,9 +589,9 @@ comparison <- do.call(rbind, lapply(names(results), function(s) {
 
 print(comparison)
 #>          strategy time_sec mean_distance total_distance
-#> elapsed    sorted     0.06        0.0912          18.24
-#> elapsed1 row_best     0.04        0.0968          19.36
-#> elapsed2       pq     0.07        0.0912          18.24
+#> elapsed    sorted     0.07        0.0912          18.24
+#> elapsed1 row_best     0.06        0.0968          19.36
+#> elapsed2       pq     0.06        0.0912          18.24
 ```
 
 **Recommendation:**

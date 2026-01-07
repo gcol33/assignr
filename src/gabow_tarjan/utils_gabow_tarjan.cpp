@@ -540,20 +540,36 @@ bool hungarian_search_cl(const CostMatrix& C_cl,
     }
 
     // Main loop: grow alternating tree until augmenting path found
+    //
+    // OPTIMIZED: Process ONE column per iteration (standard Hungarian approach)
+    // This gives O(n²) per augmenting path instead of O(n³)
+    //
+    // Each iteration:
+    //   1. Find minimum slack column j* among columns not in T - O(m)
+    //   2. Perform dual adjustment by delta = slack[j*] - O(n+m)
+    //   3. Add j* to T (now tight since slack[j*] = 0 after adjustment)
+    //   4. If j* is free, we found augmenting path - done
+    //   5. Otherwise, add matched row to S and update slack - O(m)
+    //
+    // Total: O(m) per iteration, O(n) iterations = O(nm) = O(n²) for square
+
     while (true) {
-        // 1) Find minimum slack among columns not in T
+        // 1) Find minimum slack column not in T
         long long delta = BIG_INT;
+        int j_min = -1;
         for (int j = 0; j < m; ++j) {
             if (!in_T[j] && slack[j] < delta) {
                 delta = slack[j];
+                j_min = j;
             }
         }
-        if (delta == BIG_INT) {
+
+        if (j_min == -1 || delta == BIG_INT) {
             // No augmenting path can be found
             return false;
         }
 
-        // 2) Dual adjustment
+        // 2) Dual adjustment: make column j_min tight
         if (delta > 0) {
             for (int i = 0; i < n; ++i) {
                 if (in_S[i]) {
@@ -569,57 +585,13 @@ bool hungarian_search_cl(const CostMatrix& C_cl,
             }
         }
 
-        // 3) Scan ALL columns with zero slack and add them to T
-        //    This is critical: after dual adjustment, multiple columns may become tight
-        //    We must process all of them before the next iteration
-        int j_final = -1;
-        bool made_progress = false;  // Track if we added anything to T
-        for (int j = 0; j < m; ++j) {
-            if (in_T[j] || slack[j] != 0) {
-                continue;
-            }
-            
-            // Column j is now tight, add it to T
-            int i = slack_row[j];
-            in_T[j] = true;
-            made_progress = true;  // We added a column to T
-            
-            // If j is free, we found an augmenting path
-            if (col_match[j] == NIL) {
-                j_final = j;
-                break;  // Found augmenting path, stop scanning
-            }
-            
-            // Otherwise, extend tree via the matched edge (j, matched_row)
-            int i2 = col_match[j];
-            if (!in_S[i2]) {
-                in_S[i2] = true;
-                parent[i2] = i;  // parent[row] = previous row that reached it
-                
-                // Update slack using this new row
-                for (int jj = 0; jj < m; ++jj) {
-                    if (!in_T[jj]) {
-                        long long val = C_cl[i2][jj] - y_u[i2] - y_v[jj];
-                        if (val < slack[jj]) {
-                            slack[jj] = val;
-                            slack_row[jj] = i2;
-                        }
-                    }
-                }
-            }
-        }
-        
-        // Safety check: if we didn't make progress, we shouldn't continue
-        if (!made_progress && j_final == -1) {
-            // This shouldn't happen in a correct implementation
-            // but prevents infinite loop
-            return false;
-        }
-        
-        // 4) If we found a free column, augment along the path and stop
-        if (j_final != -1) {
+        // 3) Add column j_min to T (now tight since slack[j_min] == 0)
+        in_T[j_min] = true;
+
+        // 4) If j_min is free, we found an augmenting path
+        if (col_match[j_min] == NIL) {
             // Reconstruct and flip the augmenting path
-            int j = j_final;
+            int j = j_min;
             int i = slack_row[j];
             while (true) {
                 int j_prev = row_match[i];
@@ -632,6 +604,24 @@ bool hungarian_search_cl(const CostMatrix& C_cl,
                 j = j_prev;
             }
             return true;
+        }
+
+        // 5) Extend tree: add matched row i2 to S
+        int i2 = col_match[j_min];
+        if (!in_S[i2]) {
+            in_S[i2] = true;
+            parent[i2] = slack_row[j_min];  // parent[row] = previous row that reached it
+
+            // Update slack using this new row - O(m)
+            for (int jj = 0; jj < m; ++jj) {
+                if (!in_T[jj]) {
+                    long long val = C_cl[i2][jj] - y_u[i2] - y_v[jj];
+                    if (val < slack[jj]) {
+                        slack[jj] = val;
+                        slack_row[jj] = i2;
+                    }
+                }
+            }
         }
     }
 }

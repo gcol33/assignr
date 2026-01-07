@@ -861,4 +861,131 @@ Rcpp::List scale_match_cpp(Rcpp::NumericMatrix cost_r,
     );
 }
 
+// =======================
+// Orlin-Ahuja Algorithm Test Exports
+// =======================
+
+// Forward declarations for orlin_tests.cpp functions
+extern double oa_test_reduced_cost_impl(Rcpp::NumericMatrix cost_r, int i, int j,
+                                        Rcpp::NumericVector row_price_r, Rcpp::NumericVector col_price_r);
+extern Rcpp::List oa_test_all_reduced_costs_impl(Rcpp::NumericMatrix cost_r,
+                                                  Rcpp::NumericVector row_price_r,
+                                                  Rcpp::NumericVector col_price_r);
+extern bool oa_test_epsilon_cs_impl(Rcpp::NumericMatrix cost_r,
+                                    Rcpp::IntegerVector row_to_col_r,
+                                    Rcpp::NumericVector row_price_r,
+                                    Rcpp::NumericVector col_price_r,
+                                    double epsilon);
+extern Rcpp::List oa_test_find_best_columns_impl(Rcpp::NumericMatrix cost_r, int row,
+                                                  Rcpp::NumericVector col_price_r);
+extern Rcpp::List oa_test_single_bid_impl(Rcpp::NumericMatrix cost_r, int row,
+                                          Rcpp::IntegerVector row_to_col_r,
+                                          Rcpp::NumericVector row_price_r,
+                                          Rcpp::NumericVector col_price_r,
+                                          double epsilon);
+extern Rcpp::List oa_test_auction_round_impl(Rcpp::NumericMatrix cost_r,
+                                             Rcpp::IntegerVector row_to_col_r,
+                                             Rcpp::NumericVector row_price_r,
+                                             Rcpp::NumericVector col_price_r,
+                                             double epsilon);
+extern Rcpp::DataFrame oa_complexity_reduced_costs_impl(Rcpp::IntegerVector sizes, int reps);
+extern Rcpp::DataFrame oa_complexity_auction_round_impl(Rcpp::IntegerVector sizes, int reps);
+extern Rcpp::List oa_test_dijkstra_impl(Rcpp::NumericMatrix cost_r,
+                                        Rcpp::IntegerVector row_to_col_r,
+                                        Rcpp::NumericVector row_price_r,
+                                        Rcpp::NumericVector col_price_r);
+extern Rcpp::List oa_test_ssp_phase_impl(Rcpp::NumericMatrix cost_r,
+                                         Rcpp::IntegerVector row_to_col_r,
+                                         Rcpp::NumericVector row_price_r,
+                                         Rcpp::NumericVector col_price_r);
+extern Rcpp::List oa_test_scale_count_impl(double max_cost, int n, double alpha);
+extern Rcpp::List oa_solve_impl(Rcpp::NumericMatrix cost_r, double alpha, int auction_rounds);
+extern Rcpp::DataFrame oa_complexity_augmentations_per_scale_impl(Rcpp::IntegerVector sizes, int reps);
+
+// [[Rcpp::export]]
+double oa_test_reduced_cost(Rcpp::NumericMatrix cost_r, int i, int j,
+                            Rcpp::NumericVector row_price_r, Rcpp::NumericVector col_price_r) {
+    return oa_test_reduced_cost_impl(cost_r, i, j, row_price_r, col_price_r);
+}
+
+// [[Rcpp::export]]
+Rcpp::List oa_test_all_reduced_costs(Rcpp::NumericMatrix cost_r,
+                                     Rcpp::NumericVector row_price_r,
+                                     Rcpp::NumericVector col_price_r) {
+    return oa_test_all_reduced_costs_impl(cost_r, row_price_r, col_price_r);
+}
+
+// [[Rcpp::export]]
+bool oa_test_epsilon_cs(Rcpp::NumericMatrix cost_r,
+                        Rcpp::IntegerVector row_to_col_r,
+                        Rcpp::NumericVector row_price_r,
+                        Rcpp::NumericVector col_price_r,
+                        double epsilon) {
+    return oa_test_epsilon_cs_impl(cost_r, row_to_col_r, row_price_r, col_price_r, epsilon);
+}
+
+// [[Rcpp::export]]
+Rcpp::List oa_test_find_best_columns(Rcpp::NumericMatrix cost_r, int row,
+                                     Rcpp::NumericVector col_price_r) {
+    return oa_test_find_best_columns_impl(cost_r, row, col_price_r);
+}
+
+// [[Rcpp::export]]
+Rcpp::List oa_test_single_bid(Rcpp::NumericMatrix cost_r, int row,
+                              Rcpp::IntegerVector row_to_col_r,
+                              Rcpp::NumericVector row_price_r,
+                              Rcpp::NumericVector col_price_r,
+                              double epsilon) {
+    return oa_test_single_bid_impl(cost_r, row, row_to_col_r, row_price_r, col_price_r, epsilon);
+}
+
+// [[Rcpp::export]]
+Rcpp::List oa_test_auction_round(Rcpp::NumericMatrix cost_r,
+                                 Rcpp::IntegerVector row_to_col_r,
+                                 Rcpp::NumericVector row_price_r,
+                                 Rcpp::NumericVector col_price_r,
+                                 double epsilon) {
+    return oa_test_auction_round_impl(cost_r, row_to_col_r, row_price_r, col_price_r, epsilon);
+}
+
+// [[Rcpp::export]]
+Rcpp::DataFrame oa_complexity_reduced_costs(Rcpp::IntegerVector sizes, int reps = 5) {
+    return oa_complexity_reduced_costs_impl(sizes, reps);
+}
+
+// [[Rcpp::export]]
+Rcpp::DataFrame oa_complexity_auction_round(Rcpp::IntegerVector sizes, int reps = 3) {
+    return oa_complexity_auction_round_impl(sizes, reps);
+}
+
+// [[Rcpp::export]]
+Rcpp::List oa_test_dijkstra(Rcpp::NumericMatrix cost_r,
+                            Rcpp::IntegerVector row_to_col_r,
+                            Rcpp::NumericVector row_price_r,
+                            Rcpp::NumericVector col_price_r) {
+    return oa_test_dijkstra_impl(cost_r, row_to_col_r, row_price_r, col_price_r);
+}
+
+// [[Rcpp::export]]
+Rcpp::List oa_test_ssp_phase(Rcpp::NumericMatrix cost_r,
+                             Rcpp::IntegerVector row_to_col_r,
+                             Rcpp::NumericVector row_price_r,
+                             Rcpp::NumericVector col_price_r) {
+    return oa_test_ssp_phase_impl(cost_r, row_to_col_r, row_price_r, col_price_r);
+}
+
+// [[Rcpp::export]]
+Rcpp::List oa_test_scale_count(double max_cost, int n, double alpha = 5.0) {
+    return oa_test_scale_count_impl(max_cost, n, alpha);
+}
+
+// [[Rcpp::export]]
+Rcpp::List oa_solve(Rcpp::NumericMatrix cost_r, double alpha = 5.0, int auction_rounds = 10) {
+    return oa_solve_impl(cost_r, alpha, auction_rounds);
+}
+
+// [[Rcpp::export]]
+Rcpp::DataFrame oa_complexity_augmentations_per_scale(Rcpp::IntegerVector sizes, int reps = 3) {
+    return oa_complexity_augmentations_per_scale_impl(sizes, reps);
+}
 
