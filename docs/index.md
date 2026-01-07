@@ -1,5 +1,7 @@
 # couplr
 
+[![GitHub
+stars](https://img.shields.io/github/stars/gcol33/couplr)](https://github.com/gcol33/couplr)
 [![R-CMD-check](https://img.shields.io/badge/R--CMD--check-passing-brightgreen)](https://github.com/gcol33/couplr)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)

@@ -9,7 +9,7 @@ assignment(
   maximize = FALSE,
   method = c("auto", "jv", "hungarian", "auction", "auction_gs", "auction_scaled", "sap",
     "ssp", "csflow", "hk01", "bruteforce", "ssap_bucket", "cycle_cancel", "gabow_tarjan",
-    "lapmod"),
+    "lapmod", "csa", "ramshaw_tarjan", "push_relabel"),
   auction_eps = NULL,
   eps = NULL
 )
@@ -22,9 +22,10 @@ entries are treated as forbidden assignments.}
 
 \item{method}{Character string indicating the algorithm to use.
 One of \code{"auto"}, \code{"jv"}, \code{"hungarian"}, \code{"auction"}, \code{"auction_gs"},
-\code{"sap"}, \code{"ssp"}, \code{"csflow"}, \code{"hk01"}, \code{"lapmod"}, or \code{"bruteforce"}.
+\code{"sap"}, \code{"ssp"}, \code{"csflow"}, \code{"hk01"}, \code{"lapmod"}, \code{"csa"}, or \code{"bruteforce"}.
 \code{"ssp"} is accepted as an alias for \code{"sap"}.
-\code{"lapmod"} is a sparse variant of JV, faster for large matrices with >50\% NA/Inf.}
+\code{"lapmod"} is a sparse variant of JV, faster for large matrices with >50\% NA/Inf.
+\code{"csa"} is Goldberg-Kennedy cost-scaling, often fastest for medium-large problems.}
 
 \item{auction_eps}{Optional numeric epsilon for the Auction/Auction-GS methods.
 If \code{NULL}, an internal default (e.g., \code{1e-9}) is used.}

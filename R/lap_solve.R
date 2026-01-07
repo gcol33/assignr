@@ -14,10 +14,11 @@
 #' @param maximize Logical; if `TRUE`, maximizes the total cost instead of minimizing.
 #' @param method Character string indicating the algorithm to use.
 #'   One of `"auto"`, `"jv"`, `"hungarian"`, `"auction"`, `"auction_gs"`,
-#'   `"sap"`, `"ssp"`, `"csflow"`, `"hk01"`, `"lapmod"`, `"csa"`, or `"bruteforce"`.
+#'   `"sap"`, `"ssp"`, `"csflow"`, `"hk01"`, `"lapmod"`, `"csa"`, `"orlin"`, or `"bruteforce"`.
 #'   `"ssp"` is accepted as an alias for `"sap"`.
 #'   `"lapmod"` is a sparse variant of JV, faster for large matrices with >50% NA/Inf.
 #'   `"csa"` is Goldberg-Kennedy cost-scaling, often fastest for medium-large problems.
+#'   `"orlin"` is the Orlin-Ahuja scaling algorithm with O(sqrt(n) * m * log(nC)) complexity.
 #' @param auction_eps Optional numeric epsilon for the Auction/Auction-GS methods.
 #'   If `NULL`, an internal default (e.g., `1e-9`) is used.
 #' @param eps Deprecated. Use `auction_eps`. If provided and `auction_eps` is `NULL`,
@@ -56,7 +57,7 @@ assignment <- function(cost, maximize = FALSE,
                        method = c("auto","jv","hungarian","auction","auction_gs","auction_scaled",
                                   "sap","ssp","csflow","hk01","bruteforce",
                                   "ssap_bucket","cycle_cancel","gabow_tarjan","lapmod","csa",
-                                  "ramshaw_tarjan","push_relabel"),
+                                  "ramshaw_tarjan","push_relabel","orlin"),
                        auction_eps = NULL, eps = NULL
                        # , auction_schedule = c("alpha7","pow2","halves"),  # optional (see below)
                        # , auction_final_eps = NULL                          # optional (see below)
@@ -153,6 +154,7 @@ assignment <- function(cost, maximize = FALSE,
     "csa"           = lap_solve_csa(work, maximize),
     "ramshaw_tarjan"= lap_solve_ramshaw_tarjan(work, maximize),
     "push_relabel"  = lap_solve_push_relabel(work, maximize),
+    "orlin"         = lap_solve_orlin(work, maximize),
     stop("Unknown or unimplemented method: ", method)
   )
 
@@ -674,11 +676,38 @@ print.bottleneck_result <- function(x, ...) {
 }
 
 # ==============================================================================
+# Internal: Orlin-Ahuja Wrapper
+# ==============================================================================
+# Wrapper for the Orlin-Ahuja scaling algorithm that returns standard LAP format
+
+#' @keywords internal
+lap_solve_orlin <- function(cost, maximize = FALSE) {
+  # Orlin-Ahuja epsilon-scaling algorithm with hybrid auction/SSP
+  # O(sqrt(n) * m * log(nC)) complexity
+  work <- if (maximize) -cost else cost
+  work[is.na(work)] <- Inf
+
+  result <- oa_solve(work, alpha = 5.0, auction_rounds = 10)
+
+  # Compute total cost from original cost matrix
+  n <- nrow(cost)
+  total_cost <- 0
+  for (i in seq_len(n)) {
+    j <- result$row_to_col[i]
+    if (j > 0 && is.finite(cost[i, j])) {
+      total_cost <- total_cost + cost[i, j]
+    }
+  }
+
+  list(match = result$row_to_col, total_cost = total_cost)
+}
+
+# ==============================================================================
 # Note on Specialized Algorithms
 # ==============================================================================
-# For specialized algorithms like ssap_bucket, cycle_cancel, and gabow_tarjan,
+# For specialized algorithms like ssap_bucket, cycle_cancel, gabow_tarjan, and orlin,
 # use assignment(cost, method = "ssap_bucket"), assignment(cost, method = "cycle_cancel"),
-# or assignment(cost, method = "gabow_tarjan") respectively.
+# assignment(cost, method = "gabow_tarjan"), or assignment(cost, method = "orlin").
 #
 # These are accessed via the method parameter in assignment() rather than
 # separate wrapper functions to keep the API clean.

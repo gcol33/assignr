@@ -621,6 +621,183 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// oa_test_reduced_cost
+double oa_test_reduced_cost(Rcpp::NumericMatrix cost_r, int i, int j, Rcpp::NumericVector row_price_r, Rcpp::NumericVector col_price_r);
+RcppExport SEXP _couplr_oa_test_reduced_cost(SEXP cost_rSEXP, SEXP iSEXP, SEXP jSEXP, SEXP row_price_rSEXP, SEXP col_price_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    Rcpp::traits::input_parameter< int >::type j(jSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type row_price_r(row_price_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type col_price_r(col_price_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_test_reduced_cost(cost_r, i, j, row_price_r, col_price_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// oa_test_all_reduced_costs
+Rcpp::List oa_test_all_reduced_costs(Rcpp::NumericMatrix cost_r, Rcpp::NumericVector row_price_r, Rcpp::NumericVector col_price_r);
+RcppExport SEXP _couplr_oa_test_all_reduced_costs(SEXP cost_rSEXP, SEXP row_price_rSEXP, SEXP col_price_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type row_price_r(row_price_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type col_price_r(col_price_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_test_all_reduced_costs(cost_r, row_price_r, col_price_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// oa_test_epsilon_cs
+bool oa_test_epsilon_cs(Rcpp::NumericMatrix cost_r, Rcpp::IntegerVector row_to_col_r, Rcpp::NumericVector row_price_r, Rcpp::NumericVector col_price_r, double epsilon);
+RcppExport SEXP _couplr_oa_test_epsilon_cs(SEXP cost_rSEXP, SEXP row_to_col_rSEXP, SEXP row_price_rSEXP, SEXP col_price_rSEXP, SEXP epsilonSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type row_to_col_r(row_to_col_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type row_price_r(row_price_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type col_price_r(col_price_rSEXP);
+    Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_test_epsilon_cs(cost_r, row_to_col_r, row_price_r, col_price_r, epsilon));
+    return rcpp_result_gen;
+END_RCPP
+}
+// oa_test_find_best_columns
+Rcpp::List oa_test_find_best_columns(Rcpp::NumericMatrix cost_r, int row, Rcpp::NumericVector col_price_r);
+RcppExport SEXP _couplr_oa_test_find_best_columns(SEXP cost_rSEXP, SEXP rowSEXP, SEXP col_price_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< int >::type row(rowSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type col_price_r(col_price_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_test_find_best_columns(cost_r, row, col_price_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// oa_test_single_bid
+Rcpp::List oa_test_single_bid(Rcpp::NumericMatrix cost_r, int row, Rcpp::IntegerVector row_to_col_r, Rcpp::NumericVector row_price_r, Rcpp::NumericVector col_price_r, double epsilon);
+RcppExport SEXP _couplr_oa_test_single_bid(SEXP cost_rSEXP, SEXP rowSEXP, SEXP row_to_col_rSEXP, SEXP row_price_rSEXP, SEXP col_price_rSEXP, SEXP epsilonSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< int >::type row(rowSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type row_to_col_r(row_to_col_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type row_price_r(row_price_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type col_price_r(col_price_rSEXP);
+    Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_test_single_bid(cost_r, row, row_to_col_r, row_price_r, col_price_r, epsilon));
+    return rcpp_result_gen;
+END_RCPP
+}
+// oa_test_auction_round
+Rcpp::List oa_test_auction_round(Rcpp::NumericMatrix cost_r, Rcpp::IntegerVector row_to_col_r, Rcpp::NumericVector row_price_r, Rcpp::NumericVector col_price_r, double epsilon);
+RcppExport SEXP _couplr_oa_test_auction_round(SEXP cost_rSEXP, SEXP row_to_col_rSEXP, SEXP row_price_rSEXP, SEXP col_price_rSEXP, SEXP epsilonSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type row_to_col_r(row_to_col_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type row_price_r(row_price_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type col_price_r(col_price_rSEXP);
+    Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_test_auction_round(cost_r, row_to_col_r, row_price_r, col_price_r, epsilon));
+    return rcpp_result_gen;
+END_RCPP
+}
+// oa_complexity_reduced_costs
+Rcpp::DataFrame oa_complexity_reduced_costs(Rcpp::IntegerVector sizes, int reps);
+RcppExport SEXP _couplr_oa_complexity_reduced_costs(SEXP sizesSEXP, SEXP repsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type sizes(sizesSEXP);
+    Rcpp::traits::input_parameter< int >::type reps(repsSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_complexity_reduced_costs(sizes, reps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// oa_complexity_auction_round
+Rcpp::DataFrame oa_complexity_auction_round(Rcpp::IntegerVector sizes, int reps);
+RcppExport SEXP _couplr_oa_complexity_auction_round(SEXP sizesSEXP, SEXP repsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type sizes(sizesSEXP);
+    Rcpp::traits::input_parameter< int >::type reps(repsSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_complexity_auction_round(sizes, reps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// oa_test_dijkstra
+Rcpp::List oa_test_dijkstra(Rcpp::NumericMatrix cost_r, Rcpp::IntegerVector row_to_col_r, Rcpp::NumericVector row_price_r, Rcpp::NumericVector col_price_r);
+RcppExport SEXP _couplr_oa_test_dijkstra(SEXP cost_rSEXP, SEXP row_to_col_rSEXP, SEXP row_price_rSEXP, SEXP col_price_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type row_to_col_r(row_to_col_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type row_price_r(row_price_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type col_price_r(col_price_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_test_dijkstra(cost_r, row_to_col_r, row_price_r, col_price_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// oa_test_ssp_phase
+Rcpp::List oa_test_ssp_phase(Rcpp::NumericMatrix cost_r, Rcpp::IntegerVector row_to_col_r, Rcpp::NumericVector row_price_r, Rcpp::NumericVector col_price_r);
+RcppExport SEXP _couplr_oa_test_ssp_phase(SEXP cost_rSEXP, SEXP row_to_col_rSEXP, SEXP row_price_rSEXP, SEXP col_price_rSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type row_to_col_r(row_to_col_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type row_price_r(row_price_rSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type col_price_r(col_price_rSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_test_ssp_phase(cost_r, row_to_col_r, row_price_r, col_price_r));
+    return rcpp_result_gen;
+END_RCPP
+}
+// oa_test_scale_count
+Rcpp::List oa_test_scale_count(double max_cost, int n, double alpha);
+RcppExport SEXP _couplr_oa_test_scale_count(SEXP max_costSEXP, SEXP nSEXP, SEXP alphaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type max_cost(max_costSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_test_scale_count(max_cost, n, alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
+// oa_solve
+Rcpp::List oa_solve(Rcpp::NumericMatrix cost_r, double alpha, int auction_rounds);
+RcppExport SEXP _couplr_oa_solve(SEXP cost_rSEXP, SEXP alphaSEXP, SEXP auction_roundsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost_r(cost_rSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< int >::type auction_rounds(auction_roundsSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_solve(cost_r, alpha, auction_rounds));
+    return rcpp_result_gen;
+END_RCPP
+}
+// oa_complexity_augmentations_per_scale
+Rcpp::DataFrame oa_complexity_augmentations_per_scale(Rcpp::IntegerVector sizes, int reps);
+RcppExport SEXP _couplr_oa_complexity_augmentations_per_scale(SEXP sizesSEXP, SEXP repsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type sizes(sizesSEXP);
+    Rcpp::traits::input_parameter< int >::type reps(repsSEXP);
+    rcpp_result_gen = Rcpp::wrap(oa_complexity_augmentations_per_scale(sizes, reps));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_couplr_lap_prepare_cost_matrix", (DL_FUNC) &_couplr_lap_prepare_cost_matrix, 2},
@@ -669,6 +846,19 @@ static const R_CallMethodDef CallEntries[] = {
     {"_couplr_gt_hungarian_step_one_feasible", (DL_FUNC) &_couplr_gt_hungarian_step_one_feasible, 5},
     {"_couplr_gt_match_gt", (DL_FUNC) &_couplr_gt_match_gt, 7},
     {"_couplr_scale_match_cpp", (DL_FUNC) &_couplr_scale_match_cpp, 5},
+    {"_couplr_oa_test_reduced_cost", (DL_FUNC) &_couplr_oa_test_reduced_cost, 5},
+    {"_couplr_oa_test_all_reduced_costs", (DL_FUNC) &_couplr_oa_test_all_reduced_costs, 3},
+    {"_couplr_oa_test_epsilon_cs", (DL_FUNC) &_couplr_oa_test_epsilon_cs, 5},
+    {"_couplr_oa_test_find_best_columns", (DL_FUNC) &_couplr_oa_test_find_best_columns, 3},
+    {"_couplr_oa_test_single_bid", (DL_FUNC) &_couplr_oa_test_single_bid, 6},
+    {"_couplr_oa_test_auction_round", (DL_FUNC) &_couplr_oa_test_auction_round, 5},
+    {"_couplr_oa_complexity_reduced_costs", (DL_FUNC) &_couplr_oa_complexity_reduced_costs, 2},
+    {"_couplr_oa_complexity_auction_round", (DL_FUNC) &_couplr_oa_complexity_auction_round, 2},
+    {"_couplr_oa_test_dijkstra", (DL_FUNC) &_couplr_oa_test_dijkstra, 4},
+    {"_couplr_oa_test_ssp_phase", (DL_FUNC) &_couplr_oa_test_ssp_phase, 4},
+    {"_couplr_oa_test_scale_count", (DL_FUNC) &_couplr_oa_test_scale_count, 3},
+    {"_couplr_oa_solve", (DL_FUNC) &_couplr_oa_solve, 3},
+    {"_couplr_oa_complexity_augmentations_per_scale", (DL_FUNC) &_couplr_oa_complexity_augmentations_per_scale, 2},
     {NULL, NULL, 0}
 };
 
