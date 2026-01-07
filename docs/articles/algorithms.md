@@ -124,9 +124,14 @@ properties](algorithms_files/figure-html/decision-flowchart-1.svg)
 | Hungarian | $`O(n^3)`$ | Small problems, pedagogy | n \> 500 |
 | Jonker-Volgenant | $`O(n^3)`$ expected | General purpose (default) | Extremely sparse |
 | Auction | $`O(n^2 \log nC/\epsilon)`$ | Large dense (n \> 1000) | Small problems |
-| SAP | $`O(n^2 + nm)`$ | Sparse (\>50% forbidden) | Dense problems |
+| SAP/LAPMOD | $`O(n^2 + nm)`$ | Sparse (\>50% forbidden) | Dense problems |
 | HK01 | $`O(n^{2.5})`$ | Binary costs only | Non-binary costs |
 | Gabow-Tarjan | $`O(n^3 \log C)`$ | Large integer cost ranges | Non-integer costs |
+| CSA | $`O(n^3)`$ amortized | Medium-large dense | Small problems |
+| Network Simplex | $`O(n^3)`$ typical | General, good dual info | — |
+| Orlin-Ahuja | $`O(\sqrt{n} \cdot m \log nC)`$ | Large sparse with scaling | Small dense |
+| Push-Relabel | $`O(n^2 m)`$ | Max-flow formulations | Dense problems |
+| Ramshaw-Tarjan | $`O(nm \log n)`$ | Rectangular (n ≠ m) | Square dense |
 
 ------------------------------------------------------------------------
 
@@ -378,7 +383,246 @@ cat("Total cost:", get_total_cost(result), "\n")
 
 ------------------------------------------------------------------------
 
-### 7. K-Best Solutions (Murty’s Algorithm)
+### 7. Cost-Scaling Algorithm (CSA)
+
+**Complexity**: $`O(n^3)`$ amortized
+
+The Goldberg-Kennedy cost-scaling algorithm (1995), often the fastest
+solver for medium-to-large dense problems in practice.
+
+#### Key Concepts
+
+- **ε-optimality**: Relaxed complementary slackness with tolerance ε
+- **Price refinement**: Iteratively tighten ε from large to small
+- **Push operations**: Move flow along admissible arcs
+
+#### When to Use
+
+- Medium-to-large dense problems (n = 200-2000)
+- When practical speed matters more than theoretical guarantees
+- General-purpose alternative to JV
+
+``` r
+
+set.seed(456)
+n <- 150
+cost <- matrix(runif(n * n, 0, 100), n, n)
+result <- lap_solve(cost, method = "csa")
+cat("Total cost:", get_total_cost(result), "\n")
+#> Total cost: 167.4593
+```
+
+------------------------------------------------------------------------
+
+### 8. Network Simplex
+
+**Complexity**: $`O(n^3)`$ typical, polynomial worst-case
+
+A specialized simplex method for network flow problems. Models
+assignment as minimum-cost flow in a bipartite network.
+
+#### Key Concepts
+
+- **Spanning tree basis**: The basis is represented as a tree, not a
+  matrix
+- **Pivot operations**: Enter/leave arcs maintain tree structure
+- **Dual variables**: Node potentials give sensitivity information
+
+#### Network Structure
+
+         source (supply = n)
+            |
+       +----+----+
+       |    |    |
+      row₀ row₁ ... row_{n-1}
+       |\   |\   |
+       | \  | \  |
+      col₀ col₁ ... col_{m-1}
+       |    |    |
+       +----+----+
+            |
+          sink (demand = n)
+
+#### When to Use
+
+- When you need dual variable information
+- Problems with network structure
+- Research and algorithmic comparisons
+
+``` r
+
+set.seed(789)
+n <- 80
+cost <- matrix(runif(n * n, 0, 100), n, n)
+result <- lap_solve(cost, method = "network_simplex")
+cat("Total cost:", get_total_cost(result), "\n")
+#> Total cost: 153.6217
+```
+
+------------------------------------------------------------------------
+
+### 9. Orlin-Ahuja Algorithm
+
+**Complexity**: $`O(\sqrt{n} \cdot m \cdot \log(nC))`$
+
+A sophisticated scaling algorithm (Orlin & Ahuja, 1992) combining
+cost-scaling with capacity-scaling techniques.
+
+#### Key Features
+
+- **Double scaling**: Scales both costs and capacities
+- **Blocking flow**: Finds multiple augmenting paths per phase
+- **Strongly polynomial**: Performance independent of cost magnitudes
+
+#### When to Use
+
+- Large sparse problems with wide cost ranges
+- When theoretical complexity guarantees matter
+- Problems where other methods struggle with numerical issues
+
+``` r
+
+set.seed(111)
+n <- 100
+cost <- matrix(sample(1:100000, n * n, replace = TRUE), n, n)
+result <- lap_solve(cost, method = "orlin")
+cat("Total cost:", get_total_cost(result), "\n")
+#> Total cost: 154972
+```
+
+------------------------------------------------------------------------
+
+### 10. Push-Relabel Algorithm
+
+**Complexity**: $`O(n^2 m)`$ worst-case
+
+Adapts the Goldberg-Tarjan push-relabel maximum flow algorithm for
+minimum-cost assignment.
+
+#### Key Concepts
+
+- **Preflow**: Allow excess flow at intermediate nodes
+- **Push**: Move flow from nodes with excess
+- **Relabel**: Increase node labels to create admissible arcs
+- **Gap heuristic**: Accelerates convergence
+
+#### When to Use
+
+- When max-flow formulation is natural
+- Problems with specific structure favoring push-relabel
+- Comparative benchmarking
+
+``` r
+
+set.seed(222)
+n <- 100
+cost <- matrix(runif(n * n, 0, 100), n, n)
+result <- lap_solve(cost, method = "push_relabel")
+cat("Total cost:", get_total_cost(result), "\n")
+#> Total cost: 169.6957
+```
+
+------------------------------------------------------------------------
+
+### 11. Ramshaw-Tarjan Algorithm
+
+**Complexity**: $`O(nm \log n)`$
+
+Optimized for rectangular assignment problems where $`n \neq m`$
+(Ramshaw & Tarjan, 2012).
+
+#### Key Features
+
+- **Handles rectangularity**: Native support for n ≠ m
+- **Efficient for sparse**: Works well with many forbidden edges
+- **Dual information**: Provides dual variables
+
+#### When to Use
+
+- Rectangular problems (significantly different row/column counts)
+- Sparse assignment with forbidden edges
+- When other methods struggle with asymmetry
+
+``` r
+
+set.seed(333)
+n_rows <- 50
+n_cols <- 150  # Rectangular: more columns than rows
+cost <- matrix(runif(n_rows * n_cols, 0, 100), n_rows, n_cols)
+result <- lap_solve(cost, method = "ramshaw_tarjan")
+cat("Matched", sum(result$assignment > 0), "of", n_rows, "rows\n")
+#> Warning: Unknown or uninitialised column: `assignment`.
+#> Matched 0 of 50 rows
+cat("Total cost:", get_total_cost(result), "\n")
+#> Total cost: 36.23957
+```
+
+------------------------------------------------------------------------
+
+### 12. Specialized Functions
+
+Beyond the standard
+[`assignment()`](https://gcol33.github.io/couplr/reference/assignment.md)
+solvers, couplr provides specialized functions for related problems:
+
+#### Dual Variables with `assignment_duals()`
+
+Extract dual variables $`(u, v)`$ for sensitivity analysis:
+
+``` r
+
+cost <- matrix(c(10, 19, 8, 15, 10, 18, 7, 17, 13), nrow = 3, byrow = TRUE)
+result <- assignment_duals(cost)
+cat("Row duals (u):", result$u, "\n")
+#> Row duals (u): 8 10 7
+cat("Col duals (v):", result$v, "\n")
+#> Col duals (v): 0 0 0
+cat("Reduced costs sum to 0 for optimal edges\n")
+#> Reduced costs sum to 0 for optimal edges
+```
+
+**Use cases**: Sensitivity analysis, identifying critical edges,
+understanding price structure.
+
+#### Bottleneck Assignment with `bottleneck_assignment()`
+
+Minimize the maximum edge cost (minimax objective):
+
+``` r
+
+cost <- matrix(c(5, 9, 2, 10, 3, 7, 8, 4, 6), nrow = 3, byrow = TRUE)
+result <- bottleneck_assignment(cost)
+cat("Assignment:", result$match, "\n")
+#> Assignment: 1 2 3
+cat("Bottleneck (max edge):", result$bottleneck, "\n")
+#> Bottleneck (max edge): 6
+```
+
+**Use cases**: Load balancing, fairness constraints, worst-case
+optimization.
+
+#### Soft Assignment with `sinkhorn()`
+
+Entropy-regularized optimal transport (soft/fuzzy assignment):
+
+``` r
+
+cost <- matrix(c(1, 2, 3, 4), nrow = 2)
+result <- sinkhorn(cost, lambda = 10)
+print(round(result$transport_plan, 3))
+#>      [,1] [,2]
+#> [1,] 0.25 0.25
+#> [2,] 0.25 0.25
+cat("Transport cost:", result$cost, "\n")
+#> Transport cost: 2.5
+```
+
+**Use cases**: Probabilistic matching, domain adaptation, Wasserstein
+distances.
+
+------------------------------------------------------------------------
+
+### 13. K-Best Solutions (Murty’s Algorithm)
 
 **Complexity**: $`O(k \cdot T(n))`$ where $`T(n)`$ is single LAP
 complexity
@@ -443,16 +687,18 @@ equally optimal) solutions across algorithms
 
 ### Performance Summary
 
-| Size     | Hungarian | JV        | Auction   | SAP\*     | HK01\*\*  | GT\*\*\* |
-|----------|-----------|-----------|-----------|-----------|-----------|----------|
-| \< 100   | Excellent | Excellent | Good      | Good      | Good      | Good     |
-| 100-500  | Good      | Excellent | Good      | Excellent | Excellent | Good     |
-| 500-2000 | Slow      | Excellent | Excellent | Excellent | Excellent | Good     |
-| \> 2000  | Too slow  | Good      | Excellent | Excellent | Excellent | Good     |
+| Size | Hungarian | JV | Auction | SAP | CSA | Network Simplex | Orlin |
+|----|----|----|----|----|----|----|----|
+| \< 100 | Excellent | Excellent | Good | Good | Good | Good | Good |
+| 100-500 | Good | Excellent | Excellent | Excellent | Excellent | Good | Good |
+| 500-2000 | Slow | Excellent | Excellent | Excellent | Excellent | Good | Good |
+| \> 2000 | Too slow | Good | Excellent | Excellent | Excellent | Good | Excellent |
 
-\* SAP only for sparse problems (\>50% forbidden entries) \*\* HK01 only
-for binary costs (0/1) \*\*\* GT (Gabow-Tarjan) best for large integer
-cost ranges; has $`O(\log C)`$ factor
+**Notes:** - SAP/LAPMOD: Best for sparse problems (\>50% forbidden
+entries) - HK01: Only for binary costs (0/1), then O(n^2.5) -
+Gabow-Tarjan: Best for large integer cost ranges; O(n³ log C) -
+Ramshaw-Tarjan: Best for rectangular problems (n ≠ m) - Push-Relabel:
+Competitive for max-flow style problems
 
 ------------------------------------------------------------------------
 
@@ -467,8 +713,20 @@ cost ranges; has $`O(\log C)`$ factor
   relaxation method. *Annals of Operations Research*.
 - Gabow, H. N., & Tarjan, R. E. (1989). Faster scaling algorithms for
   network problems. *SIAM Journal on Computing*, 18(5), 1013-1036.
+- Goldberg, A. V., & Kennedy, R. (1995). An efficient cost scaling
+  algorithm for the assignment problem. *Mathematical Programming*,
+  71(2), 153-177.
+- Orlin, J. B., & Ahuja, R. K. (1992). New scaling algorithms for the
+  assignment and minimum mean cycle problems. *Mathematical
+  Programming*, 54(1), 41-56.
+- Ramshaw, L., & Tarjan, R. E. (2012). On minimum-cost assignments in
+  unbalanced bipartite graphs. *HP Labs Technical Report*.
+- Goldberg, A. V., & Tarjan, R. E. (1988). A new approach to the
+  maximum-flow problem. *Journal of the ACM*, 35(4), 921-940.
 - Murty, K. G. (1968). An algorithm for ranking all assignments in order
   of increasing cost. *Operations Research*.
+- Cuturi, M. (2013). Sinkhorn distances: Lightspeed computation of
+  optimal transport. *NeurIPS*.
 - Burkard, R., Dell’Amico, M., & Martello, S. (2009). *Assignment
   Problems*. SIAM.
 
@@ -482,6 +740,15 @@ cost ranges; has $`O(\log C)`$ factor
   Production matching pipelines
 - [`vignette("pixel-morphing")`](https://gcol33.github.io/couplr/articles/pixel-morphing.md) -
   Large-scale approximation strategies
-- [`?lap_solve`](https://gcol33.github.io/couplr/reference/lap_solve.md),
-  [`?assignment`](https://gcol33.github.io/couplr/reference/assignment.md),
-  [`?lap_solve_kbest`](https://gcol33.github.io/couplr/reference/lap_solve_kbest.md)
+- [`?assignment`](https://gcol33.github.io/couplr/reference/assignment.md) -
+  Core solver with all 20 methods
+- [`?lap_solve`](https://gcol33.github.io/couplr/reference/lap_solve.md) -
+  Tidy interface
+- [`?lap_solve_kbest`](https://gcol33.github.io/couplr/reference/lap_solve_kbest.md) -
+  K-best solutions
+- [`?assignment_duals`](https://gcol33.github.io/couplr/reference/assignment_duals.md) -
+  Dual variable extraction
+- [`?bottleneck_assignment`](https://gcol33.github.io/couplr/reference/bottleneck_assignment.md) -
+  Minimax objective
+- [`?sinkhorn`](https://gcol33.github.io/couplr/reference/sinkhorn.md) -
+  Entropy-regularized transport

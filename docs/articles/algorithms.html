@@ -437,7 +437,7 @@ expected</td>
 <td>Small problems</td>
 </tr>
 <tr class="even">
-<td>SAP</td>
+<td>SAP/LAPMOD</td>
 <td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mi>n</mi><mi>m</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2 + nm)</annotation></semantics></math></td>
 <td>Sparse (&gt;50% forbidden)</td>
 <td>Dense problems</td>
@@ -453,6 +453,40 @@ expected</td>
 <td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mi>C</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3 \log C)</annotation></semantics></math></td>
 <td>Large integer cost ranges</td>
 <td>Non-integer costs</td>
+</tr>
+<tr class="odd">
+<td>CSA</td>
+<td>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math>
+amortized</td>
+<td>Medium-large dense</td>
+<td>Small problems</td>
+</tr>
+<tr class="even">
+<td>Network Simplex</td>
+<td>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math>
+typical</td>
+<td>General, good dual info</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Orlin-Ahuja</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msqrt><mi>n</mi></msqrt><mo>⋅</mo><mi>m</mi><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mi>n</mi><mi>C</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\sqrt{n} \cdot m \log nC)</annotation></semantics></math></td>
+<td>Large sparse with scaling</td>
+<td>Small dense</td>
+</tr>
+<tr class="even">
+<td>Push-Relabel</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mi>m</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2 m)</annotation></semantics></math></td>
+<td>Max-flow formulations</td>
+<td>Dense problems</td>
+</tr>
+<tr class="odd">
+<td>Ramshaw-Tarjan</td>
+<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>m</mi><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(nm \log n)</annotation></semantics></math></td>
+<td>Rectangular (n ≠ m)</td>
+<td>Square dense</td>
 </tr>
 </tbody>
 </table>
@@ -819,7 +853,287 @@ expected</td>
 </div>
 </div>
 <div class="section level3">
-<h3 id="k-best-solutions-murtys-algorithm">7. K-Best Solutions (Murty’s Algorithm)<a class="anchor" aria-label="anchor" href="#k-best-solutions-murtys-algorithm"></a>
+<h3 id="cost-scaling-algorithm-csa">7. Cost-Scaling Algorithm (CSA)<a class="anchor" aria-label="anchor" href="#cost-scaling-algorithm-csa"></a>
+</h3>
+<p><strong>Complexity</strong>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math>
+amortized</p>
+<p>The Goldberg-Kennedy cost-scaling algorithm (1995), often the fastest
+solver for medium-to-large dense problems in practice.</p>
+<div class="section level4">
+<h4 id="key-concepts-1">Key Concepts<a class="anchor" aria-label="anchor" href="#key-concepts-1"></a>
+</h4>
+<ul>
+<li>
+<strong>ε-optimality</strong>: Relaxed complementary slackness with
+tolerance ε</li>
+<li>
+<strong>Price refinement</strong>: Iteratively tighten ε from large
+to small</li>
+<li>
+<strong>Push operations</strong>: Move flow along admissible
+arcs</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="when-to-use-6">When to Use<a class="anchor" aria-label="anchor" href="#when-to-use-6"></a>
+</h4>
+<ul>
+<li>Medium-to-large dense problems (n = 200-2000)</li>
+<li>When practical speed matters more than theoretical guarantees</li>
+<li>General-purpose alternative to JV</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">456</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">150</span></span>
+<span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span>, <span class="va">n</span>, <span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lap_solve.html">lap_solve</a></span><span class="op">(</span><span class="va">cost</span>, method <span class="op">=</span> <span class="st">"csa"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Total cost:"</span>, <span class="fu"><a href="../reference/get_total_cost.html">get_total_cost</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Total cost: 167.4593</span></span></code></pre></div>
+<hr>
+</div>
+</div>
+<div class="section level3">
+<h3 id="network-simplex">8. Network Simplex<a class="anchor" aria-label="anchor" href="#network-simplex"></a>
+</h3>
+<p><strong>Complexity</strong>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math>
+typical, polynomial worst-case</p>
+<p>A specialized simplex method for network flow problems. Models
+assignment as minimum-cost flow in a bipartite network.</p>
+<div class="section level4">
+<h4 id="key-concepts-2">Key Concepts<a class="anchor" aria-label="anchor" href="#key-concepts-2"></a>
+</h4>
+<ul>
+<li>
+<strong>Spanning tree basis</strong>: The basis is represented as a
+tree, not a matrix</li>
+<li>
+<strong>Pivot operations</strong>: Enter/leave arcs maintain tree
+structure</li>
+<li>
+<strong>Dual variables</strong>: Node potentials give sensitivity
+information</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="network-structure">Network Structure<a class="anchor" aria-label="anchor" href="#network-structure"></a>
+</h4>
+<pre><code>     source (supply = n)
+        |
+   +----+----+
+   |    |    |
+  row₀ row₁ ... row_{n-1}
+   |\   |\   |
+   | \  | \  |
+  col₀ col₁ ... col_{m-1}
+   |    |    |
+   +----+----+
+        |
+      sink (demand = n)</code></pre>
+</div>
+<div class="section level4">
+<h4 id="when-to-use-7">When to Use<a class="anchor" aria-label="anchor" href="#when-to-use-7"></a>
+</h4>
+<ul>
+<li>When you need dual variable information</li>
+<li>Problems with network structure</li>
+<li>Research and algorithmic comparisons</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">789</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">80</span></span>
+<span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span>, <span class="va">n</span>, <span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lap_solve.html">lap_solve</a></span><span class="op">(</span><span class="va">cost</span>, method <span class="op">=</span> <span class="st">"network_simplex"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Total cost:"</span>, <span class="fu"><a href="../reference/get_total_cost.html">get_total_cost</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Total cost: 153.6217</span></span></code></pre></div>
+<hr>
+</div>
+</div>
+<div class="section level3">
+<h3 id="orlin-ahuja-algorithm">9. Orlin-Ahuja Algorithm<a class="anchor" aria-label="anchor" href="#orlin-ahuja-algorithm"></a>
+</h3>
+<p><strong>Complexity</strong>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msqrt><mi>n</mi></msqrt><mo>⋅</mo><mi>m</mi><mo>⋅</mo><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>C</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\sqrt{n} \cdot m \cdot \log(nC))</annotation></semantics></math></p>
+<p>A sophisticated scaling algorithm (Orlin &amp; Ahuja, 1992) combining
+cost-scaling with capacity-scaling techniques.</p>
+<div class="section level4">
+<h4 id="key-features-2">Key Features<a class="anchor" aria-label="anchor" href="#key-features-2"></a>
+</h4>
+<ul>
+<li>
+<strong>Double scaling</strong>: Scales both costs and
+capacities</li>
+<li>
+<strong>Blocking flow</strong>: Finds multiple augmenting paths per
+phase</li>
+<li>
+<strong>Strongly polynomial</strong>: Performance independent of
+cost magnitudes</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="when-to-use-8">When to Use<a class="anchor" aria-label="anchor" href="#when-to-use-8"></a>
+</h4>
+<ul>
+<li>Large sparse problems with wide cost ranges</li>
+<li>When theoretical complexity guarantees matter</li>
+<li>Problems where other methods struggle with numerical issues</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">111</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100000</span>, <span class="va">n</span> <span class="op">*</span> <span class="va">n</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="va">n</span>, <span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lap_solve.html">lap_solve</a></span><span class="op">(</span><span class="va">cost</span>, method <span class="op">=</span> <span class="st">"orlin"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Total cost:"</span>, <span class="fu"><a href="../reference/get_total_cost.html">get_total_cost</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Total cost: 154972</span></span></code></pre></div>
+<hr>
+</div>
+</div>
+<div class="section level3">
+<h3 id="push-relabel-algorithm">10. Push-Relabel Algorithm<a class="anchor" aria-label="anchor" href="#push-relabel-algorithm"></a>
+</h3>
+<p><strong>Complexity</strong>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mi>m</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2 m)</annotation></semantics></math>
+worst-case</p>
+<p>Adapts the Goldberg-Tarjan push-relabel maximum flow algorithm for
+minimum-cost assignment.</p>
+<div class="section level4">
+<h4 id="key-concepts-3">Key Concepts<a class="anchor" aria-label="anchor" href="#key-concepts-3"></a>
+</h4>
+<ul>
+<li>
+<strong>Preflow</strong>: Allow excess flow at intermediate
+nodes</li>
+<li>
+<strong>Push</strong>: Move flow from nodes with excess</li>
+<li>
+<strong>Relabel</strong>: Increase node labels to create admissible
+arcs</li>
+<li>
+<strong>Gap heuristic</strong>: Accelerates convergence</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="when-to-use-9">When to Use<a class="anchor" aria-label="anchor" href="#when-to-use-9"></a>
+</h4>
+<ul>
+<li>When max-flow formulation is natural</li>
+<li>Problems with specific structure favoring push-relabel</li>
+<li>Comparative benchmarking</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">222</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span>, <span class="va">n</span>, <span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lap_solve.html">lap_solve</a></span><span class="op">(</span><span class="va">cost</span>, method <span class="op">=</span> <span class="st">"push_relabel"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Total cost:"</span>, <span class="fu"><a href="../reference/get_total_cost.html">get_total_cost</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Total cost: 169.6957</span></span></code></pre></div>
+<hr>
+</div>
+</div>
+<div class="section level3">
+<h3 id="ramshaw-tarjan-algorithm">11. Ramshaw-Tarjan Algorithm<a class="anchor" aria-label="anchor" href="#ramshaw-tarjan-algorithm"></a>
+</h3>
+<p><strong>Complexity</strong>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>m</mi><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(nm \log n)</annotation></semantics></math></p>
+<p>Optimized for rectangular assignment problems where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≠</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">n \neq m</annotation></semantics></math>
+(Ramshaw &amp; Tarjan, 2012).</p>
+<div class="section level4">
+<h4 id="key-features-3">Key Features<a class="anchor" aria-label="anchor" href="#key-features-3"></a>
+</h4>
+<ul>
+<li>
+<strong>Handles rectangularity</strong>: Native support for n ≠
+m</li>
+<li>
+<strong>Efficient for sparse</strong>: Works well with many
+forbidden edges</li>
+<li>
+<strong>Dual information</strong>: Provides dual variables</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="when-to-use-10">When to Use<a class="anchor" aria-label="anchor" href="#when-to-use-10"></a>
+</h4>
+<ul>
+<li>Rectangular problems (significantly different row/column
+counts)</li>
+<li>Sparse assignment with forbidden edges</li>
+<li>When other methods struggle with asymmetry</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">333</span><span class="op">)</span></span>
+<span><span class="va">n_rows</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
+<span><span class="va">n_cols</span> <span class="op">&lt;-</span> <span class="fl">150</span>  <span class="co"># Rectangular: more columns than rows</span></span>
+<span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n_rows</span> <span class="op">*</span> <span class="va">n_cols</span>, <span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span>, <span class="va">n_rows</span>, <span class="va">n_cols</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lap_solve.html">lap_solve</a></span><span class="op">(</span><span class="va">cost</span>, method <span class="op">=</span> <span class="st">"ramshaw_tarjan"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Matched"</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">assignment</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>, <span class="st">"of"</span>, <span class="va">n_rows</span>, <span class="st">"rows\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Unknown or uninitialised column: `assignment`.</span></span>
+<span><span class="co">#&gt; Matched 0 of 50 rows</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Total cost:"</span>, <span class="fu"><a href="../reference/get_total_cost.html">get_total_cost</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Total cost: 36.23957</span></span></code></pre></div>
+<hr>
+</div>
+</div>
+<div class="section level3">
+<h3 id="specialized-functions">12. Specialized Functions<a class="anchor" aria-label="anchor" href="#specialized-functions"></a>
+</h3>
+<p>Beyond the standard <code><a href="../reference/assignment.html">assignment()</a></code> solvers, couplr
+provides specialized functions for related problems:</p>
+<div class="section level4">
+<h4 id="dual-variables-with-assignment_duals">Dual Variables with <code>assignment_duals()</code><a class="anchor" aria-label="anchor" href="#dual-variables-with-assignment_duals"></a>
+</h4>
+<p>Extract dual variables
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(u, v)</annotation></semantics></math>
+for sensitivity analysis:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">19</span>, <span class="fl">8</span>, <span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">18</span>, <span class="fl">7</span>, <span class="fl">17</span>, <span class="fl">13</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/assignment_duals.html">assignment_duals</a></span><span class="op">(</span><span class="va">cost</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Row duals (u):"</span>, <span class="va">result</span><span class="op">$</span><span class="va">u</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Row duals (u): 8 10 7</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Col duals (v):"</span>, <span class="va">result</span><span class="op">$</span><span class="va">v</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Col duals (v): 0 0 0</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Reduced costs sum to 0 for optimal edges\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Reduced costs sum to 0 for optimal edges</span></span></code></pre></div>
+<p><strong>Use cases</strong>: Sensitivity analysis, identifying
+critical edges, understanding price structure.</p>
+</div>
+<div class="section level4">
+<h4 id="bottleneck-assignment-with-bottleneck_assignment">Bottleneck Assignment with <code>bottleneck_assignment()</code><a class="anchor" aria-label="anchor" href="#bottleneck-assignment-with-bottleneck_assignment"></a>
+</h4>
+<p>Minimize the maximum edge cost (minimax objective):</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">9</span>, <span class="fl">2</span>, <span class="fl">10</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bottleneck_assignment.html">bottleneck_assignment</a></span><span class="op">(</span><span class="va">cost</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Assignment:"</span>, <span class="va">result</span><span class="op">$</span><span class="va">match</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Assignment: 1 2 3</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Bottleneck (max edge):"</span>, <span class="va">result</span><span class="op">$</span><span class="va">bottleneck</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bottleneck (max edge): 6</span></span></code></pre></div>
+<p><strong>Use cases</strong>: Load balancing, fairness constraints,
+worst-case optimization.</p>
+</div>
+<div class="section level4">
+<h4 id="soft-assignment-with-sinkhorn">Soft Assignment with <code>sinkhorn()</code><a class="anchor" aria-label="anchor" href="#soft-assignment-with-sinkhorn"></a>
+</h4>
+<p>Entropy-regularized optimal transport (soft/fuzzy assignment):</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sinkhorn.html">sinkhorn</a></span><span class="op">(</span><span class="va">cost</span>, lambda <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">transport_plan</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      [,1] [,2]</span></span>
+<span><span class="co">#&gt; [1,] 0.25 0.25</span></span>
+<span><span class="co">#&gt; [2,] 0.25 0.25</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Transport cost:"</span>, <span class="va">result</span><span class="op">$</span><span class="va">cost</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Transport cost: 2.5</span></span></code></pre></div>
+<p><strong>Use cases</strong>: Probabilistic matching, domain
+adaptation, Wasserstein distances.</p>
+<hr>
+</div>
+</div>
+<div class="section level3">
+<h3 id="k-best-solutions-murtys-algorithm">13. K-Best Solutions (Murty’s Algorithm)<a class="anchor" aria-label="anchor" href="#k-best-solutions-murtys-algorithm"></a>
 </h3>
 <p><strong>Complexity</strong>:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>⋅</mo><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(k \cdot T(n))</annotation></semantics></math>
@@ -838,14 +1152,14 @@ is single LAP complexity</p>
 </ol>
 </div>
 <div class="section level4">
-<h4 id="when-to-use-6">When to Use<a class="anchor" aria-label="anchor" href="#when-to-use-6"></a>
+<h4 id="when-to-use-11">When to Use<a class="anchor" aria-label="anchor" href="#when-to-use-11"></a>
 </h4>
 <ul>
 <li>Robustness analysis</li>
 <li>Alternative plans when optimal is infeasible</li>
 <li>Understanding cost landscape</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">19</span>, <span class="fl">8</span>, <span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">18</span>, <span class="fl">7</span>, <span class="fl">17</span>, <span class="fl">13</span>, <span class="fl">16</span>, <span class="fl">9</span>, <span class="fl">14</span>, <span class="fl">12</span>, <span class="fl">19</span>, <span class="fl">8</span>, <span class="fl">18</span><span class="op">)</span>,</span>
 <span>               nrow <span class="op">=</span> <span class="fl">4</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">kbest</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/lap_solve_kbest.html">lap_solve_kbest</a></span><span class="op">(</span><span class="va">cost</span>, k <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -882,7 +1196,7 @@ is single LAP complexity</p>
 </h4>
 <p><strong>Infeasible problems</strong>: When a row has no finite
 entries</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="cn">Inf</span>, <span class="cn">Inf</span>, <span class="cn">Inf</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">feasible</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">is.finite</a></span><span class="op">(</span><span class="va">cost</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Feasible:"</span>, <span class="va">feasible</span>, <span class="st">"\n"</span><span class="op">)</span></span>
@@ -897,22 +1211,24 @@ different (but equally optimal) solutions across algorithms</p>
 </h3>
 <table class="table">
 <colgroup>
-<col width="12%">
-<col width="23%">
-<col width="8%">
-<col width="19%">
-<col width="8%">
-<col width="12%">
+<col width="9%">
+<col width="17%">
+<col width="6%">
 <col width="14%">
+<col width="6%">
+<col width="7%">
+<col width="26%">
+<col width="11%">
 </colgroup>
 <thead><tr class="header">
 <th>Size</th>
 <th>Hungarian</th>
 <th>JV</th>
 <th>Auction</th>
-<th>SAP*</th>
-<th>HK01**</th>
-<th>GT***</th>
+<th>SAP</th>
+<th>CSA</th>
+<th>Network Simplex</th>
+<th>Orlin</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -923,14 +1239,16 @@ different (but equally optimal) solutions across algorithms</p>
 <td>Good</td>
 <td>Good</td>
 <td>Good</td>
+<td>Good</td>
 </tr>
 <tr class="even">
 <td>100-500</td>
 <td>Good</td>
 <td>Excellent</td>
+<td>Excellent</td>
+<td>Excellent</td>
+<td>Excellent</td>
 <td>Good</td>
-<td>Excellent</td>
-<td>Excellent</td>
 <td>Good</td>
 </tr>
 <tr class="odd">
@@ -941,6 +1259,7 @@ different (but equally optimal) solutions across algorithms</p>
 <td>Excellent</td>
 <td>Excellent</td>
 <td>Good</td>
+<td>Good</td>
 </tr>
 <tr class="even">
 <td>&gt; 2000</td>
@@ -950,14 +1269,15 @@ different (but equally optimal) solutions across algorithms</p>
 <td>Excellent</td>
 <td>Excellent</td>
 <td>Good</td>
+<td>Excellent</td>
 </tr>
 </tbody>
 </table>
-<p>* SAP only for sparse problems (&gt;50% forbidden entries) ** HK01
-only for binary costs (0/1) *** GT (Gabow-Tarjan) best for large integer
-cost ranges; has
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mi>C</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log C)</annotation></semantics></math>
-factor</p>
+<p><strong>Notes:</strong> - SAP/LAPMOD: Best for sparse problems
+(&gt;50% forbidden entries) - HK01: Only for binary costs (0/1), then
+O(n^2.5) - Gabow-Tarjan: Best for large integer cost ranges; O(n³ log C)
+- Ramshaw-Tarjan: Best for rectangular problems (n ≠ m) - Push-Relabel:
+Competitive for max-flow style problems</p>
 <hr>
 </div>
 <div class="section level3">
@@ -974,8 +1294,20 @@ relaxation method. <em>Annals of Operations Research</em>.</li>
 <li>Gabow, H. N., &amp; Tarjan, R. E. (1989). Faster scaling algorithms
 for network problems. <em>SIAM Journal on Computing</em>, 18(5),
 1013-1036.</li>
+<li>Goldberg, A. V., &amp; Kennedy, R. (1995). An efficient cost scaling
+algorithm for the assignment problem. <em>Mathematical Programming</em>,
+71(2), 153-177.</li>
+<li>Orlin, J. B., &amp; Ahuja, R. K. (1992). New scaling algorithms for
+the assignment and minimum mean cycle problems. <em>Mathematical
+Programming</em>, 54(1), 41-56.</li>
+<li>Ramshaw, L., &amp; Tarjan, R. E. (2012). On minimum-cost assignments
+in unbalanced bipartite graphs. <em>HP Labs Technical Report</em>.</li>
+<li>Goldberg, A. V., &amp; Tarjan, R. E. (1988). A new approach to the
+maximum-flow problem. <em>Journal of the ACM</em>, 35(4), 921-940.</li>
 <li>Murty, K. G. (1968). An algorithm for ranking all assignments in
 order of increasing cost. <em>Operations Research</em>.</li>
+<li>Cuturi, M. (2013). Sinkhorn distances: Lightspeed computation of
+optimal transport. <em>NeurIPS</em>.</li>
 <li>Burkard, R., Dell’Amico, M., &amp; Martello, S. (2009).
 <em>Assignment Problems</em>. SIAM.</li>
 </ul>
@@ -995,9 +1327,17 @@ pipelines</li>
 <code><a href="../articles/pixel-morphing.html">vignette("pixel-morphing")</a></code> - Large-scale approximation
 strategies</li>
 <li>
-<code><a href="../reference/lap_solve.html">?lap_solve</a></code>, <code><a href="../reference/assignment.html">?assignment</a></code>,
-<code><a href="../reference/lap_solve_kbest.html">?lap_solve_kbest</a></code>
-</li>
+<code><a href="../reference/assignment.html">?assignment</a></code> - Core solver with all 20 methods</li>
+<li>
+<code><a href="../reference/lap_solve.html">?lap_solve</a></code> - Tidy interface</li>
+<li>
+<code><a href="../reference/lap_solve_kbest.html">?lap_solve_kbest</a></code> - K-best solutions</li>
+<li>
+<code><a href="../reference/assignment_duals.html">?assignment_duals</a></code> - Dual variable extraction</li>
+<li>
+<code><a href="../reference/bottleneck_assignment.html">?bottleneck_assignment</a></code> - Minimax objective</li>
+<li>
+<code><a href="../reference/sinkhorn.html">?sinkhorn</a></code> - Entropy-regularized transport</li>
 </ul>
 </div>
 </div>
