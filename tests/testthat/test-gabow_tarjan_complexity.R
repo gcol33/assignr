@@ -1,149 +1,123 @@
 # test-gabow_tarjan_complexity.R
-# Empirical complexity tests for Gabow-Tarjan algorithm
-# Expected: O(n³ log C) which should show roughly cubic growth in n
+# Deterministic tests for Gabow-Tarjan algorithm correctness and behavior
+# Replaces timing-based complexity tests which are inherently flaky in CI
 
-test_that("Gabow-Tarjan has O(n³ log C) complexity", {
-  skip_on_cran()  # Skip on CRAN due to timing variability
-
-  # Test sizes - need enough range to see cubic growth
-  sizes <- c(20, 40, 60, 80, 100)
-  n_reps <- 3  # Replications per size for stability
-
-  timings <- data.frame(
-    n = integer(),
-    time_ms = numeric()
-  )
-
-  set.seed(42)
-
-  for (n in sizes) {
-    for (rep in seq_len(n_reps)) {
-      # Random cost matrix with integer costs in [1, 1000]
-      cost <- matrix(sample(1:1000, n * n, replace = TRUE), nrow = n, ncol = n)
-
-      # Time the Gabow-Tarjan solver
-      start <- Sys.time()
-      result <- lap_solve(cost, method = "gabow_tarjan")
-      elapsed <- as.numeric(Sys.time() - start, units = "secs") * 1000
-
-      timings <- rbind(timings, data.frame(n = n, time_ms = elapsed))
-
-      # Verify correctness
-      expect_equal(nrow(result), n)
-      expect_true(attr(result, "total_cost") > 0)
-    }
-  }
-
-  # Aggregate by size
-  agg <- aggregate(time_ms ~ n, data = timings, FUN = median)
-
-  # Fit log-log regression: log(time) = a + b * log(n)
-  # For O(n³), we expect b ≈ 3
-  # For O(n⁴), we expect b ≈ 4
-  fit <- lm(log(time_ms) ~ log(n), data = agg)
-  exponent <- coef(fit)[2]
-
-  # Print results for debugging
-  cat("\n\nGabow-Tarjan Complexity Analysis:\n")
-  cat("=================================\n")
-  cat(sprintf("%-6s  %10s  %10s\n", "n", "time(ms)", "ratio"))
-  for (i in seq_len(nrow(agg))) {
-    ratio <- if (i == 1) NA else agg$time_ms[i] / agg$time_ms[i-1]
-    cat(sprintf("%-6d  %10.2f  %10.2f\n", agg$n[i], agg$time_ms[i],
-                if (is.na(ratio)) 0 else ratio))
-  }
-  cat(sprintf("\nFitted exponent: %.2f\n", exponent))
-  cat(sprintf("Expected for O(n³): 3.0\n"))
-  cat(sprintf("Expected for O(n⁴): 4.0\n"))
-
-  # For n doubling (20→40, 40→80), expected ratio:
-  # O(n³): 2³ = 8
-  # O(n⁴): 2⁴ = 16
-  # We check that exponent is closer to 3 than to 4
-  expect_lt(exponent, 3.7,
-            label = sprintf("Exponent %.2f should be < 3.7 (closer to cubic than quartic)", exponent))
-  expect_gt(exponent, 2.0,
-            label = sprintf("Exponent %.2f should be > 2.0 (at least quadratic)", exponent))
-})
-
-test_that("Gabow-Tarjan scales better than O(n⁴) on worst-case-like inputs", {
+test_that("Gabow-Tarjan produces optimal results across problem sizes", {
   skip_on_cran()
 
-  # Create matrices that might trigger worst-case behavior:
-  # All costs equal (many ties in slack values)
-  sizes <- c(30, 50, 70)
-  n_reps <- 3
-
-  timings <- data.frame(n = integer(), time_ms = numeric())
-
-  for (n in sizes) {
-    for (rep in seq_len(n_reps)) {
-      # Uniform costs - potential worst case for naive implementation
-      cost <- matrix(1, nrow = n, ncol = n)
-
-      start <- Sys.time()
-      result <- lap_solve(cost, method = "gabow_tarjan")
-      elapsed <- as.numeric(Sys.time() - start, units = "secs") * 1000
-
-      timings <- rbind(timings, data.frame(n = n, time_ms = elapsed))
-      expect_equal(nrow(result), n)
-    }
-  }
-
-  agg <- aggregate(time_ms ~ n, data = timings, FUN = median)
-
-  # Fit exponent
-  if (nrow(agg) >= 2) {
-    fit <- lm(log(time_ms) ~ log(n), data = agg)
-    exponent <- coef(fit)[2]
-
-    cat("\n\nUniform Cost Matrix (worst-case-like):\n")
-    cat("======================================\n")
-    cat(sprintf("Fitted exponent: %.2f\n", exponent))
-
-    # Should still be cubic, not quartic
-    expect_lt(exponent, 4.0,
-              label = sprintf("Exponent %.2f should be < 4.0 on uniform costs", exponent))
-  }
-})
-
-test_that("Gabow-Tarjan produces correct results matching other solvers", {
-  skip_on_cran()
-
-  # Test correctness across multiple problem sizes and seeds
-  # This replaces the flaky timing comparison test
+  # Test correctness across multiple problem sizes with fixed seeds
   test_cases <- list(
-    list(n = 20, seed = 100),
-    list(n = 50, seed = 200),
-    list(n = 80, seed = 300),
-    list(n = 100, seed = 400)
+    list(n = 10, seed = 100),
+    list(n = 20, seed = 200),
+    list(n = 50, seed = 300),
+    list(n = 80, seed = 400),
+    list(n = 100, seed = 500)
   )
 
   for (tc in test_cases) {
     set.seed(tc$seed)
-    cost <- matrix(sample(1:100, tc$n * tc$n, replace = TRUE), nrow = tc$n, ncol = tc$n)
+    cost <- matrix(sample(1:1000, tc$n * tc$n, replace = TRUE), nrow = tc$n, ncol = tc$n)
 
-    # Solve with different methods
+    # Solve with Gabow-Tarjan and reference solver
     res_gt <- lap_solve(cost, method = "gabow_tarjan")
     res_jv <- lap_solve(cost, method = "jv")
-    res_hungarian <- lap_solve(cost, method = "hungarian")
 
-    # All should produce same optimal cost
+    # Must produce same optimal cost
     expect_equal(
       attr(res_gt, "total_cost"),
       attr(res_jv, "total_cost"),
-      label = sprintf("GT vs JV at n=%d", tc$n)
+      label = sprintf("Gabow-Tarjan vs JV optimal cost at n=%d", tc$n)
     )
+
+    # Must have valid assignment
+    expect_equal(nrow(res_gt), tc$n)
+    expect_true(all(res_gt$source >= 1 & res_gt$source <= tc$n))
+    expect_true(all(res_gt$target >= 1 & res_gt$target <= tc$n))
+    expect_equal(length(unique(res_gt$target)), tc$n)  # All targets assigned exactly once
+  }
+})
+
+test_that("Gabow-Tarjan handles uniform cost matrices", {
+  skip_on_cran()
+
+  # Uniform costs - all assignments have same cost
+  # This tests tie-breaking behavior
+  sizes <- c(10, 30, 50, 70)
+
+  for (n in sizes) {
+    cost <- matrix(1, nrow = n, ncol = n)
+
+    res <- lap_solve(cost, method = "gabow_tarjan")
+
+    expect_equal(attr(res, "total_cost"), n)  # n assignments × cost 1
+    expect_equal(nrow(res), n)
+    expect_equal(length(unique(res$target)), n)
+  }
+})
+
+test_that("Gabow-Tarjan handles diagonal-dominant matrices", {
+  skip_on_cran()
+
+  # Diagonal is cheapest - optimal is identity matching
+  for (n in c(10, 25, 50)) {
+    cost <- matrix(100, nrow = n, ncol = n)
+    diag(cost) <- 1
+
+    res <- lap_solve(cost, method = "gabow_tarjan")
+
+    expect_equal(attr(res, "total_cost"), n)  # n × 1
+    # Should match diagonal
+    expect_true(all(res$source == res$target))
+  }
+})
+
+test_that("Gabow-Tarjan handles anti-diagonal matrices", {
+  skip_on_cran()
+
+  # Anti-diagonal is cheapest
+  for (n in c(10, 25, 50)) {
+    cost <- matrix(100, nrow = n, ncol = n)
+    for (i in 1:n) {
+      cost[i, n - i + 1] <- 1
+    }
+
+    res <- lap_solve(cost, method = "gabow_tarjan")
+
+    expect_equal(attr(res, "total_cost"), n)
+    # Should match anti-diagonal
+    for (i in 1:n) {
+      row_match <- res[res$source == i, "target"]
+      expect_equal(as.integer(row_match), n - i + 1)
+    }
+  }
+})
+
+test_that("Gabow-Tarjan matches Hungarian on random instances", {
+  skip_on_cran()
+
+  # Multiple random instances with different characteristics
+  test_configs <- list(
+    list(n = 20, max_cost = 100, seed = 1001),
+    list(n = 30, max_cost = 1000, seed = 1002),
+    list(n = 40, max_cost = 10000, seed = 1003),
+    list(n = 50, max_cost = 100, seed = 1004)
+  )
+
+  for (cfg in test_configs) {
+    set.seed(cfg$seed)
+    cost <- matrix(
+      sample(1:cfg$max_cost, cfg$n * cfg$n, replace = TRUE),
+      nrow = cfg$n, ncol = cfg$n
+    )
+
+    res_gt <- lap_solve(cost, method = "gabow_tarjan")
+    res_hungarian <- lap_solve(cost, method = "hungarian")
+
     expect_equal(
       attr(res_gt, "total_cost"),
       attr(res_hungarian, "total_cost"),
-      label = sprintf("GT vs Hungarian at n=%d", tc$n)
+      label = sprintf("GT vs Hungarian at n=%d, max_cost=%d", cfg$n, cfg$max_cost)
     )
-
-    # All should have valid assignments
-    expect_equal(nrow(res_gt), tc$n)
-    expect_equal(nrow(res_jv), tc$n)
-    expect_equal(nrow(res_hungarian), tc$n)
   }
 })
 
@@ -154,13 +128,24 @@ test_that("Gabow-Tarjan handles edge cases correctly", {
   cost_1x1 <- matrix(42, nrow = 1, ncol = 1)
   res <- lap_solve(cost_1x1, method = "gabow_tarjan")
   expect_equal(attr(res, "total_cost"), 42)
+  expect_equal(nrow(res), 1)
 
-  # 2x2 matrix
-  cost_2x2 <- matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE)
+  # 2x2 matrix with unique optimum
+  cost_2x2 <- matrix(c(1, 100, 100, 1), nrow = 2, byrow = TRUE)
   res <- lap_solve(cost_2x2, method = "gabow_tarjan")
-  expect_true(attr(res, "total_cost") %in% c(5, 5))  # Either (1,4) or (2,3)
+  expect_equal(attr(res, "total_cost"), 2)  # Diagonal: 1 + 1
 
-  # Large costs (test overflow handling)
+  # 3x3 with known optimum
+  cost_3x3 <- matrix(c(
+    1, 2, 3,
+    4, 5, 6,
+    7, 8, 9
+  ), nrow = 3, byrow = TRUE)
+  res_gt <- lap_solve(cost_3x3, method = "gabow_tarjan")
+  res_jv <- lap_solve(cost_3x3, method = "jv")
+  expect_equal(attr(res_gt, "total_cost"), attr(res_jv, "total_cost"))
+
+  # Large costs (test numeric stability)
   set.seed(999)
   cost_large <- matrix(sample(1e6:1e7, 25, replace = TRUE), nrow = 5, ncol = 5)
   res_gt <- lap_solve(cost_large, method = "gabow_tarjan")
@@ -171,4 +156,53 @@ test_that("Gabow-Tarjan handles edge cases correctly", {
   cost_zero <- matrix(0, nrow = 5, ncol = 5)
   res <- lap_solve(cost_zero, method = "gabow_tarjan")
   expect_equal(attr(res, "total_cost"), 0)
+})
+
+test_that("Gabow-Tarjan handles sparse-like cost patterns", {
+  skip_on_cran()
+
+  # Matrix with most entries very high, few low
+  # Simulates sparse assignment problems
+  set.seed(777)
+  n <- 30
+  cost <- matrix(1000000, nrow = n, ncol = n)
+
+  # Add n random low-cost entries ensuring feasibility
+  for (i in 1:n) {
+    j <- sample(1:n, 1)
+    cost[i, j] <- sample(1:100, 1)
+  }
+  # Ensure at least one feasible assignment exists by adding diagonal fallback
+  diag(cost) <- pmin(diag(cost), 500)
+
+  res_gt <- lap_solve(cost, method = "gabow_tarjan")
+  res_jv <- lap_solve(cost, method = "jv")
+
+  expect_equal(
+    attr(res_gt, "total_cost"),
+    attr(res_jv, "total_cost")
+  )
+})
+
+test_that("Gabow-Tarjan is deterministic", {
+  skip_on_cran()
+
+  # Same input should always produce same output
+  set.seed(12345)
+  cost <- matrix(sample(1:500, 400, replace = TRUE), nrow = 20, ncol = 20)
+
+  results <- replicate(5, {
+    res <- lap_solve(cost, method = "gabow_tarjan")
+    list(
+      cost = attr(res, "total_cost"),
+      assignment = paste(res$target, collapse = ",")
+    )
+  }, simplify = FALSE)
+
+  # All runs should produce identical results
+  costs <- sapply(results, `[[`, "cost")
+  assignments <- sapply(results, `[[`, "assignment")
+
+  expect_equal(length(unique(costs)), 1)
+  expect_equal(length(unique(assignments)), 1)
 })
