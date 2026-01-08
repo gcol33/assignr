@@ -1217,3 +1217,129 @@ print.matching_result <- function(x, ...) {
 
   invisible(x)
 }
+
+#' Summary method for matching results
+#'
+#' @param object A matching_result object
+#' @param ... Additional arguments (ignored)
+#'
+#' @return A list containing summary statistics (invisibly)
+#' @export
+#' @method summary matching_result
+summary.matching_result <- function(object, ...) {
+  n_matched <- object$info$n_matched
+  total_dist <- object$info$total_distance
+  mean_dist <- if (n_matched > 0) total_dist / n_matched else NA_real_
+  distances <- object$pairs$distance
+
+  # Build summary list
+  out <- list(
+    method = object$info$method,
+    strategy = object$info$strategy,
+    n_matched = n_matched,
+    n_blocks = object$info$n_blocks %||% 1L,
+    total_distance = total_dist,
+    mean_distance = mean_dist,
+    distance_stats = if (length(distances) > 0) {
+      list(
+        min = min(distances, na.rm = TRUE),
+        q1 = stats::quantile(distances, 0.25, na.rm = TRUE),
+        median = stats::median(distances, na.rm = TRUE),
+        q3 = stats::quantile(distances, 0.75, na.rm = TRUE),
+        max = max(distances, na.rm = TRUE),
+        sd = stats::sd(distances, na.rm = TRUE)
+      )
+    } else NULL,
+    n_unmatched_left = if (!is.null(object$unmatched)) length(object$unmatched$left) else NA_integer_,
+    n_unmatched_right = if (!is.null(object$unmatched)) length(object$unmatched$right) else NA_integer_
+  )
+
+  class(out) <- "summary.matching_result"
+  out
+}
+
+#' @export
+print.summary.matching_result <- function(x, ...) {
+  cat("Matching Result Summary\n")
+  cat("=======================\n\n")
+
+  cat("Method:", x$method)
+  if (!is.null(x$strategy)) cat(" (", x$strategy, ")", sep = "")
+  cat("\n")
+
+  cat("Pairs matched:", x$n_matched, "\n")
+  if (x$n_blocks > 1) cat("Blocks:", x$n_blocks, "\n")
+
+  if (!is.na(x$n_unmatched_left)) {
+    cat("Unmatched: ", x$n_unmatched_left, " left, ",
+        x$n_unmatched_right, " right\n", sep = "")
+  }
+
+  cat("\nDistance Statistics:\n")
+  cat("  Total:", sprintf("%.4f", x$total_distance), "\n")
+  cat("  Mean:", sprintf("%.4f", x$mean_distance), "\n")
+
+  if (!is.null(x$distance_stats)) {
+    ds <- x$distance_stats
+    cat("  Min:", sprintf("%.4f", ds$min), "\n")
+    cat("  Q1:", sprintf("%.4f", ds$q1), "\n")
+    cat("  Median:", sprintf("%.4f", ds$median), "\n")
+    cat("  Q3:", sprintf("%.4f", ds$q3), "\n")
+    cat("  Max:", sprintf("%.4f", ds$max), "\n")
+    cat("  SD:", sprintf("%.4f", ds$sd), "\n")
+  }
+
+  invisible(x)
+}
+
+#' Plot method for matching results
+#'
+#' Produces a histogram of pairwise distances from a matching result.
+#'
+#' @param x A matching_result object
+#' @param type Type of plot: "histogram" (default), "density", or "ecdf"
+#' @param ... Additional arguments passed to plotting functions
+#'
+#' @return The matching_result object (invisibly)
+#' @export
+#' @method plot matching_result
+plot.matching_result <- function(x, type = c("histogram", "density", "ecdf"), ...) {
+  type <- match.arg(type)
+  distances <- x$pairs$distance
+
+  if (length(distances) == 0) {
+    message("No matched pairs to plot")
+    return(invisible(x))
+  }
+
+  main_title <- paste0("Matching Distances (n=", length(distances), ")")
+
+
+  switch(type,
+    histogram = {
+      graphics::hist(distances,
+                     main = main_title,
+                     xlab = "Distance",
+                     col = "steelblue",
+                     border = "white",
+                     ...)
+    },
+    density = {
+      d <- stats::density(distances)
+      graphics::plot(d,
+                     main = main_title,
+                     xlab = "Distance",
+                     ...)
+      graphics::polygon(d, col = "steelblue", border = "steelblue")
+    },
+    ecdf = {
+      graphics::plot(stats::ecdf(distances),
+                     main = main_title,
+                     xlab = "Distance",
+                     ylab = "Cumulative Proportion",
+                     ...)
+    }
+  )
+
+  invisible(x)
+}

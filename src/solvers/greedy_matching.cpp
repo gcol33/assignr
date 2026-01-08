@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <vector>
 #include <queue>
+#include "../core/lap_utils.h"
 
 using namespace Rcpp;
 
@@ -233,7 +234,7 @@ List greedy_matching_impl(NumericMatrix cost_matrix, bool maximize,
     } else if (strategy == "pq") {
         result = greedy_matching_pq_impl(cost_matrix, maximize);
     } else {
-        stop("Unknown greedy strategy: " + strategy);
+        LAP_ERROR("Unknown greedy strategy: %s", strategy.c_str());
     }
 
     // Add metadata

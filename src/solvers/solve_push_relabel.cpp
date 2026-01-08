@@ -58,7 +58,7 @@ Rcpp::List solve_push_relabel_impl(NumericMatrix cost, bool maximize) {
   }
 
   if (!has_finite) {
-    stop("No finite costs found.");
+    LAP_ERROR("No finite costs found.");
   }
 
   // Check feasibility: each row must have at least one allowed column
@@ -71,7 +71,7 @@ Rcpp::List solve_push_relabel_impl(NumericMatrix cost, bool maximize) {
       }
     }
     if (!has_option) {
-      stop("Infeasible: row %d has no valid assignments", i + 1);
+      LAP_ERROR("Infeasible: row %d has no valid assignments", i + 1);
     }
   }
 
@@ -165,7 +165,7 @@ Rcpp::List solve_push_relabel_impl(NumericMatrix cost, bool maximize) {
     }
 
     if (!std::isfinite(dist[SINK])) {
-      stop("Infeasible: could not find augmenting path (flow=%d/%d)", total_flow, n);
+      LAP_ERROR("Infeasible: could not find augmenting path (flow=%d/%d)", total_flow, n);
     }
 
     // Update potentials

@@ -42,7 +42,7 @@ Rcpp::List solve_murty_impl(NumericMatrix cost, int k, bool maximize, std::strin
     return List::create(_["matches"] = IntegerMatrix(0, n),
                         _["totals"]  = NumericVector(0));
   }
-  if (n > m) stop("Infeasible: n > m");
+  if (n > m) LAP_ERROR("Infeasible: n > m");
 
   // Best solution with chosen base solver (throws if infeasible)
   List base = run_base_solver_by_name(cost, maximize, single_method);

@@ -145,7 +145,7 @@ Rcpp::List solve_hk01_impl(NumericMatrix cost, bool maximize) {
       int k = i*m + j;
       if (Mnv[k] == 0 && std::isfinite(Wnv[k])) { ok = true; break; }
     }
-    if (!ok) stop("Infeasible: row %d has no allowed edges", i+1);
+    if (!ok) LAP_ERROR("Infeasible: row %d has no allowed edges", i+1);
   }
 
   // Inspect palette
@@ -179,16 +179,16 @@ Rcpp::List solve_hk01_impl(NumericMatrix cost, bool maximize) {
     // Any perfect matching is optimal
     build_edges(0);
     int mm = hk.max_matching();
-    if (mm < n) stop("Infeasible: could not find perfect matching");
+    if (mm < n) LAP_ERROR("Infeasible: could not find perfect matching");
     // Recover matching (pairU is 1-based)
     for (int i = 0; i < n; ++i) match_work[i] = hk.pairU[i+1]; // already 1-based col
     // Compute total on ORIGINAL (all equal on allowed edges)
     for (int i = 0; i < n; ++i) {
       int j = match_work[i] - 1;
       int k = i*m + j;
-      if (Monv[k]) stop("Infeasible: chosen forbidden edge");
+      if (Monv[k]) LAP_ERROR("Infeasible: chosen forbidden edge");
       double c = Onv[k];
-      if (!std::isfinite(c)) stop("Infeasible");
+      if (!std::isfinite(c)) LAP_ERROR("Infeasible");
       total += c;
     }
   } else if (pal.is_binary01) {
@@ -201,9 +201,9 @@ Rcpp::List solve_hk01_impl(NumericMatrix cost, bool maximize) {
       for (int i = 0; i < n; ++i) {
         int j = match_work[i] - 1;
         int k = i*m + j;
-        if (Monv[k]) stop("Infeasible: chosen forbidden edge");
+        if (Monv[k]) LAP_ERROR("Infeasible: chosen forbidden edge");
         double c = Onv[k];
-        if (!std::isfinite(c)) stop("Infeasible");
+        if (!std::isfinite(c)) LAP_ERROR("Infeasible");
         total += c;
       }
     } else {
@@ -215,7 +215,7 @@ Rcpp::List solve_hk01_impl(NumericMatrix cost, bool maximize) {
       total = best_total;
     }
   } else {
-    stop("hk01: cost matrix is neither all-equal nor binary {0,1} after preparation");
+    LAP_ERROR("hk01: cost matrix is neither all-equal nor binary {0,1} after preparation");
   }
 
   // Map back if we transposed

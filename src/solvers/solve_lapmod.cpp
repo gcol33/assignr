@@ -165,13 +165,13 @@ Rcpp::List solve_lapmod_impl(NumericMatrix cost, bool maximize) {
     const int m = cost.ncol();
 
     if (n == 0) return make_result(IntegerVector(), 0.0);
-    if (n > m) stop("Infeasible: rows (%d) > cols (%d)", n, m);
+    if (n > m) LAP_ERROR("Infeasible: rows (%d) > cols (%d)", n, m);
 
     SparseMatrix sp = build_sparse(cost, maximize);
 
     for (int i = 0; i < n; ++i) {
         if (sp.row_size(i) == 0) {
-            stop("Infeasible: row %d has no finite costs", i + 1);
+            LAP_ERROR("Infeasible: row %d has no finite costs", i + 1);
         }
     }
 
@@ -188,7 +188,7 @@ Rcpp::List solve_lapmod_impl(NumericMatrix cost, bool maximize) {
     // Augment for each row
     for (int i = 0; i < n; ++i) {
         if (!augment(sp, i, x, y, u, v)) {
-            stop("Infeasible: cannot match row %d", i + 1);
+            LAP_ERROR("Infeasible: cannot match row %d", i + 1);
         }
     }
 

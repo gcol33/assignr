@@ -14,7 +14,7 @@ Rcpp::List prepare_cost_matrix_impl(NumericMatrix cost, bool maximize);
 Rcpp::List solve_hungarian_impl(NumericMatrix cost, bool maximize) {
   const int n = cost.nrow(), m = cost.ncol();
   if (n == 0)   if (n == 0) return make_result(IntegerVector(), 0.0);
-  if (n > m) stop("Infeasible: n=%d > m=%d", n, m);
+  if (n > m) LAP_ERROR("Infeasible: n=%d > m=%d", n, m);
 
   // Prepared work (flip if maximize) and original (for reporting)
   List Wp = prepare_cost_matrix_impl(cost, maximize);
@@ -53,7 +53,7 @@ Rcpp::List solve_hungarian_impl(NumericMatrix cost, bool maximize) {
     for (int i = 0; i < n; ++i) {
       double mn = row_min(i);
       if (!std::isfinite(mn)) {
-        stop("Infeasible: row %d has no finite values (all forbidden?). n=%d, m=%d", i, n, m);
+        LAP_ERROR("Infeasible: row %d has no finite values (all forbidden?). n=%d, m=%d", i, n, m);
       }
       for (int j = 0; j < m; ++j) if (std::isfinite(C[i*m+j])) C[i*m+j] -= mn;
     }
@@ -155,7 +155,7 @@ Rcpp::List solve_hungarian_impl(NumericMatrix cost, bool maximize) {
         int num_row_cov = 0, num_col_cov = 0;
         for (int i = 0; i < n; ++i) if (row_cov[i]) num_row_cov++;
         for (int j = 0; j < m; ++j) if (col_cov[j]) num_col_cov++;
-        stop("Inner loop exceeded %lld iterations. Stars=%d, RowCov=%d/%d, ColCov=%d/%d",
+        LAP_ERROR("Inner loop exceeded %lld iterations. Stars=%d, RowCov=%d/%d, ColCov=%d/%d",
              max_inner, num_stars, num_row_cov, n, num_col_cov, m);
       }
       
@@ -168,7 +168,7 @@ Rcpp::List solve_hungarian_impl(NumericMatrix cost, bool maximize) {
           for (int i = 0; i < n; ++i) if (row_cov[i]) num_row_cov++;
           for (int j = 0; j < m; ++j) if (col_cov[j]) num_col_cov++;
           
-          stop("Infeasible: no uncovered finite values. Stars=%d, RowCov=%d/%d, ColCov=%d/%d, minDim=%d",
+          LAP_ERROR("Infeasible: no uncovered finite values. Stars=%d, RowCov=%d/%d, ColCov=%d/%d, minDim=%d",
                num_stars, num_row_cov, n, num_col_cov, m, minDim);
         }
         // Adjustment: add to covered rows, subtract from uncovered columns
@@ -249,7 +249,7 @@ Rcpp::List solve_hungarian_impl(NumericMatrix cost, bool maximize) {
     for (int j = 0; j < m; ++j) {
       if (star_row_of_col[j] >= 0) num_stars++;
     }
-    stop("Infeasible: only %d/%d rows matched, %d stars found, minDim=%d",  
+    LAP_ERROR("Infeasible: only %d/%d rows matched, %d stars found, minDim=%d",
          num_matched, n, num_stars, minDim);
   }
 
@@ -257,9 +257,9 @@ Rcpp::List solve_hungarian_impl(NumericMatrix cost, bool maximize) {
   double total = 0.0;
   for (int i = 0; i < n; ++i) {
     int j = match[i] - 1;
-    if (Monv[i*m + j]) Rcpp::stop("Infeasible: chosen forbidden edge");
+    if (Monv[i*m + j]) LAP_ERROR("Infeasible: chosen forbidden edge");
     double c = Onv[i*m + j];
-    if (!std::isfinite(c)) Rcpp::stop("Infeasible");
+    if (!std::isfinite(c)) LAP_ERROR("Infeasible");
     total += c;
   }
 

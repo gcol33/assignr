@@ -62,7 +62,7 @@ Rcpp::List solve_csa_impl(NumericMatrix cost, bool maximize) {
   }
 
   if (!has_finite) {
-    stop("No finite costs found.");
+    LAP_ERROR("No finite costs found.");
   }
 
   // For dummy rows (if padded), set very high costs to all columns
@@ -98,7 +98,7 @@ Rcpp::List solve_csa_impl(NumericMatrix cost, bool maximize) {
   // Check feasibility
   for (int i = 0; i < nn; ++i) {
     if (row_ptr[i] == row_ptr[i + 1]) {
-      stop("Infeasible: row %d has no valid assignments", i + 1);
+      LAP_ERROR("Infeasible: row %d has no valid assignments", i + 1);
     }
   }
 
@@ -168,7 +168,7 @@ Rcpp::List solve_csa_impl(NumericMatrix cost, bool maximize) {
     long long iter = 0;
     while (!unmatched.empty()) {
       if (++iter > max_iter) {
-        stop("CSA: iteration guard at eps=%g, phase=%d", epsilon, phase);
+        LAP_ERROR("CSA: iteration guard at eps=%g, phase=%d", epsilon, phase);
       }
 
       int i = unmatched.back();
@@ -179,7 +179,7 @@ Rcpp::List solve_csa_impl(NumericMatrix cost, bool maximize) {
       find_best(i, best_rc, second_rc, best_j);
 
       if (best_j < 0) {
-        stop("Infeasible: person %d has no valid objects", i + 1);
+        LAP_ERROR("Infeasible: person %d has no valid objects", i + 1);
       }
 
       // Compute gamma (bid increment)

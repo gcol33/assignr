@@ -95,6 +95,8 @@
 <url><loc>https://gcol33.github.io/couplr/reference/pipe.html</loc></url>
 <url><loc>https://gcol33.github.io/couplr/reference/pixel_morph.html</loc></url>
 <url><loc>https://gcol33.github.io/couplr/reference/pixel_morph_animate.html</loc></url>
+<url><loc>https://gcol33.github.io/couplr/reference/plot.balance_diagnostics.html</loc></url>
+<url><loc>https://gcol33.github.io/couplr/reference/plot.matching_result.html</loc></url>
 <url><loc>https://gcol33.github.io/couplr/reference/preprocess_matching_vars.html</loc></url>
 <url><loc>https://gcol33.github.io/couplr/reference/print.balance_diagnostics.html</loc></url>
 <url><loc>https://gcol33.github.io/couplr/reference/print.distance_object.html</loc></url>
@@ -113,8 +115,10 @@
 <url><loc>https://gcol33.github.io/couplr/reference/success_good_balance.html</loc></url>
 <url><loc>https://gcol33.github.io/couplr/reference/suggest_scaling.html</loc></url>
 <url><loc>https://gcol33.github.io/couplr/reference/summarize_blocks.html</loc></url>
+<url><loc>https://gcol33.github.io/couplr/reference/summary.balance_diagnostics.html</loc></url>
 <url><loc>https://gcol33.github.io/couplr/reference/summary.distance_object.html</loc></url>
 <url><loc>https://gcol33.github.io/couplr/reference/summary.lap_solve_kbest_result.html</loc></url>
+<url><loc>https://gcol33.github.io/couplr/reference/summary.matching_result.html</loc></url>
 <url><loc>https://gcol33.github.io/couplr/reference/update_constraints.html</loc></url>
 <url><loc>https://gcol33.github.io/couplr/reference/use_emoji.html</loc></url>
 <url><loc>https://gcol33.github.io/couplr/reference/validate_calipers.html</loc></url>

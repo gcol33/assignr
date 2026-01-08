@@ -285,6 +285,8 @@ test_that("bottleneck_assignment scales to larger problems", {
 # ==============================================================================
 
 test_that("bottleneck optimality verified by exhaustive check (small)", {
+  skip_if_not_installed("combinat")
+
   # For small n, verify by checking all permutations
   cost <- matrix(c(3, 1, 4,
                    1, 5, 9,

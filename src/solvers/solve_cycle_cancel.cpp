@@ -203,7 +203,7 @@ Rcpp::List solve_cycle_cancel_impl(Rcpp::NumericMatrix cost, bool maximize) {
   const int m0 = cost.ncol();
   
   if (n0 == 0 || m0 == 0) {
-    Rcpp::stop("Cost matrix cannot be empty");
+    LAP_ERROR("Cost matrix cannot be empty");
   }
   
   bool transposed = false;
@@ -254,7 +254,7 @@ Rcpp::List solve_cycle_cancel_impl(Rcpp::NumericMatrix cost, bool maximize) {
   bool ok = ssp_feasible(adj, s, t, n, total_cost);
   
   if (!ok) {
-    Rcpp::stop("Infeasible: forbidden edges block perfect matching");
+    LAP_ERROR("Infeasible: forbidden edges block perfect matching");
   }
   
   int max_iters = n * m * 10;

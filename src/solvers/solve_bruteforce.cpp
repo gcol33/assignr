@@ -11,9 +11,9 @@ Rcpp::List prepare_cost_matrix_impl(NumericMatrix cost, bool maximize);
 Rcpp::List solve_bruteforce_impl(NumericMatrix cost, bool maximize) {
   const int n = cost.nrow();
   const int m = cost.ncol();
-  if (n > m) stop("Infeasible: more rows than columns");
+  if (n > m) LAP_ERROR("Infeasible: more rows than columns");
   if (n == 0)   if (n == 0) return make_result(IntegerVector(), 0.0);
-  if (n > 8)  stop("bruteforce only supports n <= 8 for now");
+  if (n > 8)  LAP_ERROR("bruteforce only supports n <= 8 for now");
 
   // Use prepared mask (independent of maximize)
   List prep = prepare_cost_matrix_impl(cost, /*maximize*/ false);
@@ -64,7 +64,7 @@ Rcpp::List solve_bruteforce_impl(NumericMatrix cost, bool maximize) {
     } while (std::next_permutation(sel.begin(), sel.end()));
   } while (std::prev_permutation(choose.begin(), choose.end()));
 
-  if (!R_finite(best_total)) stop("Infeasible given forbidden edges");
+  if (!R_finite(best_total)) LAP_ERROR("Infeasible given forbidden edges");
 
     return make_result(best, best_total);
 }

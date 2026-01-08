@@ -31,7 +31,7 @@ Rcpp::List solve_jv_duals_impl(NumericMatrix cost, bool maximize) {
     );
   }
 
-  if (n > m) stop("Infeasible: number of rows greater than number of columns");
+  if (n > m) LAP_ERROR("Infeasible: number of rows greater than number of columns");
 
   // For dual variable extraction, we need to handle maximize specially
   // Using -cost directly (not cmax-cost) so duals transform cleanly
@@ -110,11 +110,11 @@ Rcpp::List solve_jv_duals_impl(NumericMatrix cost, bool maximize) {
   // Compute total on original costs
   double total = 0.0;
   for (int i = 0; i < n; ++i) {
-    if (match[i] < 1) stop("Infeasible: could not find full matching");
+    if (match[i] < 1) LAP_ERROR("Infeasible: could not find full matching");
     int col = match[i] - 1;
-    if (orig_mask_iv[i * m + col]) stop("Infeasible: chosen forbidden edge");
+    if (orig_mask_iv[i * m + col]) LAP_ERROR("Infeasible: chosen forbidden edge");
     double c = orig_cost[i * m + col];
-    if (!std::isfinite(c)) stop("Infeasible: chosen edge has non-finite original cost");
+    if (!std::isfinite(c)) LAP_ERROR("Infeasible: chosen edge has non-finite original cost");
     total += c;
   }
 

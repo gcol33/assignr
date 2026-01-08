@@ -72,7 +72,7 @@ void ensure_each_row_has_option(const std::vector<int>& mask, int n, int m) {
       if (!mask[i * m + j]) { ok = true; break; }
     }
     if (!ok) {
-      Rcpp::stop("Infeasible: row %d has no allowed edges", i + 1);
+      LAP_ERROR("Infeasible: row %d has no allowed edges", i + 1);
     }
   }
 }
@@ -179,8 +179,8 @@ double compute_total_cost(const Rcpp::NumericMatrix& original_cost,
   const int m = original_cost.ncol();
 
   if (assignment.size() != n) {
-    Rcpp::stop("compute_total_cost: assignment length %d != nrow %d",
-               assignment.size(), n);
+    LAP_ERROR("compute_total_cost: assignment length %d != nrow %d",
+               (int)assignment.size(), n);
   }
 
   double total = 0.0;
@@ -203,7 +203,7 @@ double compute_total_cost(const Rcpp::NumericMatrix& original_cost,
 
     // Safety check
     if (j < 0 || j >= m) {
-      Rcpp::stop("compute_total_cost: invalid assignment[%d] = %d (ncol = %d)",
+      LAP_ERROR("compute_total_cost: invalid assignment[%d] = %d (ncol = %d)",
                  i, col_1based, m);
     }
 
@@ -258,5 +258,5 @@ Rcpp::List run_base_solver_by_name(const Rcpp::NumericMatrix& cost,
   if (m == "auction")      return lap_solve_auction(cost, maximize, R_NilValue);
   if (m == "csflow")       return lap_solve_csflow(cost, maximize);
   if (m == "bruteforce")   return lap_solve_bruteforce(cost, maximize);
-  Rcpp::stop("Unknown base method: '%s'", method.c_str());
+  LAP_ERROR("Unknown base method: '%s'", method.c_str());
 }
