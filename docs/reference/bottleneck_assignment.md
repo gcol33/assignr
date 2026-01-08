@@ -42,8 +42,8 @@ costs, we minimize the maximum cost among all assignments (minimax
 objective).
 
 **Algorithm:** Uses binary search on the sorted unique costs combined
-with Hopcroft-Karp bipartite matching to find the minimum threshold that
-allows a perfect matching.
+with 'Hopcroft-Karp' bipartite matching to find the minimum threshold
+that allows a perfect matching.
 
 **Complexity:** O(E \* sqrt(V) \* log(unique costs)) where E = edges, V
 = vertices.
@@ -74,7 +74,6 @@ cost <- matrix(c(1, 5, 3,
                  7, 1, 2), nrow = 3, byrow = TRUE)
 result <- bottleneck_assignment(cost)
 result$bottleneck  # Maximum edge cost in optimal assignment
-#> [1] 3
 
 # Maximize minimum (fair allocation)
 profits <- matrix(c(10, 5, 8,
@@ -82,7 +81,6 @@ profits <- matrix(c(10, 5, 8,
                     3, 7, 11), nrow = 3, byrow = TRUE)
 result <- bottleneck_assignment(profits, maximize = TRUE)
 result$bottleneck  # Minimum profit among all assignments
-#> [1] 10
 
 # With forbidden assignments
 cost <- matrix(c(1, NA, 3,

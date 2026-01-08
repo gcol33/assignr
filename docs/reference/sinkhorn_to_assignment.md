@@ -1,4 +1,4 @@
-# Round Sinkhorn transport plan to hard assignment
+# Round 'Sinkhorn' transport plan to hard assignment
 
 Convert a soft transport plan from
 [`sinkhorn()`](https://gcol33.github.io/couplr/reference/sinkhorn.md) to
@@ -42,5 +42,4 @@ cost <- matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), nrow = 3, byrow = TRUE)
 result <- sinkhorn(cost, lambda = 20)
 hard_match <- sinkhorn_to_assignment(result)
 print(hard_match)
-#> [1] 1 3 2
 ```

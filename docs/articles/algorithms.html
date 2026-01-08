@@ -221,7 +221,97 @@ underlies most efficient LAP algorithms.</p>
 </h3>
 <p>The LAP corresponds to finding a minimum-weight perfect matching in a
 weighted bipartite graph:</p>
-<p><img src="algorithms_files/figure-html/bipartite-graph-1.svg" class="r-plt" width="768"></p>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='576.00pt' height='432.00pt' viewBox='0 0 576.00 432.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    /* theme-aware-processed */
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite circle {
+      fill: none;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite > g > rect {
+      fill: none;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+      fill: #3E3F3A;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #F5F6F8;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1NzYuMDB8MC4wMHw0MzIuMDA='>
+    <rect x='0.00' y='0.00' width='576.00' height='432.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHw0MzIuMDA=)'>
+<rect x='0.00' y='0.00' width='576.00' height='432.00' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+</g>
+<defs>
+  <clipPath id='cpMjQuOTF8NTUxLjA5fDQ5LjA3fDM0NC4xMQ=='>
+    <rect x='24.91' y='49.07' width='526.19' height='295.05' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMjQuOTF8NTUxLjA5fDQ5LjA3fDM0NC4xMQ==)'>
+<rect x='24.91' y='49.07' width='526.19' height='295.05' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<line x1='117.16' y1='107.18' x2='458.84' y2='196.59' style='stroke-width: 2.56; stroke: #AAA49B; stroke-opacity: 0.60; stroke-linecap: butt;' />
+<line x1='117.16' y1='196.59' x2='458.84' y2='107.18' style='stroke-width: 2.56; stroke: #AAA49B; stroke-opacity: 0.60; stroke-linecap: butt;' />
+<line x1='117.16' y1='286.00' x2='458.84' y2='107.18' style='stroke-width: 2.56; stroke: #AAA49B; stroke-opacity: 0.60; stroke-linecap: butt;' />
+<line x1='117.16' y1='107.18' x2='458.84' y2='107.18' style='stroke-width: 5.33; stroke: #93C54B; stroke-linecap: butt;' />
+<line x1='117.16' y1='196.59' x2='458.84' y2='196.59' style='stroke-width: 5.33; stroke: #93C54B; stroke-linecap: butt;' />
+<line x1='117.16' y1='286.00' x2='458.84' y2='286.00' style='stroke-width: 5.33; stroke: #93C54B; stroke-linecap: butt;' />
+<polygon points='281.49,162.10 294.51,162.10 294.41,162.10 294.82,162.08 295.23,162.00 295.61,161.85 295.97,161.64 296.29,161.38 296.56,161.07 296.78,160.73 296.94,160.35 297.04,159.95 297.07,159.54 297.07,159.54 297.07,144.23 297.07,144.23 297.04,143.82 296.94,143.42 296.78,143.04 296.56,142.70 296.29,142.39 295.97,142.13 295.61,141.92 295.23,141.77 294.82,141.69 294.51,141.67 281.49,141.67 281.79,141.69 281.38,141.68 280.97,141.73 280.58,141.84 280.21,142.02 279.87,142.25 279.57,142.54 279.32,142.87 279.13,143.23 279.00,143.62 278.93,144.03 278.93,144.23 278.93,159.54 278.93,159.33 278.93,159.74 279.00,160.15 279.13,160.54 279.32,160.91 279.57,161.23 279.87,161.52 280.21,161.75 280.58,161.93 280.97,162.05 281.38,162.10 ' style='stroke-width: 0.53; stroke: #3E3F3A; fill: #DFD9D2;' />
+<text x='288.00' y='156.98' text-anchor='middle' style='font-size: 14.23px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='7.91px' lengthAdjust='spacingAndGlyphs'>4</text>
+<polygon points='178.98,188.92 192.01,188.92 191.91,188.92 192.32,188.90 192.72,188.82 193.11,188.67 193.46,188.47 193.78,188.21 194.06,187.90 194.28,187.55 194.44,187.17 194.54,186.77 194.57,186.36 194.57,186.36 194.57,171.06 194.57,171.06 194.54,170.65 194.44,170.25 194.28,169.87 194.06,169.52 193.78,169.21 193.46,168.95 193.11,168.74 192.72,168.60 192.32,168.51 192.01,168.50 178.98,168.50 179.29,168.51 178.88,168.50 178.47,168.55 178.07,168.66 177.70,168.84 177.36,169.07 177.07,169.36 176.82,169.69 176.63,170.05 176.50,170.44 176.43,170.85 176.42,171.06 176.42,186.36 176.43,186.15 176.43,186.57 176.50,186.97 176.63,187.36 176.82,187.73 177.07,188.06 177.36,188.34 177.70,188.58 178.07,188.75 178.47,188.87 178.88,188.92 ' style='stroke-width: 0.53; stroke: #3E3F3A; fill: #DFD9D2;' />
+<text x='185.50' y='183.80' text-anchor='middle' style='font-size: 14.23px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='7.91px' lengthAdjust='spacingAndGlyphs'>3</text>
+<polygon points='383.99,153.16 397.02,153.16 396.91,153.15 397.33,153.14 397.73,153.06 398.12,152.91 398.47,152.70 398.79,152.44 399.06,152.13 399.29,151.79 399.45,151.41 399.55,151.01 399.58,150.60 399.58,150.60 399.58,135.29 399.58,135.29 399.55,134.88 399.45,134.48 399.29,134.10 399.06,133.76 398.79,133.45 398.47,133.19 398.12,132.98 397.73,132.83 397.33,132.75 397.02,132.73 383.99,132.73 384.30,132.75 383.89,132.73 383.48,132.78 383.08,132.90 382.71,133.08 382.37,133.31 382.07,133.60 381.83,133.92 381.63,134.29 381.50,134.68 381.44,135.09 381.43,135.29 381.43,150.60 381.44,150.39 381.44,150.80 381.50,151.21 381.63,151.60 381.83,151.96 382.07,152.29 382.37,152.58 382.71,152.81 383.08,152.99 383.48,153.10 383.89,153.15 ' style='stroke-width: 0.53; stroke: #3E3F3A; fill: #DFD9D2;' />
+<text x='390.50' y='148.04' text-anchor='middle' style='font-size: 14.23px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='7.91px' lengthAdjust='spacingAndGlyphs'>3</text>
+<polygon points='281.49,117.39 294.51,117.39 294.41,117.39 294.82,117.37 295.23,117.29 295.61,117.15 295.97,116.94 296.29,116.68 296.56,116.37 296.78,116.02 296.94,115.64 297.04,115.24 297.07,114.83 297.07,114.83 297.07,99.53 297.07,99.53 297.04,99.12 296.94,98.72 296.78,98.34 296.56,97.99 296.29,97.68 295.97,97.42 295.61,97.22 295.23,97.07 294.82,96.99 294.51,96.97 281.49,96.97 281.79,96.99 281.38,96.97 280.97,97.02 280.58,97.14 280.21,97.31 279.87,97.55 279.57,97.83 279.32,98.16 279.13,98.53 279.00,98.92 278.93,99.32 278.93,99.53 278.93,114.83 278.93,114.63 278.93,115.04 279.00,115.45 279.13,115.84 279.32,116.20 279.57,116.53 279.87,116.82 280.21,117.05 280.58,117.23 280.97,117.34 281.38,117.39 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
+<text x='288.00' y='112.27' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='7.91px' lengthAdjust='spacingAndGlyphs'>2</text>
+<polygon points='281.49,206.80 294.51,206.80 294.41,206.80 294.82,206.78 295.23,206.70 295.61,206.55 295.97,206.35 296.29,206.09 296.56,205.78 296.78,205.43 296.94,205.05 297.04,204.65 297.07,204.24 297.07,204.24 297.07,188.94 297.07,188.94 297.04,188.53 296.94,188.13 296.78,187.75 296.56,187.40 296.29,187.09 295.97,186.83 295.61,186.63 295.23,186.48 294.82,186.40 294.51,186.38 281.49,186.38 281.79,186.40 281.38,186.38 280.97,186.43 280.58,186.54 280.21,186.72 279.87,186.96 279.57,187.24 279.32,187.57 279.13,187.94 279.00,188.33 278.93,188.73 278.93,188.94 278.93,204.24 278.93,204.04 278.93,204.45 279.00,204.85 279.13,205.24 279.32,205.61 279.57,205.94 279.87,206.22 280.21,206.46 280.58,206.64 280.97,206.75 281.38,206.80 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
+<text x='288.00' y='201.68' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='7.91px' lengthAdjust='spacingAndGlyphs'>1</text>
+<polygon points='281.49,296.21 294.51,296.21 294.41,296.21 294.82,296.19 295.23,296.11 295.61,295.96 295.97,295.76 296.29,295.50 296.56,295.19 296.78,294.84 296.94,294.46 297.04,294.06 297.07,293.65 297.07,293.65 297.07,278.35 297.07,278.35 297.04,277.94 296.94,277.54 296.78,277.16 296.56,276.81 296.29,276.50 295.97,276.24 295.61,276.03 295.23,275.89 294.82,275.81 294.51,275.79 281.49,275.79 281.79,275.81 281.38,275.79 280.97,275.84 280.58,275.95 280.21,276.13 279.87,276.36 279.57,276.65 279.32,276.98 279.13,277.34 279.00,277.73 278.93,278.14 278.93,278.35 278.93,293.65 278.93,293.44 278.93,293.86 279.00,294.26 279.13,294.65 279.32,295.02 279.57,295.35 279.87,295.63 280.21,295.87 280.58,296.04 280.97,296.16 281.38,296.21 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
+<text x='288.00' y='291.09' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='7.91px' lengthAdjust='spacingAndGlyphs'>2</text>
+<circle cx='117.16' cy='107.18' r='19.56' style='stroke-width: 0.71; stroke: #F47C3C; fill: #F47C3C;' />
+<circle cx='117.16' cy='196.59' r='19.56' style='stroke-width: 0.71; stroke: #F47C3C; fill: #F47C3C;' />
+<circle cx='117.16' cy='286.00' r='19.56' style='stroke-width: 0.71; stroke: #F47C3C; fill: #F47C3C;' />
+<circle cx='458.84' cy='107.18' r='19.56' style='stroke-width: 0.71; stroke: #29ABE0; fill: #29ABE0;' />
+<circle cx='458.84' cy='196.59' r='19.56' style='stroke-width: 0.71; stroke: #29ABE0; fill: #29ABE0;' />
+<circle cx='458.84' cy='286.00' r='19.56' style='stroke-width: 0.71; stroke: #29ABE0; fill: #29ABE0;' />
+<text x='117.16' y='113.29' text-anchor='middle' style='font-size: 17.07px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='20.86px' lengthAdjust='spacingAndGlyphs'>S1</text>
+<text x='117.16' y='202.70' text-anchor='middle' style='font-size: 17.07px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='20.86px' lengthAdjust='spacingAndGlyphs'>S2</text>
+<text x='117.16' y='292.11' text-anchor='middle' style='font-size: 17.07px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='20.86px' lengthAdjust='spacingAndGlyphs'>S3</text>
+<text x='458.84' y='113.29' text-anchor='middle' style='font-size: 17.07px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='19.91px' lengthAdjust='spacingAndGlyphs'>T1</text>
+<text x='458.84' y='202.70' text-anchor='middle' style='font-size: 17.07px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='19.91px' lengthAdjust='spacingAndGlyphs'>T2</text>
+<text x='458.84' y='292.11' text-anchor='middle' style='font-size: 17.07px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='19.91px' lengthAdjust='spacingAndGlyphs'>T3</text>
+</g>
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHw0MzIuMDA=)'>
+<rect x='187.80' y='355.07' width='200.39' height='61.98' style='stroke-width: 0.75; stroke: none;' /> fill: #F5F6F8;' />
+<rect x='187.80' y='355.07' width='200.39' height='61.98' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<circle cx='224.27' cy='386.06' r='19.56' style='stroke-width: 0.71; stroke: #F47C3C; fill: #F47C3C;' />
+<circle cx='321.13' cy='386.06' r='19.56' style='stroke-width: 0.71; stroke: #29ABE0; fill: #29ABE0;' />
+<text x='255.27' y='390.00' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='34.88px' lengthAdjust='spacingAndGlyphs'>Source</text>
+<text x='352.12' y='390.00' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='30.59px' lengthAdjust='spacingAndGlyphs'>Target</text>
+<text x='288.00' y='41.27' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='248.08px' lengthAdjust='spacingAndGlyphs'>Optimal assignment shown in green (total cost = 5)</text>
+<text x='288.00' y='24.97' text-anchor='middle' style='font-size: 14.00px; font-weight: bold; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='265.22px' lengthAdjust='spacingAndGlyphs'>Assignment Problem as Bipartite Graph</text>
+</g>
+</g>
+</svg></div>
+
 <p>The optimal solution (green edges) assigns S1→T1, S2→T2, S3→T3 with
 total cost 2 + 1 + 2 = 5.</p>
 <hr>
@@ -229,7 +319,94 @@ total cost 2 + 1 + 2 = 5.</p>
 <div class="section level3">
 <h3 id="algorithm-selection-guide">Algorithm Selection Guide<a class="anchor" aria-label="anchor" href="#algorithm-selection-guide"></a>
 </h3>
-<p><img src="algorithms_files/figure-html/decision-flowchart-1.svg" class="r-plt" alt="Flowchart showing algorithm selection based on cost matrix properties" width="864"></p>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='648.00pt' height='432.00pt' viewBox='0 0 648.00 432.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    /* theme-aware-processed */
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite circle {
+      fill: none;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite > g > rect {
+      fill: none;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+      fill: #3E3F3A;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #F5F6F8;'/>
+<defs>
+  <clipPath id='cpMC4wMHw2NDguMDB8MC4wMHw0MzIuMDA='>
+    <rect x='0.00' y='0.00' width='648.00' height='432.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw2NDguMDB8MC4wMHw0MzIuMDA=)'>
+<rect x='0.00' y='0.00' width='648.00' height='432.00' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+</g>
+<defs>
+  <clipPath id='cpMjkuODl8NjE4LjExfDMzLjM5fDQxNy4wNg=='>
+    <rect x='29.89' y='33.39' width='588.22' height='383.67' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMjkuODl8NjE4LjExfDMzLjM5fDQxNy4wNg==)'>
+<rect x='29.89' y='33.39' width='588.22' height='383.67' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
+<line x1='285.80' y1='94.43' x2='133.02' y2='181.62' style='stroke-width: 2.13; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polygon points='135.88,176.73 133.02,181.62 138.69,181.65 ' style='stroke-width: 2.13; stroke: #3E3F3A; stroke-linecap: butt; fill: #3E3F3A;' />
+<line x1='285.80' y1='94.43' x2='438.59' y2='181.62' style='stroke-width: 2.13; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polygon points='432.92,181.65 438.59,181.62 435.73,176.73 ' style='stroke-width: 2.13; stroke: #3E3F3A; stroke-linecap: butt; fill: #3E3F3A;' />
+<line x1='438.59' y1='181.62' x2='285.80' y2='268.82' style='stroke-width: 2.13; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polygon points='288.66,263.93 285.80,268.82 291.47,268.85 ' style='stroke-width: 2.13; stroke: #3E3F3A; stroke-linecap: butt; fill: #3E3F3A;' />
+<line x1='438.59' y1='181.62' x2='438.59' y2='268.82' style='stroke-width: 2.13; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polygon points='435.75,263.91 438.59,268.82 441.42,263.91 ' style='stroke-width: 2.13; stroke: #3E3F3A; stroke-linecap: butt; fill: #3E3F3A;' />
+<line x1='438.59' y1='268.82' x2='362.20' y2='356.02' style='stroke-width: 2.13; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polygon points='363.30,350.46 362.20,356.02 367.56,354.19 ' style='stroke-width: 2.13; stroke: #3E3F3A; stroke-linecap: butt; fill: #3E3F3A;' />
+<line x1='438.59' y1='268.82' x2='514.98' y2='356.02' style='stroke-width: 2.13; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polygon points='509.61,354.19 514.98,356.02 513.88,350.46 ' style='stroke-width: 2.13; stroke: #3E3F3A; stroke-linecap: butt; fill: #3E3F3A;' />
+<text x='194.13' y='133.89' text-anchor='middle' style='font-size: 12.80px; font-style: italic;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='21.34px' lengthAdjust='spacingAndGlyphs'>Yes</text>
+<text x='377.47' y='133.89' text-anchor='middle' style='font-size: 12.80px; font-style: italic;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='16.34px' lengthAdjust='spacingAndGlyphs'>No</text>
+<text x='346.92' y='221.08' text-anchor='middle' style='font-size: 12.80px; font-style: italic;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='21.34px' lengthAdjust='spacingAndGlyphs'>Yes</text>
+<text x='453.87' y='221.08' text-anchor='middle' style='font-size: 12.80px; font-style: italic;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='16.34px' lengthAdjust='spacingAndGlyphs'>No</text>
+<text x='385.11' y='312.64' text-anchor='middle' style='font-size: 12.80px; font-style: italic;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='21.34px' lengthAdjust='spacingAndGlyphs'>Yes</text>
+<text x='492.06' y='312.64' text-anchor='middle' style='font-size: 12.80px; font-style: italic;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='16.34px' lengthAdjust='spacingAndGlyphs'>No</text>
+<polygon points='285.80,128.30 319.67,94.43 285.80,60.56 251.93,94.43 ' style='stroke-width: 2.83; stroke: #F47C3C; fill: #FFC107;' />
+<polygon points='438.59,215.50 472.46,181.62 438.59,147.75 404.72,181.62 ' style='stroke-width: 2.83; stroke: #F47C3C; fill: #FFC107;' />
+<polygon points='438.59,302.69 472.46,268.82 438.59,234.95 404.72,268.82 ' style='stroke-width: 2.83; stroke: #F47C3C; fill: #FFC107;' />
+<text x='285.80' y='92.35' text-anchor='middle' style='font-size: 11.38px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='32.25px' lengthAdjust='spacingAndGlyphs'>Binary</text>
+<text x='285.80' y='104.65' text-anchor='middle' style='font-size: 11.38px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='32.88px' lengthAdjust='spacingAndGlyphs'>costs?</text>
+<text x='438.59' y='179.55' text-anchor='middle' style='font-size: 11.38px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='41.09px' lengthAdjust='spacingAndGlyphs'>Sparsity</text>
+<text x='438.59' y='191.84' text-anchor='middle' style='font-size: 11.38px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='38.89px' lengthAdjust='spacingAndGlyphs'>&gt; 50%?</text>
+<text x='438.59' y='272.89' text-anchor='middle' style='font-size: 11.38px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='50.92px' lengthAdjust='spacingAndGlyphs'>n &gt; 1000?</text>
+<polygon points='110.58,195.25 155.46,195.25 155.29,195.25 155.97,195.22 156.65,195.08 157.29,194.84 157.88,194.50 158.41,194.06 158.87,193.55 159.24,192.97 159.51,192.33 159.67,191.67 159.73,190.98 159.73,190.98 159.73,172.27 159.73,172.27 159.67,171.58 159.51,170.92 159.24,170.28 158.87,169.70 158.41,169.19 157.88,168.75 157.29,168.41 156.65,168.17 155.97,168.03 155.46,168.00 110.58,168.00 111.09,168.03 110.41,168.00 109.72,168.09 109.06,168.28 108.44,168.57 107.88,168.96 107.38,169.44 106.97,169.99 106.65,170.59 106.43,171.25 106.32,171.92 106.31,172.27 106.31,190.98 106.32,190.64 106.32,191.33 106.43,192.00 106.65,192.66 106.97,193.26 107.38,193.81 107.88,194.29 108.44,194.68 109.06,194.97 109.72,195.16 110.41,195.25 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
+<text x='133.02' y='186.72' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='36.34px' lengthAdjust='spacingAndGlyphs'>HK01</text>
+<polygon points='266.92,282.45 304.69,282.45 304.52,282.44 305.20,282.42 305.88,282.28 306.52,282.04 307.11,281.69 307.65,281.26 308.10,280.74 308.47,280.16 308.74,279.53 308.90,278.86 308.96,278.18 308.96,278.18 308.96,259.46 308.96,259.46 308.90,258.78 308.74,258.11 308.47,257.48 308.10,256.90 307.65,256.39 307.11,255.95 306.52,255.61 305.88,255.36 305.20,255.23 304.69,255.20 266.92,255.20 267.43,255.23 266.75,255.20 266.06,255.28 265.41,255.47 264.78,255.77 264.22,256.16 263.72,256.63 263.31,257.18 262.99,257.79 262.77,258.44 262.66,259.12 262.65,259.46 262.65,278.18 262.66,277.84 262.66,278.52 262.77,279.20 262.99,279.85 263.31,280.46 263.72,281.01 264.22,281.49 264.78,281.88 265.41,282.17 266.06,282.36 266.75,282.44 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
+<text x='285.80' y='273.91' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='29.23px' lengthAdjust='spacingAndGlyphs'>SAP</text>
+<polygon points='331.47,369.64 392.93,369.64 392.75,369.64 393.44,369.61 394.11,369.48 394.75,369.23 395.35,368.89 395.88,368.45 396.34,367.94 396.70,367.36 396.97,366.73 397.14,366.06 397.19,365.38 397.19,365.38 397.19,346.66 397.19,346.66 397.14,345.98 396.97,345.31 396.70,344.68 396.34,344.10 395.88,343.58 395.35,343.15 394.75,342.80 394.11,342.56 393.44,342.42 392.93,342.39 331.47,342.39 331.98,342.42 331.30,342.40 330.61,342.48 329.95,342.67 329.33,342.96 328.77,343.35 328.27,343.83 327.86,344.38 327.54,344.99 327.32,345.64 327.21,346.32 327.20,346.66 327.20,365.38 327.21,365.03 327.21,365.72 327.32,366.40 327.54,367.05 327.86,367.66 328.27,368.21 328.77,368.68 329.33,369.07 329.95,369.37 330.61,369.56 331.30,369.64 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
+<text x='362.20' y='361.11' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='52.92px' lengthAdjust='spacingAndGlyphs'>Auction</text>
+<polygon points='472.00,369.64 557.96,369.64 557.79,369.64 558.48,369.61 559.15,369.48 559.79,369.23 560.39,368.89 560.92,368.45 561.37,367.94 561.74,367.36 562.01,366.73 562.17,366.06 562.23,365.38 562.23,365.38 562.23,346.66 562.23,346.66 562.17,345.98 562.01,345.31 561.74,344.68 561.37,344.10 560.92,343.58 560.39,343.15 559.79,342.80 559.15,342.56 558.48,342.42 557.96,342.39 472.00,342.39 472.52,342.42 471.83,342.40 471.15,342.48 470.49,342.67 469.87,342.96 469.30,343.35 468.81,343.83 468.40,344.38 468.08,344.99 467.86,345.64 467.75,346.32 467.74,346.66 467.74,365.38 467.75,365.03 467.75,365.72 467.86,366.40 468.08,367.05 468.40,367.66 468.81,368.21 469.30,368.68 469.87,369.07 470.49,369.37 471.15,369.56 471.83,369.64 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
+<text x='514.98' y='361.11' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='77.42px' lengthAdjust='spacingAndGlyphs'>JV (default)</text>
+</g>
+<g clip-path='url(#cpMC4wMHw2NDguMDB8MC4wMHw0MzIuMDA=)'>
+<text x='324.00' y='24.97' text-anchor='middle' style='font-size: 14.00px; font-weight: bold; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='227.11px' lengthAdjust='spacingAndGlyphs'>Algorithm Selection Decision Tree</text>
+</g>
+</g>
+</svg></div>
+
 <div class="section level4">
 <h4 id="quick-reference">Quick Reference<a class="anchor" aria-label="anchor" href="#quick-reference"></a>
 </h4>
@@ -473,7 +650,88 @@ prices adjust based on competition.</p>
 <li>Highest bidder wins; price increases</li>
 <li>Repeat until all matched</li>
 </ol>
-<p><img src="algorithms_files/figure-html/auction-diagram-1.svg" class="r-plt" alt="Auction algorithm bidding process showing sources bidding for targets with prices" width="864"></p>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='648.00pt' height='360.00pt' viewBox='0 0 648.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    /* theme-aware-processed */
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite circle {
+      fill: none;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite > g > rect {
+      fill: none;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+      fill: #3E3F3A;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #F5F6F8;'/>
+<defs>
+  <clipPath id='cpMC4wMHw2NDguMDB8MC4wMHwzNjAuMDA='>
+    <rect x='0.00' y='0.00' width='648.00' height='360.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw2NDguMDB8MC4wMHwzNjAuMDA=)'>
+<rect x='0.00' y='0.000000000000057' width='648.00' height='360.00' style='stroke-width: 0.00; stroke: none;' /> fill: #F5F6F8;' />
+</g>
+<defs>
+  <clipPath id='cpOS45Nnw2MzguMDR8NDQuMDh8MzUwLjA0'>
+    <rect x='9.96' y='44.08' width='628.07' height='305.95' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpOS45Nnw2MzguMDR8NDQuMDh8MzUwLjA0)'>
+<line x1='120.08' y1='97.73' x2='469.66' y2='177.19' style='stroke-width: 2.13; stroke: #AAA49B; stroke-dasharray: 11.38,11.38; stroke-linecap: butt;' />
+<polygon points='465.60,178.45 469.66,177.19 466.54,174.30 ' style='stroke-width: 2.13; stroke: #AAA49B; stroke-dasharray: 11.38,11.38; stroke-linecap: butt; fill: #AAA49B;' />
+<line x1='120.08' y1='177.19' x2='469.66' y2='177.19' style='stroke-width: 4.27; stroke: #93C54B; stroke-linecap: butt;' />
+<line x1='120.08' y1='97.73' x2='469.66' y2='97.73' style='stroke-width: 4.27; stroke: #F47C3C; stroke-linecap: butt;' />
+<polygon points='464.75,100.56 469.66,97.73 464.75,94.89 ' style='stroke-width: 4.27; stroke: #F47C3C; stroke-linecap: butt; fill: #F47C3C;' />
+<polygon points='278.34,93.29 311.40,93.29 311.32,93.29 311.65,93.28 311.97,93.21 312.28,93.09 312.56,92.93 312.82,92.72 313.04,92.47 313.21,92.19 313.34,91.89 313.42,91.57 313.45,91.24 313.45,91.24 313.45,80.37 313.45,80.37 313.42,80.04 313.34,79.72 313.21,79.42 313.04,79.14 312.82,78.89 312.56,78.68 312.28,78.52 311.97,78.40 311.65,78.33 311.40,78.32 278.34,78.32 278.59,78.33 278.26,78.32 277.93,78.36 277.61,78.45 277.31,78.59 277.04,78.78 276.81,79.01 276.61,79.27 276.45,79.56 276.35,79.88 276.30,80.20 276.29,80.37 276.29,91.24 276.30,91.08 276.30,91.41 276.35,91.73 276.45,92.05 276.61,92.34 276.81,92.60 277.04,92.83 277.31,93.02 277.61,93.16 277.93,93.25 278.26,93.29 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #F47C3C;' />
+<text x='294.87' y='89.88' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='30.33px' lengthAdjust='spacingAndGlyphs'>bid: 8</text>
+<polygon points='276.24,155.93 313.49,155.93 313.42,155.93 313.71,155.92 313.99,155.86 314.26,155.76 314.51,155.61 314.73,155.43 314.93,155.22 315.08,154.97 315.19,154.71 315.26,154.43 315.29,154.14 315.29,154.14 315.29,144.62 315.29,144.62 315.26,144.33 315.19,144.05 315.08,143.79 314.93,143.54 314.73,143.33 314.51,143.15 314.26,143.00 313.99,142.90 313.71,142.84 313.49,142.83 276.24,142.83 276.46,142.84 276.17,142.83 275.89,142.86 275.61,142.94 275.35,143.07 275.11,143.23 274.90,143.43 274.73,143.66 274.59,143.92 274.50,144.19 274.46,144.48 274.45,144.62 274.45,154.14 274.46,153.99 274.46,154.28 274.50,154.57 274.59,154.84 274.73,155.10 274.90,155.33 275.11,155.53 275.35,155.69 275.61,155.81 275.89,155.89 276.17,155.93 ' style='stroke-width: 0.53; stroke: #3E3F3A; fill: #DFD9D2;' />
+<text x='294.87' y='152.94' text-anchor='middle' style='font-size: 9.96px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='34.86px' lengthAdjust='spacingAndGlyphs'>value: 6</text>
+<circle cx='120.08' cy='97.73' r='17.43' style='stroke-width: 0.71; stroke: #F47C3C; fill: #F47C3C;' />
+<circle cx='120.08' cy='177.19' r='17.43' style='stroke-width: 0.71; stroke: #93C54B; fill: #93C54B;' />
+<circle cx='120.08' cy='256.66' r='17.43' style='stroke-width: 0.71; stroke: #F47C3C; fill: #F47C3C;' />
+<text x='120.08' y='102.82' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='17.39px' lengthAdjust='spacingAndGlyphs'>S1</text>
+<text x='120.08' y='182.28' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='17.39px' lengthAdjust='spacingAndGlyphs'>S2</text>
+<text x='120.08' y='261.75' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='17.39px' lengthAdjust='spacingAndGlyphs'>S3</text>
+<circle cx='469.66' cy='97.73' r='17.43' style='stroke-width: 0.71; stroke: #29ABE0; fill: #29ABE0;' />
+<circle cx='469.66' cy='177.19' r='17.43' style='stroke-width: 0.71; stroke: #29ABE0; fill: #29ABE0;' />
+<circle cx='469.66' cy='256.66' r='17.43' style='stroke-width: 0.71; stroke: #29ABE0; fill: #29ABE0;' />
+<text x='469.66' y='102.82' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='16.59px' lengthAdjust='spacingAndGlyphs'>T1</text>
+<text x='469.66' y='182.28' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='16.59px' lengthAdjust='spacingAndGlyphs'>T2</text>
+<text x='469.66' y='261.75' text-anchor='middle' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='16.59px' lengthAdjust='spacingAndGlyphs'>T3</text>
+<polygon points='529.24,104.53 549.90,104.53 549.82,104.53 550.15,104.51 550.47,104.45 550.78,104.33 551.07,104.17 551.32,103.96 551.54,103.71 551.72,103.43 551.85,103.13 551.93,102.81 551.95,102.48 551.95,102.48 551.95,92.97 551.95,92.97 551.93,92.64 551.85,92.32 551.72,92.02 551.54,91.74 551.32,91.49 551.07,91.28 550.78,91.12 550.47,91.00 550.15,90.94 549.90,90.92 529.24,90.92 529.49,90.94 529.16,90.92 528.83,90.96 528.52,91.06 528.22,91.20 527.95,91.38 527.71,91.61 527.51,91.88 527.36,92.17 527.25,92.48 527.20,92.81 527.19,92.97 527.19,102.48 527.20,102.31 527.20,102.64 527.25,102.97 527.36,103.28 527.51,103.57 527.71,103.84 527.95,104.07 528.22,104.25 528.52,104.40 528.83,104.49 529.16,104.53 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #29ABE0;' />
+<text x='539.57' y='101.80' text-anchor='middle' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='19.30px' lengthAdjust='spacingAndGlyphs'>p=5</text>
+<polygon points='529.24,184.00 549.90,184.00 549.82,183.99 550.15,183.98 550.47,183.92 550.78,183.80 551.07,183.63 551.32,183.43 551.54,183.18 551.72,182.90 551.85,182.60 551.93,182.28 551.95,181.95 551.95,181.95 551.95,172.44 551.95,172.44 551.93,172.11 551.85,171.79 551.72,171.49 551.54,171.21 551.32,170.96 551.07,170.75 550.78,170.59 550.47,170.47 550.15,170.41 549.90,170.39 529.24,170.39 529.49,170.41 529.16,170.39 528.83,170.43 528.52,170.52 528.22,170.66 527.95,170.85 527.71,171.08 527.51,171.34 527.36,171.64 527.25,171.95 527.20,172.27 527.19,172.44 527.19,181.95 527.20,181.78 527.20,182.11 527.25,182.44 527.36,182.75 527.51,183.04 527.71,183.31 527.95,183.53 528.22,183.72 528.52,183.86 528.83,183.96 529.16,183.99 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #29ABE0;' />
+<text x='539.57' y='181.27' text-anchor='middle' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='19.30px' lengthAdjust='spacingAndGlyphs'>p=3</text>
+<polygon points='529.24,263.47 549.90,263.47 549.82,263.46 550.15,263.45 550.47,263.38 550.78,263.27 551.07,263.10 551.32,262.89 551.54,262.65 551.72,262.37 551.85,262.07 551.93,261.75 551.95,261.42 551.95,261.42 551.95,251.91 551.95,251.91 551.93,251.58 551.85,251.26 551.72,250.96 551.54,250.68 551.32,250.43 551.07,250.22 550.78,250.06 550.47,249.94 550.15,249.87 549.90,249.86 529.24,249.86 529.49,249.87 529.16,249.86 528.83,249.90 528.52,249.99 528.22,250.13 527.95,250.32 527.71,250.55 527.51,250.81 527.36,251.10 527.25,251.42 527.20,251.74 527.19,251.91 527.19,261.42 527.20,261.25 527.20,261.58 527.25,261.91 527.36,262.22 527.51,262.51 527.71,262.77 527.95,263.00 528.22,263.19 528.52,263.33 528.83,263.42 529.16,263.46 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #29ABE0;' />
+<text x='539.57' y='260.73' text-anchor='middle' style='font-size: 11.38px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='19.30px' lengthAdjust='spacingAndGlyphs'>p=0</text>
+<text x='294.87' y='315.85' text-anchor='middle' style='font-size: 9.96px; font-style: italic;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='210.70px' lengthAdjust='spacingAndGlyphs'>S1 bids for T1: increment = (best - 2nd best) + ε</text>
+</g>
+<g clip-path='url(#cpMC4wMHw2NDguMDB8MC4wMHwzNjAuMDA=)'>
+<text x='324.00' y='41.77' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='248.97px' lengthAdjust='spacingAndGlyphs'>Sources bid for targets; prices rise with competition</text>
+<text x='324.00' y='25.46' text-anchor='middle' style='font-size: 14.00px; font-weight: bold; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='227.30px' lengthAdjust='spacingAndGlyphs'>Auction Algorithm: Bidding Phase</text>
+</g>
+</g>
+</svg></div>
+
 </div>
 <div class="section level4">
 <h4 id="when-to-use-2">When to Use<a class="anchor" aria-label="anchor" href="#when-to-use-2"></a>
@@ -752,7 +1010,104 @@ information</li>
 <h4 id="network-structure">Network Structure<a class="anchor" aria-label="anchor" href="#network-structure"></a>
 </h4>
 <p>The assignment problem is modeled as a minimum-cost flow network:</p>
-<p><img src="algorithms_files/figure-html/network-simplex-diagram-1.svg" class="r-plt" alt="Network simplex spanning tree structure for assignment problem" width="864"></p>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='648.00pt' height='432.00pt' viewBox='0 0 648.00 432.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    /* theme-aware-processed */
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite circle {
+      fill: none;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite > g > rect {
+      fill: none;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+      fill: #3E3F3A;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #F5F6F8;'/>
+<defs>
+  <clipPath id='cpMC4wMHw2NDguMDB8MC4wMHw0MzIuMDA='>
+    <rect x='0.00' y='0.00' width='648.00' height='432.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw2NDguMDB8MC4wMHw0MzIuMDA=)'>
+<rect x='0.00' y='-0.00000000000011' width='648.00' height='432.00' style='stroke-width: 0.00; stroke: none;' /> fill: #F5F6F8;' />
+</g>
+<defs>
+  <clipPath id='cpOS45Nnw2MzguMDR8NDQuMDh8NDIyLjA0'>
+    <rect x='9.96' y='44.08' width='628.07' height='377.95' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpOS45Nnw2MzguMDR8NDQuMDh8NDIyLjA0)'>
+<line x1='228.84' y1='110.35' x2='419.16' y2='208.52' style='stroke-width: 2.13; stroke: #AAA49B; stroke-dasharray: 11.38,11.38; stroke-linecap: butt;' />
+<line x1='228.84' y1='208.52' x2='419.16' y2='110.35' style='stroke-width: 2.13; stroke: #AAA49B; stroke-dasharray: 11.38,11.38; stroke-linecap: butt;' />
+<line x1='228.84' y1='306.69' x2='419.16' y2='208.52' style='stroke-width: 2.13; stroke: #AAA49B; stroke-dasharray: 11.38,11.38; stroke-linecap: butt;' />
+<line x1='86.09' y1='208.52' x2='228.84' y2='110.35' style='stroke-width: 4.27; stroke: #93C54B; stroke-linecap: butt;' />
+<line x1='86.09' y1='208.52' x2='228.84' y2='208.52' style='stroke-width: 4.27; stroke: #93C54B; stroke-linecap: butt;' />
+<line x1='86.09' y1='208.52' x2='228.84' y2='306.69' style='stroke-width: 4.27; stroke: #93C54B; stroke-linecap: butt;' />
+<line x1='228.84' y1='110.35' x2='419.16' y2='110.35' style='stroke-width: 4.27; stroke: #93C54B; stroke-linecap: butt;' />
+<line x1='228.84' y1='208.52' x2='419.16' y2='208.52' style='stroke-width: 4.27; stroke: #93C54B; stroke-linecap: butt;' />
+<line x1='228.84' y1='306.69' x2='419.16' y2='306.69' style='stroke-width: 4.27; stroke: #93C54B; stroke-linecap: butt;' />
+<line x1='419.16' y1='110.35' x2='561.91' y2='208.52' style='stroke-width: 4.27; stroke: #93C54B; stroke-linecap: butt;' />
+<line x1='419.16' y1='208.52' x2='561.91' y2='208.52' style='stroke-width: 4.27; stroke: #93C54B; stroke-linecap: butt;' />
+<line x1='419.16' y1='306.69' x2='561.91' y2='208.52' style='stroke-width: 4.27; stroke: #93C54B; stroke-linecap: butt;' />
+<polygon points='321.23,116.01 326.77,116.01 326.69,116.01 326.98,115.99 327.26,115.94 327.53,115.83 327.78,115.69 328.01,115.51 328.20,115.29 328.35,115.05 328.47,114.78 328.53,114.50 328.56,114.22 328.56,114.22 328.56,106.48 328.56,106.48 328.53,106.19 328.47,105.91 328.35,105.65 328.20,105.40 328.01,105.19 327.78,105.01 327.53,104.86 327.26,104.76 326.98,104.70 326.77,104.69 321.23,104.69 321.45,104.70 321.16,104.69 320.88,104.73 320.60,104.81 320.34,104.93 320.10,105.09 319.89,105.29 319.72,105.52 319.59,105.78 319.49,106.05 319.45,106.34 319.44,106.48 319.44,114.22 319.45,114.07 319.45,114.36 319.49,114.64 319.59,114.92 319.72,115.17 319.89,115.40 320.10,115.60 320.34,115.77 320.60,115.89 320.88,115.97 321.16,116.01 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
+<text x='324.00' y='113.91' text-anchor='middle' style='font-size: 9.96px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='5.53px' lengthAdjust='spacingAndGlyphs'>3</text>
+<polygon points='321.23,165.09 326.77,165.09 326.69,165.09 326.98,165.08 327.26,165.02 327.53,164.92 327.78,164.78 328.01,164.59 328.20,164.38 328.35,164.13 328.47,163.87 328.53,163.59 328.56,163.30 328.56,163.30 328.56,155.57 328.56,155.57 328.53,155.28 328.47,155.00 328.35,154.73 328.20,154.49 328.01,154.27 327.78,154.09 327.53,153.95 327.26,153.84 326.98,153.79 326.77,153.77 321.23,153.77 321.45,153.79 321.16,153.78 320.88,153.81 320.60,153.89 320.34,154.01 320.10,154.18 319.89,154.38 319.72,154.61 319.59,154.86 319.49,155.14 319.45,155.42 319.44,155.57 319.44,163.30 319.45,163.16 319.45,163.44 319.49,163.73 319.59,164.00 319.72,164.26 319.89,164.49 320.10,164.69 320.34,164.85 320.60,164.98 320.88,165.06 321.16,165.09 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #AAA49B;' />
+<text x='324.00' y='163.00' text-anchor='middle' style='font-size: 9.96px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='5.53px' lengthAdjust='spacingAndGlyphs'>5</text>
+<polygon points='321.23,214.18 326.77,214.18 326.69,214.18 326.98,214.16 327.26,214.11 327.53,214.00 327.78,213.86 328.01,213.68 328.20,213.46 328.35,213.22 328.47,212.95 328.53,212.67 328.56,212.38 328.56,212.38 328.56,204.65 328.56,204.65 328.53,204.36 328.47,204.08 328.35,203.82 328.20,203.57 328.01,203.36 327.78,203.18 327.53,203.03 327.26,202.93 326.98,202.87 326.77,202.86 321.23,202.86 321.45,202.87 321.16,202.86 320.88,202.90 320.60,202.98 320.34,203.10 320.10,203.26 319.89,203.46 319.72,203.69 319.59,203.95 319.49,204.22 319.45,204.51 319.44,204.65 319.44,212.38 319.45,212.24 319.45,212.53 319.49,212.81 319.59,213.09 319.72,213.34 319.89,213.57 320.10,213.77 320.34,213.94 320.60,214.06 320.88,214.14 321.16,214.18 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
+<text x='324.00' y='212.08' text-anchor='middle' style='font-size: 9.96px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='5.53px' lengthAdjust='spacingAndGlyphs'>2</text>
+<polygon points='321.23,165.09 326.77,165.09 326.69,165.09 326.98,165.08 327.26,165.02 327.53,164.92 327.78,164.78 328.01,164.59 328.20,164.38 328.35,164.13 328.47,163.87 328.53,163.59 328.56,163.30 328.56,163.30 328.56,155.57 328.56,155.57 328.53,155.28 328.47,155.00 328.35,154.73 328.20,154.49 328.01,154.27 327.78,154.09 327.53,153.95 327.26,153.84 326.98,153.79 326.77,153.77 321.23,153.77 321.45,153.79 321.16,153.78 320.88,153.81 320.60,153.89 320.34,154.01 320.10,154.18 319.89,154.38 319.72,154.61 319.59,154.86 319.49,155.14 319.45,155.42 319.44,155.57 319.44,163.30 319.45,163.16 319.45,163.44 319.49,163.73 319.59,164.00 319.72,164.26 319.89,164.49 320.10,164.69 320.34,164.85 320.60,164.98 320.88,165.06 321.16,165.09 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #AAA49B;' />
+<text x='324.00' y='163.00' text-anchor='middle' style='font-size: 9.96px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='5.53px' lengthAdjust='spacingAndGlyphs'>7</text>
+<polygon points='321.23,312.35 326.77,312.35 326.69,312.35 326.98,312.33 327.26,312.28 327.53,312.17 327.78,312.03 328.01,311.85 328.20,311.63 328.35,311.39 328.47,311.12 328.53,310.84 328.56,310.55 328.56,310.55 328.56,302.82 328.56,302.82 328.53,302.53 328.47,302.25 328.35,301.99 328.20,301.74 328.01,301.53 327.78,301.35 327.53,301.20 327.26,301.10 326.98,301.04 326.77,301.03 321.23,301.03 321.45,301.04 321.16,301.03 320.88,301.06 320.60,301.15 320.34,301.27 320.10,301.43 319.89,301.63 319.72,301.86 319.59,302.12 319.49,302.39 319.45,302.68 319.44,302.82 319.44,310.55 319.45,310.41 319.45,310.70 319.49,310.98 319.59,311.26 319.72,311.51 319.89,311.74 320.10,311.94 320.34,312.11 320.60,312.23 320.88,312.31 321.16,312.35 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
+<text x='324.00' y='310.25' text-anchor='middle' style='font-size: 9.96px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='5.53px' lengthAdjust='spacingAndGlyphs'>4</text>
+<polygon points='321.23,263.26 326.77,263.26 326.69,263.26 326.98,263.25 327.26,263.19 327.53,263.09 327.78,262.94 328.01,262.76 328.20,262.55 328.35,262.30 328.47,262.04 328.53,261.76 328.56,261.47 328.56,261.47 328.56,253.74 328.56,253.74 328.53,253.45 328.47,253.17 328.35,252.90 328.20,252.66 328.01,252.44 327.78,252.26 327.53,252.12 327.26,252.01 326.98,251.96 326.77,251.94 321.23,251.94 321.45,251.96 321.16,251.95 320.88,251.98 320.60,252.06 320.34,252.18 320.10,252.35 319.89,252.55 319.72,252.78 319.59,253.03 319.49,253.31 319.45,253.59 319.44,253.74 319.44,261.47 319.45,261.33 319.45,261.61 319.49,261.90 319.59,262.17 319.72,262.43 319.89,262.66 320.10,262.86 320.34,263.02 320.60,263.15 320.88,263.23 321.16,263.26 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #AAA49B;' />
+<text x='324.00' y='261.17' text-anchor='middle' style='font-size: 9.96px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='5.53px' lengthAdjust='spacingAndGlyphs'>6</text>
+<circle cx='86.09' cy='208.52' r='15.29' style='stroke-width: 0.71; stroke: #3E3F3A; fill: #3E3F3A;' />
+<circle cx='561.91' cy='208.52' r='15.29' style='stroke-width: 0.71; stroke: #3E3F3A; fill: #3E3F3A;' />
+<circle cx='228.84' cy='110.35' r='15.29' style='stroke-width: 0.71; stroke: #F47C3C; fill: #F47C3C;' />
+<circle cx='228.84' cy='208.52' r='15.29' style='stroke-width: 0.71; stroke: #F47C3C; fill: #F47C3C;' />
+<circle cx='228.84' cy='306.69' r='15.29' style='stroke-width: 0.71; stroke: #F47C3C; fill: #F47C3C;' />
+<circle cx='419.16' cy='110.35' r='15.29' style='stroke-width: 0.71; stroke: #29ABE0; fill: #29ABE0;' />
+<circle cx='419.16' cy='208.52' r='15.29' style='stroke-width: 0.71; stroke: #29ABE0; fill: #29ABE0;' />
+<circle cx='419.16' cy='306.69' r='15.29' style='stroke-width: 0.71; stroke: #29ABE0; fill: #29ABE0;' />
+<text x='86.09' y='212.59' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='38.58px' lengthAdjust='spacingAndGlyphs'>Source</text>
+<text x='228.84' y='114.42' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.55px' lengthAdjust='spacingAndGlyphs'>R1</text>
+<text x='228.84' y='212.59' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.55px' lengthAdjust='spacingAndGlyphs'>R2</text>
+<text x='228.84' y='310.76' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.55px' lengthAdjust='spacingAndGlyphs'>R3</text>
+<text x='419.16' y='114.42' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.55px' lengthAdjust='spacingAndGlyphs'>C1</text>
+<text x='419.16' y='212.59' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.55px' lengthAdjust='spacingAndGlyphs'>C2</text>
+<text x='419.16' y='310.76' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.55px' lengthAdjust='spacingAndGlyphs'>C3</text>
+<text x='561.91' y='212.59' text-anchor='middle' style='font-size: 11.38px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='24.03px' lengthAdjust='spacingAndGlyphs'>Sink</text>
+<text x='86.09' y='378.97' text-anchor='middle' style='font-size: 9.96px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='47.31px' lengthAdjust='spacingAndGlyphs'>Supply = n</text>
+<text x='228.84' y='378.97' text-anchor='middle' style='font-size: 9.96px;fill: #F47C3C; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='24.89px' lengthAdjust='spacingAndGlyphs'>Rows</text>
+<text x='419.16' y='378.97' text-anchor='middle' style='font-size: 9.96px;fill: #29ABE0; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='39.28px' lengthAdjust='spacingAndGlyphs'>Columns</text>
+<text x='561.91' y='378.97' text-anchor='middle' style='font-size: 9.96px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='54.48px' lengthAdjust='spacingAndGlyphs'>Demand = n</text>
+</g>
+<g clip-path='url(#cpMC4wMHw2NDguMDB8MC4wMHw0MzIuMDA=)'>
+<text x='324.00' y='41.77' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='291.91px' lengthAdjust='spacingAndGlyphs'>Solid green = tree edges (basis); dashed = non-basic edges</text>
+<text x='324.00' y='25.46' text-anchor='middle' style='font-size: 14.00px; font-weight: bold; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='259.02px' lengthAdjust='spacingAndGlyphs'>Network Simplex: Spanning Tree Basis</text>
+</g>
+</g>
+</svg></div>
+
 <p><strong>Pivot operation</strong>: Enter a non-tree arc, find the
 cycle, identify leaving arc, update tree and node potentials.</p>
 </div>
@@ -1069,7 +1424,6 @@ representative dense cost matrices:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">bench_results</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">size</span>, y <span class="op">=</span> <span class="va">time</span> <span class="op">*</span> <span class="fl">1000</span>, color <span class="op">=</span> <span class="va">method</span>, shape <span class="op">=</span> <span class="va">method</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"%.1f"</span>, <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1082,7 +1436,7 @@ representative dense cost matrices:</p>
 <span>  <span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Algorithm Runtime vs Problem Size (Dense Matrices)"</span>,</span>
-<span>    x <span class="op">=</span> <span class="st">"Matrix Size (n × n)"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Matrix Size (n x n)"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Time (milliseconds, log scale)"</span>,</span>
 <span>    color <span class="op">=</span> <span class="st">"Algorithm"</span>,</span>
 <span>    shape <span class="op">=</span> <span class="st">"Algorithm"</span></span>
@@ -1090,10 +1444,134 @@ representative dense cost matrices:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
 <span>    legend.position <span class="op">=</span> <span class="st">"bottom"</span>,</span>
-<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span>, face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
 <span>    panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="algorithms_files/figure-html/benchmark-plot-1.svg" class="r-plt" alt="Runtime comparison of LAP algorithms across problem sizes" width="768"></p>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='576.00pt' height='360.00pt' viewBox='0 0 576.00 360.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    /* theme-aware-processed */
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite circle {
+      fill: none;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite > g > rect {
+      fill: none;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+      fill: #3E3F3A;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #F5F6F8;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA='>
+    <rect x='0.00' y='0.00' width='576.00' height='360.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA=)'>
+<rect rx='4' x='0.00' y='0.00' width='576.00' height='360.00' style='stroke-width: 1.07; stroke: none; fill: #F5F6F8;' />
+</g>
+<defs>
+  <clipPath id='cpNDUuMzV8NTcwLjUyfDIzLjE4fDI4OS4zMQ=='>
+    <rect x='45.35' y='23.18' width='525.17' height='266.13' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNDUuMzV8NTcwLjUyfDIzLjE4fDI4OS4zMQ==)'>
+<polyline points='45.35,250.22 570.52,250.22 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='45.35,160.59 570.52,160.59 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='45.35,70.95 570.52,70.95 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='137.42,289.31 137.42,23.18 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='273.83,289.31 273.83,23.18 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='410.24,289.31 410.24,23.18 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='546.65,289.31 546.65,23.18 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='69.22,250.22 137.42,187.57 273.83,111.81 546.65,35.27 ' style='stroke-width: 2.13; stroke: #D9534F; stroke-linecap: butt;' />
+<polyline points='69.22,277.21 137.42,250.22 273.83,196.26 546.65,124.91 ' style='stroke-width: 2.13; stroke: #5BC0DE; stroke-linecap: butt;' />
+<polyline points='69.22,223.24 137.42,207.46 273.83,169.27 546.65,117.82 ' style='stroke-width: 2.13; stroke: #F0AD4E; stroke-linecap: butt;' />
+<polyline points='69.22,250.22 137.42,223.24 273.83,187.57 546.65,133.60 ' style='stroke-width: 2.13; stroke: #5CB85C; stroke-linecap: butt;' />
+<polyline points='69.22,250.22 137.42,207.46 273.83,153.49 546.65,79.63 ' style='stroke-width: 2.13; stroke: #428BCA; stroke-linecap: butt;' />
+<circle cx='69.22' cy='250.22' r='3.56' style='stroke-width: 0.71; stroke: none; fill: #D9534F;' />
+<polygon points='69.22,271.68 74.01,279.97 64.43,279.97 ' style='stroke-width: 0.71; stroke: none; fill: #5BC0DE;' />
+<polygon points='65.66,226.80 72.77,226.80 72.77,219.69 65.66,219.69 ' style='stroke-width: 0.71; stroke: none; fill: #F0AD4E;' />
+<line x1='64.19' y1='250.22' x2='74.25' y2='250.22' style='stroke-width: 0.71; stroke: #5CB85C;' />
+<line x1='69.22' y1='255.25' x2='69.22' y2='245.20' style='stroke-width: 0.71; stroke: #5CB85C;' />
+<rect x='65.66' y='246.67' width='7.11' height='7.11' style='stroke-width: 0.71; stroke: #428BCA;' />
+<line x1='65.66' y1='253.78' x2='72.77' y2='246.67' style='stroke-width: 0.71; stroke: #428BCA;' />
+<line x1='65.66' y1='246.67' x2='72.77' y2='253.78' style='stroke-width: 0.71; stroke: #428BCA;' />
+<circle cx='137.42' cy='187.57' r='3.56' style='stroke-width: 0.71; stroke: none; fill: #D9534F;' />
+<polygon points='137.42,244.70 142.21,252.99 132.63,252.99 ' style='stroke-width: 0.71; stroke: none; fill: #5BC0DE;' />
+<polygon points='133.87,211.01 140.98,211.01 140.98,203.90 133.87,203.90 ' style='stroke-width: 0.71; stroke: none; fill: #F0AD4E;' />
+<line x1='132.39' y1='223.24' x2='142.45' y2='223.24' style='stroke-width: 0.71; stroke: #5CB85C;' />
+<line x1='137.42' y1='228.27' x2='137.42' y2='218.21' style='stroke-width: 0.71; stroke: #5CB85C;' />
+<rect x='133.87' y='203.90' width='7.11' height='7.11' style='stroke-width: 0.71; stroke: #428BCA;' />
+<line x1='133.87' y1='211.01' x2='140.98' y2='203.90' style='stroke-width: 0.71; stroke: #428BCA;' />
+<line x1='133.87' y1='203.90' x2='140.98' y2='211.01' style='stroke-width: 0.71; stroke: #428BCA;' />
+<circle cx='273.83' cy='111.81' r='3.56' style='stroke-width: 0.71; stroke: none; fill: #D9534F;' />
+<polygon points='273.83,190.73 278.62,199.02 269.04,199.02 ' style='stroke-width: 0.71; stroke: none; fill: #5BC0DE;' />
+<polygon points='270.28,172.83 277.39,172.83 277.39,165.72 270.28,165.72 ' style='stroke-width: 0.71; stroke: none; fill: #F0AD4E;' />
+<line x1='268.80' y1='187.57' x2='278.86' y2='187.57' style='stroke-width: 0.71; stroke: #5CB85C;' />
+<line x1='273.83' y1='192.60' x2='273.83' y2='182.54' style='stroke-width: 0.71; stroke: #5CB85C;' />
+<rect x='270.28' y='149.93' width='7.11' height='7.11' style='stroke-width: 0.71; stroke: #428BCA;' />
+<line x1='270.28' y1='157.04' x2='277.39' y2='149.93' style='stroke-width: 0.71; stroke: #428BCA;' />
+<line x1='270.28' y1='149.93' x2='277.39' y2='157.04' style='stroke-width: 0.71; stroke: #428BCA;' />
+<circle cx='546.65' cy='35.27' r='3.56' style='stroke-width: 0.71; stroke: none; fill: #D9534F;' />
+<polygon points='546.65,119.38 551.44,127.68 541.86,127.68 ' style='stroke-width: 0.71; stroke: none; fill: #5BC0DE;' />
+<polygon points='543.09,121.37 550.20,121.37 550.20,114.26 543.09,114.26 ' style='stroke-width: 0.71; stroke: none; fill: #F0AD4E;' />
+<line x1='541.62' y1='133.60' x2='551.68' y2='133.60' style='stroke-width: 0.71; stroke: #5CB85C;' />
+<line x1='546.65' y1='138.63' x2='546.65' y2='128.57' style='stroke-width: 0.71; stroke: #5CB85C;' />
+<rect x='543.09' y='76.08' width='7.11' height='7.11' style='stroke-width: 0.71; stroke: #428BCA;' />
+<line x1='543.09' y1='83.19' x2='550.20' y2='76.08' style='stroke-width: 0.71; stroke: #428BCA;' />
+<line x1='543.09' y1='76.08' x2='550.20' y2='83.19' style='stroke-width: 0.71; stroke: #428BCA;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA=)'>
+<text x='40.41' y='253.37' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='40.41' y='163.74' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='17.11px' lengthAdjust='spacingAndGlyphs'>10.0</text>
+<text x='40.41' y='74.10' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='22.00px' lengthAdjust='spacingAndGlyphs'>100.0</text>
+<text x='137.42' y='300.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>100</text>
+<text x='273.83' y='300.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>200</text>
+<text x='410.24' y='300.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>300</text>
+<text x='546.65' y='300.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>400</text>
+<text x='307.93' y='313.00' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='88.66px' lengthAdjust='spacingAndGlyphs'>Matrix Size (n x n)</text>
+<text transform='translate(13.36,156.24) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='143.88px' lengthAdjust='spacingAndGlyphs'>Time (milliseconds, log scale)</text>
+<text x='102.86' y='344.34' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='46.47px' lengthAdjust='spacingAndGlyphs'>Algorithm</text>
+<line x1='156.54' y1='340.40' x2='170.36' y2='340.40' style='stroke-width: 2.13; stroke: #D9534F; stroke-linecap: butt;' />
+<circle cx='163.45' cy='340.40' r='3.56' style='stroke-width: 0.71; stroke: none; fill: #D9534F;' />
+<line x1='225.35' y1='340.40' x2='239.18' y2='340.40' style='stroke-width: 2.13; stroke: #5BC0DE; stroke-linecap: butt;' />
+<polygon points='232.26,334.87 237.05,343.17 227.48,343.17 ' style='stroke-width: 0.71; stroke: none; fill: #5BC0DE;' />
+<line x1='322.04' y1='340.40' x2='335.87' y2='340.40' style='stroke-width: 2.13; stroke: #F0AD4E; stroke-linecap: butt;' />
+<polygon points='325.40,343.96 332.51,343.96 332.51,336.85 325.40,336.85 ' style='stroke-width: 0.71; stroke: none; fill: #F0AD4E;' />
+<line x1='379.63' y1='340.40' x2='393.45' y2='340.40' style='stroke-width: 2.13; stroke: #5CB85C; stroke-linecap: butt;' />
+<line x1='381.51' y1='340.40' x2='391.57' y2='340.40' style='stroke-width: 0.71; stroke: #5CB85C;' />
+<line x1='386.54' y1='345.43' x2='386.54' y2='335.37' style='stroke-width: 0.71; stroke: #5CB85C;' />
+<line x1='425.98' y1='340.40' x2='439.80' y2='340.40' style='stroke-width: 2.13; stroke: #428BCA; stroke-linecap: butt;' />
+<rect x='429.33' y='336.85' width='7.11' height='7.11' style='stroke-width: 0.71; stroke: #428BCA;' />
+<line x1='429.33' y1='343.96' x2='436.44' y2='336.85' style='stroke-width: 0.71; stroke: #428BCA;' />
+<line x1='429.33' y1='336.85' x2='436.44' y2='343.96' style='stroke-width: 0.71; stroke: #428BCA;' />
+<text x='177.57' y='343.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='40.58px' lengthAdjust='spacingAndGlyphs'>Hungarian</text>
+<text x='246.38' y='343.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='68.45px' lengthAdjust='spacingAndGlyphs'>Jonker-Volgenant</text>
+<text x='343.08' y='343.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='29.34px' lengthAdjust='spacingAndGlyphs'>Auction</text>
+<text x='400.66' y='343.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='18.11px' lengthAdjust='spacingAndGlyphs'>CSA</text>
+<text x='447.01' y='343.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='66.00px' lengthAdjust='spacingAndGlyphs'>Network Simplex</text>
+<text x='45.35' y='14.93' style='font-size: 13.20px; font-weight: bold; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='332.56px' lengthAdjust='spacingAndGlyphs'>Algorithm Runtime vs Problem Size (Dense Matrices)</text>
+</g>
+</g>
+</svg></div>
+
 <p><strong>Key observations:</strong></p>
 <ul>
 <li>
@@ -1140,14 +1618,112 @@ excel:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Sparse vs Dense Algorithms (80% Forbidden Entries)"</span>,</span>
-<span>    x <span class="op">=</span> <span class="st">"Matrix Size (n × n)"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Matrix Size (n x n)"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Time (milliseconds)"</span>,</span>
 <span>    color <span class="op">=</span> <span class="st">"Algorithm"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#5bc0de"</span>, <span class="st">"#5cb85c"</span>, <span class="st">"#f0ad4e"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span>, plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span>, face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="algorithms_files/figure-html/sparse-plot-1.svg" class="r-plt" alt="Sparse algorithm performance comparison" width="672"></p>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span>, plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+
+<div class="svg-container"><button type="button" class="btn btn-primary btn-copy-svg" title="Copy SVG to clipboard" aria-label="Copy SVG to clipboard" data-bs-toggle="tooltip" data-bs-placement="left"><i class="fa fa-copy"></i></button>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='288.00pt' viewBox='0 0 504.00 288.00' class="r-plt inline-svg" style="max-width:100%;width:100%;height:auto;">
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    /* theme-aware-processed */
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite circle {
+      fill: none;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite > g > rect {
+      fill: none;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+      fill: #3E3F3A;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #F5F6F8;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1MDQuMDB8MC4wMHwyODguMDA='>
+    <rect x='0.00' y='0.00' width='504.00' height='288.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwyODguMDA=)'>
+<rect rx='4' x='0.00' y='0.00' width='504.00' height='288.00' style='stroke-width: 1.07; stroke: none; fill: #F5F6F8;' />
+</g>
+<defs>
+  <clipPath id='cpMzMuMTN8NDk4LjUyfDIzLjE4fDIxNy4zMQ=='>
+    <rect x='33.13' y='23.18' width='465.39' height='194.13' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMzMuMTN8NDk4LjUyfDIzLjE4fDIxNy4zMQ==)'>
+<polyline points='33.13,182.07 498.52,182.07 ' style='stroke-width: 0.53; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='33.13,122.04 498.52,122.04 ' style='stroke-width: 0.53; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='33.13,62.02 498.52,62.02 ' style='stroke-width: 0.53; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='124.80,217.31 124.80,23.18 ' style='stroke-width: 0.53; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='265.82,217.31 265.82,23.18 ' style='stroke-width: 0.53; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='406.85,217.31 406.85,23.18 ' style='stroke-width: 0.53; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='33.13,212.08 498.52,212.08 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='33.13,152.06 498.52,152.06 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='33.13,92.03 498.52,92.03 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='33.13,32.00 498.52,32.00 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='54.28,217.31 54.28,23.18 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='195.31,217.31 195.31,23.18 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='336.34,217.31 336.34,23.18 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='477.37,217.31 477.37,23.18 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='54.28,202.48 195.31,176.07 477.37,32.00 ' style='stroke-width: 2.13; stroke: #5BC0DE; stroke-linecap: butt;' />
+<polyline points='54.28,208.48 195.31,202.48 477.37,188.07 ' style='stroke-width: 2.13; stroke: #5CB85C; stroke-linecap: butt;' />
+<polyline points='54.28,208.48 195.31,203.68 477.37,190.47 ' style='stroke-width: 2.13; stroke: #F0AD4E; stroke-linecap: butt;' />
+<circle cx='54.28' cy='202.48' r='3.56' style='stroke-width: 0.71; stroke: #5BC0DE; fill: #5BC0DE;' />
+<circle cx='54.28' cy='208.48' r='3.56' style='stroke-width: 0.71; stroke: #5CB85C; fill: #5CB85C;' />
+<circle cx='54.28' cy='208.48' r='3.56' style='stroke-width: 0.71; stroke: #F0AD4E; fill: #F0AD4E;' />
+<circle cx='195.31' cy='176.07' r='3.56' style='stroke-width: 0.71; stroke: #5BC0DE; fill: #5BC0DE;' />
+<circle cx='195.31' cy='202.48' r='3.56' style='stroke-width: 0.71; stroke: #5CB85C; fill: #5CB85C;' />
+<circle cx='195.31' cy='203.68' r='3.56' style='stroke-width: 0.71; stroke: #F0AD4E; fill: #F0AD4E;' />
+<circle cx='477.37' cy='32.00' r='3.56' style='stroke-width: 0.71; stroke: #5BC0DE; fill: #5BC0DE;' />
+<circle cx='477.37' cy='188.07' r='3.56' style='stroke-width: 0.71; stroke: #5CB85C; fill: #5CB85C;' />
+<circle cx='477.37' cy='190.47' r='3.56' style='stroke-width: 0.71; stroke: #F0AD4E; fill: #F0AD4E;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwyODguMDA=)'>
+<text x='28.20' y='215.23' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='28.20' y='155.21' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>5</text>
+<text x='28.20' y='95.18' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='28.20' y='35.15' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>15</text>
+<text x='54.28' y='228.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>50</text>
+<text x='195.31' y='228.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>100</text>
+<text x='336.34' y='228.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>150</text>
+<text x='477.37' y='228.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>200</text>
+<text x='265.82' y='241.00' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='88.66px' lengthAdjust='spacingAndGlyphs'>Matrix Size (n x n)</text>
+<text transform='translate(13.36,120.24) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='94.31px' lengthAdjust='spacingAndGlyphs'>Time (milliseconds)</text>
+<text x='116.96' y='272.34' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='46.47px' lengthAdjust='spacingAndGlyphs'>Algorithm</text>
+<line x1='170.63' y1='268.40' x2='184.46' y2='268.40' style='stroke-width: 2.13; stroke: #5BC0DE; stroke-linecap: butt;' />
+<circle cx='177.55' cy='268.40' r='3.56' style='stroke-width: 0.71; stroke: #5BC0DE; fill: #5BC0DE;' />
+<line x1='241.40' y1='268.40' x2='255.23' y2='268.40' style='stroke-width: 2.13; stroke: #5CB85C; stroke-linecap: butt;' />
+<circle cx='248.32' cy='268.40' r='3.56' style='stroke-width: 0.71; stroke: #5CB85C; fill: #5CB85C;' />
+<line x1='321.80' y1='268.40' x2='335.62' y2='268.40' style='stroke-width: 2.13; stroke: #F0AD4E; stroke-linecap: butt;' />
+<circle cx='328.71' cy='268.40' r='3.56' style='stroke-width: 0.71; stroke: #F0AD4E; fill: #F0AD4E;' />
+<text x='191.67' y='271.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='42.53px' lengthAdjust='spacingAndGlyphs'>JV (dense)</text>
+<text x='262.44' y='271.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='52.16px' lengthAdjust='spacingAndGlyphs'>SAP (sparse)</text>
+<text x='342.83' y='271.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='71.86px' lengthAdjust='spacingAndGlyphs'>LAPMOD (sparse)</text>
+<text x='33.13' y='14.93' style='font-size: 13.20px; font-weight: bold; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='333.58px' lengthAdjust='spacingAndGlyphs'>Sparse vs Dense Algorithms (80% Forbidden Entries)</text>
+</g>
+</g>
+</svg></div>
+
 <p><strong>Takeaway</strong>: For sparse problems, SAP and LAPMOD
 significantly outperform dense algorithms.</p>
 <hr>
@@ -1315,5 +1891,121 @@ strategies</li>
 
 
 
-  </body>
+  <script>
+/* SVG Copy Button Functionality - Copy as PNG Image */
+(function() {
+  "use strict";
+
+  // Convert SVG to PNG and copy to clipboard
+  async function copySvgAsImage(svg, btn) {
+    try {
+      // Get SVG dimensions
+      var svgRect = svg.getBoundingClientRect();
+      var width = svgRect.width;
+      var height = svgRect.height;
+
+      // Use higher resolution for better quality (2x)
+      var scale = 2;
+      var canvas = document.createElement("canvas");
+      canvas.width = width * scale;
+      canvas.height = height * scale;
+      var ctx = canvas.getContext("2d");
+      ctx.scale(scale, scale);
+
+      // Clone SVG and prepare for rendering
+      var clone = svg.cloneNode(true);
+      clone.classList.remove("inline-svg");
+
+      // Get computed styles and inline them for proper rendering
+      var svgStyles = window.getComputedStyle(svg);
+
+      // Serialize SVG
+      var serializer = new XMLSerializer();
+      var svgString = serializer.serializeToString(clone);
+
+      // Create a blob and URL for the SVG
+      var svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+      var url = URL.createObjectURL(svgBlob);
+
+      // Create image and draw to canvas
+      var img = new Image();
+      img.onload = async function() {
+        // Fill white background (for transparency)
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0, 0, width, height);
+
+        // Draw the SVG
+        ctx.drawImage(img, 0, 0, width, height);
+        URL.revokeObjectURL(url);
+
+        // Convert canvas to blob and copy to clipboard
+        canvas.toBlob(async function(blob) {
+          try {
+            var item = new ClipboardItem({ "image/png": blob });
+            await navigator.clipboard.write([item]);
+
+            // Show success tooltip
+            showTooltip(btn, "Copied!");
+          } catch (err) {
+            console.error("Failed to copy image:", err);
+            showTooltip(btn, "Copy failed - try right-click");
+          }
+        }, "image/png");
+      };
+
+      img.onerror = function() {
+        URL.revokeObjectURL(url);
+        console.error("Failed to load SVG as image");
+        showTooltip(btn, "Copy failed");
+      };
+
+      img.src = url;
+
+    } catch (err) {
+      console.error("Error copying SVG:", err);
+      showTooltip(btn, "Copy failed");
+    }
+  }
+
+  // Show tooltip message
+  function showTooltip(btn, message) {
+    var originalTitle = btn.getAttribute("data-bs-original-title") || btn.getAttribute("title");
+    btn.setAttribute("data-bs-original-title", message);
+    var tooltip = bootstrap.Tooltip.getInstance(btn);
+    if (tooltip) {
+      tooltip.show();
+    }
+    setTimeout(function() {
+      btn.setAttribute("data-bs-original-title", originalTitle);
+    }, 1500);
+  }
+
+  // Initialize SVG copy buttons after DOM is ready
+  document.addEventListener("DOMContentLoaded", function() {
+    // Check for Clipboard API support
+    if (!navigator.clipboard || !navigator.clipboard.write) {
+      console.warn("Clipboard API not supported - SVG copy buttons disabled");
+      return;
+    }
+
+    // Add click handlers to all SVG copy buttons
+    document.querySelectorAll(".btn-copy-svg").forEach(function(btn) {
+      btn.addEventListener("click", function(e) {
+        e.preventDefault();
+        var container = btn.closest(".svg-container");
+        if (!container) return;
+
+        var svg = container.querySelector("svg");
+        if (!svg) return;
+
+        copySvgAsImage(svg, btn);
+      });
+
+      // Initialize Bootstrap tooltip
+      new bootstrap.Tooltip(btn, { container: "body" });
+    });
+  });
+})();
+</script>
+</body>
 </html>

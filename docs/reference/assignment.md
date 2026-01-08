@@ -38,17 +38,17 @@ assignment(
   - `"auto"` — Automatic selection based on problem characteristics
     (default)
 
-  - `"jv"` — Jonker-Volgenant, fast general-purpose O(n³)
+  - `"jv"` — 'Jonker-Volgenant', fast general-purpose O(n³)
 
-  - `"hungarian"` — Classic Hungarian algorithm O(n³)
+  - `"hungarian"` — Classic 'Hungarian' algorithm O(n³)
 
   **Auction-based solvers:**
 
-  - `"auction"` — Bertsekas auction with adaptive epsilon
+  - `"auction"` — 'Bertsekas' auction with adaptive epsilon
 
-  - `"auction_gs"` — Gauss-Seidel variant, good for spatial structure
+  - `"auction_gs"` — 'Gauss-Seidel' variant, good for spatial structure
 
-  - `"auction_scaled"` — Epsilon-scaling, fastest for large dense
+  - `"auction_scaled"` — 'Epsilon-scaling', fastest for large dense
     problems
 
   **Specialized solvers:**
@@ -57,9 +57,9 @@ assignment(
 
   - `"lapmod"` — Sparse JV variant, faster when \>50\\
 
-  - `"hk01"` — Hopcroft-Karp for binary (0/1) costs only
+  - `"hk01"` — 'Hopcroft-Karp' for binary (0/1) costs only
 
-  - `"ssap_bucket"` — Dial's algorithm for integer costs
+  - `"ssap_bucket"` — 'Dial' algorithm for integer costs
 
   - `"line_metric"` — O(n log n) for 1D assignment problems
 
@@ -67,28 +67,29 @@ assignment(
 
   **Advanced solvers:**
 
-  - `"csa"` — Goldberg-Kennedy cost-scaling, often fastest for
+  - `"csa"` — 'Goldberg-Kennedy' cost-scaling, often fastest for
     medium-large
 
-  - `"gabow_tarjan"` — Bit-scaling with complementary slackness O(n³ log
-    C)
+  - `"gabow_tarjan"` — 'Gabow-Tarjan' bit-scaling with complementary
+    slackness O(n³ log C)
 
-  - `"cycle_cancel"` — Cycle-canceling with Karp's algorithm
+  - `"cycle_cancel"` — Cycle-canceling with 'Karp' algorithm
 
   - `"csflow"` — Cost-scaling network flow
 
-  - `"network_simplex"` — Network simplex with spanning tree
+  - `"network_simplex"` — 'Network simplex' with spanning tree
     representation
 
-  - `"orlin"` — Orlin-Ahuja scaling O(√n · m · log(nC))
+  - `"orlin"` — 'Orlin-Ahuja' scaling O(√n · m · log(nC))
 
-  - `"push_relabel"` — Push-relabel max-flow based solver
+  - `"push_relabel"` — 'Push-relabel' max-flow based solver
 
-  - `"ramshaw_tarjan"` — Optimized for rectangular matrices (n ≠ m)
+  - `"ramshaw_tarjan"` — 'Ramshaw-Tarjan', optimized for rectangular
+    matrices (n ≠ m)
 
 - auction_eps:
 
-  Optional numeric epsilon for the Auction/Auction-GS methods. If
+  Optional numeric epsilon for the 'Auction'/'Auction-GS' methods. If
   `NULL`, an internal default (e.g., `1e-9`) is used.
 
 - eps:
@@ -128,8 +129,8 @@ data characteristics:
 
 - Large (n\>75): `"auction_scaled"` — fastest for large dense problems
 
-Benchmarks show auction_scaled and JV are 100-1500x faster than
-Hungarian at n=500.
+Benchmarks show 'Auction-scaled' and 'JV' are 100-1500x faster than
+'Hungarian' at n=500.
 
 ## See also
 
@@ -137,7 +138,7 @@ Hungarian at n=500.
   — Tidy interface returning tibbles
 
 - [`lap_solve_kbest()`](https://gcol33.github.io/couplr/reference/lap_solve_kbest.md)
-  — Find k-best assignments (Murty's algorithm)
+  — Find k-best assignments ('Murty' algorithm)
 
 - [`assignment_duals()`](https://gcol33.github.io/couplr/reference/assignment_duals.md)
   — Extract dual variables for sensitivity analysis
@@ -154,6 +155,4 @@ Hungarian at n=500.
 cost <- matrix(c(4,2,5, 3,3,6, 7,5,4), nrow = 3, byrow = TRUE)
 res  <- assignment(cost)
 res$match; res$total_cost
-#> [1] 2 1 3
-#> [1] 9
 ```

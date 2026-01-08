@@ -3,15 +3,24 @@
 <g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
-    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+    /* theme-aware-processed */
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite circle {
       fill: none;
-      stroke: #000000;
+      stroke: #3E3F3A;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite > g > rect {
+      fill: none;
+      stroke: #3E3F3A;
       stroke-linecap: round;
       stroke-linejoin: round;
       stroke-miterlimit: 10.00;
     }
     .svglite text {
       white-space: pre;
+      fill: #3E3F3A;
     }
     .svglite g.glyphgroup path {
       fill: inherit;
@@ -26,7 +35,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA=)'>
-<rect x='0.00' y='0.00' width='576.00' height='360.00' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect rx='4' x='0.00' y='0.00' width='576.00' height='360.00' style='stroke-width: 1.07; stroke: none; fill: #F5F6F8;' />
 </g>
 <defs>
   <clipPath id='cpNDUuMzV8NTcwLjUyfDIzLjE4fDI4OS4zMQ=='>
@@ -34,13 +43,13 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpNDUuMzV8NTcwLjUyfDIzLjE4fDI4OS4zMQ==)'>
-<polyline points='45.35,250.22 570.52,250.22 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='45.35,160.59 570.52,160.59 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='45.35,70.95 570.52,70.95 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='137.42,289.31 137.42,23.18 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='273.83,289.31 273.83,23.18 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='410.24,289.31 410.24,23.18 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='546.65,289.31 546.65,23.18 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
+<polyline points='45.35,250.22 570.52,250.22 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='45.35,160.59 570.52,160.59 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='45.35,70.95 570.52,70.95 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='137.42,289.31 137.42,23.18 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='273.83,289.31 273.83,23.18 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='410.24,289.31 410.24,23.18 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
+<polyline points='546.65,289.31 546.65,23.18 ' style='stroke-width: 1.07; stroke: #3E3F3A; stroke-linecap: butt;' />
 <polyline points='69.22,250.22 137.42,187.57 273.83,111.81 546.65,35.27 ' style='stroke-width: 2.13; stroke: #D9534F; stroke-linecap: butt;' />
 <polyline points='69.22,277.21 137.42,250.22 273.83,196.26 546.65,124.91 ' style='stroke-width: 2.13; stroke: #5BC0DE; stroke-linecap: butt;' />
 <polyline points='69.22,223.24 137.42,207.46 273.83,169.27 546.65,117.82 ' style='stroke-width: 2.13; stroke: #F0AD4E; stroke-linecap: butt;' />
@@ -80,16 +89,16 @@
 <line x1='543.09' y1='76.08' x2='550.20' y2='83.19' style='stroke-width: 0.71; stroke: #428BCA;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwzNjAuMDA=)'>
-<text x='40.41' y='253.37' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>1.0</text>
-<text x='40.41' y='163.74' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='17.11px' lengthAdjust='spacingAndGlyphs'>10.0</text>
-<text x='40.41' y='74.10' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='22.00px' lengthAdjust='spacingAndGlyphs'>100.0</text>
-<text x='137.42' y='300.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>100</text>
-<text x='273.83' y='300.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>200</text>
-<text x='410.24' y='300.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>300</text>
-<text x='546.65' y='300.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>400</text>
-<text x='307.93' y='313.00' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='89.58px' lengthAdjust='spacingAndGlyphs'>Matrix Size (n × n)</text>
-<text transform='translate(13.36,156.24) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='143.88px' lengthAdjust='spacingAndGlyphs'>Time (milliseconds, log scale)</text>
-<text x='102.86' y='344.34' style='font-size: 11.00px; font-family: "Arial";' textLength='46.47px' lengthAdjust='spacingAndGlyphs'>Algorithm</text>
+<text x='40.41' y='253.37' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='40.41' y='163.74' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='17.11px' lengthAdjust='spacingAndGlyphs'>10.0</text>
+<text x='40.41' y='74.10' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='22.00px' lengthAdjust='spacingAndGlyphs'>100.0</text>
+<text x='137.42' y='300.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>100</text>
+<text x='273.83' y='300.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>200</text>
+<text x='410.24' y='300.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>300</text>
+<text x='546.65' y='300.54' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>400</text>
+<text x='307.93' y='313.00' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='88.66px' lengthAdjust='spacingAndGlyphs'>Matrix Size (n x n)</text>
+<text transform='translate(13.36,156.24) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='143.88px' lengthAdjust='spacingAndGlyphs'>Time (milliseconds, log scale)</text>
+<text x='102.86' y='344.34' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='46.47px' lengthAdjust='spacingAndGlyphs'>Algorithm</text>
 <line x1='156.54' y1='340.40' x2='170.36' y2='340.40' style='stroke-width: 2.13; stroke: #D9534F; stroke-linecap: butt;' />
 <circle cx='163.45' cy='340.40' r='3.56' style='stroke-width: 0.71; stroke: none; fill: #D9534F;' />
 <line x1='225.35' y1='340.40' x2='239.18' y2='340.40' style='stroke-width: 2.13; stroke: #5BC0DE; stroke-linecap: butt;' />
@@ -103,12 +112,12 @@
 <rect x='429.33' y='336.85' width='7.11' height='7.11' style='stroke-width: 0.71; stroke: #428BCA;' />
 <line x1='429.33' y1='343.96' x2='436.44' y2='336.85' style='stroke-width: 0.71; stroke: #428BCA;' />
 <line x1='429.33' y1='336.85' x2='436.44' y2='343.96' style='stroke-width: 0.71; stroke: #428BCA;' />
-<text x='177.57' y='343.55' style='font-size: 8.80px; font-family: "Arial";' textLength='40.58px' lengthAdjust='spacingAndGlyphs'>Hungarian</text>
-<text x='246.38' y='343.55' style='font-size: 8.80px; font-family: "Arial";' textLength='68.45px' lengthAdjust='spacingAndGlyphs'>Jonker-Volgenant</text>
-<text x='343.08' y='343.55' style='font-size: 8.80px; font-family: "Arial";' textLength='29.34px' lengthAdjust='spacingAndGlyphs'>Auction</text>
-<text x='400.66' y='343.55' style='font-size: 8.80px; font-family: "Arial";' textLength='18.11px' lengthAdjust='spacingAndGlyphs'>CSA</text>
-<text x='447.01' y='343.55' style='font-size: 8.80px; font-family: "Arial";' textLength='66.00px' lengthAdjust='spacingAndGlyphs'>Network Simplex</text>
-<text x='307.93' y='14.93' text-anchor='middle' style='font-size: 13.20px; font-weight: bold; font-family: "Arial";' textLength='332.56px' lengthAdjust='spacingAndGlyphs'>Algorithm Runtime vs Problem Size (Dense Matrices)</text>
+<text x='177.57' y='343.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='40.58px' lengthAdjust='spacingAndGlyphs'>Hungarian</text>
+<text x='246.38' y='343.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='68.45px' lengthAdjust='spacingAndGlyphs'>Jonker-Volgenant</text>
+<text x='343.08' y='343.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='29.34px' lengthAdjust='spacingAndGlyphs'>Auction</text>
+<text x='400.66' y='343.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='18.11px' lengthAdjust='spacingAndGlyphs'>CSA</text>
+<text x='447.01' y='343.55' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='66.00px' lengthAdjust='spacingAndGlyphs'>Network Simplex</text>
+<text x='45.35' y='14.93' style='font-size: 13.20px; font-weight: bold; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='332.56px' lengthAdjust='spacingAndGlyphs'>Algorithm Runtime vs Problem Size (Dense Matrices)</text>
 </g>
 </g>
 </svg>

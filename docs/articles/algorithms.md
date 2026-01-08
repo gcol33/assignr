@@ -729,7 +729,6 @@ bench_results$method <- factor(bench_results$method,
 ``` r
 
 ggplot(bench_results, aes(x = size, y = time * 1000, color = method, shape = method)) +
-
   geom_line(linewidth = 1) +
   geom_point(size = 3) +
   scale_y_log10(labels = function(x) sprintf("%.1f", x)) +
@@ -742,7 +741,7 @@ ggplot(bench_results, aes(x = size, y = time * 1000, color = method, shape = met
   )) +
   labs(
     title = "Algorithm Runtime vs Problem Size (Dense Matrices)",
-    x = "Matrix Size (n × n)",
+    x = "Matrix Size (n x n)",
     y = "Time (milliseconds, log scale)",
     color = "Algorithm",
     shape = "Algorithm"
@@ -750,7 +749,7 @@ ggplot(bench_results, aes(x = size, y = time * 1000, color = method, shape = met
   theme_minimal() +
   theme(
     legend.position = "bottom",
-    plot.title = element_text(hjust = 0.5, face = "bold"),
+    plot.title = element_text(face = "bold"),
     panel.grid.minor = element_blank()
   )
 ```
@@ -800,13 +799,13 @@ ggplot(sparse_results, aes(x = size, y = time * 1000, color = method)) +
   geom_point(size = 3) +
   labs(
     title = "Sparse vs Dense Algorithms (80% Forbidden Entries)",
-    x = "Matrix Size (n × n)",
+    x = "Matrix Size (n x n)",
     y = "Time (milliseconds)",
     color = "Algorithm"
   ) +
   scale_color_manual(values = c("#5bc0de", "#5cb85c", "#f0ad4e")) +
   theme_minimal() +
-  theme(legend.position = "bottom", plot.title = element_text(hjust = 0.5, face = "bold"))
+  theme(legend.position = "bottom", plot.title = element_text(face = "bold"))
 ```
 
 ![Sparse algorithm performance
