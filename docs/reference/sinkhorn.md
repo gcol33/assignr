@@ -1,7 +1,7 @@
-# Sinkhorn-Knopp optimal transport solver
+# 'Sinkhorn-Knopp' optimal transport solver
 
 Compute an entropy-regularized optimal transport plan using the
-Sinkhorn-Knopp algorithm. Unlike other LAP solvers that return a hard
+'Sinkhorn-Knopp' algorithm. Unlike other LAP solvers that return a hard
 1-to-1 assignment, this returns a soft assignment (doubly stochastic
 matrix).
 
@@ -69,7 +69,7 @@ A list with elements:
 
 ## Details
 
-The Sinkhorn-Knopp algorithm solves the entropy-regularized optimal
+The 'Sinkhorn-Knopp' algorithm solves the entropy-regularized optimal
 transport problem:
 
 \$\$P^\* = \arg\min_P \langle C, P \rangle - \frac{1}{\lambda} H(P)\$\$
@@ -96,8 +96,9 @@ to round the soft assignment to a hard matching.
 
 ## References
 
-Cuturi, M. (2013). Sinkhorn Distances: Lightspeed Computation of Optimal
-Transport. *Advances in Neural Information Processing Systems*, 26.
+Cuturi, M. (2013). 'Sinkhorn Distances': Lightspeed Computation of
+Optimal Transport. *Advances in Neural Information Processing Systems*,
+26.
 
 ## See also
 
@@ -114,29 +115,16 @@ cost <- matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), nrow = 3, byrow = TRUE)
 # Soft assignment with default parameters
 result <- sinkhorn(cost)
 print(round(result$transport_plan, 3))
-#>       [,1]  [,2]  [,3]
-#> [1,] 0.111 0.111 0.111
-#> [2,] 0.111 0.111 0.111
-#> [3,] 0.111 0.111 0.111
 
 # Sharper assignment (higher lambda)
 result_sharp <- sinkhorn(cost, lambda = 50)
 print(round(result_sharp$transport_plan, 3))
-#>       [,1]  [,2]  [,3]
-#> [1,] 0.111 0.111 0.111
-#> [2,] 0.111 0.111 0.111
-#> [3,] 0.111 0.111 0.111
 
 # With custom marginals (more mass from row 1)
 result_weighted <- sinkhorn(cost, r_weights = c(0.5, 0.25, 0.25))
 print(round(result_weighted$transport_plan, 3))
-#>       [,1]  [,2]  [,3]
-#> [1,] 0.167 0.167 0.167
-#> [2,] 0.083 0.083 0.083
-#> [3,] 0.083 0.083 0.083
 
 # Round to hard assignment
 hard_match <- sinkhorn_to_assignment(result)
 print(hard_match)
-#> [1] 1 3 2
 ```

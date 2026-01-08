@@ -15,7 +15,7 @@ comparisons.
 Solves optimal pairing and matching problems using linear assignment
 algorithms. Designed for matching plots, sites, samples, or any pairwise
 optimization problem. Provides modern, tidy implementations of
-Hungarian, Jonker–Volgenant, Auction, and other LAP solvers.
+'Hungarian', 'Jonker-Volgenant', 'Auction', and other LAP solvers.
 
 ## Main functions
 

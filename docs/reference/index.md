@@ -19,9 +19,9 @@ Core functions for solving linear assignment problems
 - [`bottleneck_assignment()`](https://gcol33.github.io/couplr/reference/bottleneck_assignment.md)
   : Solve the Bottleneck Assignment Problem
 - [`sinkhorn()`](https://gcol33.github.io/couplr/reference/sinkhorn.md)
-  : Sinkhorn-Knopp optimal transport solver
+  : 'Sinkhorn-Knopp' optimal transport solver
 - [`sinkhorn_to_assignment()`](https://gcol33.github.io/couplr/reference/sinkhorn_to_assignment.md)
-  : Round Sinkhorn transport plan to hard assignment
+  : Round 'Sinkhorn' transport plan to hard assignment
 
 ## Matching Functions
 

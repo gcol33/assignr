@@ -97,30 +97,30 @@ entries are treated as forbidden assignments.</p></dd>
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>Character string indicating the algorithm to use. Options:</p>
 <p><strong>General-purpose solvers:</strong></p><ul><li><p><code>"auto"</code> — Automatic selection based on problem characteristics (default)</p></li>
-<li><p><code>"jv"</code> — Jonker-Volgenant, fast general-purpose O(n³)</p></li>
-<li><p><code>"hungarian"</code> — Classic Hungarian algorithm O(n³)</p></li>
-</ul><p><strong>Auction-based solvers:</strong></p><ul><li><p><code>"auction"</code> — Bertsekas auction with adaptive epsilon</p></li>
-<li><p><code>"auction_gs"</code> — Gauss-Seidel variant, good for spatial structure</p></li>
-<li><p><code>"auction_scaled"</code> — Epsilon-scaling, fastest for large dense problems</p></li>
+<li><p><code>"jv"</code> — 'Jonker-Volgenant', fast general-purpose O(n³)</p></li>
+<li><p><code>"hungarian"</code> — Classic 'Hungarian' algorithm O(n³)</p></li>
+</ul><p><strong>Auction-based solvers:</strong></p><ul><li><p><code>"auction"</code> — 'Bertsekas' auction with adaptive epsilon</p></li>
+<li><p><code>"auction_gs"</code> — 'Gauss-Seidel' variant, good for spatial structure</p></li>
+<li><p><code>"auction_scaled"</code> — 'Epsilon-scaling', fastest for large dense problems</p></li>
 </ul><p><strong>Specialized solvers:</strong></p><ul><li><p><code>"sap"</code> / <code>"ssp"</code> — Shortest augmenting path, handles sparsity well</p></li>
 <li><p><code>"lapmod"</code> — Sparse JV variant, faster when &gt;50\<!-- % entries are NA/Inf --></p></li>
-<li><p><code>"hk01"</code> — Hopcroft-Karp for binary (0/1) costs only</p></li>
-<li><p><code>"ssap_bucket"</code> — Dial's algorithm for integer costs</p></li>
+<li><p><code>"hk01"</code> — 'Hopcroft-Karp' for binary (0/1) costs only</p></li>
+<li><p><code>"ssap_bucket"</code> — 'Dial' algorithm for integer costs</p></li>
 <li><p><code>"line_metric"</code> — O(n log n) for 1D assignment problems</p></li>
 <li><p><code>"bruteforce"</code> — Exact enumeration for tiny problems (n ≤ 8)</p></li>
-</ul><p><strong>Advanced solvers:</strong></p><ul><li><p><code>"csa"</code> — Goldberg-Kennedy cost-scaling, often fastest for medium-large</p></li>
-<li><p><code>"gabow_tarjan"</code> — Bit-scaling with complementary slackness O(n³ log C)</p></li>
-<li><p><code>"cycle_cancel"</code> — Cycle-canceling with Karp's algorithm</p></li>
+</ul><p><strong>Advanced solvers:</strong></p><ul><li><p><code>"csa"</code> — 'Goldberg-Kennedy' cost-scaling, often fastest for medium-large</p></li>
+<li><p><code>"gabow_tarjan"</code> — 'Gabow-Tarjan' bit-scaling with complementary slackness O(n³ log C)</p></li>
+<li><p><code>"cycle_cancel"</code> — Cycle-canceling with 'Karp' algorithm</p></li>
 <li><p><code>"csflow"</code> — Cost-scaling network flow</p></li>
-<li><p><code>"network_simplex"</code> — Network simplex with spanning tree representation</p></li>
-<li><p><code>"orlin"</code> — Orlin-Ahuja scaling O(√n · m · log(nC))</p></li>
-<li><p><code>"push_relabel"</code> — Push-relabel max-flow based solver</p></li>
-<li><p><code>"ramshaw_tarjan"</code> — Optimized for rectangular matrices (n ≠ m)</p></li>
+<li><p><code>"network_simplex"</code> — 'Network simplex' with spanning tree representation</p></li>
+<li><p><code>"orlin"</code> — 'Orlin-Ahuja' scaling O(√n · m · log(nC))</p></li>
+<li><p><code>"push_relabel"</code> — 'Push-relabel' max-flow based solver</p></li>
+<li><p><code>"ramshaw_tarjan"</code> — 'Ramshaw-Tarjan', optimized for rectangular matrices (n ≠ m)</p></li>
 </ul></dd>
 
 
 <dt id="arg-auction-eps">auction_eps<a class="anchor" aria-label="anchor" href="#arg-auction-eps"></a></dt>
-<dd><p>Optional numeric epsilon for the Auction/Auction-GS methods.
+<dd><p>Optional numeric epsilon for the 'Auction'/'Auction-GS' methods.
 If <code>NULL</code>, an internal default (e.g., <code>1e-9</code>) is used.</p></dd>
 
 
@@ -147,13 +147,13 @@ characteristics:</p><ul><li><p>Very small (n≤8): <code>"bruteforce"</code> —
 <li><p>Small-medium (8&lt;n≤50): <code>"hungarian"</code> — provides exact dual solutions</p></li>
 <li><p>Medium (50&lt;n≤75): <code>"jv"</code> — fast general-purpose solver</p></li>
 <li><p>Large (n&gt;75): <code>"auction_scaled"</code> — fastest for large dense problems</p></li>
-</ul><p>Benchmarks show auction_scaled and JV are 100-1500x faster than Hungarian at n=500.</p>
+</ul><p>Benchmarks show 'Auction-scaled' and 'JV' are 100-1500x faster than 'Hungarian' at n=500.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
 <ul><li><p><code><a href="lap_solve.html">lap_solve()</a></code> — Tidy interface returning tibbles</p></li>
-<li><p><code><a href="lap_solve_kbest.html">lap_solve_kbest()</a></code> — Find k-best assignments (Murty's algorithm)</p></li>
+<li><p><code><a href="lap_solve_kbest.html">lap_solve_kbest()</a></code> — Find k-best assignments ('Murty' algorithm)</p></li>
 <li><p><code><a href="assignment_duals.html">assignment_duals()</a></code> — Extract dual variables for sensitivity analysis</p></li>
 <li><p><code><a href="bottleneck_assignment.html">bottleneck_assignment()</a></code> — Minimize maximum edge cost (minimax)</p></li>
 <li><p><code><a href="sinkhorn.html">sinkhorn()</a></code> — Entropy-regularized optimal transport</p></li>
@@ -162,13 +162,10 @@ characteristics:</p><ul><li><p>Very small (n≤8): <code>"bruteforce"</code> —
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">5</span>, <span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">6</span>, <span class="fl">7</span>,<span class="fl">5</span>,<span class="fl">4</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">res</span>  <span class="op">&lt;-</span> <span class="fu">assignment</span><span class="op">(</span><span class="va">cost</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">res</span><span class="op">$</span><span class="va">match</span>; <span class="va">res</span><span class="op">$</span><span class="va">total_cost</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9</span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">5</span>, <span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">6</span>, <span class="fl">7</span>,<span class="fl">5</span>,<span class="fl">4</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">res</span>  <span class="op">&lt;-</span> <span class="fu">assignment</span><span class="op">(</span><span class="va">cost</span><span class="op">)</span></span>
+<span><span class="va">res</span><span class="op">$</span><span class="va">match</span>; <span class="va">res</span><span class="op">$</span><span class="va">total_cost</span></span>
+<span></span></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
