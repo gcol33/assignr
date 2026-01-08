@@ -9,6 +9,7 @@
 #include <cmath>
 #include <algorithm>
 #include <limits>
+#include "../core/lap_utils.h"
 
 using namespace Rcpp;
 
@@ -52,7 +53,7 @@ Rcpp::List solve_sinkhorn_impl(
   if (r_weights.isNotNull()) {
     NumericVector rw(r_weights);
     if (rw.size() != n) {
-      stop("r_weights must have length equal to number of rows");
+      LAP_ERROR("r_weights must have length equal to number of rows");
     }
     double sum_r = 0.0;
     for (int i = 0; i < n; ++i) {
@@ -68,7 +69,7 @@ Rcpp::List solve_sinkhorn_impl(
   if (c_weights.isNotNull()) {
     NumericVector cw(c_weights);
     if (cw.size() != m) {
-      stop("c_weights must have length equal to number of columns");
+      LAP_ERROR("c_weights must have length equal to number of columns");
     }
     double sum_c = 0.0;
     for (int j = 0; j < m; ++j) {

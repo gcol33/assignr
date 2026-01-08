@@ -1,5 +1,6 @@
 // src/region_means.cpp
 #include <Rcpp.h>
+#include "../core/lap_utils.h"
 #ifdef _OPENMP
   #include <omp.h>
 #endif
@@ -15,9 +16,9 @@ List region_means_impl(const NumericVector& pixels,
                        const int W,
                        const int K) {
   if (pixels.size() != H * W * 3)
-    stop("pixels length mismatch (expected H*W*3).");
+    LAP_ERROR("pixels length mismatch (expected H*W*3).");
   if (labels.nrow() != H || labels.ncol() != W)
-    stop("labels dims mismatch.");
+    LAP_ERROR("labels dims mismatch.");
 
   // accumulators
   std::vector<double> sumR(K, 0.0), sumG(K, 0.0), sumB(K, 0.0);

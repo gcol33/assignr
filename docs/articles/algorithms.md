@@ -233,6 +233,9 @@ adjust based on competition.
 3.  Highest bidder wins; price increases
 4.  Repeat until all matched
 
+![Auction algorithm bidding process showing sources bidding for targets
+with prices](algorithms_files/figure-html/auction-diagram-1.svg)
+
 #### When to Use
 
 - Large dense problems (n \> 1000)
@@ -430,18 +433,13 @@ assignment as minimum-cost flow in a bipartite network.
 
 #### Network Structure
 
-         source (supply = n)
-            |
-       +----+----+
-       |    |    |
-      row₀ row₁ ... row_{n-1}
-       |\   |\   |
-       | \  | \  |
-      col₀ col₁ ... col_{m-1}
-       |    |    |
-       +----+----+
-            |
-          sink (demand = n)
+The assignment problem is modeled as a minimum-cost flow network:
+
+![Network simplex spanning tree structure for assignment
+problem](algorithms_files/figure-html/network-simplex-diagram-1.svg)
+
+**Pivot operation**: Enter a non-tree arc, find the cycle, identify
+leaving arc, update tree and node potentials.
 
 #### When to Use
 
@@ -682,6 +680,140 @@ cat("Feasible:", feasible, "\n")
 
 **Degenerate problems**: Many tied costs may produce different (but
 equally optimal) solutions across algorithms
+
+------------------------------------------------------------------------
+
+### Runtime Benchmarks
+
+Actual timing comparisons across problem sizes, measured on
+representative dense cost matrices:
+
+``` r
+
+library(ggplot2)
+
+# Benchmark function - run each method on given size
+benchmark_methods <- function(n, methods, n_reps = 3) {
+  set.seed(42)
+  cost <- matrix(runif(n * n, 0, 100), n, n)
+
+  results <- lapply(methods, function(m) {
+    times <- numeric(n_reps)
+    for (i in seq_len(n_reps)) {
+      times[i] <- system.time(lap_solve(cost, method = m))["elapsed"]
+    }
+    data.frame(method = m, size = n, time = median(times))
+  })
+  do.call(rbind, results)
+}
+```
+
+``` r
+
+# Core methods to benchmark
+methods <- c("hungarian", "jv", "auction", "csa", "network_simplex")
+sizes <- c(50, 100, 200, 400)
+
+# Run benchmarks
+bench_results <- do.call(rbind, lapply(sizes, function(n) {
+  benchmark_methods(n, methods)
+}))
+
+# Create factor with nice labels
+bench_results$method <- factor(bench_results$method,
+  levels = c("hungarian", "jv", "auction", "csa", "network_simplex"),
+  labels = c("Hungarian", "Jonker-Volgenant", "Auction", "CSA", "Network Simplex")
+)
+```
+
+``` r
+
+ggplot(bench_results, aes(x = size, y = time * 1000, color = method, shape = method)) +
+
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  scale_y_log10(labels = function(x) sprintf("%.1f", x)) +
+  scale_color_manual(values = c(
+    "Hungarian" = "#d9534f",
+    "Jonker-Volgenant" = "#5bc0de",
+    "Auction" = "#f0ad4e",
+    "CSA" = "#5cb85c",
+    "Network Simplex" = "#428bca"
+  )) +
+  labs(
+    title = "Algorithm Runtime vs Problem Size (Dense Matrices)",
+    x = "Matrix Size (n × n)",
+    y = "Time (milliseconds, log scale)",
+    color = "Algorithm",
+    shape = "Algorithm"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+![Runtime comparison of LAP algorithms across problem
+sizes](algorithms_files/figure-html/benchmark-plot-1.svg)
+
+**Key observations:**
+
+- **JV and CSA** are consistently fastest for dense problems
+- **Hungarian** shows classic O(n³) scaling, becomes slow above n=200
+- **Auction** has higher overhead for small problems but scales well
+- **Network Simplex** is reliable but not the fastest
+
+#### Sparse Matrix Performance
+
+For sparse problems (many forbidden entries), different algorithms
+excel:
+
+``` r
+
+# Sparse benchmark
+sparse_methods <- c("jv", "sap", "lapmod")
+sparse_results <- lapply(c(50, 100, 200), function(n) {
+  set.seed(42)
+  cost <- matrix(Inf, n, n)
+  # 20% density (80% forbidden)
+  edges <- sample(1:(n^2), floor(0.2 * n^2))
+  cost[edges] <- runif(length(edges), 0, 100)
+
+  lapply(sparse_methods, function(m) {
+    time <- median(replicate(3, system.time(lap_solve(cost, method = m))["elapsed"]))
+    data.frame(method = m, size = n, time = time)
+  }) |> do.call(what = rbind)
+}) |> do.call(what = rbind)
+
+sparse_results$method <- factor(sparse_results$method,
+  levels = c("jv", "sap", "lapmod"),
+  labels = c("JV (dense)", "SAP (sparse)", "LAPMOD (sparse)")
+)
+```
+
+``` r
+
+ggplot(sparse_results, aes(x = size, y = time * 1000, color = method)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  labs(
+    title = "Sparse vs Dense Algorithms (80% Forbidden Entries)",
+    x = "Matrix Size (n × n)",
+    y = "Time (milliseconds)",
+    color = "Algorithm"
+  ) +
+  scale_color_manual(values = c("#5bc0de", "#5cb85c", "#f0ad4e")) +
+  theme_minimal() +
+  theme(legend.position = "bottom", plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+![Sparse algorithm performance
+comparison](algorithms_files/figure-html/sparse-plot-1.svg)
+
+**Takeaway**: For sparse problems, SAP and LAPMOD significantly
+outperform dense algorithms.
 
 ------------------------------------------------------------------------
 

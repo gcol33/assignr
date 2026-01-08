@@ -136,7 +136,7 @@ Rcpp::List lap_solve_auction_scaled(Rcpp::NumericMatrix cost, bool maximize,
   std::transform(schedule.begin(), schedule.end(), schedule.begin(),
                  [](unsigned char c){ return static_cast<char>(std::tolower(c)); });
   if (schedule != "alpha7" && schedule != "pow2" && schedule != "halves") {
-    Rcpp::stop("Invalid schedule: '%s'. Use: 'alpha7', 'pow2', 'halves'.", schedule.c_str());
+    LAP_ERROR("Invalid schedule: '%s'. Use: 'alpha7', 'pow2', 'halves'.", schedule.c_str());
   }
   return solve_auction_scaled_impl(cost, maximize, schedule);
 }
@@ -288,7 +288,7 @@ Rcpp::List analyze_color_overlap_cpp(Rcpp::NumericVector pixelsA,
   const int N = H * W;
   const int expected = N * 3;
   if (pixelsA.size() != expected || pixelsB.size() != expected)
-    Rcpp::stop("pixelsA and pixelsB must be H*W*3.");
+    LAP_ERROR("pixelsA and pixelsB must be H*W*3.");
   return analyze_color_overlap(pixelsA, pixelsB, H, W, quantize_bits);
 }
 
@@ -305,7 +305,7 @@ Rcpp::NumericMatrix compute_pixel_cost_cpp(const Rcpp::NumericVector& pixelsA,
   const int N = H * W;
   const int expected = N * 3;
   if (pixelsA.size() != expected || pixelsB.size() != expected)
-    Rcpp::stop("pixelsA and pixelsB must be H*W*3.");
+    LAP_ERROR("pixelsA and pixelsB must be H*W*3.");
   return compute_pixel_cost(pixelsA, pixelsB, H, W, alpha, beta);
 }
 
@@ -315,7 +315,7 @@ Rcpp::NumericVector downscale_image_cpp(Rcpp::NumericVector pixels,
   const int N = H * W;
   const int expected = N * 3;
   if (pixels.size() != expected)
-    Rcpp::stop("pixels must be H*W*3.");
+    LAP_ERROR("pixels must be H*W*3.");
   return downscale_image(pixels, H, W, H_new, W_new);
 }
 
@@ -325,7 +325,7 @@ Rcpp::IntegerVector upscale_assignment_cpp(Rcpp::IntegerVector assignment,
                                            int H_scaled, int W_scaled) {
   const int N_scaled = H_scaled * W_scaled;
   if (assignment.size() != N_scaled)
-    Rcpp::stop("assignment must have H_scaled*W_scaled elements.");
+    LAP_ERROR("assignment must have H_scaled*W_scaled elements.");
   return upscale_assignment(assignment, H_orig, W_orig, H_scaled, W_scaled);
 }
 
@@ -338,9 +338,9 @@ Rcpp::List morph_pixel_level_cpp(Rcpp::NumericVector pixelsA,
   const int N = H * W;
   const int expected = N * 3;
   if (pixelsA.size() != expected || pixelsB.size() != expected)
-    Rcpp::stop("pixelsA and pixelsB must be H*W*3.");
+    LAP_ERROR("pixelsA and pixelsB must be H*W*3.");
   if (assignment.size() != N)
-    Rcpp::stop("assignment must have H*W elements.");
+    LAP_ERROR("assignment must have H*W elements.");
   for (int i = 0; i < N; ++i) {
     if (assignment[i] < 0 || assignment[i] >= N) assignment[i] = i;
   }
@@ -355,7 +355,7 @@ Rcpp::List color_palette_info_cpp(Rcpp::NumericVector pixelsA,
   const int N = H * W;
   const int expected = N * 3;
   if (pixelsA.size() != expected || pixelsB.size() != expected)
-    Rcpp::stop("pixelsA and pixelsB must be H*W*3.");
+    LAP_ERROR("pixelsA and pixelsB must be H*W*3.");
   return color_palette_info(pixelsA, pixelsB, H, W, quantize_bits);
 }
 

@@ -106,9 +106,9 @@ Visual demonstrations and image processing
 - [`pixel_morph_animate()`](https://gcol33.github.io/couplr/reference/pixel_morph_animate.md)
   : Pixel-level image morphing (animation)
 
-## Print and Summary Methods
+## Print, Summary and Plot Methods
 
-S3 methods for displaying results
+S3 methods for displaying and visualizing results
 
 - [`print(`*`<lap_solve_result>`*`)`](https://gcol33.github.io/couplr/reference/print.lap_solve_result.md)
   : Print method for assignment results
@@ -132,3 +132,11 @@ S3 methods for displaying results
   : Get summary of k-best results
 - [`summary(`*`<distance_object>`*`)`](https://gcol33.github.io/couplr/reference/summary.distance_object.md)
   : Summary Method for Distance Objects
+- [`summary(`*`<matching_result>`*`)`](https://gcol33.github.io/couplr/reference/summary.matching_result.md)
+  : Summary method for matching results
+- [`summary(`*`<balance_diagnostics>`*`)`](https://gcol33.github.io/couplr/reference/summary.balance_diagnostics.md)
+  : Summary method for balance diagnostics
+- [`plot(`*`<matching_result>`*`)`](https://gcol33.github.io/couplr/reference/plot.matching_result.md)
+  : Plot method for matching results
+- [`plot(`*`<balance_diagnostics>`*`)`](https://gcol33.github.io/couplr/reference/plot.balance_diagnostics.md)
+  : Plot method for balance diagnostics

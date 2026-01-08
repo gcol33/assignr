@@ -26,7 +26,7 @@ inline CostType parse_cost_type(const std::string& cost_str) {
              lower_cost == "squared" || lower_cost == "quadratic") {
     return CostType::L2;
   }
-  Rcpp::stop("Unknown cost type: '%s'. Use 'L1' or 'L2'.", cost_str.c_str());
+  LAP_ERROR("Unknown cost type: '%s'. Use 'L1' or 'L2'.", cost_str.c_str());
 }
 
 inline double compute_cost(double diff, CostType cost_type) {
@@ -57,9 +57,9 @@ Rcpp::List solve_line_metric_impl(const NumericVector& x_in,
   const int n = static_cast<int>(x.size());
   const int m = static_cast<int>(y.size());
   
-  if (n <= 0) Rcpp::stop("x must have at least one element");
-  if (m <= 0) Rcpp::stop("y must have at least one element");
-  if (n > m) Rcpp::stop("n must be <= m (number of x values <= number of y values)");
+  if (n <= 0) LAP_ERROR("x must have at least one element");
+  if (m <= 0) LAP_ERROR("y must have at least one element");
+  if (n > m) LAP_ERROR("n must be <= m (number of x values <= number of y values)");
   
   // Parse cost type
   CostType cost_type = parse_cost_type(cost_str);

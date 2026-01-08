@@ -224,7 +224,7 @@ Rcpp::List solve_ssap_bucket_impl(Rcpp::NumericMatrix cost, bool maximize) {
   }
   
   if (finite_vals.empty()) {
-    stop("No finite costs found");
+    LAP_ERROR("No finite costs found");
   }
   
   // Shift to make all costs non-negative
@@ -284,7 +284,7 @@ Rcpp::List solve_ssap_bucket_impl(Rcpp::NumericMatrix cost, bool maximize) {
       }
     }
     if (!has_edge) {
-      stop("Infeasible: row %d has no valid edges", i + 1);
+      LAP_ERROR("Infeasible: row %d has no valid edges", i + 1);
     }
   }
   
@@ -320,7 +320,7 @@ Rcpp::List solve_ssap_bucket_impl(Rcpp::NumericMatrix cost, bool maximize) {
   (void)total_cost_int;  // We'll compute from original costs
   
   if (flow != n) {
-    stop("Infeasible: could not find perfect matching");
+    LAP_ERROR("Infeasible: could not find perfect matching");
   }
   
   // Extract matching from residual graph
@@ -346,7 +346,7 @@ Rcpp::List solve_ssap_bucket_impl(Rcpp::NumericMatrix cost, bool maximize) {
   if (!transposed) {
     for (int i = 0; i < n; ++i) {
       if (row_match[i] < 0) {
-        stop("Internal error: unmatched row");
+        LAP_ERROR("Internal error: unmatched row");
       }
       match[i] = row_match[i] + 1;  // 1-based
       total += cost(i, row_match[i]);  // Use ORIGINAL cost
@@ -357,7 +357,7 @@ Rcpp::List solve_ssap_bucket_impl(Rcpp::NumericMatrix cost, bool maximize) {
     for (int i = 0; i < n; ++i) {
       int j = row_match[i];
       if (j < 0) {
-        stop("Internal error: unmatched row (transposed)");
+        LAP_ERROR("Internal error: unmatched row (transposed)");
       }
       match[j] = i + 1;  // 1-based
       total += cost(j, i);  // Use ORIGINAL cost

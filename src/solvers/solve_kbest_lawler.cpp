@@ -54,7 +54,7 @@ solve_one_with_auto_transpose(NumericMatrix M,
   else if (base == "auction")              ans = lap_solve_auction(work, maximize, R_NilValue);
   else if (base == "csflow")               ans = lap_solve_csflow(work, maximize);
   else if (base == "bruteforce")           ans = lap_solve_bruteforce(work, maximize);
-  else stop("Unknown base method in Lawler: '%s'", base_in.c_str());
+  else LAP_ERROR("Unknown base method in Lawler: '%s'", base_in.c_str());
 
   IntegerVector match_iv = ans["match"]; // 1-based in 'work' orientation
   std::vector<int> match_work(match_iv.begin(), match_iv.end());

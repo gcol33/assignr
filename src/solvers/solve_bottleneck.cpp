@@ -119,7 +119,7 @@ Rcpp::List solve_bottleneck_impl(NumericMatrix cost, bool maximize) {
     }
 
     if (n > m) {
-        stop("Infeasible: rows (%d) > cols (%d)", n, m);
+        LAP_ERROR("Infeasible: rows (%d) > cols (%d)", n, m);
     }
 
     // Collect all unique finite costs
@@ -136,7 +136,7 @@ Rcpp::List solve_bottleneck_impl(NumericMatrix cost, bool maximize) {
     }
 
     if (unique_costs.empty()) {
-        stop("Infeasible: no finite costs in matrix");
+        LAP_ERROR("Infeasible: no finite costs in matrix");
     }
 
     // Sort and deduplicate
@@ -185,7 +185,7 @@ Rcpp::List solve_bottleneck_impl(NumericMatrix cost, bool maximize) {
 
     // First check if any matching is possible
     if (!can_match(unique_costs[hi])) {
-        stop("Infeasible: no perfect matching possible");
+        LAP_ERROR("Infeasible: no perfect matching possible");
     }
 
     while (lo <= hi) {
@@ -199,7 +199,7 @@ Rcpp::List solve_bottleneck_impl(NumericMatrix cost, bool maximize) {
     }
 
     if (best < 0) {
-        stop("Infeasible: no perfect matching found");
+        LAP_ERROR("Infeasible: no perfect matching found");
     }
 
     double bottleneck = unique_costs[best];

@@ -45,7 +45,7 @@ Rcpp::List solve_cost_scaling_impl(NumericMatrix cost, bool maximize) {
   }
   
   if (!has_finite) {
-    stop("No finite costs found.");
+    LAP_ERROR("No finite costs found.");
   }
 
   // Working costs: use BIG for forbidden edges; transform for maximize
@@ -147,7 +147,7 @@ Rcpp::List solve_cost_scaling_impl(NumericMatrix cost, bool maximize) {
       }
 
       if (!std::isfinite(delta) || delta >= BIG / 2.0) {
-        stop("Infeasible: forbidden edges block all matchings.");
+        LAP_ERROR("Infeasible: forbidden edges block all matchings.");
       }
 
       // Update duals: increase u on S, decrease v on T

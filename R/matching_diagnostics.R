@@ -451,9 +451,171 @@ print.balance_diagnostics <- function(x, ...) {
   cat("  |Std Diff| > 0.50: Poor balance\n")
   cat("\n")
 
+
   invisible(x)
 }
 
+#' Summary method for balance diagnostics
+#'
+#' @param object A balance_diagnostics object
+#' @param ... Additional arguments (ignored)
+#'
+#' @return A list containing summary statistics (invisibly)
+#' @export
+#' @method summary balance_diagnostics
+summary.balance_diagnostics <- function(object, ...) {
+  std_diffs <- abs(object$var_stats$std_diff)
+  var_ratios <- object$var_stats$var_ratio
+
+  # Classify balance quality
+  quality <- if (object$overall$mean_abs_std_diff < 0.1) {
+    "Excellent"
+  } else if (object$overall$mean_abs_std_diff < 0.25) {
+    "Good"
+  } else if (object$overall$mean_abs_std_diff < 0.5) {
+    "Acceptable"
+  } else {
+    "Poor"
+  }
+
+  out <- list(
+    n_matched = object$n_matched,
+    n_unmatched_left = object$n_unmatched_left,
+    n_unmatched_right = object$n_unmatched_right,
+    n_variables = nrow(object$var_stats),
+    mean_abs_std_diff = object$overall$mean_abs_std_diff,
+    max_abs_std_diff = object$overall$max_abs_std_diff,
+    median_abs_std_diff = stats::median(std_diffs, na.rm = TRUE),
+    pct_excellent = mean(std_diffs < 0.1, na.rm = TRUE) * 100,
+    pct_good = mean(std_diffs >= 0.1 & std_diffs < 0.25, na.rm = TRUE) * 100,
+    pct_acceptable = mean(std_diffs >= 0.25 & std_diffs < 0.5, na.rm = TRUE) * 100,
+    pct_poor = mean(std_diffs >= 0.5, na.rm = TRUE) * 100,
+    mean_var_ratio = mean(var_ratios, na.rm = TRUE),
+    quality = quality,
+    has_blocks = object$has_blocks,
+    method = object$method
+  )
+
+  class(out) <- "summary.balance_diagnostics"
+  out
+}
+
+#' @export
+print.summary.balance_diagnostics <- function(x, ...) {
+  cat("Balance Diagnostics Summary\n")
+  cat("===========================\n\n")
+
+  cat("Method:", x$method, "\n")
+  cat("Matched pairs:", x$n_matched, "\n")
+  cat("Variables assessed:", x$n_variables, "\n\n")
+
+  cat("Standardized Differences:\n")
+  cat("  Mean |Std Diff|:", sprintf("%.3f", x$mean_abs_std_diff), "\n")
+  cat("  Median |Std Diff|:", sprintf("%.3f", x$median_abs_std_diff), "\n")
+  cat("  Max |Std Diff|:", sprintf("%.3f", x$max_abs_std_diff), "\n\n")
+
+  cat("Balance Quality Distribution:\n")
+  cat("  Excellent (<0.10):", sprintf("%.1f%%", x$pct_excellent), "\n")
+  cat("  Good (0.10-0.25):", sprintf("%.1f%%", x$pct_good), "\n")
+  cat("  Acceptable (0.25-0.50):", sprintf("%.1f%%", x$pct_acceptable), "\n")
+  cat("  Poor (>0.50):", sprintf("%.1f%%", x$pct_poor), "\n\n")
+
+  cat("Overall Quality:", x$quality, "\n")
+
+  invisible(x)
+}
+
+#' Plot method for balance diagnostics
+#'
+#' Produces a Love plot (dot plot) of standardized differences.
+#'
+#' @param x A balance_diagnostics object
+#' @param type Type of plot: "love" (default), "histogram", or "variance"
+#' @param threshold Threshold line for standardized differences (default: 0.1)
+#' @param ... Additional arguments passed to plotting functions
+#'
+#' @return The balance_diagnostics object (invisibly)
+#' @export
+#' @method plot balance_diagnostics
+plot.balance_diagnostics <- function(x,
+                                     type = c("love", "histogram", "variance"),
+                                     threshold = 0.1,
+                                     ...) {
+  type <- match.arg(type)
+
+  switch(type,
+    love = {
+      # Love plot (dot plot of standardized differences)
+      std_diffs <- x$var_stats$std_diff
+      vars <- x$var_stats$variable
+      n <- length(std_diffs)
+
+      # Order by absolute value
+      ord <- order(abs(std_diffs), decreasing = TRUE)
+      std_diffs <- std_diffs[ord]
+      vars <- vars[ord]
+
+      # Set up plot area
+      old_par <- graphics::par(mar = c(4, 8, 3, 2))
+      on.exit(graphics::par(old_par))
+
+      # Plot
+      graphics::plot(std_diffs, seq_len(n),
+                     xlim = range(c(-max(abs(std_diffs)) * 1.1, max(abs(std_diffs)) * 1.1, -threshold, threshold)),
+                     yaxt = "n",
+                     xlab = "Standardized Difference",
+                     ylab = "",
+                     main = "Balance: Standardized Differences",
+                     pch = 19,
+                     col = ifelse(abs(std_diffs) > threshold, "firebrick", "steelblue"),
+                     ...)
+      graphics::axis(2, at = seq_len(n), labels = vars, las = 1, cex.axis = 0.8)
+      graphics::abline(v = 0, lty = 1, col = "gray50")
+      graphics::abline(v = c(-threshold, threshold), lty = 2, col = "firebrick")
+    },
+    histogram = {
+      # Histogram of standardized differences
+      std_diffs <- abs(x$var_stats$std_diff)
+      graphics::hist(std_diffs,
+                     main = "Distribution of |Standardized Differences|",
+                     xlab = "|Standardized Difference|",
+                     col = "steelblue",
+                     border = "white",
+                     ...)
+      graphics::abline(v = threshold, lty = 2, col = "firebrick", lwd = 2)
+    },
+    variance = {
+      # Variance ratio plot
+      var_ratios <- x$var_stats$var_ratio
+      vars <- x$var_stats$variable
+      n <- length(var_ratios)
+
+      # Order by distance from 1
+      ord <- order(abs(log(var_ratios)), decreasing = TRUE)
+      var_ratios <- var_ratios[ord]
+      vars <- vars[ord]
+
+      old_par <- graphics::par(mar = c(4, 8, 3, 2))
+      on.exit(graphics::par(old_par))
+
+      graphics::plot(var_ratios, seq_len(n),
+                     xlim = c(0.5, max(2, max(var_ratios, na.rm = TRUE) * 1.1)),
+                     yaxt = "n",
+                     xlab = "Variance Ratio (left/right)",
+                     ylab = "",
+                     main = "Balance: Variance Ratios",
+                     pch = 19,
+                     col = ifelse(var_ratios < 0.5 | var_ratios > 2, "firebrick", "steelblue"),
+                     log = "x",
+                     ...)
+      graphics::axis(2, at = seq_len(n), labels = vars, las = 1, cex.axis = 0.8)
+      graphics::abline(v = 1, lty = 1, col = "gray50")
+      graphics::abline(v = c(0.5, 2), lty = 2, col = "firebrick")
+    }
+  )
+
+  invisible(x)
+}
 
 # Helper for NULL coalescing
 `%||%` <- function(x, y) {

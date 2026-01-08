@@ -121,8 +121,8 @@ reference:
       - pixel_morph_animate
       - starts_with("morph")
 
-  - title: "Print and Summary Methods"
-    desc: "S3 methods for displaying results"
+  - title: "Print, Summary and Plot Methods"
+    desc: "S3 methods for displaying and visualizing results"
     contents:
       - print.lap_solve_result
       - print.lap_solve_batch_result
@@ -135,6 +135,10 @@ reference:
       - print.variable_health
       - summary.lap_solve_kbest_result
       - summary.distance_object
+      - summary.matching_result
+      - summary.balance_diagnostics
+      - plot.matching_result
+      - plot.balance_diagnostics
 
 articles:
   - title: "Getting Started"

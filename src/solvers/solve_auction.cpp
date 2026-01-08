@@ -44,7 +44,7 @@ Rcpp::List prepare_cost_matrix_impl(NumericMatrix cost, bool maximize);
 Rcpp::List solve_auction_impl(NumericMatrix cost, bool maximize, double eps_in) {
   const int n = cost.nrow(), m = cost.ncol();
   if (n == 0) return make_result(IntegerVector(), 0.0);
-  if (n > m) Rcpp::stop("Infeasible: n > m");
+  if (n > m) LAP_ERROR("Infeasible: n > m");
 
   // Work (maybe flipped for maximize) + original (for reporting)
   List Wp = prepare_cost_matrix_impl(cost, maximize);
@@ -67,7 +67,7 @@ Rcpp::List solve_auction_impl(NumericMatrix cost, bool maximize, double eps_in) 
   // Quick infeasible check: any row with zero allowed neighbors?
   for (int i = 0; i < n; ++i) {
     if (row_ptr[i] == row_ptr[i + 1]) {
-      Rcpp::stop("Infeasible: row %d has no valid options", i + 1);
+      LAP_ERROR("Infeasible: row %d has no valid options", i + 1);
     }
   }
 
@@ -116,7 +116,7 @@ Rcpp::List solve_auction_impl(NumericMatrix cost, bool maximize, double eps_in) 
       if (val > best) { second = best; best = val; jbest = j; }
       else if (val > second) { second = val; }
     }
-    if (jbest < 0) Rcpp::stop("Infeasible");
+    if (jbest < 0) LAP_ERROR("Infeasible");
 
     double bid = (second == -INFINITY) ? (2.0 * eps) : (best - second + eps);
 
@@ -131,7 +131,7 @@ Rcpp::List solve_auction_impl(NumericMatrix cost, bool maximize, double eps_in) 
     }
     a_of_i[i] = jbest;
 
-    if (++reassign_guard > 200000000LL) Rcpp::stop("Auction: exceeded iteration guard");
+    if (++reassign_guard > 200000000LL) LAP_ERROR("Auction: exceeded iteration guard");
   }
 
   // Build result & compute true total on original costs
@@ -139,11 +139,11 @@ Rcpp::List solve_auction_impl(NumericMatrix cost, bool maximize, double eps_in) 
   double total = 0.0;
   for (int i = 0; i < n; ++i) {
     int j = a_of_i[i];
-    if (j < 0) Rcpp::stop("Infeasible: incomplete assignment");
+    if (j < 0) LAP_ERROR("Infeasible: incomplete assignment");
     match[i] = j + 1;
-    if (OMASK[i * m + j]) Rcpp::stop("Infeasible: chosen forbidden edge");
+    if (OMASK[i * m + j]) LAP_ERROR("Infeasible: chosen forbidden edge");
     double c = O[i * m + j];
-    if (!R_finite(c)) Rcpp::stop("Infeasible");
+    if (!R_finite(c)) LAP_ERROR("Infeasible");
     total += c;
   }
   return make_result(match, total);
@@ -175,7 +175,7 @@ Rcpp::List solve_auction_scaled_impl(Rcpp::NumericMatrix cost, bool maximize,
   if (n == 0) return make_result(IntegerVector(), 0.0);
 
   // C reference requires balanced graph (n == m). If n < m, pad with dummies.
-  if (n > m) stop("Infeasible: n > m");
+  if (n > m) LAP_ERROR("Infeasible: n > m");
 
   NumericMatrix padded_cost;
   bool needs_padding = (n < m);
@@ -312,7 +312,7 @@ Rcpp::List solve_auction_scaled_impl(Rcpp::NumericMatrix cost, bool maximize,
     long long iter = 0;
     while (!unmatched.empty()) {
       if (++iter > max_iter) {
-        stop("Auction(scaled): iteration guard at eps=%f, phase=%d", epsilon, phase);
+        LAP_ERROR("Auction(scaled): iteration guard at eps=%f, phase=%d", epsilon, phase);
       }
 
       int i = unmatched.back();
@@ -322,7 +322,7 @@ Rcpp::List solve_auction_scaled_impl(Rcpp::NumericMatrix cost, bool maximize,
       int best_j;
       find_best(i, best_rc, second_rc, best_j);
 
-      if (best_j < 0) stop("Infeasible: person %d has no valid neighbors", i + 1);
+      if (best_j < 0) LAP_ERROR("Infeasible: person %d has no valid neighbors", i + 1);
 
       // Compute gamma
       double gamma = (second_rc == INFINITY) ? 1e6 : (second_rc - best_rc);
@@ -346,11 +346,11 @@ Rcpp::List solve_auction_scaled_impl(Rcpp::NumericMatrix cost, bool maximize,
   double total = 0.0;
   for (int i = 0; i < n; ++i) {
     const int j = a_of_i[i];
-    if (j < 0) stop("Infeasible: incomplete assignment");
+    if (j < 0) LAP_ERROR("Infeasible: incomplete assignment");
     match[i] = j + 1;
-    if (OMASK[i * m + j]) stop("Infeasible: chosen forbidden edge");
+    if (OMASK[i * m + j]) LAP_ERROR("Infeasible: chosen forbidden edge");
     const double c = O[i * m + j];
-    if (!R_finite(c)) stop("Infeasible");
+    if (!R_finite(c)) LAP_ERROR("Infeasible");
     total += c;
   }
 
@@ -401,7 +401,7 @@ Rcpp::List solve_auction_gauss_seidel_impl(NumericMatrix cost, bool maximize, do
   // Quick infeasible check
   for (int i = 0; i < n; ++i) {
     if (row_ptr[i] == row_ptr[i + 1]) {
-      Rcpp::stop("Infeasible: row %d has no valid options", i + 1);
+      LAP_ERROR("Infeasible: row %d has no valid options", i + 1);
     }
   }
 
@@ -462,7 +462,7 @@ Rcpp::List solve_auction_gauss_seidel_impl(NumericMatrix cost, bool maximize, do
         else if (val > second) { second = val; }
       }
 
-      if (jbest < 0) Rcpp::stop("Infeasible: no valid objects for person %d", i + 1);
+      if (jbest < 0) LAP_ERROR("Infeasible: no valid objects for person %d", i + 1);
 
       // Compute bid increment and update price immediately (GS difference)
       double bid = (second == -INFINITY) ? (2.0 * eps) : (best - second + eps);
@@ -478,7 +478,7 @@ Rcpp::List solve_auction_gauss_seidel_impl(NumericMatrix cost, bool maximize, do
       }
 
       if (++total_bids > max_bids) {
-        Rcpp::stop("Auction (Gauss-Seidel): exceeded iteration guard");
+        LAP_ERROR("Auction (Gauss-Seidel): exceeded iteration guard");
       }
     }
   }
@@ -488,13 +488,13 @@ Rcpp::List solve_auction_gauss_seidel_impl(NumericMatrix cost, bool maximize, do
   double total = 0.0;
   for (int i = 0; i < n; ++i) {
     int j = a_of_i[i];
-    if (j < 0) Rcpp::stop("Infeasible: incomplete assignment");
+    if (j < 0) LAP_ERROR("Infeasible: incomplete assignment");
     match_work[i] = j + 1;  // 1-based
 
     // Compute cost on original scale
-    if (OMASK[i * m + j]) Rcpp::stop("Infeasible: chosen forbidden edge");
+    if (OMASK[i * m + j]) LAP_ERROR("Infeasible: chosen forbidden edge");
     double c = O[i * m + j];
-    if (!R_finite(c)) Rcpp::stop("Infeasible");
+    if (!R_finite(c)) LAP_ERROR("Infeasible");
     total += c;
   }
 

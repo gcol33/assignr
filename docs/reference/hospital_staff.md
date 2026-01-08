@@ -13,41 +13,49 @@ hospital_staff
 
 ## Format
 
-A list containing several related datasets:
+A list containing eight related datasets:
 
 - basic_costs:
 
-  A 10x10 cost matrix for assigning 10 nurses to 10 shifts. Lower values
-  indicate better fit (less overtime, matches skills).
+  A 10x10 numeric cost matrix for assigning 10 nurses to 10 shifts.
+  Values range from approximately 1-15, where lower values indicate
+  better fit (less overtime, matches skills, respects preferences). Use
+  with
+  [`lap_solve()`](https://gcol33.github.io/couplr/reference/lap_solve.md)
+  for basic assignment.
 
 - preferences:
 
-  A 10x10 preference matrix (0-10 scale, higher = more preferred). Use
-  with `maximize = TRUE`.
+  A 10x10 numeric preference matrix on a 0-10 scale, where higher values
+  indicate stronger nurse preference for a shift. Use with
+  `lap_solve(..., maximize = TRUE)` to optimize preferences rather than
+  minimize costs.
 
 - schedule_df:
 
-  A tibble with 100 rows (10 nurses x 10 shifts) containing:
+  A tibble with 100 rows (10 nurses x 10 shifts) in long format for data
+  frame workflows:
 
   nurse_id
 
-  :   Nurse identifier (1-10)
+  :   Integer 1-10. Unique identifier for each nurse.
 
   shift_id
 
-  :   Shift identifier (1-10)
+  :   Integer 1-10. Unique identifier for each shift.
 
   cost
 
-  :   Assignment cost
+  :   Numeric. Assignment cost (same values as basic_costs).
 
   preference
 
-  :   Nurse preference score (0-10)
+  :   Numeric 0-10. Nurse preference score.
 
   skill_match
 
-  :   Whether nurse skills match shift needs (0/1)
+  :   Integer 0/1. Binary indicator: 1 if nurse skills match shift
+      requirements, 0 otherwise.
 
 - nurses:
 
@@ -55,23 +63,25 @@ A list containing several related datasets:
 
   nurse_id
 
-  :   Nurse identifier (1-10)
+  :   Integer 1-10. Links to schedule_df and basic_costs rows.
 
   experience_years
 
-  :   Years of experience (1-20)
+  :   Numeric 1-20. Years of nursing experience.
 
   department
 
-  :   Primary department (ICU, ER, General, Pediatrics)
+  :   Character. Primary department: "ICU", "ER", "General", or
+      "Pediatrics".
 
   shift_preference
 
-  :   Preferred shift type (day, evening, night)
+  :   Character. Preferred shift type: "day", "evening", or "night".
 
   certification_level
 
-  :   Certification level (1-3)
+  :   Integer 1-3. Certification level where 3 is highest (e.g., 1=RN,
+      2=BSN, 3=MSN).
 
 - shifts:
 
@@ -79,44 +89,99 @@ A list containing several related datasets:
 
   shift_id
 
-  :   Shift identifier (1-10)
+  :   Integer 1-10. Links to schedule_df and basic_costs cols.
 
   department
 
-  :   Department needing coverage
+  :   Character. Department needing coverage.
 
   shift_type
 
-  :   Shift type (day, evening, night)
+  :   Character. Shift type: "day", "evening", or "night".
 
   min_experience
 
-  :   Minimum years of experience required
+  :   Numeric. Minimum years of experience required.
 
   min_certification
 
-  :   Minimum certification level required
+  :   Integer 1-3. Minimum certification level.
 
 - weekly_df:
 
-  A tibble for batch solving: 5 days x 10 nurses x 10 shifts. Contains
-  columns: day, nurse_id, shift_id, cost, preference.
+  A tibble for batch solving with 500 rows (5 days x 10 nurses x 10
+  shifts):
+
+  day
+
+  :   Character. Day of week: "Mon", "Tue", "Wed", "Thu", "Fri".
+
+  nurse_id
+
+  :   Integer 1-10. Nurse identifier.
+
+  shift_id
+
+  :   Integer 1-10. Shift identifier.
+
+  cost
+
+  :   Numeric. Daily assignment cost (varies by day).
+
+  preference
+
+  :   Numeric 0-10. Daily preference score.
+
+  Use with `group_by(day)` for solving each day's schedule.
 
 - nurses_extended:
 
-  A tibble with 200 nurses for matching examples. Contains: nurse_id,
-  age, experience_years, hourly_rate, department, certification_level,
-  is_fulltime.
+  A tibble with 200 nurses for matching examples, representing a
+  treatment group (e.g., full-time nurses):
+
+  nurse_id
+
+  :   Integer 1-200. Unique identifier.
+
+  age
+
+  :   Numeric 22-65. Nurse age in years.
+
+  experience_years
+
+  :   Numeric 0-40. Years of nursing experience.
+
+  hourly_rate
+
+  :   Numeric 25-75. Hourly wage in dollars.
+
+  department
+
+  :   Character. Primary department assignment.
+
+  certification_level
+
+  :   Integer 1-3. Certification level.
+
+  is_fulltime
+
+  :   Logical. TRUE for full-time status.
 
 - controls_extended:
 
-  A tibble with 300 potential control nurses for matching examples. Same
-  structure as nurses_extended.
+  A tibble with 300 potential control nurses (e.g., part-time or
+  registry nurses) for matching. Same structure as nurses_extended.
+  Designed to have systematic differences from nurses_extended (older,
+  less experience on average) to demonstrate matching's ability to
+  create comparable groups.
 
 ## Details
 
 This dataset is used throughout the couplr documentation to provide a
-consistent, realistic example that evolves in complexity.
+consistent, realistic example that evolves in complexity. It supports
+three use cases: (1) basic LAP solving with cost matrices, (2) batch
+solving across multiple days, and (3) matching workflows comparing nurse
+groups.
 
 The dataset is designed to demonstrate progressively complex scenarios:
 

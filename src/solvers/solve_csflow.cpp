@@ -131,7 +131,7 @@ Rcpp::List solve_csflow_impl(NumericMatrix cost, bool maximize) {
       int k = i*m + j;
       if (Mnv[k] == 0 && std::isfinite(Wnv[k])) { ok = true; break; }
     }
-    if (!ok) stop("Infeasible: row %d has no allowed edges", i+1);
+    if (!ok) LAP_ERROR("Infeasible: row %d has no allowed edges", i+1);
   }
 
   // Build flow network on work (n <= m always holds here)
@@ -159,7 +159,7 @@ Rcpp::List solve_csflow_impl(NumericMatrix cost, bool maximize) {
 
   auto result = mf.min_cost_max_flow(S, T, n);
   int pushed = result.first;
-  if (pushed < n) stop("Infeasible: only %d/%d units of flow sent", pushed, n);
+  if (pushed < n) LAP_ERROR("Infeasible: only %d/%d units of flow sent", pushed, n);
 
   // Recover matching in work orientation (length n)
   IntegerVector match_work(n); std::fill(match_work.begin(), match_work.end(), 0);
@@ -183,9 +183,9 @@ Rcpp::List solve_csflow_impl(NumericMatrix cost, bool maximize) {
   for (int i = 0; i < n; ++i) {
     int j = match_work[i] - 1;
     int k = i*m + j;
-    if (Monv[k]) stop("Infeasible: chosen forbidden edge");
+    if (Monv[k]) LAP_ERROR("Infeasible: chosen forbidden edge");
     double c = Onv[k];
-    if (!std::isfinite(c)) stop("Infeasible");
+    if (!std::isfinite(c)) LAP_ERROR("Infeasible");
     total += c;
   }
 

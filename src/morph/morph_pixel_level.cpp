@@ -13,6 +13,8 @@
 //       Spatial distances are normalized to [0..1] by dividing by the image diagonal.
 //       This makes alpha/beta commensurate: alpha=1, beta in [0,1] behaves as expected.
 //
+
+#include "../core/lap_utils.h"
 // INDEXING CONVENTION: All functions use COLUMN-MAJOR indexing to match R's planar data layout.
 //       For an image with height H and width W:
 //       - Linear index: i = x*H + y
@@ -489,10 +491,10 @@ Rcpp::List morph_pixel_level_impl(const NumericVector& pixelsA,
 
   // Basic size checks
   if ((int)pixelsA.size() != HW * 3 || (int)pixelsB.size() != HW * 3) {
-    Rcpp::stop("pixelsA and pixelsB must be length H*W*3.");
+    LAP_ERROR("pixelsA and pixelsB must be length H*W*3.");
   }
   if ((int)assignment.size() != N) {
-    Rcpp::stop("assignment must have length H*W.");
+    LAP_ERROR("assignment must have length H*W.");
   }
 
   Rcpp::List frames(n_frames);
@@ -517,7 +519,7 @@ Rcpp::List morph_pixel_level_impl(const NumericVector& pixelsA,
     for (int i = 0; i < HW; ++i) {
       int j = assignment[i];  // 0-based destination
       if (j < 0 || j >= HW) {
-        Rcpp::stop("assignment index out of range.");
+        LAP_ERROR("assignment index out of range.");
       }
       
       // Check for overlaps
@@ -586,7 +588,7 @@ Rcpp::List morph_pixel_level_impl(const NumericVector& pixelsA,
       for (int i = 0; i < N; ++i) {
         int j = assignment[i];  // 0-based destination
         if (j < 0 || j >= N) {
-          Rcpp::stop("assignment index out of range.");
+          LAP_ERROR("assignment index out of range.");
         }
         
         // Check for overlaps (multiple sources → same destination)
@@ -633,7 +635,7 @@ Rcpp::List morph_pixel_level_impl(const NumericVector& pixelsA,
       for (int i = 0; i < N; ++i) {
         int j = assignment[i];  // 0-based
         if (j < 0 || j >= N) {
-          Rcpp::stop("assignment index out of range.");
+          LAP_ERROR("assignment index out of range.");
         }
 
         // Column-major index: i = x*H + y

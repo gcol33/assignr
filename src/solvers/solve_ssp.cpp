@@ -102,7 +102,7 @@ Rcpp::List solve_ssp_impl(NumericMatrix cost, bool maximize) {
   int flow = 0;
   std::vector<int> pv_v, pv_e;
   while (flow < n) {
-    if (!dijkstra(pv_v, pv_e)) stop("Infeasible: could not send full flow");
+    if (!dijkstra(pv_v, pv_e)) LAP_ERROR("Infeasible: could not send full flow");
     // Augment along path S->...->T
     int v = T;
     while (v != S) {
@@ -126,16 +126,16 @@ Rcpp::List solve_ssp_impl(NumericMatrix cost, bool maximize) {
         break;
       }
     }
-    if (match_work[i] == 0) stop("Infeasible: incomplete assignment");
+    if (match_work[i] == 0) LAP_ERROR("Infeasible: incomplete assignment");
   }
 
   // Compute total on original costs (in work orientation)
   double total = 0.0;
   for (int i = 0; i < n; ++i) {
     int j = match_work[i] - 1;
-    if (MO[i*m + j]) stop("Infeasible: chosen forbidden edge");
+    if (MO[i*m + j]) LAP_ERROR("Infeasible: chosen forbidden edge");
     double c = O[i*m + j];
-    if (!R_finite(c)) stop("Infeasible");
+    if (!R_finite(c)) LAP_ERROR("Infeasible");
     total += c;
   }
 
