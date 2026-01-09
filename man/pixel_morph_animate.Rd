@@ -144,8 +144,10 @@ A warning is issued if overlaps/holes are detected in the final frame.
 if (requireNamespace("magick", quietly = TRUE)) {
   imgA <- system.file("extdata/icons/circleA_40.png", package = "couplr")
   imgB <- system.file("extdata/icons/circleB_40.png", package = "couplr")
-  outfile <- tempfile(fileext = ".gif")
-  pixel_morph_animate(imgA, imgB, outfile = outfile, n_frames = 4, show = FALSE)
+  if (nzchar(imgA) && nzchar(imgB)) {
+    outfile <- tempfile(fileext = ".gif")
+    pixel_morph_animate(imgA, imgB, outfile = outfile, n_frames = 4, show = FALSE)
+  }
 }
 
 }
