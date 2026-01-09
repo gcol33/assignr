@@ -103,7 +103,9 @@ For guaranteed pixel-perfect results, use:
 if (requireNamespace("magick", quietly = TRUE)) {
   imgA <- system.file("extdata/icons/circleA_40.png", package = "couplr")
   imgB <- system.file("extdata/icons/circleB_40.png", package = "couplr")
-  result <- pixel_morph(imgA, imgB, n_frames = 4, show = FALSE)
+  if (nzchar(imgA) && nzchar(imgB)) {
+    result <- pixel_morph(imgA, imgB, n_frames = 4, show = FALSE)
+  }
 }
 
 }
