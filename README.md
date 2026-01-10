@@ -212,10 +212,10 @@ pixel_morph_animate(morph, "output.gif")
 
 ## Documentation
 
-- `vignette("getting-started", package = "couplr")`
-- `vignette("algorithms", package = "couplr")`
-- `vignette("matching-workflows", package = "couplr")`
-- `vignette("pixel-morphing", package = "couplr")`
+- [Getting Started](https://gillescolling.com/couplr/articles/getting-started.html)
+- [Algorithm Details](https://gillescolling.com/couplr/articles/algorithms.html)
+- [Matching Workflows](https://gillescolling.com/couplr/articles/matching-workflows.html)
+- [Pixel Morphing](https://gillescolling.com/couplr/articles/pixel-morphing.html)
 
 ## Support
 
