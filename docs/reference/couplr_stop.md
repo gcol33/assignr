@@ -7,3 +7,7 @@ Stop with a fun, themed error message
 ``` r
 couplr_stop(..., call. = FALSE)
 ```
+
+## Value
+
+No return value, throws an error.

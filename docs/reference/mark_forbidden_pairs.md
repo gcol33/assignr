@@ -7,3 +7,7 @@ Generic function to mark specific pairs as forbidden.
 ``` r
 mark_forbidden_pairs(cost_matrix, forbidden_indices)
 ```
+
+## Value
+
+Modified cost matrix with forbidden pairs marked.

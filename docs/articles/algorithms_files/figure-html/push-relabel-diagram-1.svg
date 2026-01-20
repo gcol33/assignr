@@ -82,7 +82,7 @@
 <polygon points='176.50,287.43 183.86,283.18 176.50,278.93 ' style='stroke-width: 1.07; stroke: #B8B8B8; stroke-linecap: butt; fill: #B8B8B8;' />
 <line x1='215.18' y1='283.18' x2='229.01' y2='283.18' style='stroke-width: 1.07; stroke: #B8B8B8; stroke-linecap: butt;' />
 <polygon points='221.64,287.43 229.01,283.18 221.64,278.93 ' style='stroke-width: 1.07; stroke: #B8B8B8; stroke-linecap: butt; fill: #B8B8B8;' />
-<text class='preserve-color' x='144.58' y='286.05' style='font-size: 8.00px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='18.25px' lengthAdjust='spacingAndGlyphs'>Push</text>
+<text x='144.58' y='286.05' style='font-size: 8.00px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='18.25px' lengthAdjust='spacingAndGlyphs'>Push</text>
 <text x='191.07' y='286.05' style='font-size: 8.00px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='16.91px' lengthAdjust='spacingAndGlyphs'>Flow</text>
 <text x='236.21' y='286.05' style='font-size: 8.00px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='32.36px' lengthAdjust='spacingAndGlyphs'>Available</text>
 <text x='290.49' y='294.77' style='font-size: 9.00px;fill: #3E3F3A; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='21.50px' lengthAdjust='spacingAndGlyphs'>Node</text>

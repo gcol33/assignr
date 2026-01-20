@@ -6,6 +6,9 @@
 \usage{
 couplr_warn(..., call. = FALSE)
 }
+\value{
+No return value, called for side effects (issues a warning).
+}
 \description{
 Warn with a fun, themed warning message
 }

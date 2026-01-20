@@ -6,6 +6,9 @@
 \usage{
 apply_scaling(left_mat, right_mat, method = "standardize")
 }
+\value{
+List with scaled left/right matrices and scaling parameters.
+}
 \description{
 Apply scaling to matching variables
 }

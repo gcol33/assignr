@@ -19,6 +19,9 @@ match_couples_single(
   check_costs = TRUE
 )
 }
+\value{
+List with pairs tibble and matching info.
+}
 \description{
 Match without blocking (single problem)
 }

@@ -7,3 +7,7 @@ Apply weights to matching variables
 ``` r
 apply_weights(mat, weights)
 ```
+
+## Value
+
+Numeric matrix with columns weighted.

@@ -14,6 +14,7 @@ NULL
 # Message styling helpers -----------------------------------------------------
 
 #' Check if emoji should be used
+#' @return Logical indicating whether emoji should be used.
 #' @keywords internal
 use_emoji <- function() {
   # Check if user has disabled emoji via option
@@ -25,6 +26,7 @@ use_emoji <- function() {
 }
 
 #' Get a themed emoji
+#' @return Character string with the emoji (or empty string if emoji disabled).
 #' @keywords internal
 couplr_emoji <- function(type = c("error", "warning", "info", "success",
                                    "heart", "broken", "sparkles", "search",
@@ -54,6 +56,7 @@ couplr_emoji <- function(type = c("error", "warning", "info", "success",
 # Couple-themed error message helpers -----------------------------------------
 
 #' Stop with a fun, themed error message
+#' @return No return value, throws an error.
 #' @keywords internal
 couplr_stop <- function(..., call. = FALSE) {
   msg <- paste0(couplr_emoji("error"), ...)
@@ -61,6 +64,7 @@ couplr_stop <- function(..., call. = FALSE) {
 }
 
 #' Warn with a fun, themed warning message
+#' @return No return value, called for side effects (issues a warning).
 #' @keywords internal
 couplr_warn <- function(..., call. = FALSE) {
   msg <- paste0(couplr_emoji("warning"), ...)
@@ -68,6 +72,7 @@ couplr_warn <- function(..., call. = FALSE) {
 }
 
 #' Info message with emoji
+#' @return No return value, called for side effects (issues a message).
 #' @keywords internal
 couplr_inform <- function(...) {
   msg <- paste0(couplr_emoji("info"), ...)
@@ -75,6 +80,7 @@ couplr_inform <- function(...) {
 }
 
 #' Success message with emoji
+#' @return No return value, called for side effects (issues a message).
 #' @keywords internal
 couplr_success <- function(...) {
   msg <- paste0(couplr_emoji("success"), ...)
@@ -84,6 +90,7 @@ couplr_success <- function(...) {
 # Specific error messages -----------------------------------------------------
 
 #' Missing data error
+#' @return No return value, throws an error.
 #' @keywords internal
 err_missing_data <- function(dataset = "left") {
   couplr_stop(
@@ -93,6 +100,7 @@ err_missing_data <- function(dataset = "left") {
 }
 
 #' Missing variables error
+#' @return No return value, throws an error.
 #' @keywords internal
 err_missing_vars <- function(vars, dataset = "left") {
   couplr_stop(
@@ -103,6 +111,7 @@ err_missing_vars <- function(vars, dataset = "left") {
 }
 
 #' Invalid parameter error
+#' @return No return value, throws an error.
 #' @keywords internal
 err_invalid_param <- function(param, value, expected) {
   couplr_stop(
@@ -112,6 +121,7 @@ err_invalid_param <- function(param, value, expected) {
 }
 
 #' All pairs forbidden error
+#' @return No return value, throws an error.
 #' @keywords internal
 err_no_valid_pairs <- function(reason = NULL) {
   msg <- paste0(
@@ -136,6 +146,7 @@ err_no_valid_pairs <- function(reason = NULL) {
 }
 
 #' Constant variable warning
+#' @return No return value, called for side effects (issues a warning).
 #' @keywords internal
 warn_constant_var <- function(var) {
   couplr_warn(
@@ -146,6 +157,7 @@ warn_constant_var <- function(var) {
 }
 
 #' Too many zeros warning
+#' @return No return value, called for side effects (issues a warning).
 #' @keywords internal
 warn_many_zeros <- function(pct, n_zeros) {
   couplr_warn(
@@ -159,6 +171,7 @@ warn_many_zeros <- function(pct, n_zeros) {
 }
 
 #' Extreme cost ratio warning
+#' @return No return value, called for side effects (issues a warning).
 #' @keywords internal
 warn_extreme_costs <- function(p95, p99, ratio, problem_vars = NULL) {
   msg <- paste0(
@@ -188,6 +201,7 @@ warn_extreme_costs <- function(p95, p99, ratio, problem_vars = NULL) {
 }
 
 #' Many forbidden pairs warning
+#' @return No return value, called for side effects (issues a warning).
 #' @keywords internal
 warn_many_forbidden <- function(pct_forbidden, n_valid, n_left) {
   severity <- if (pct_forbidden > 90) {
@@ -216,6 +230,7 @@ warn_many_forbidden <- function(pct_forbidden, n_valid, n_left) {
 }
 
 #' All distances identical warning
+#' @return No return value, called for side effects (issues a warning).
 #' @keywords internal
 warn_constant_distance <- function(value) {
   couplr_warn(
@@ -233,6 +248,7 @@ warn_constant_distance <- function(value) {
 }
 
 #' Low match rate info
+#' @return No return value, called for side effects (issues a message or warning).
 #' @keywords internal
 info_low_match_rate <- function(n_matched, n_left, pct) {
   if (pct < 25) {
@@ -254,6 +270,7 @@ info_low_match_rate <- function(n_matched, n_left, pct) {
 }
 
 #' High distance matches warning
+#' @return No return value, called for side effects (issues a warning).
 #' @keywords internal
 warn_poor_quality <- function(pct_poor, threshold) {
   couplr_warn(
@@ -269,6 +286,7 @@ warn_poor_quality <- function(pct_poor, threshold) {
 }
 
 #' Parallel package missing warning (reuse from matching_parallel.R)
+#' @return No return value, called for side effects (issues a warning).
 #' @keywords internal
 warn_parallel_unavailable <- function() {
   couplr_warn(
@@ -279,6 +297,7 @@ warn_parallel_unavailable <- function() {
 }
 
 #' Perfect balance success message
+#' @return No return value, called for side effects (issues a message).
 #' @keywords internal
 success_good_balance <- function(mean_std_diff) {
   if (mean_std_diff < 0.1) {

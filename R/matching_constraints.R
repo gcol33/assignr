@@ -4,11 +4,14 @@
 
 #' Large value for forbidden pairs
 #'
+#' A numeric constant used to mark forbidden pairs in cost matrices.
+#' @format Numeric value (half of .Machine$double.xmax).
 #' @keywords internal
 BIG_COST <- .Machine$double.xmax / 2
 
 #' Apply maximum distance constraint
 #'
+#' @return Modified cost matrix with forbidden pairs marked.
 #' @keywords internal
 apply_max_distance <- function(cost_matrix, max_distance = Inf) {
   if (is.null(max_distance)) {
@@ -37,6 +40,7 @@ apply_max_distance <- function(cost_matrix, max_distance = Inf) {
 #'
 #' Calipers impose per-variable maximum absolute differences.
 #'
+#' @return Modified cost matrix with forbidden pairs marked.
 #' @keywords internal
 apply_calipers <- function(cost_matrix, left, right, calipers, vars) {
   if (is.null(calipers)) {
@@ -75,6 +79,7 @@ apply_calipers <- function(cost_matrix, left, right, calipers, vars) {
 #'
 #' Generic function to mark specific pairs as forbidden.
 #'
+#' @return Modified cost matrix with forbidden pairs marked.
 #' @keywords internal
 mark_forbidden_pairs <- function(cost_matrix, forbidden_indices) {
   if (is.null(forbidden_indices) || nrow(forbidden_indices) == 0) {
@@ -95,6 +100,7 @@ mark_forbidden_pairs <- function(cost_matrix, forbidden_indices) {
 #'
 #' Main entry point for applying constraints.
 #'
+#' @return Modified cost matrix with all constraints applied.
 #' @keywords internal
 apply_all_constraints <- function(cost_matrix, left, right, vars,
                                   max_distance = Inf, calipers = NULL,
@@ -113,6 +119,7 @@ apply_all_constraints <- function(cost_matrix, left, right, vars,
 
 #' Check if any valid pairs exist
 #'
+#' @return Logical indicating whether any valid pairs exist.
 #' @keywords internal
 has_valid_pairs <- function(cost_matrix) {
   any(is.finite(cost_matrix) & cost_matrix < BIG_COST)
@@ -120,6 +127,7 @@ has_valid_pairs <- function(cost_matrix) {
 
 #' Count valid pairs in cost matrix
 #'
+#' @return Integer count of valid (non-forbidden) pairs.
 #' @keywords internal
 count_valid_pairs <- function(cost_matrix) {
   sum(is.finite(cost_matrix) & cost_matrix < BIG_COST)

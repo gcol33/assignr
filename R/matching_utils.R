@@ -4,6 +4,7 @@
 
 #' Validate matching inputs
 #'
+#' @return Invisibly returns TRUE if validation passes; otherwise throws an error.
 #' @keywords internal
 validate_matching_inputs <- function(left, right, vars = NULL) {
   # Check that inputs are data frames or can be coerced
@@ -52,6 +53,7 @@ validate_matching_inputs <- function(left, right, vars = NULL) {
 
 #' Extract and standardize IDs from data frames
 #'
+#' @return Character vector of IDs.
 #' @keywords internal
 extract_ids <- function(df, prefix = "id") {
   # If there's an 'id' column, use it
@@ -71,6 +73,7 @@ extract_ids <- function(df, prefix = "id") {
 
 #' Extract matching variables from data frame
 #'
+#' @return Numeric matrix of matching variables.
 #' @keywords internal
 extract_matching_vars <- function(df, vars) {
   mat <- as.matrix(df[, vars, drop = FALSE])
@@ -91,6 +94,7 @@ extract_matching_vars <- function(df, vars) {
 
 #' Standardize block ID column name
 #'
+#' @return Character string with column name, or NULL if not found.
 #' @keywords internal
 get_block_id_column <- function(df) {
   # Check for common block ID column names
@@ -106,6 +110,7 @@ get_block_id_column <- function(df) {
 
 #' Check if data frame has blocking information
 #'
+#' @return Logical indicating whether data frame has block ID column.
 #' @keywords internal
 has_blocks <- function(df) {
   !is.null(get_block_id_column(df))
@@ -113,6 +118,7 @@ has_blocks <- function(df) {
 
 #' Validate weights parameter
 #'
+#' @return Numeric vector of validated weights.
 #' @keywords internal
 validate_weights <- function(weights, vars) {
   if (is.null(weights)) {
@@ -149,6 +155,7 @@ validate_weights <- function(weights, vars) {
 
 #' Validate calipers parameter
 #'
+#' @return Validated calipers (list or named numeric), or NULL if none.
 #' @keywords internal
 validate_calipers <- function(calipers, vars) {
   if (is.null(calipers)) {

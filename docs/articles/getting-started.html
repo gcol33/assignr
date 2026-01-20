@@ -14,6 +14,20 @@
 <meta property="og:title" content="Quick Start">
 </head>
 <body>
+<p>
+
+
+
+
+
+
+
+
+  pkgdown/mathjax-config.html
+
+  
+
+  </p>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -21,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">couplr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +103,7 @@
                         <h4 data-toc-skip class="author">Gilles
 Colling</h4>
             
-            <h4 data-toc-skip class="date">2026-01-09</h4>
+            <h4 data-toc-skip class="date">2026-01-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gcol33/couplr/blob/HEAD/vignettes/getting-started.Rmd" class="external-link"><code>vignettes/getting-started.Rmd</code></a></small>
       <div class="d-none name"><code>getting-started.Rmd</code></div>
@@ -106,10 +120,10 @@ finds the best one-to-one pairing based on similarity across variables
 you specify.</p>
 <p><strong>Common use cases:</strong></p>
 <ul>
-<li>Matching treated patients to similar controls in observational
-studies</li>
-<li>Pairing survey respondents for comparison</li>
-<li>Creating balanced samples for causal inference</li>
+<li><p>Matching treated patients to similar controls in observational
+studies</p></li>
+<li><p>Pairing survey respondents for comparison</p></li>
+<li><p>Creating balanced samples for causal inference</p></li>
 </ul>
 <div class="section level3">
 <h3 id="documentation-roadmap">Documentation Roadmap<a class="anchor" aria-label="anchor" href="#documentation-roadmap"></a>
@@ -199,11 +213,12 @@ matches your use case.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 6       36          0.130    -<span style="color: #BB0000;">1.43</span>          62.2</span></span></code></pre></div>
 <p><strong>What happened:</strong></p>
 <ol style="list-style-type: decimal">
-<li>couplr calculated how similar each treatment unit is to each control
-unit</li>
-<li>It found the optimal one-to-one pairing that minimizes total
-distance</li>
-<li>Each treatment unit gets matched to exactly one control unit</li>
+<li><p>couplr calculated how similar each treatment unit is to each
+control unit</p></li>
+<li><p>It found the optimal one-to-one pairing that minimizes total
+distance</p></li>
+<li><p>Each treatment unit gets matched to exactly one control
+unit</p></li>
 </ol>
 <div class="section level3">
 <h3 id="understanding-the-output">Understanding the Output<a class="anchor" aria-label="anchor" href="#understanding-the-output"></a>
@@ -233,13 +248,11 @@ distance</li>
 <span><span class="co">#&gt; [1] 50</span></span></code></pre></div>
 <p>The <code>result$pairs</code> table contains:</p>
 <ul>
-<li>
-<code>left_id</code>: Row number from the treatment group</li>
-<li>
-<code>right_id</code>: Row number from the control group</li>
-<li>
-<code>distance</code>: How different the matched units are (lower =
-more similar)</li>
+<li><p><code>left_id</code>: Row number from the treatment
+group</p></li>
+<li><p><code>right_id</code>: Row number from the control group</p></li>
+<li><p><code>distance</code>: How different the matched units are (lower
+= more similar)</p></li>
 </ul>
 <hr>
 </div>
@@ -780,15 +793,13 @@ all results in one tidy table.</p>
 <h2 id="see-also">See Also<a class="anchor" aria-label="anchor" href="#see-also"></a>
 </h2>
 <ul>
-<li>
-<code><a href="../reference/match_couples.html">?match_couples</a></code> - Optimal matching function
-reference</li>
-<li>
-<code><a href="../reference/greedy_couples.html">?greedy_couples</a></code> - Fast approximate matching</li>
-<li>
-<code><a href="../reference/balance_diagnostics.html">?balance_diagnostics</a></code> - Formal balance assessment</li>
-<li>
-<code><a href="../reference/lap_solve.html">?lap_solve</a></code> - Direct assignment problem solving</li>
+<li><p><code><a href="../reference/match_couples.html">?match_couples</a></code> - Optimal matching function
+reference</p></li>
+<li><p><code><a href="../reference/greedy_couples.html">?greedy_couples</a></code> - Fast approximate matching</p></li>
+<li><p><code><a href="../reference/balance_diagnostics.html">?balance_diagnostics</a></code> - Formal balance
+assessment</p></li>
+<li><p><code><a href="../reference/lap_solve.html">?lap_solve</a></code> - Direct assignment problem
+solving</p></li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -812,7 +823,8 @@ reference</li>
 
 
 
-  <script>
+  
+<script>
 /* SVG Copy Button Functionality */
 (function() {
   "use strict";

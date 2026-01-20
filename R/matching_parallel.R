@@ -84,6 +84,7 @@ setup_parallel <- function(parallel = FALSE, n_workers = NULL) {
 #' Restore original parallel plan
 #'
 #' @param parallel_state State from setup_parallel()
+#' @return No return value, called for side effects (restores parallel plan).
 #' @keywords internal
 restore_parallel <- function(parallel_state) {
   if (parallel_state$setup && !is.null(parallel_state$original_plan)) {

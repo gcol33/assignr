@@ -7,3 +7,7 @@ Extract and standardize IDs from data frames
 ``` r
 extract_ids(df, prefix = "id")
 ```
+
+## Value
+
+Character vector of IDs.

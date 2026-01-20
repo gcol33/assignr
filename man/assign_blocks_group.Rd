@@ -6,6 +6,9 @@
 \usage{
 assign_blocks_group(left, right, block_by)
 }
+\value{
+List with modified left/right data frames (with block_id) and n_blocks_initial.
+}
 \description{
 Assign blocks based on grouping variable(s)
 }

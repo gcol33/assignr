@@ -3,6 +3,9 @@
 \name{group_by}
 \alias{group_by}
 \title{Re-export of dplyr::group_by}
+\value{
+See \code{\link[dplyr]{group_by}}.
+}
 \description{
 Re-export of dplyr::group_by
 }

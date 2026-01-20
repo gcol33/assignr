@@ -6,6 +6,9 @@
 \usage{
 assign_blocks_cluster(left, right, block_vars, method, n_blocks, ...)
 }
+\value{
+List with modified left/right data frames (with block_id) and n_blocks_initial.
+}
 \description{
 Assign blocks using clustering
 }

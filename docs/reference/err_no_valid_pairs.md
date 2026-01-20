@@ -7,3 +7,7 @@ All pairs forbidden error
 ``` r
 err_no_valid_pairs(reason = NULL)
 ```
+
+## Value
+
+No return value, throws an error.

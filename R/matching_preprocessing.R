@@ -452,6 +452,7 @@ preprocess_matching_vars <- function(left, right, vars,
 #' @param x A variable_health object
 #' @param ... Additional arguments (ignored)
 #'
+#' @return Invisibly returns the input object `x`.
 #' @export
 #' @method print variable_health
 print.variable_health <- function(x, ...) {
@@ -486,6 +487,7 @@ print.variable_health <- function(x, ...) {
 #' @param x A preprocessing_result object
 #' @param ... Additional arguments (ignored)
 #'
+#' @return Invisibly returns the input object `x`.
 #' @export
 #' @method print preprocessing_result
 print.preprocessing_result <- function(x, ...) {

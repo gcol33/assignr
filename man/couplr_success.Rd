@@ -6,6 +6,9 @@
 \usage{
 couplr_success(...)
 }
+\value{
+No return value, called for side effects (issues a message).
+}
 \description{
 Success message with emoji
 }

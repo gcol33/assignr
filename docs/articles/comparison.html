@@ -14,6 +14,20 @@
 <meta property="og:title" content="Comparison with Alternatives">
 </head>
 <body>
+<p>
+
+
+
+
+
+
+
+
+  pkgdown/mathjax-config.html
+
+  
+
+  </p>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -21,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">couplr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +103,7 @@
                         <h4 data-toc-skip class="author">Gilles
 Colling</h4>
             
-            <h4 data-toc-skip class="date">2026-01-09</h4>
+            <h4 data-toc-skip class="date">2026-01-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gcol33/couplr/blob/HEAD/vignettes/comparison.Rmd" class="external-link"><code>vignettes/comparison.Rmd</code></a></small>
       <div class="d-none name"><code>comparison.Rmd</code></div>
@@ -102,10 +116,15 @@ Colling</h4>
 </h2>
 <p>This vignette compares couplr’s approach to matching with established
 R packages: 1. <strong>MatchIt</strong> - The most popular matching
-package in R 2. <strong>optmatch</strong> - Optimal full matching with
-constraints 3. <strong>designmatch</strong> - Optimization-based
-matching with balance constraints 4. <strong>Matching</strong> - Genetic
-matching and multivariate matching</p>
+package in R</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p><strong>optmatch</strong> - Optimal full matching with
+constraints</p></li>
+<li><p><strong>designmatch</strong> - Optimization-based matching with
+balance constraints</p></li>
+<li><p><strong>Matching</strong> - Genetic matching and multivariate
+matching</p></li>
+</ol>
 <p>Each comparison examines algorithmic differences, API design,
 performance characteristics, and appropriate use cases. We use simulated
 observational data to demonstrate practical differences.</p>
@@ -338,14 +357,22 @@ matches directly on covariates (multivariate distance).</p>
 <h3 id="when-to-use-each">When to Use Each<a class="anchor" aria-label="anchor" href="#when-to-use-each"></a>
 </h3>
 <p><strong>MatchIt</strong>: - Propensity score methods are preferred
-(common in epidemiology) - Need full matching, CEM, or genetic matching
-- Following published protocols that specify MatchIt - Familiar with
-propensity score theory</p>
+(common in epidemiology)</p>
+<ul>
+<li><p>Need full matching, CEM, or genetic matching</p></li>
+<li><p>Following published protocols that specify MatchIt</p></li>
+<li><p>Familiar with propensity score theory</p></li>
+</ul>
 <p><strong>couplr</strong>: - Direct covariate matching is preferred (no
-model for treatment) - Need optimal (minimum distance) one-to-one
-matching - Working with large datasets (20+ LAP algorithms for different
-scales) - Need fine-grained control over distance computation - Matching
-on continuous variables where Euclidean distance is natural</p>
+model for treatment)</p>
+<ul>
+<li><p>Need optimal (minimum distance) one-to-one matching</p></li>
+<li><p>Working with large datasets (20+ LAP algorithms for different
+scales)</p></li>
+<li><p>Need fine-grained control over distance computation</p></li>
+<li><p>Matching on continuous variables where Euclidean distance is
+natural</p></li>
+</ul>
 <hr>
 </div>
 </div>
@@ -409,15 +436,12 @@ matching with 20+ algorithm choices.</p>
 <p>Both packages use optimal assignment algorithms, so they should
 achieve similar total distances. The key differences are in:</p>
 <ol style="list-style-type: decimal">
-<li>
-<strong>API design</strong>: optmatch uses formula interface; couplr
-uses separate data frames</li>
-<li>
-<strong>Algorithm selection</strong>: optmatch uses RELAX-IV; couplr
-offers 20+ algorithms</li>
-<li>
-<strong>Full matching</strong>: optmatch supports variable-ratio
-matching; couplr is one-to-one only</li>
+<li><p><strong>API design</strong>: optmatch uses formula interface;
+couplr uses separate data frames</p></li>
+<li><p><strong>Algorithm selection</strong>: optmatch uses RELAX-IV;
+couplr offers 20+ algorithms</p></li>
+<li><p><strong>Full matching</strong>: optmatch supports variable-ratio
+matching; couplr is one-to-one only</p></li>
 </ol>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"optmatch"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -482,12 +506,18 @@ matching; couplr is one-to-one only</li>
 <h3 id="when-to-use-each-1">When to Use Each<a class="anchor" aria-label="anchor" href="#when-to-use-each-1"></a>
 </h3>
 <p><strong>optmatch</strong>: - Full matching or variable ratio matching
-needed - Network flow formulation is preferred - Integration with
-RItools for diagnostics</p>
-<p><strong>couplr</strong>: - One-to-one matching is sufficient - Need
-algorithm flexibility (auction for n &gt; 1000, sparse methods, etc.) -
-Large-scale problems requiring greedy approximations - Distance caching
-for iterative analysis</p>
+needed</p>
+<ul>
+<li><p>Network flow formulation is preferred</p></li>
+<li><p>Integration with RItools for diagnostics</p></li>
+</ul>
+<p><strong>couplr</strong>: - One-to-one matching is sufficient</p>
+<ul>
+<li><p>Need algorithm flexibility (auction for n &gt; 1000, sparse
+methods, etc.)</p></li>
+<li><p>Large-scale problems requiring greedy approximations</p></li>
+<li><p>Distance caching for iterative analysis</p></li>
+</ul>
 <hr>
 </div>
 </div>
@@ -624,12 +654,19 @@ through distance minimization:</p>
 <h3 id="when-to-use-each-2">When to Use Each<a class="anchor" aria-label="anchor" href="#when-to-use-each-2"></a>
 </h3>
 <p><strong>designmatch</strong>: - Specific balance requirements must be
-guaranteed - Cardinality matching (fixed sample sizes) - Fine-grained
-moment balancing (means, variances, quantiles) - Willing to accept no
-solution if constraints infeasible</p>
-<p><strong>couplr</strong>: - Distance minimization is the goal -
-Balance is assessed post-hoc (typical workflow) - Need guaranteed
-solutions - Iterative refinement (match, assess, refine)</p>
+guaranteed</p>
+<ul>
+<li><p>Cardinality matching (fixed sample sizes)</p></li>
+<li><p>Fine-grained moment balancing (means, variances,
+quantiles)</p></li>
+<li><p>Willing to accept no solution if constraints infeasible</p></li>
+</ul>
+<p><strong>couplr</strong>: - Distance minimization is the goal</p>
+<ul>
+<li><p>Balance is assessed post-hoc (typical workflow)</p></li>
+<li><p>Need guaranteed solutions</p></li>
+<li><p>Iterative refinement (match, assess, refine)</p></li>
+</ul>
 <hr>
 </div>
 </div>
@@ -729,12 +766,18 @@ scaling) and optimizes assignment.</p>
 <h3 id="when-to-use-each-3">When to Use Each<a class="anchor" aria-label="anchor" href="#when-to-use-each-3"></a>
 </h3>
 <p><strong>Matching</strong>: - Need automatic weight selection via
-genetic optimization - Matching with replacement is acceptable - Need
-ATE or ATC estimands (not just ATT) - Willing to accept stochastic
-results</p>
-<p><strong>couplr</strong>: - Deterministic, reproducible matching -
-Matching without replacement - Direct control over variable scaling -
-Large problems (couplr scales better)</p>
+genetic optimization</p>
+<ul>
+<li><p>Matching with replacement is acceptable</p></li>
+<li><p>Need ATE or ATC estimands (not just ATT)</p></li>
+<li><p>Willing to accept stochastic results</p></li>
+</ul>
+<p><strong>couplr</strong>: - Deterministic, reproducible matching</p>
+<ul>
+<li><p>Matching without replacement</p></li>
+<li><p>Direct control over variable scaling</p></li>
+<li><p>Large problems (couplr scales better)</p></li>
+</ul>
 <hr>
 </div>
 </div>
@@ -978,68 +1021,60 @@ greedy modes.</p>
 <h3 id="choose-couplr-when">Choose couplr when:<a class="anchor" aria-label="anchor" href="#choose-couplr-when"></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li>
-<strong>Direct covariate matching</strong> is preferred over
-propensity scores</li>
-<li>
-<strong>Optimal one-to-one matching</strong> is the goal</li>
-<li>
-<strong>Large datasets</strong> (n &gt; 5,000) with greedy or
-blocking options</li>
-<li>
-<strong>Algorithm flexibility</strong> is needed (auction for large
-dense, sparse for many forbidden)</li>
-<li>
-<strong>Distance caching</strong> helps iterative analysis</li>
-<li>
-<strong>Tidy workflow</strong> with tibble outputs is preferred</li>
-<li>
-<strong>Reproducibility</strong> requires deterministic
-algorithms</li>
+<li><p><strong>Direct covariate matching</strong> is preferred over
+propensity scores</p></li>
+<li><p><strong>Optimal one-to-one matching</strong> is the goal</p></li>
+<li><p><strong>Large datasets</strong> (n &gt; 5,000) with greedy or
+blocking options</p></li>
+<li><p><strong>Algorithm flexibility</strong> is needed (auction for
+large dense, sparse for many forbidden)</p></li>
+<li><p><strong>Distance caching</strong> helps iterative
+analysis</p></li>
+<li><p><strong>Tidy workflow</strong> with tibble outputs is
+preferred</p></li>
+<li><p><strong>Reproducibility</strong> requires deterministic
+algorithms</p></li>
 </ol>
 </div>
 <div class="section level3">
 <h3 id="choose-matchit-when">Choose MatchIt when:<a class="anchor" aria-label="anchor" href="#choose-matchit-when"></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li>
-<strong>Propensity score matching</strong> is standard in your
-field</li>
-<li>Need <strong>full matching</strong> or <strong>CEM</strong>
-(coarsened exact matching)</li>
-<li>Following a <strong>published protocol</strong> that specifies
-MatchIt</li>
-<li>Need <strong>genetic matching</strong> for automatic weight
-selection</li>
-<li>
-<strong>Integration</strong> with existing MatchIt workflows</li>
+<li><p><strong>Propensity score matching</strong> is standard in your
+field</p></li>
+<li><p>Need <strong>full matching</strong> or <strong>CEM</strong>
+(coarsened exact matching)</p></li>
+<li><p>Following a <strong>published protocol</strong> that specifies
+MatchIt</p></li>
+<li><p>Need <strong>genetic matching</strong> for automatic weight
+selection</p></li>
+<li><p><strong>Integration</strong> with existing MatchIt
+workflows</p></li>
 </ol>
 </div>
 <div class="section level3">
 <h3 id="choose-optmatch-when">Choose optmatch when:<a class="anchor" aria-label="anchor" href="#choose-optmatch-when"></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li>
-<strong>Full matching</strong> with variable ratios is needed</li>
-<li>
-<strong>Network flow</strong> formulation is preferred</li>
-<li>Working with <strong>RItools</strong> for diagnostics</li>
-<li>Need <strong>optimal pair matching</strong> with sparse distance
-matrices</li>
+<li><p><strong>Full matching</strong> with variable ratios is
+needed</p></li>
+<li><p><strong>Network flow</strong> formulation is preferred</p></li>
+<li><p>Working with <strong>RItools</strong> for diagnostics</p></li>
+<li><p>Need <strong>optimal pair matching</strong> with sparse distance
+matrices</p></li>
 </ol>
 </div>
 <div class="section level3">
 <h3 id="choose-designmatch-when">Choose designmatch when:<a class="anchor" aria-label="anchor" href="#choose-designmatch-when"></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li>
-<strong>Specific balance constraints</strong> must be
-guaranteed</li>
-<li>
-<strong>Cardinality matching</strong> (exact sample sizes) is
-needed</li>
-<li>Fine-grained <strong>moment balancing</strong> is required</li>
-<li>MIP solvers (Gurobi) are available for speed</li>
+<li><p><strong>Specific balance constraints</strong> must be
+guaranteed</p></li>
+<li><p><strong>Cardinality matching</strong> (exact sample sizes) is
+needed</p></li>
+<li><p>Fine-grained <strong>moment balancing</strong> is
+required</p></li>
+<li><p>MIP solvers (Gurobi) are available for speed</p></li>
 </ol>
 <hr>
 </div>
@@ -1380,17 +1415,14 @@ efficient matching. couplr handles this with greedy matching:</p>
 <h3 id="key-takeaways">Key Takeaways<a class="anchor" aria-label="anchor" href="#key-takeaways"></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li>
-<strong>Greedy matching</strong> handles 185:15,815 ratio
-efficiently</li>
-<li>
-<strong>Robust scaling</strong> handles skewed earnings
-distributions</li>
-<li>
-<strong>Balance diagnostics</strong> quantify improvement</li>
-<li>
-<strong>Large control pools</strong> actually help - more options
-for good matches</li>
+<li><p><strong>Greedy matching</strong> handles 185:15,815 ratio
+efficiently</p></li>
+<li><p><strong>Robust scaling</strong> handles skewed earnings
+distributions</p></li>
+<li><p><strong>Balance diagnostics</strong> quantify
+improvement</p></li>
+<li><p><strong>Large control pools</strong> actually help - more options
+for good matches</p></li>
 </ol>
 <p>For comparison, optimal matching would require full distance matrix
 computation (n × m entries), but greedy matching finds excellent matches
@@ -1425,17 +1457,14 @@ Review</em>, 76(4), 604-620.</p></li>
 <h2 id="see-also">See Also<a class="anchor" aria-label="anchor" href="#see-also"></a>
 </h2>
 <ul>
-<li>
-<code><a href="../articles/getting-started.html">vignette("getting-started")</a></code> - Basic couplr usage</li>
-<li>
-<code><a href="../articles/matching-workflows.html">vignette("matching-workflows")</a></code> - Production matching
-pipelines</li>
-<li>
-<code><a href="../articles/algorithms.html">vignette("algorithms")</a></code> - LAP algorithm selection
-guide</li>
-<li>
-<code><a href="../articles/troubleshooting.html">vignette("troubleshooting")</a></code> - Common issues and
-solutions</li>
+<li><p><code><a href="../articles/getting-started.html">vignette("getting-started")</a></code> - Basic couplr
+usage</p></li>
+<li><p><code><a href="../articles/matching-workflows.html">vignette("matching-workflows")</a></code> - Production matching
+pipelines</p></li>
+<li><p><code><a href="../articles/algorithms.html">vignette("algorithms")</a></code> - LAP algorithm selection
+guide</p></li>
+<li><p><code><a href="../articles/troubleshooting.html">vignette("troubleshooting")</a></code> - Common issues and
+solutions</p></li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -1459,7 +1488,8 @@ solutions</li>
 
 
 
-  <script>
+  
+<script>
 /* SVG Copy Button Functionality */
 (function() {
   "use strict";

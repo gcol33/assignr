@@ -6,6 +6,9 @@
 \usage{
 couplr_stop(..., call. = FALSE)
 }
+\value{
+No return value, throws an error.
+}
 \description{
 Stop with a fun, themed error message
 }

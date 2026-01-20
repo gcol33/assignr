@@ -18,6 +18,9 @@ greedy_couples_single(
   strategy
 )
 }
+\value{
+List with pairs tibble and matching info.
+}
 \description{
 Greedy matching without blocking
 }

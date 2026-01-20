@@ -4,6 +4,7 @@
 
 #' Compute pairwise distance matrix
 #'
+#' @return Numeric matrix of pairwise distances (n_left x n_right).
 #' @keywords internal
 compute_distance_matrix <- function(left_mat, right_mat, distance = "euclidean") {
   n_left <- nrow(left_mat)
@@ -88,6 +89,7 @@ compute_distance_matrix <- function(left_mat, right_mat, distance = "euclidean")
 
 #' Apply scaling to matching variables
 #'
+#' @return List with scaled left/right matrices and scaling parameters.
 #' @keywords internal
 apply_scaling <- function(left_mat, right_mat, method = "standardize") {
   if (method == FALSE || method == "none" || is.null(method)) {
@@ -151,6 +153,7 @@ apply_scaling <- function(left_mat, right_mat, method = "standardize") {
 
 #' Apply weights to matching variables
 #'
+#' @return Numeric matrix with columns weighted.
 #' @keywords internal
 apply_weights <- function(mat, weights) {
   if (is.null(weights) || all(weights == 1)) {
@@ -171,6 +174,7 @@ apply_weights <- function(mat, weights) {
 #'
 #' This is the main entry point for distance computation.
 #'
+#' @return Numeric matrix of distances with optional scaling/weights applied.
 #' @keywords internal
 build_cost_matrix <- function(left, right, vars, distance = "euclidean",
                                weights = NULL, scale = FALSE) {

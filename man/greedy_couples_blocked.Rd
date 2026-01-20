@@ -20,6 +20,9 @@ greedy_couples_blocked(
   parallel = FALSE
 )
 }
+\value{
+List with pairs tibble and matching info.
+}
 \description{
 Greedy matching with blocking
 }

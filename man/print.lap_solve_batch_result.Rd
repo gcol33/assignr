@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments passed to \code{print()}. Currently ignored.}
 }
+\value{
+Invisibly returns the input object \code{x}.
+}
 \description{
 Prints a summary and the table of results for a batch of assignment
 problems solved with \code{lap_solve_batch()}.

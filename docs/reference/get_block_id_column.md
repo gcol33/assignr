@@ -7,3 +7,7 @@ Standardize block ID column name
 ``` r
 get_block_id_column(df)
 ```
+
+## Value
+
+Character string with column name, or NULL if not found.

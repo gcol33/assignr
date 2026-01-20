@@ -6,6 +6,9 @@
 \usage{
 apply_max_distance(cost_matrix, max_distance = Inf)
 }
+\value{
+Modified cost matrix with forbidden pairs marked.
+}
 \description{
 Apply maximum distance constraint
 }

@@ -6,6 +6,9 @@
 \usage{
 use_emoji()
 }
+\value{
+Logical indicating whether emoji should be used.
+}
 \description{
 Check if emoji should be used
 }

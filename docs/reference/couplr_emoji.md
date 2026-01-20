@@ -10,3 +10,7 @@ couplr_emoji(
     "search", "chart", "warning_sign", "stop", "check")
 )
 ```
+
+## Value
+
+Character string with the emoji (or empty string if emoji disabled).

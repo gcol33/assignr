@@ -17,3 +17,7 @@ match_couples_from_distance(
   check_costs = TRUE
 )
 ```
+
+## Value
+
+A matching_result object with pairs, info, and optional diagnostics.

@@ -6,6 +6,9 @@
 \usage{
 validate_weights(weights, vars)
 }
+\value{
+Numeric vector of validated weights.
+}
 \description{
 Validate weights parameter
 }

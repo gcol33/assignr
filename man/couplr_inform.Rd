@@ -6,6 +6,9 @@
 \usage{
 couplr_inform(...)
 }
+\value{
+No return value, called for side effects (issues a message).
+}
 \description{
 Info message with emoji
 }

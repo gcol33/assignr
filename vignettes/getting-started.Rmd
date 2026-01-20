@@ -27,7 +27,9 @@ couplr creates matched pairs from two groups of observations. Given a "left" gro
 **Common use cases:**
 
 - Matching treated patients to similar controls in observational studies
+
 - Pairing survey respondents for comparison
+
 - Creating balanced samples for causal inference
 
 ### Documentation Roadmap
@@ -79,7 +81,9 @@ head(result$pairs)
 **What happened:**
 
 1. couplr calculated how similar each treatment unit is to each control unit
+
 2. It found the optimal one-to-one pairing that minimizes total distance
+
 3. Each treatment unit gets matched to exactly one control unit
 
 ### Understanding the Output
@@ -95,7 +99,9 @@ result$info$n_matched
 The `result$pairs` table contains:
 
 - `left_id`: Row number from the treatment group
+
 - `right_id`: Row number from the control group
+
 - `distance`: How different the matched units are (lower = more similar)
 
 ---
@@ -432,6 +438,9 @@ print(kbest)
 ## See Also
 
 - `?match_couples` - Optimal matching function reference
+
 - `?greedy_couples` - Fast approximate matching
+
 - `?balance_diagnostics` - Formal balance assessment
+
 - `?lap_solve` - Direct assignment problem solving

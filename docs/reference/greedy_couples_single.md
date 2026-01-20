@@ -19,3 +19,7 @@ greedy_couples_single(
   strategy
 )
 ```
+
+## Value
+
+List with pairs tibble and matching info.

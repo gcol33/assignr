@@ -32,6 +32,7 @@ NULL
 #'
 #' @name group_by
 #' @rdname group_by
+#' @return See \code{\link[dplyr]{group_by}}.
 #' @keywords internal
 #' @export
 #' @importFrom dplyr group_by

@@ -164,6 +164,7 @@ lap_solve_kbest_df <- function(df, k, source_col, target_col, cost_col,
 #' Print method for k-best assignment results
 #' @param x A `lap_solve_kbest_result`.
 #' @param ... Additional arguments passed to `print()`. Ignored.
+#' @return Invisibly returns the input object `x`.
 #' @export
 #' @method print lap_solve_kbest_result
 print.lap_solve_kbest_result <- function(x, ...) {

@@ -150,6 +150,7 @@ matchmaker <- function(left, right,
 
 #' Assign blocks based on grouping variable(s)
 #'
+#' @return List with modified left/right data frames (with block_id) and n_blocks_initial.
 #' @keywords internal
 assign_blocks_group <- function(left, right, block_by) {
   # Check that variables exist
@@ -181,6 +182,7 @@ assign_blocks_group <- function(left, right, block_by) {
 
 #' Assign blocks using clustering
 #'
+#' @return List with modified left/right data frames (with block_id) and n_blocks_initial.
 #' @keywords internal
 assign_blocks_cluster <- function(left, right, block_vars, method, n_blocks, ...) {
   # Validate that variables exist
@@ -231,6 +233,7 @@ assign_blocks_cluster <- function(left, right, block_vars, method, n_blocks, ...
 
 #' Filter blocks based on size and balance criteria
 #'
+#' @return List with filtered left/right data frames and dropped block info.
 #' @keywords internal
 filter_blocks <- function(left, right, min_left, min_right,
                          drop_imbalanced, imbalance_threshold) {
@@ -286,6 +289,7 @@ filter_blocks <- function(left, right, min_left, min_right,
 
 #' Summarize block structure
 #'
+#' @return Tibble with block_id, n_left, n_right, and optional variable means.
 #' @keywords internal
 summarize_blocks <- function(left, right, block_vars = NULL) {
   # Count by block
@@ -322,6 +326,7 @@ summarize_blocks <- function(left, right, block_vars = NULL) {
 #' @param x A matchmaker_result object
 #' @param ... Additional arguments (ignored)
 #'
+#' @return Invisibly returns the input object `x`.
 #' @export
 #' @method print matchmaker_result
 print.matchmaker_result <- function(x, ...) {

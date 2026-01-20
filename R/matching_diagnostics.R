@@ -399,6 +399,7 @@ balance_table <- function(balance, digits = 3) {
 #' @param x A balance_diagnostics object
 #' @param ... Additional arguments (ignored)
 #'
+#' @return Invisibly returns the input object `x`.
 #' @export
 print.balance_diagnostics <- function(x, ...) {
   cat("\n")

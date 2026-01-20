@@ -249,6 +249,7 @@ update_constraints <- function(dist_obj, max_distance = Inf, calipers = NULL) {
 #' @param x A distance_object
 #' @param ... Additional arguments (ignored)
 #'
+#' @return Invisibly returns the input object `x`.
 #' @export
 print.distance_object <- function(x, ...) {
   cat("Distance Object\n")
@@ -311,6 +312,7 @@ print.distance_object <- function(x, ...) {
 #' @param object A distance_object
 #' @param ... Additional arguments (ignored)
 #'
+#' @return Invisibly returns the input object.
 #' @export
 summary.distance_object <- function(object, ...) {
   cat("Distance Object Summary\n")

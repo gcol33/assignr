@@ -1,6 +1,6 @@
 # Large value for forbidden pairs
 
-Large value for forbidden pairs
+A numeric constant used to mark forbidden pairs in cost matrices.
 
 ## Usage
 
@@ -10,4 +10,4 @@ BIG_COST
 
 ## Format
 
-An object of class `numeric` of length 1.
+Numeric value (half of .Machine\$double.xmax).

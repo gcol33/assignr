@@ -6,6 +6,9 @@
 \usage{
 err_no_valid_pairs(reason = NULL)
 }
+\value{
+No return value, throws an error.
+}
 \description{
 All pairs forbidden error
 }

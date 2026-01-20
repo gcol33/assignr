@@ -6,6 +6,9 @@
 \usage{
 apply_weights(mat, weights)
 }
+\value{
+Numeric matrix with columns weighted.
+}
 \description{
 Apply weights to matching variables
 }

@@ -20,3 +20,7 @@ match_couples_single(
   check_costs = TRUE
 )
 ```
+
+## Value
+
+List with pairs tibble and matching info.

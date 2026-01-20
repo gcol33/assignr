@@ -6,6 +6,9 @@
 \usage{
 warn_extreme_costs(p95, p99, ratio, problem_vars = NULL)
 }
+\value{
+No return value, called for side effects (issues a warning).
+}
 \description{
 Extreme cost ratio warning
 }

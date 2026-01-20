@@ -15,6 +15,9 @@ greedy_couples_from_distance(
   return_diagnostics = FALSE
 )
 }
+\value{
+A matching_result object with pairs, info, and optional diagnostics.
+}
 \description{
 Internal function to handle greedy matching when a distance_object is provided
 }

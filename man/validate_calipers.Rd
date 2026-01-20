@@ -6,6 +6,9 @@
 \usage{
 validate_calipers(calipers, vars)
 }
+\value{
+Validated calipers (list or named numeric), or NULL if none.
+}
 \description{
 Validate calipers parameter
 }

@@ -1,30 +1,32 @@
 url: https://gillescolling.com/couplr/
-
 template:
   bootstrap: 5
   bootswatch: sandstone
-  light-switch: true
-
+  light-switch: yes
+  includes:
+    in_header: pkgdown/mathjax-config.html
 figures:
   dev: svglite::svglite
   fig.ext: svg
-  bg: "#F5F6F8"
-
+  bg: '#F5F6F8'
 home:
-  title: "couplr: Optimal Pairing and Matching via Linear Assignment"
-  description: >
-    18 LAP algorithms including Hungarian, Jonker-Volgenant, and Auction methods.
-    Production-ready matching workflows with automatic preprocessing, greedy
-    algorithms for large-scale problems, and comprehensive balance diagnostics.
-
+  title: 'couplr: Optimal Pairing and Matching via Linear Assignment'
+  description: |
+    18 LAP algorithms including Hungarian, Jonker-Volgenant, and Auction methods. Production-ready matching workflows with automatic preprocessing, greedy algorithms for large-scale problems, and comprehensive balance diagnostics.
 authors:
   Gilles Colling:
     href: https://github.com/gcol33
-
 navbar:
   structure:
-    left:  [intro, reference, articles, news]
-    right: [search, lightswitch, github]
+    left:
+    - intro
+    - reference
+    - articles
+    - news
+    right:
+    - search
+    - lightswitch
+    - github
   components:
     intro:
       text: Get Started
@@ -32,142 +34,125 @@ navbar:
     articles:
       text: Articles
       menu:
-        - text: "Getting Started"
-          href: articles/getting-started.html
-        - text: "---"
-        - text: "Core Topics"
-        - text: "Algorithm Details"
-          href: articles/algorithms.html
-        - text: "Matching Workflows"
-          href: articles/matching-workflows.html
-        - text: "---"
-        - text: "Guides"
-        - text: "Comparison with Alternatives"
-          href: articles/comparison.html
-        - text: "Troubleshooting"
-          href: articles/troubleshooting.html
-        - text: "---"
-        - text: "Advanced"
-        - text: "Pixel Morphing & Scientific Applications"
-          href: articles/pixel-morphing.html
+      - text: Getting Started
+        href: articles/getting-started.html
+      - text: '---'
+      - text: Core Topics
+      - text: Algorithm Details
+        href: articles/algorithms.html
+      - text: Matching Workflows
+        href: articles/matching-workflows.html
+      - text: '---'
+      - text: Guides
+      - text: Comparison with Alternatives
+        href: articles/comparison.html
+      - text: Troubleshooting
+        href: articles/troubleshooting.html
+      - text: '---'
+      - text: Advanced
+      - text: Pixel Morphing & Scientific Applications
+        href: articles/pixel-morphing.html
     github:
       icon: fab fa-github
       href: https://github.com/gcol33/couplr
       aria-label: GitHub
-
 reference:
-  - title: "LAP Solving"
-    desc: "Core functions for solving linear assignment problems"
-    contents:
-      - lap_solve
-      - lap_solve_batch
-      - lap_solve_kbest
-      - lap_solve_line_metric
-      - assignment
-      - assignment_duals
-      - bottleneck_assignment
-      - sinkhorn
-      - sinkhorn_to_assignment
-
-  - title: "Matching Functions"
-    desc: "High-level matching for observational studies"
-    contents:
-      - match_couples
-      - greedy_couples
-      - matchmaker
-
-  - title: "Balance Diagnostics"
-    desc: "Assess and report match quality"
-    contents:
-      - balance_diagnostics
-      - balance_table
-
-  - title: "Distance and Preprocessing"
-    desc: "Distance computation and data preparation"
-    contents:
-      - compute_distances
-      - update_constraints
-      - preprocess_matching_vars
-      - diagnose_distance_matrix
-
-  - title: "Joined Datasets"
-    desc: "Create analysis-ready merged datasets"
-    contents:
-      - join_matched
-      - starts_with("augment")
-
-  - title: "Utility Functions"
-    desc: "Helper functions for working with results"
-    contents:
-      - get_total_cost
-      - get_method_used
-      - as_assignment_matrix
-      - is_lap_solve_result
-      - is_lap_solve_batch_result
-      - is_lap_solve_kbest_result
-      - is_distance_object
-
-  - title: "Example Data"
-    desc: "Built-in datasets for examples and testing"
-    contents:
-      - hospital_staff
-      - example_costs
-      - example_df
-
-  - title: "Pixel Morphing"
-    desc: "Visual demonstrations and image processing"
-    contents:
-      - pixel_morph
-      - pixel_morph_animate
-      - starts_with("morph")
-
-  - title: "Print, Summary and Plot Methods"
-    desc: "S3 methods for displaying and visualizing results"
-    contents:
-      - print.lap_solve_result
-      - print.lap_solve_batch_result
-      - print.lap_solve_kbest_result
-      - print.matching_result
-      - print.matchmaker_result
-      - print.balance_diagnostics
-      - print.distance_object
-      - print.preprocessing_result
-      - print.variable_health
-      - summary.lap_solve_kbest_result
-      - summary.distance_object
-      - summary.matching_result
-      - summary.balance_diagnostics
-      - plot.matching_result
-      - plot.balance_diagnostics
-
+- title: LAP Solving
+  desc: Core functions for solving linear assignment problems
+  contents:
+  - lap_solve
+  - lap_solve_batch
+  - lap_solve_kbest
+  - lap_solve_line_metric
+  - assignment
+  - assignment_duals
+  - bottleneck_assignment
+  - sinkhorn
+  - sinkhorn_to_assignment
+- title: Matching Functions
+  desc: High-level matching for observational studies
+  contents:
+  - match_couples
+  - greedy_couples
+  - matchmaker
+- title: Balance Diagnostics
+  desc: Assess and report match quality
+  contents:
+  - balance_diagnostics
+  - balance_table
+- title: Distance and Preprocessing
+  desc: Distance computation and data preparation
+  contents:
+  - compute_distances
+  - update_constraints
+  - preprocess_matching_vars
+  - diagnose_distance_matrix
+- title: Joined Datasets
+  desc: Create analysis-ready merged datasets
+  contents:
+  - join_matched
+  - starts_with("augment")
+- title: Utility Functions
+  desc: Helper functions for working with results
+  contents:
+  - get_total_cost
+  - get_method_used
+  - as_assignment_matrix
+  - is_lap_solve_result
+  - is_lap_solve_batch_result
+  - is_lap_solve_kbest_result
+  - is_distance_object
+- title: Example Data
+  desc: Built-in datasets for examples and testing
+  contents:
+  - hospital_staff
+  - example_costs
+  - example_df
+- title: Pixel Morphing
+  desc: Visual demonstrations and image processing
+  contents:
+  - pixel_morph
+  - pixel_morph_animate
+  - starts_with("morph")
+- title: Print, Summary and Plot Methods
+  desc: S3 methods for displaying and visualizing results
+  contents:
+  - print.lap_solve_result
+  - print.lap_solve_batch_result
+  - print.lap_solve_kbest_result
+  - print.matching_result
+  - print.matchmaker_result
+  - print.balance_diagnostics
+  - print.distance_object
+  - print.preprocessing_result
+  - print.variable_health
+  - summary.lap_solve_kbest_result
+  - summary.distance_object
+  - summary.matching_result
+  - summary.balance_diagnostics
+  - plot.matching_result
+  - plot.balance_diagnostics
 articles:
-  - title: "Getting Started"
-    navbar: ~
-    contents:
-      - getting-started
-
-  - title: "Core Topics"
-    navbar: ~
-    contents:
-      - algorithms
-      - matching-workflows
-
-  - title: "Guides"
-    navbar: ~
-    contents:
-      - comparison
-      - troubleshooting
-
-  - title: "Advanced"
-    navbar: ~
-    contents:
-      - pixel-morphing
-
+- title: Getting Started
+  navbar: ~
+  contents: getting-started
+- title: Core Topics
+  navbar: ~
+  contents:
+  - algorithms
+  - matching-workflows
+- title: Guides
+  navbar: ~
+  contents:
+  - comparison
+  - troubleshooting
+- title: Advanced
+  navbar: ~
+  contents: pixel-morphing
 news:
   releases:
-    - text: "Version 1.0.0"
-      href: news/index.html
-
+  - text: Version 1.0.0
+    href: news/index.html
 footer:
   structure:
     left: developed_by

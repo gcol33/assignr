@@ -7,3 +7,7 @@ Check if any valid pairs exist
 ``` r
 has_valid_pairs(cost_matrix)
 ```
+
+## Value
+
+Logical indicating whether any valid pairs exist.

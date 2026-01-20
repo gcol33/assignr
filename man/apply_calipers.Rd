@@ -6,6 +6,9 @@
 \usage{
 apply_calipers(cost_matrix, left, right, calipers, vars)
 }
+\value{
+Modified cost matrix with forbidden pairs marked.
+}
 \description{
 Calipers impose per-variable maximum absolute differences.
 }

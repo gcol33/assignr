@@ -19,3 +19,7 @@ print(x, ...)
 
   Additional arguments passed to
   [`print()`](https://rdrr.io/r/base/print.html). Ignored.
+
+## Value
+
+Invisibly returns the input object `x`.

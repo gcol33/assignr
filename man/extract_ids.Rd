@@ -6,6 +6,9 @@
 \usage{
 extract_ids(df, prefix = "id")
 }
+\value{
+Character vector of IDs.
+}
 \description{
 Extract and standardize IDs from data frames
 }

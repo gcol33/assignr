@@ -6,6 +6,9 @@
 \usage{
 warn_constant_distance(value)
 }
+\value{
+No return value, called for side effects (issues a warning).
+}
 \description{
 All distances identical warning
 }

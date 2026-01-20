@@ -197,6 +197,7 @@ match_couples <- function(left, right = NULL,
 #'
 #' Internal function to handle matching when a distance_object is provided
 #'
+#' @return A matching_result object with pairs, info, and optional diagnostics.
 #' @keywords internal
 match_couples_from_distance <- function(dist_obj,
                                         max_distance = Inf,
@@ -334,6 +335,7 @@ match_couples_from_distance <- function(dist_obj,
 
 #' Match without blocking (single problem)
 #'
+#' @return List with pairs tibble and matching info.
 #' @keywords internal
 match_couples_single <- function(left, right, left_ids, right_ids,
                                  vars, distance, weights, scale,
@@ -437,6 +439,7 @@ match_couples_single <- function(left, right, left_ids, right_ids,
 
 #' Match with blocking (multiple problems)
 #'
+#' @return List with pairs tibble and matching info.
 #' @keywords internal
 match_couples_blocked <- function(left, right, left_ids, right_ids,
                                   block_col, vars, distance, weights, scale,
@@ -583,6 +586,7 @@ match_couples_blocked <- function(left, right, left_ids, right_ids,
 
 #' Detect and validate blocking
 #'
+#' @return List with use_blocking (logical) and block_col (character or NULL).
 #' @keywords internal
 detect_blocking <- function(left, right, block_id, ignore_blocks) {
   if (ignore_blocks) {
@@ -615,6 +619,7 @@ detect_blocking <- function(left, right, block_id, ignore_blocks) {
 
 #' Check if full matching was achieved
 #'
+#' @return No return value; throws error if unmatched units exist.
 #' @keywords internal
 check_full_matching <- function(result) {
   n_unmatched <- length(result$unmatched$left) + length(result$unmatched$right)
@@ -810,6 +815,7 @@ greedy_couples <- function(left, right = NULL,
 #'
 #' Internal function to handle greedy matching when a distance_object is provided
 #'
+#' @return A matching_result object with pairs, info, and optional diagnostics.
 #' @keywords internal
 greedy_couples_from_distance <- function(dist_obj,
                                         max_distance = Inf,
@@ -941,6 +947,7 @@ greedy_couples_from_distance <- function(dist_obj,
 
 #' Greedy matching without blocking
 #'
+#' @return List with pairs tibble and matching info.
 #' @keywords internal
 greedy_couples_single <- function(left, right, left_ids, right_ids,
                                   vars, distance, weights, scale,
@@ -1036,6 +1043,7 @@ greedy_couples_single <- function(left, right, left_ids, right_ids,
 
 #' Greedy matching with blocking
 #'
+#' @return List with pairs tibble and matching info.
 #' @keywords internal
 greedy_couples_blocked <- function(left, right, left_ids, right_ids,
                                    block_col, vars, distance, weights, scale,
@@ -1187,6 +1195,7 @@ greedy_couples_blocked <- function(left, right, left_ids, right_ids,
 #' @param x A matching_result object
 #' @param ... Additional arguments (ignored)
 #'
+#' @return Invisibly returns the input object `x`.
 #' @export
 #' @method print matching_result
 print.matching_result <- function(x, ...) {

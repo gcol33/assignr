@@ -7,3 +7,7 @@ Too many zeros warning
 ``` r
 warn_many_zeros(pct, n_zeros)
 ```
+
+## Value
+
+No return value, called for side effects (issues a warning).

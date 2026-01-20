@@ -5,12 +5,12 @@
 \alias{BIG_COST}
 \title{Large value for forbidden pairs}
 \format{
-An object of class \code{numeric} of length 1.
+Numeric value (half of .Machine$double.xmax).
 }
 \usage{
 BIG_COST
 }
 \description{
-Large value for forbidden pairs
+A numeric constant used to mark forbidden pairs in cost matrices.
 }
 \keyword{internal}

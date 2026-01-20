@@ -6,6 +6,9 @@
 \usage{
 warn_many_zeros(pct, n_zeros)
 }
+\value{
+No return value, called for side effects (issues a warning).
+}
 \description{
 Too many zeros warning
 }

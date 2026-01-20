@@ -200,17 +200,12 @@ A warning is issued if overlaps/holes are detected in the final frame.
 ## Examples
 
 ``` r
-# \donttest{
-# Use bundled example images
-imgA <- system.file("extdata/icons/circleA_40.png", package = "couplr")
-imgB <- system.file("extdata/icons/circleB_40.png", package = "couplr")
-
-# Basic animation (writes to temp file)
-outfile <- tempfile(fileext = ".gif")
-pixel_morph_animate(imgA, imgB, outfile = outfile, n_frames = 4, show = FALSE)
-
-# Pure spatial rearrangement (ignore B's colors in assignment)
-pixel_morph_animate(imgA, imgB, alpha = 0, beta = 1,
-                    outfile = tempfile(fileext = ".gif"), show = FALSE)
-# }
+if (requireNamespace("magick", quietly = TRUE)) {
+  imgA <- system.file("extdata/icons/circleA_40.png", package = "couplr")
+  imgB <- system.file("extdata/icons/circleB_40.png", package = "couplr")
+  if (nzchar(imgA) && nzchar(imgB)) {
+    outfile <- tempfile(fileext = ".gif")
+    pixel_morph_animate(imgA, imgB, outfile = outfile, n_frames = 4, show = FALSE)
+  }
+}
 ```

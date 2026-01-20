@@ -7,3 +7,7 @@ Validate calipers parameter
 ``` r
 validate_calipers(calipers, vars)
 ```
+
+## Value
+
+Validated calipers (list or named numeric), or NULL if none.

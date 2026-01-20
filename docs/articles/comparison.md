@@ -3,10 +3,14 @@
 ## Overview
 
 This vignette compares couplr’s approach to matching with established R
-packages: 1. **MatchIt** - The most popular matching package in R 2.
-**optmatch** - Optimal full matching with constraints 3.
-**designmatch** - Optimization-based matching with balance constraints
-4. **Matching** - Genetic matching and multivariate matching
+packages: 1. **MatchIt** - The most popular matching package in R
+
+2.  **optmatch** - Optimal full matching with constraints
+
+3.  **designmatch** - Optimization-based matching with balance
+    constraints
+
+4.  **Matching** - Genetic matching and multivariate matching
 
 Each comparison examines algorithmic differences, API design,
 performance characteristics, and appropriate use cases. We use simulated
@@ -199,15 +203,24 @@ if (requireNamespace("MatchIt", quietly = TRUE)) {
 ### When to Use Each
 
 **MatchIt**: - Propensity score methods are preferred (common in
-epidemiology) - Need full matching, CEM, or genetic matching - Following
-published protocols that specify MatchIt - Familiar with propensity
-score theory
+epidemiology)
+
+- Need full matching, CEM, or genetic matching
+
+- Following published protocols that specify MatchIt
+
+- Familiar with propensity score theory
 
 **couplr**: - Direct covariate matching is preferred (no model for
-treatment) - Need optimal (minimum distance) one-to-one matching -
-Working with large datasets (20+ LAP algorithms for different scales) -
-Need fine-grained control over distance computation - Matching on
-continuous variables where Euclidean distance is natural
+treatment)
+
+- Need optimal (minimum distance) one-to-one matching
+
+- Working with large datasets (20+ LAP algorithms for different scales)
+
+- Need fine-grained control over distance computation
+
+- Matching on continuous variables where Euclidean distance is natural
 
 ------------------------------------------------------------------------
 
@@ -273,8 +286,10 @@ similar total distances. The key differences are in:
 
 1.  **API design**: optmatch uses formula interface; couplr uses
     separate data frames
+
 2.  **Algorithm selection**: optmatch uses RELAX-IV; couplr offers 20+
     algorithms
+
 3.  **Full matching**: optmatch supports variable-ratio matching; couplr
     is one-to-one only
 
@@ -301,14 +316,20 @@ if (requireNamespace("optmatch", quietly = TRUE)) {
 
 ### When to Use Each
 
-**optmatch**: - Full matching or variable ratio matching needed -
-Network flow formulation is preferred - Integration with RItools for
-diagnostics
+**optmatch**: - Full matching or variable ratio matching needed
 
-**couplr**: - One-to-one matching is sufficient - Need algorithm
-flexibility (auction for n \> 1000, sparse methods, etc.) - Large-scale
-problems requiring greedy approximations - Distance caching for
-iterative analysis
+- Network flow formulation is preferred
+
+- Integration with RItools for diagnostics
+
+**couplr**: - One-to-one matching is sufficient
+
+- Need algorithm flexibility (auction for n \> 1000, sparse methods,
+  etc.)
+
+- Large-scale problems requiring greedy approximations
+
+- Distance caching for iterative analysis
 
 ------------------------------------------------------------------------
 
@@ -408,14 +429,21 @@ cat("  Max |std diff|:", round(balance_dm$overall$max_abs_std_diff, 4), "\n")
 
 ### When to Use Each
 
-**designmatch**: - Specific balance requirements must be guaranteed -
-Cardinality matching (fixed sample sizes) - Fine-grained moment
-balancing (means, variances, quantiles) - Willing to accept no solution
-if constraints infeasible
+**designmatch**: - Specific balance requirements must be guaranteed
 
-**couplr**: - Distance minimization is the goal - Balance is assessed
-post-hoc (typical workflow) - Need guaranteed solutions - Iterative
-refinement (match, assess, refine)
+- Cardinality matching (fixed sample sizes)
+
+- Fine-grained moment balancing (means, variances, quantiles)
+
+- Willing to accept no solution if constraints infeasible
+
+**couplr**: - Distance minimization is the goal
+
+- Balance is assessed post-hoc (typical workflow)
+
+- Need guaranteed solutions
+
+- Iterative refinement (match, assess, refine)
 
 ------------------------------------------------------------------------
 
@@ -481,13 +509,21 @@ if (requireNamespace("Matching", quietly = TRUE)) {
 
 ### When to Use Each
 
-**Matching**: - Need automatic weight selection via genetic
-optimization - Matching with replacement is acceptable - Need ATE or ATC
-estimands (not just ATT) - Willing to accept stochastic results
+**Matching**: - Need automatic weight selection via genetic optimization
 
-**couplr**: - Deterministic, reproducible matching - Matching without
-replacement - Direct control over variable scaling - Large problems
-(couplr scales better)
+- Matching with replacement is acceptable
+
+- Need ATE or ATC estimands (not just ATT)
+
+- Willing to accept stochastic results
+
+**couplr**: - Deterministic, reproducible matching
+
+- Matching without replacement
+
+- Direct control over variable scaling
+
+- Large problems (couplr scales better)
 
 ------------------------------------------------------------------------
 
@@ -549,34 +585,50 @@ modes.
 ### Choose couplr when:
 
 1.  **Direct covariate matching** is preferred over propensity scores
+
 2.  **Optimal one-to-one matching** is the goal
+
 3.  **Large datasets** (n \> 5,000) with greedy or blocking options
+
 4.  **Algorithm flexibility** is needed (auction for large dense, sparse
     for many forbidden)
+
 5.  **Distance caching** helps iterative analysis
+
 6.  **Tidy workflow** with tibble outputs is preferred
+
 7.  **Reproducibility** requires deterministic algorithms
 
 ### Choose MatchIt when:
 
 1.  **Propensity score matching** is standard in your field
+
 2.  Need **full matching** or **CEM** (coarsened exact matching)
+
 3.  Following a **published protocol** that specifies MatchIt
+
 4.  Need **genetic matching** for automatic weight selection
+
 5.  **Integration** with existing MatchIt workflows
 
 ### Choose optmatch when:
 
 1.  **Full matching** with variable ratios is needed
+
 2.  **Network flow** formulation is preferred
+
 3.  Working with **RItools** for diagnostics
+
 4.  Need **optimal pair matching** with sparse distance matrices
 
 ### Choose designmatch when:
 
 1.  **Specific balance constraints** must be guaranteed
+
 2.  **Cardinality matching** (exact sample sizes) is needed
+
 3.  Fine-grained **moment balancing** is required
+
 4.  MIP solvers (Gurobi) are available for speed
 
 ------------------------------------------------------------------------
@@ -819,8 +871,11 @@ if (balance_lalonde$overall$max_abs_std_diff < 0.25) {
 ### Key Takeaways
 
 1.  **Greedy matching** handles 185:15,815 ratio efficiently
+
 2.  **Robust scaling** handles skewed earnings distributions
+
 3.  **Balance diagnostics** quantify improvement
+
 4.  **Large control pools** actually help - more options for good
     matches
 
@@ -863,9 +918,12 @@ becomes critical.
 
 - [`vignette("getting-started")`](https://gillescolling.com/couplr/articles/getting-started.md) -
   Basic couplr usage
+
 - [`vignette("matching-workflows")`](https://gillescolling.com/couplr/articles/matching-workflows.md) -
   Production matching pipelines
+
 - [`vignette("algorithms")`](https://gillescolling.com/couplr/articles/algorithms.md) -
   LAP algorithm selection guide
+
 - [`vignette("troubleshooting")`](https://gillescolling.com/couplr/articles/troubleshooting.md) -
   Common issues and solutions

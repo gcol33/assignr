@@ -6,6 +6,9 @@
 \usage{
 warn_many_forbidden(pct_forbidden, n_valid, n_left)
 }
+\value{
+No return value, called for side effects (issues a warning).
+}
 \description{
 Many forbidden pairs warning
 }

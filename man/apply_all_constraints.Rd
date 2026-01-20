@@ -14,6 +14,9 @@ apply_all_constraints(
   forbidden = NULL
 )
 }
+\value{
+Modified cost matrix with all constraints applied.
+}
 \description{
 Main entry point for applying constraints.
 }

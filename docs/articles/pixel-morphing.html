@@ -14,6 +14,20 @@
 <meta property="og:title" content="Advanced Topics">
 </head>
 <body>
+<p>
+
+
+
+
+
+
+
+
+  pkgdown/mathjax-config.html
+
+  
+
+  </p>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -21,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">couplr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +103,7 @@
                         <h4 data-toc-skip class="author">Gilles
 Colling</h4>
             
-            <h4 data-toc-skip class="date">2026-01-09</h4>
+            <h4 data-toc-skip class="date">2026-01-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gcol33/couplr/blob/HEAD/vignettes/pixel-morphing.Rmd" class="external-link"><code>vignettes/pixel-morphing.Rmd</code></a></small>
       <div class="d-none name"><code>pixel-morphing.Rmd</code></div>
@@ -125,15 +139,12 @@ Colling</h4>
 </h2>
 <p>This vignette serves three purposes:</p>
 <ol style="list-style-type: decimal">
-<li>
-<strong>Build intuition</strong>: Use pixel morphing as a visual
-analogy for assignment problems</li>
-<li>
-<strong>Scale up</strong>: Demonstrate approximation strategies when
-exact LAP becomes infeasible</li>
-<li>
-<strong>Scientific applications</strong>: Show how matching applies
-to ecology, physics, and chemistry</li>
+<li><p><strong>Build intuition</strong>: Use pixel morphing as a visual
+analogy for assignment problems</p></li>
+<li><p><strong>Scale up</strong>: Demonstrate approximation strategies
+when exact LAP becomes infeasible</p></li>
+<li><p><strong>Scientific applications</strong>: Show how matching
+applies to ecology, physics, and chemistry</p></li>
 </ol>
 <p><strong>This vignette is different</strong>: Unlike the other couplr
 documentation, it emphasizes <em>understanding</em> over <em>doing</em>.
@@ -149,17 +160,18 @@ approximations are appropriate.</p>
 developers, curious minds</p>
 <p><strong>Prerequisites</strong>:</p>
 <ul>
-<li>Familiarity with <code><a href="../reference/lap_solve.html">lap_solve()</a></code>
-(<code><a href="../articles/getting-started.html">vignette("getting-started")</a></code>)</li>
-<li>Basic complexity analysis (Big-O notation)</li>
-<li>Interest in algorithm design or scientific computing</li>
+<li><p>Familiarity with <code><a href="../reference/lap_solve.html">lap_solve()</a></code>
+(<code><a href="../articles/getting-started.html">vignette("getting-started")</a></code>)</p></li>
+<li><p>Basic complexity analysis (Big-O notation)</p></li>
+<li><p>Interest in algorithm design or scientific computing</p></li>
 </ul>
 <p><strong>What You’ll Learn</strong>:</p>
 <ul>
-<li>Why exact LAP becomes infeasible for large n</li>
-<li>Three approximation strategies and their trade-offs</li>
-<li>How matching problems appear in ecology, physics, and chemistry</li>
-<li>Mathematical connections to optimal transport theory</li>
+<li><p>Why exact LAP becomes infeasible for large n</p></li>
+<li><p>Three approximation strategies and their trade-offs</p></li>
+<li><p>How matching problems appear in ecology, physics, and
+chemistry</p></li>
+<li><p>Mathematical connections to optimal transport theory</p></li>
 </ul>
 <p><strong>Time to complete</strong>: 45-60 minutes (conceptual
 reading)</p>
@@ -209,14 +221,13 @@ reading)</p>
 <p>Pixels provide an ideal testbed for understanding assignment
 problems:</p>
 <ul>
-<li>Each pixel is an <strong>entity</strong> with measurable
-properties</li>
-<li>
-<strong>Color</strong> = feature (what it looks like)</li>
-<li>
-<strong>Position</strong> = spatial location (where it is)</li>
-<li>The matching is <strong>visually verifiable</strong>: you can see if
-it worked</li>
+<li><p>Each pixel is an <strong>entity</strong> with measurable
+properties</p></li>
+<li><p><strong>Color</strong> = feature (what it looks like)</p></li>
+<li><p><strong>Position</strong> = spatial location (where it
+is)</p></li>
+<li><p>The matching is <strong>visually verifiable</strong>: you can see
+if it worked</p></li>
 </ul>
 <p>The same algorithms that morph images smoothly also track particles
 in physics, align molecules in chemistry, and match vegetation plots in
@@ -289,24 +300,21 @@ c_{ij} = \alpha \, d_{\text{feature}}(a_i, b_j) + \beta \, d_{\text{spatial}}(\m
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mtext mathvariant="normal">feature</mtext></msub><annotation encoding="application/x-tex">d_{\text{feature}}</annotation></semantics></math>:
 domain-specific similarity</p>
 <ul>
-<li>Ecology: Bray-Curtis dissimilarity between species vectors</li>
-<li>Physics: difference in particle intensity or size<br>
-</li>
-<li>Chemistry: penalty for mismatched atom types<br>
-</li>
-<li>Images: Euclidean distance in RGB color space</li>
+<li><p>Ecology: Bray-Curtis dissimilarity between species
+vectors</p></li>
+<li><p>Physics: difference in particle intensity or size</p></li>
+<li><p>Chemistry: penalty for mismatched atom types</p></li>
+<li><p>Images: Euclidean distance in RGB color space</p></li>
 </ul>
 <p><strong>Spatial distance</strong>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mtext mathvariant="normal">spatial</mtext></msub><annotation encoding="application/x-tex">d_{\text{spatial}}</annotation></semantics></math>:
 physical proximity</p>
 <ul>
-<li>Ecology: geographic distance between plot centers<br>
-</li>
-<li>Physics: Euclidean distance accounting for predicted motion<br>
-</li>
-<li>Chemistry: 3D distance between atomic coordinates<br>
-</li>
-<li>Images: 2D pixel position distance</li>
+<li><p>Ecology: geographic distance between plot centers</p></li>
+<li><p>Physics: Euclidean distance accounting for predicted
+motion</p></li>
+<li><p>Chemistry: 3D distance between atomic coordinates</p></li>
+<li><p>Images: 2D pixel position distance</p></li>
 </ul>
 <p><strong>Weights</strong>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>,</mo><mi>β</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\alpha, \beta \ge 0</annotation></semantics></math>
@@ -319,39 +327,35 @@ balance feature matching vs. spatial coherence.</p>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \times n</annotation></semantics></math>
 LAP.</p>
 <ul>
-<li>Complexity:
+<li><p>Complexity:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math>
-using Jonker-Volgenant</li>
-<li>Feasible: up to
+using Jonker-Volgenant</p></li>
+<li><p>Feasible: up to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≈</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">n \approx 1000</annotation></semantics></math>
 (about
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>30</mn><mo>×</mo><mn>30</mn></mrow><annotation encoding="application/x-tex">30 \times 30</annotation></semantics></math>
 images, or
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1000</mn><annotation encoding="application/x-tex">1000</annotation></semantics></math>
-plots/particles/atoms)<br>
-</li>
-<li>Prohibitive: for
+plots/particles/atoms)</p></li>
+<li><p>Prohibitive: for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>10</mn><mspace width="0.167em"></mspace><mn>000</mn></mrow><annotation encoding="application/x-tex">n = 10\,000</annotation></semantics></math>
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100</mn><mo>×</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">100 \times 100</annotation></semantics></math>
-images), runtime and memory become expensive</li>
+images), runtime and memory become expensive</p></li>
 </ul>
 <p>Real applications often involve</p>
 <ul>
-<li>High-resolution images:
+<li><p>High-resolution images:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>200</mn><mo>×</mo><mn>200</mn><mo>=</mo><mn>40</mn><mspace width="0.167em"></mspace><mn>000</mn></mrow><annotation encoding="application/x-tex">200 \times 200 = 40\,000</annotation></semantics></math>
-pixels<br>
-</li>
-<li>Large ecological surveys:
+pixels</p></li>
+<li><p>Large ecological surveys:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5000</mn><mo>+</mo></mrow><annotation encoding="application/x-tex">5000+</annotation></semantics></math>
-plots<br>
-</li>
-<li>Particle tracking:
+plots</p></li>
+<li><p>Particle tracking:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mspace width="0.167em"></mspace><mn>000</mn><mo>+</mo></mrow><annotation encoding="application/x-tex">10\,000+</annotation></semantics></math>
-particles per frame<br>
-</li>
-<li>Molecular dynamics:
+particles per frame</p></li>
+<li><p>Molecular dynamics:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>100</mn><mspace width="0.167em"></mspace><mn>000</mn><mo>+</mo></mrow><annotation encoding="application/x-tex">100\,000+</annotation></semantics></math>
-atoms</li>
+atoms</p></li>
 </ul>
 <p>We therefore need approximations that are much faster but still
 produce high-quality matchings.</p>
@@ -363,13 +367,11 @@ produce high-quality matchings.</p>
 <p>To make the abstract ideas concrete, we visualize them using image
 morphing where</p>
 <ul>
-<li>entities = pixels<br>
-</li>
-<li>features = RGB color values<br>
-</li>
-<li>spatial position =
+<li><p>entities = pixels</p></li>
+<li><p>features = RGB color values</p></li>
+<li><p>spatial position =
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(x, y)</annotation></semantics></math>
-coordinates</li>
+coordinates</p></li>
 </ul>
 <p>We first show the static input images (all at
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>80</mn><mo>×</mo><mn>80</mn></mrow><annotation encoding="application/x-tex">80 \times 80</annotation></semantics></math>
@@ -493,21 +495,18 @@ is assigned according to the group-to-group match.</p>
 <h4 id="complexity-reduction">Complexity Reduction<a class="anchor" aria-label="anchor" href="#complexity-reduction"></a>
 </h4>
 <ul>
-<li>Original:
+<li><p>Original:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math>
 for an
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \times n</annotation></semantics></math>
-LAP<br>
-</li>
-<li>Quantized:
+LAP</p></li>
+<li><p>Quantized:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>k</mi><mn>3</mn></msup><mo>+</mo><mi>n</mi><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(k^3 + n k)</annotation></semantics></math>
 for the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>×</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">k \times k</annotation></semantics></math>
-LAP plus group assignment<br>
-</li>
-<li>Speedup: approximately
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>/</mi><mi>k</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">(n/k)^3</annotation></semantics></math>
-</li>
+LAP plus group assignment</p></li>
+<li><p>Speedup: approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>/</mi><mi>k</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">(n/k)^3</annotation></semantics></math></p></li>
 </ul>
 <p>For example, with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1600</mn></mrow><annotation encoding="application/x-tex">n = 1600</annotation></semantics></math>
@@ -526,23 +525,20 @@ you get</p>
 </h4>
 <p><strong>Advantages</strong></p>
 <ul>
-<li>Very large speedups for big
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math><br>
-</li>
-<li>Preserves global structure (similar features stay together)<br>
-</li>
-<li>Produces smooth, band-like motion without large jumps</li>
+<li><p>Very large speedups for big
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></p></li>
+<li><p>Preserves global structure (similar features stay
+together)</p></li>
+<li><p>Produces smooth, band-like motion without large jumps</p></li>
 </ul>
 <p><strong>Disadvantages</strong></p>
 <ul>
-<li>Loses detail within each palette group<br>
-</li>
-<li>Quantization artifacts when
+<li><p>Loses detail within each palette group</p></li>
+<li><p>Quantization artifacts when
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-is too small<br>
-</li>
-<li>May miss optimal local pairings between similar but distinct feature
-values</li>
+is too small</p></li>
+<li><p>May miss optimal local pairings between similar but distinct
+feature values</p></li>
 </ul>
 <p>The corresponding GIFs are the <em>color walk</em> morphs shown
 earlier.</p>
@@ -587,13 +583,12 @@ spatial distances but now at patch level.</p>
 <p>Within each matched patch pair
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msubsup><mi>P</mi><mi>A</mi><mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mo>,</mo><msubsup><mi>P</mi><mi>B</mi><mrow><mo stretchy="false" form="prefix">(</mo><mi>l</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(P_A^{(k)}, P_B^{(l)})</annotation></semantics></math>:</p>
 <ul>
-<li>If
+<li><p>If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><msubsup><mi>P</mi><mi>A</mi><mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mo stretchy="false" form="postfix">|</mo><mo>≤</mo><mi>τ</mi></mrow><annotation encoding="application/x-tex">\lvert P_A^{(k)} \rvert \le \tau</annotation></semantics></math>
 (a threshold,
 e.g. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>τ</mi><mo>=</mo><mn>50</mn></mrow><annotation encoding="application/x-tex">\tau = 50</annotation></semantics></math>)
-solve the subproblem exactly.<br>
-</li>
-<li>Otherwise, partition that patch pair again and repeat.</li>
+solve the subproblem exactly.</p></li>
+<li><p>Otherwise, partition that patch pair again and repeat.</p></li>
 </ul>
 <ol start="4" style="list-style-type: decimal">
 <li><strong>Combine solutions</strong></li>
@@ -620,24 +615,21 @@ ones.</p>
 </h4>
 <p><strong>Advantages</strong></p>
 <ul>
-<li>Scales to very large
+<li><p>Scales to very large
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-(tens of thousands of entities)<br>
-</li>
-<li>Preserves local structure: nearby entities tend to be matched within
-the same spatial patch<br>
-</li>
-<li>No feature discretization, so feature precision is retained</li>
+(tens of thousands of entities)</p></li>
+<li><p>Preserves local structure: nearby entities tend to be matched
+within the same spatial patch</p></li>
+<li><p>No feature discretization, so feature precision is
+retained</p></li>
 </ul>
 <p><strong>Disadvantages</strong></p>
 <ul>
-<li>May miss globally optimal cross-patch matches<br>
-</li>
-<li>Quality depends on partitioning scheme and threshold
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>τ</mi><annotation encoding="application/x-tex">\tau</annotation></semantics></math><br>
-</li>
-<li>Possible boundary artifacts if important structure crosses patch
-boundaries</li>
+<li><p>May miss globally optimal cross-patch matches</p></li>
+<li><p>Quality depends on partitioning scheme and threshold
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>τ</mi><annotation encoding="application/x-tex">\tau</annotation></semantics></math></p></li>
+<li><p>Possible boundary artifacts if important structure crosses patch
+boundaries</p></li>
 </ul>
 </div>
 <div class="section level4">
@@ -744,15 +736,12 @@ coarse cell.</p>
 <h4 id="complexity">Complexity<a class="anchor" aria-label="anchor" href="#complexity"></a>
 </h4>
 <ul>
-<li>Original:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math><br>
-</li>
-<li>Downscaled:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>/</mi><msup><mi>s</mi><mn>2</mn></msup><msup><mo stretchy="false" form="postfix">)</mo><mn>3</mn></msup><mo minsize="120%" maxsize="120%" stretchy="true" form="postfix">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mi>/</mi><msup><mi>s</mi><mn>6</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O\bigl((n/s^2)^3\bigr) = O(n^3 / s^6)</annotation></semantics></math><br>
-</li>
-<li>Speedup:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>s</mi><mn>6</mn></msup><annotation encoding="application/x-tex">s^6</annotation></semantics></math>
-</li>
+<li><p>Original:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math></p></li>
+<li><p>Downscaled:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>/</mi><msup><mi>s</mi><mn>2</mn></msup><msup><mo stretchy="false" form="postfix">)</mo><mn>3</mn></msup><mo minsize="120%" maxsize="120%" stretchy="true" form="postfix">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mi>/</mi><msup><mi>s</mi><mn>6</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O\bigl((n/s^2)^3\bigr) = O(n^3 / s^6)</annotation></semantics></math></p></li>
+<li><p>Speedup:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>s</mi><mn>6</mn></msup><annotation encoding="application/x-tex">s^6</annotation></semantics></math></p></li>
 </ul>
 <p>For
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">s = 2</annotation></semantics></math>
@@ -765,24 +754,18 @@ reduction in LAP work.</p>
 </h4>
 <p><strong>Advantages</strong></p>
 <ul>
-<li>Very simple to implement<br>
-</li>
-<li>Exact LAP at the coarse level<br>
-</li>
-<li>Large speedups for moderate
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>
-</li>
+<li><p>Very simple to implement</p></li>
+<li><p>Exact LAP at the coarse level</p></li>
+<li><p>Large speedups for moderate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math></p></li>
 </ul>
 <p><strong>Disadvantages</strong></p>
 <ul>
-<li>Loss of fine detail and blocky artifacts<br>
-</li>
-<li>Assignment is no longer a true permutation at pixel level (multiple
-fine pixels can map to the same coarse target)<br>
-</li>
-<li>Quality deteriorates quickly for larger
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>
-</li>
+<li><p>Loss of fine detail and blocky artifacts</p></li>
+<li><p>Assignment is no longer a true permutation at pixel level
+(multiple fine pixels can map to the same coarse target)</p></li>
+<li><p>Quality deteriorates quickly for larger
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math></p></li>
 </ul>
 <p>In practice, resolution reduction is most useful as a crude
 initialization step for very large problems
@@ -838,22 +821,16 @@ rough initialization</td>
 </table>
 <p><strong>Practical rules of thumb</strong></p>
 <ul>
-<li>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&lt;</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">n &lt; 1000</annotation></semantics></math>:
-use the exact LAP.<br>
-</li>
-<li>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1000</mn><mo>&lt;</mo><mi>n</mi><mo>&lt;</mo><mn>5000</mn></mrow><annotation encoding="application/x-tex">1000 &lt; n &lt; 5000</annotation></semantics></math>:
-feature quantization or a shallow hierarchy.<br>
-</li>
-<li>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>5000</mn></mrow><annotation encoding="application/x-tex">n &gt; 5000</annotation></semantics></math>:
-hierarchical decomposition with 2-3 levels.</li>
-<li>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>50</mn><mspace width="0.167em"></mspace><mn>000</mn></mrow><annotation encoding="application/x-tex">n &gt; 50\,000</annotation></semantics></math>:
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&lt;</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">n &lt; 1000</annotation></semantics></math>:
+use the exact LAP.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1000</mn><mo>&lt;</mo><mi>n</mi><mo>&lt;</mo><mn>5000</mn></mrow><annotation encoding="application/x-tex">1000 &lt; n &lt; 5000</annotation></semantics></math>:
+feature quantization or a shallow hierarchy.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>5000</mn></mrow><annotation encoding="application/x-tex">n &gt; 5000</annotation></semantics></math>:
+hierarchical decomposition with 2-3 levels.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>50</mn><mspace width="0.167em"></mspace><mn>000</mn></mrow><annotation encoding="application/x-tex">n &gt; 50\,000</annotation></semantics></math>:
 combine
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">s = 2</annotation></semantics></math>
-resolution reduction with a hierarchical method.</li>
+resolution reduction with a hierarchical method.</p></li>
 </ul>
 </div>
 </div>
@@ -1272,11 +1249,9 @@ W_1(\mu, \nu) = \min_{\pi \in S_n} \sum_{i=1}^n c_{i,\pi(i)}.
 </annotation></semantics></math></p>
 <p>This appears in</p>
 <ul>
-<li>Earth mover’s distance for image retrieval<br>
-</li>
-<li>Distributional similarity in statistics<br>
-</li>
-<li>Generative modeling (e.g. Wasserstein GANs)</li>
+<li><p>Earth mover’s distance for image retrieval</p></li>
+<li><p>Distributional similarity in statistics</p></li>
+<li><p>Generative modeling (e.g. Wasserstein GANs)</p></li>
 </ul>
 </div>
 </div>
@@ -1287,11 +1262,10 @@ W_1(\mu, \nu) = \min_{\pi \in S_n} \sum_{i=1}^n c_{i,\pi(i)}.
 <h3 id="optimal-transport-theory">Optimal Transport Theory<a class="anchor" aria-label="anchor" href="#optimal-transport-theory"></a>
 </h3>
 <ul>
-<li>Peyré, G., &amp; Cuturi, M. (2019). <em>Computational Optimal
-Transport</em>. Foundations and Trends in Machine Learning.<br>
-</li>
-<li>Villani, C. (2008). <em>Optimal Transport: Old and New</em>.
-Springer.</li>
+<li><p>Peyré, G., &amp; Cuturi, M. (2019). <em>Computational Optimal
+Transport</em>. Foundations and Trends in Machine Learning.</p></li>
+<li><p>Villani, C. (2008). <em>Optimal Transport: Old and New</em>.
+Springer.</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -1299,38 +1273,35 @@ Springer.</li>
 </h3>
 <p><strong>Ecology</strong></p>
 <ul>
-<li>Anderson, M. J. et al. (2011). Navigating the multiple meanings of
-beta diversity. <em>Ecology Letters</em>.<br>
-</li>
-<li>Legendre, P., &amp; Legendre, L. (2012). <em>Numerical Ecology</em>.
-Elsevier.</li>
+<li><p>Anderson, M. J. et al. (2011). Navigating the multiple meanings
+of beta diversity. <em>Ecology Letters</em>.</p></li>
+<li><p>Legendre, P., &amp; Legendre, L. (2012). <em>Numerical
+Ecology</em>. Elsevier.</p></li>
 </ul>
 <p><strong>Physics</strong></p>
 <ul>
-<li>Adrian, R. J., &amp; Westerweel, J. (2011). <em>Particle Image
-Velocimetry</em>. Cambridge University Press.<br>
-</li>
-<li>Crocker, J. C., &amp; Grier, D. G. (1996). Methods of digital video
-microscopy. <em>Journal of Colloid and Interface Science</em>.</li>
+<li><p>Adrian, R. J., &amp; Westerweel, J. (2011). <em>Particle Image
+Velocimetry</em>. Cambridge University Press.</p></li>
+<li><p>Crocker, J. C., &amp; Grier, D. G. (1996). Methods of digital
+video microscopy. <em>Journal of Colloid and Interface
+Science</em>.</p></li>
 </ul>
 <p><strong>Chemistry</strong></p>
 <ul>
-<li>Kabsch, W. (1976). A solution for the best rotation to relate two
-sets of vectors. <em>Acta Crystallographica</em>.<br>
-</li>
-<li>Coutsias, E. A. et al. (2004). Using quaternions to calculate RMSD.
-<em>Journal of Computational Chemistry</em>.</li>
+<li><p>Kabsch, W. (1976). A solution for the best rotation to relate two
+sets of vectors. <em>Acta Crystallographica</em>.</p></li>
+<li><p>Coutsias, E. A. et al. (2004). Using quaternions to calculate
+RMSD. <em>Journal of Computational Chemistry</em>.</p></li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="assignment-algorithms">Assignment Algorithms<a class="anchor" aria-label="anchor" href="#assignment-algorithms"></a>
 </h3>
 <ul>
-<li>Burkard, R., Dell’Amico, M., &amp; Martello, S. (2009).
-<em>Assignment Problems</em>. SIAM.<br>
-</li>
-<li>For implementation details in this package see
-<code><a href="../articles/algorithms.html">vignette("algorithms")</a></code>.</li>
+<li><p>Burkard, R., Dell’Amico, M., &amp; Martello, S. (2009).
+<em>Assignment Problems</em>. SIAM.</p></li>
+<li><p>For implementation details in this package see
+<code><a href="../articles/algorithms.html">vignette("algorithms")</a></code>.</p></li>
 </ul>
 </div>
 </div>
@@ -1440,21 +1411,16 @@ modes:</p>
 morphing and scientific applications.</p>
 <p><strong>Key Ideas</strong>:</p>
 <ol style="list-style-type: decimal">
-<li>
-<strong>Assignment = matching</strong>: LAP finds optimal
-correspondences between two sets</li>
-<li>
-<strong>Scalability matters</strong>:
+<li><p><strong>Assignment = matching</strong>: LAP finds optimal
+correspondences between two sets</p></li>
+<li><p><strong>Scalability matters</strong>:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math>
 becomes prohibitive for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>3</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">n &gt; 3{,}000</annotation></semantics></math>
-</li>
-<li>
-<strong>Three approximations</strong>: Feature quantization,
-hierarchical decomposition, resolution reduction</li>
-<li>
-<strong>Same math, different domains</strong>: Pixels, particles,
-plots, and atoms all use the same algorithms</li>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>3</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">n &gt; 3{,}000</annotation></semantics></math></p></li>
+<li><p><strong>Three approximations</strong>: Feature quantization,
+hierarchical decomposition, resolution reduction</p></li>
+<li><p><strong>Same math, different domains</strong>: Pixels, particles,
+plots, and atoms all use the same algorithms</p></li>
 </ol>
 <p>The same algorithms that morph images smoothly also track particles
 in physics, align molecules in chemistry, and match vegetation plots in
@@ -1467,17 +1433,14 @@ on problem size and accuracy requirements.</p>
 <h2 id="see-also">See Also<a class="anchor" aria-label="anchor" href="#see-also"></a>
 </h2>
 <ul>
-<li>
-<code><a href="../articles/getting-started.html">vignette("getting-started")</a></code> - Basic LAP solving</li>
-<li>
-<code><a href="../articles/algorithms.html">vignette("algorithms")</a></code> - Mathematical foundations</li>
-<li>
-<code><a href="../articles/matching-workflows.html">vignette("matching-workflows")</a></code> - Production matching
-pipelines</li>
-<li>
-<code><a href="../reference/lap_solve.html">?lap_solve</a></code>, <code><a href="../reference/match_couples.html">?match_couples</a></code>,
-<code><a href="../reference/greedy_couples.html">?greedy_couples</a></code>
-</li>
+<li><p><code><a href="../articles/getting-started.html">vignette("getting-started")</a></code> - Basic LAP
+solving</p></li>
+<li><p><code><a href="../articles/algorithms.html">vignette("algorithms")</a></code> - Mathematical
+foundations</p></li>
+<li><p><code><a href="../articles/matching-workflows.html">vignette("matching-workflows")</a></code> - Production matching
+pipelines</p></li>
+<li><p><code><a href="../reference/lap_solve.html">?lap_solve</a></code>, <code><a href="../reference/match_couples.html">?match_couples</a></code>,
+<code><a href="../reference/greedy_couples.html">?greedy_couples</a></code></p></li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -1501,5 +1464,6 @@ pipelines</li>
 
 
 
-  </body>
+  
+</body>
 </html>

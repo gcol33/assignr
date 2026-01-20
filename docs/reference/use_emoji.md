@@ -7,3 +7,7 @@ Check if emoji should be used
 ``` r
 use_emoji()
 ```
+
+## Value
+
+Logical indicating whether emoji should be used.

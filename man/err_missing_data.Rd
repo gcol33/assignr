@@ -6,6 +6,9 @@
 \usage{
 err_missing_data(dataset = "left")
 }
+\value{
+No return value, throws an error.
+}
 \description{
 Missing data error
 }

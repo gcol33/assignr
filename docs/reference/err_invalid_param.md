@@ -7,3 +7,7 @@ Invalid parameter error
 ``` r
 err_invalid_param(param, value, expected)
 ```
+
+## Value
+
+No return value, throws an error.

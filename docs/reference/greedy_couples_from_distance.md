@@ -17,3 +17,7 @@ greedy_couples_from_distance(
   return_diagnostics = FALSE
 )
 ```
+
+## Value
+
+A matching_result object with pairs, info, and optional diagnostics.

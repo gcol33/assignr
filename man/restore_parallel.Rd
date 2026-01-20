@@ -9,6 +9,9 @@ restore_parallel(parallel_state)
 \arguments{
 \item{parallel_state}{State from setup_parallel()}
 }
+\value{
+No return value, called for side effects (restores parallel plan).
+}
 \description{
 Restore original parallel plan
 }

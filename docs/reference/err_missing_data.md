@@ -7,3 +7,7 @@ Missing data error
 ``` r
 err_missing_data(dataset = "left")
 ```
+
+## Value
+
+No return value, throws an error.

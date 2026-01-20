@@ -6,8 +6,10 @@ This vignette serves three purposes:
 
 1.  **Build intuition**: Use pixel morphing as a visual analogy for
     assignment problems
+
 2.  **Scale up**: Demonstrate approximation strategies when exact LAP
     becomes infeasible
+
 3.  **Scientific applications**: Show how matching applies to ecology,
     physics, and chemistry
 
@@ -30,14 +32,19 @@ minds
 - Familiarity with
   [`lap_solve()`](https://gillescolling.com/couplr/reference/lap_solve.md)
   ([`vignette("getting-started")`](https://gillescolling.com/couplr/articles/getting-started.md))
+
 - Basic complexity analysis (Big-O notation)
+
 - Interest in algorithm design or scientific computing
 
 **What You’ll Learn**:
 
 - Why exact LAP becomes infeasible for large n
+
 - Three approximation strategies and their trade-offs
+
 - How matching problems appear in ecology, physics, and chemistry
+
 - Mathematical connections to optimal transport theory
 
 **Time to complete**: 45-60 minutes (conceptual reading)
@@ -58,8 +65,11 @@ minds
 Pixels provide an ideal testbed for understanding assignment problems:
 
 - Each pixel is an **entity** with measurable properties
+
 - **Color** = feature (what it looks like)
+
 - **Position** = spatial location (where it is)
+
 - The matching is **visually verifiable**: you can see if it worked
 
 The same algorithms that morph images smoothly also track particles in
@@ -96,15 +106,21 @@ c_{ij} = \alpha \, d_{\text{feature}}(a_i, b_j) + \beta \, d_{\text{spatial}}(\m
 **Feature distance** $`d_{\text{feature}}`$: domain-specific similarity
 
 - Ecology: Bray-Curtis dissimilarity between species vectors
-- Physics: difference in particle intensity or size  
-- Chemistry: penalty for mismatched atom types  
+
+- Physics: difference in particle intensity or size
+
+- Chemistry: penalty for mismatched atom types
+
 - Images: Euclidean distance in RGB color space
 
 **Spatial distance** $`d_{\text{spatial}}`$: physical proximity
 
-- Ecology: geographic distance between plot centers  
-- Physics: Euclidean distance accounting for predicted motion  
-- Chemistry: 3D distance between atomic coordinates  
+- Ecology: geographic distance between plot centers
+
+- Physics: Euclidean distance accounting for predicted motion
+
+- Chemistry: 3D distance between atomic coordinates
+
 - Images: 2D pixel position distance
 
 **Weights** $`\alpha, \beta \ge 0`$ balance feature matching vs. spatial
@@ -115,16 +131,21 @@ coherence.
 Exact solution: solve the full $`n \times n`$ LAP.
 
 - Complexity: $`O(n^3)`$ using Jonker-Volgenant
+
 - Feasible: up to $`n \approx 1000`$ (about $`30 \times 30`$ images, or
-  $`1000`$ plots/particles/atoms)  
+  $`1000`$ plots/particles/atoms)
+
 - Prohibitive: for $`n = 10\,000`$ ($`100 \times 100`$ images), runtime
   and memory become expensive
 
 Real applications often involve
 
-- High-resolution images: $`200 \times 200 = 40\,000`$ pixels  
-- Large ecological surveys: $`5000+`$ plots  
-- Particle tracking: $`10\,000+`$ particles per frame  
+- High-resolution images: $`200 \times 200 = 40\,000`$ pixels
+
+- Large ecological surveys: $`5000+`$ plots
+
+- Particle tracking: $`10\,000+`$ particles per frame
+
 - Molecular dynamics: $`100\,000+`$ atoms
 
 We therefore need approximations that are much faster but still produce
@@ -135,8 +156,10 @@ high-quality matchings.
 To make the abstract ideas concrete, we visualize them using image
 morphing where
 
-- entities = pixels  
-- features = RGB color values  
+- entities = pixels
+
+- features = RGB color values
+
 - spatial position = $`(x, y)`$ coordinates
 
 We first show the static input images (all at $`80 \times 80`$ for
@@ -246,9 +269,11 @@ group-to-group match.
 
 #### Complexity Reduction
 
-- Original: $`O(n^3)`$ for an $`n \times n`$ LAP  
+- Original: $`O(n^3)`$ for an $`n \times n`$ LAP
+
 - Quantized: $`O(k^3 + n k)`$ for the $`k \times k`$ LAP plus group
-  assignment  
+  assignment
+
 - Speedup: approximately $`(n/k)^3`$
 
 For example, with $`n = 1600`$ (a $`40 \times 40`$ image) and $`k = 64`$
@@ -264,14 +289,18 @@ times fewer LAP operations.
 
 **Advantages**
 
-- Very large speedups for big $`n`$  
-- Preserves global structure (similar features stay together)  
+- Very large speedups for big $`n`$
+
+- Preserves global structure (similar features stay together)
+
 - Produces smooth, band-like motion without large jumps
 
 **Disadvantages**
 
-- Loses detail within each palette group  
-- Quantization artifacts when $`k`$ is too small  
+- Loses detail within each palette group
+
+- Quantization artifacts when $`k`$ is too small
+
 - May miss optimal local pairings between similar but distinct feature
   values
 
@@ -306,7 +335,8 @@ level.
 Within each matched patch pair $`(P_A^{(k)}, P_B^{(l)})`$:
 
 - If $`\lvert P_A^{(k)} \rvert \le \tau`$ (a threshold,
-  e.g. $`\tau = 50`$) solve the subproblem exactly.  
+  e.g. $`\tau = 50`$) solve the subproblem exactly.
+
 - Otherwise, partition that patch pair again and repeat.
 
 4.  **Combine solutions**
@@ -326,15 +356,19 @@ series of much smaller ones.
 
 **Advantages**
 
-- Scales to very large $`n`$ (tens of thousands of entities)  
+- Scales to very large $`n`$ (tens of thousands of entities)
+
 - Preserves local structure: nearby entities tend to be matched within
-  the same spatial patch  
+  the same spatial patch
+
 - No feature discretization, so feature precision is retained
 
 **Disadvantages**
 
-- May miss globally optimal cross-patch matches  
-- Quality depends on partitioning scheme and threshold $`\tau`$  
+- May miss globally optimal cross-patch matches
+
+- Quality depends on partitioning scheme and threshold $`\tau`$
+
 - Possible boundary artifacts if important structure crosses patch
   boundaries
 
@@ -430,8 +464,10 @@ cell.
 
 #### Complexity
 
-- Original: $`O(n^3)`$  
-- Downscaled: $`O\bigl((n/s^2)^3\bigr) = O(n^3 / s^6)`$  
+- Original: $`O(n^3)`$
+
+- Downscaled: $`O\bigl((n/s^2)^3\bigr) = O(n^3 / s^6)`$
+
 - Speedup: $`s^6`$
 
 For $`s = 2`$ this gives a $`64\times`$ reduction in LAP work.
@@ -440,15 +476,19 @@ For $`s = 2`$ this gives a $`64\times`$ reduction in LAP work.
 
 **Advantages**
 
-- Very simple to implement  
-- Exact LAP at the coarse level  
+- Very simple to implement
+
+- Exact LAP at the coarse level
+
 - Large speedups for moderate $`s`$
 
 **Disadvantages**
 
-- Loss of fine detail and blocky artifacts  
+- Loss of fine detail and blocky artifacts
+
 - Assignment is no longer a true permutation at pixel level (multiple
-  fine pixels can map to the same coarse target)  
+  fine pixels can map to the same coarse target)
+
 - Quality deteriorates quickly for larger $`s`$
 
 In practice, resolution reduction is most useful as a crude
@@ -465,9 +505,12 @@ initialization step for very large problems ($`n > 100\,000`$).
 
 **Practical rules of thumb**
 
-- $`n < 1000`$: use the exact LAP.  
-- $`1000 < n < 5000`$: feature quantization or a shallow hierarchy.  
+- $`n < 1000`$: use the exact LAP.
+
+- $`1000 < n < 5000`$: feature quantization or a shallow hierarchy.
+
 - $`n > 5000`$: hierarchical decomposition with 2-3 levels.
+
 - $`n > 50\,000`$: combine $`s = 2`$ resolution reduction with a
   hierarchical method.
 
@@ -876,8 +919,10 @@ W_1(\mu, \nu) = \min_{\pi \in S_n} \sum_{i=1}^n c_{i,\pi(i)}.
 
 This appears in
 
-- Earth mover’s distance for image retrieval  
-- Distributional similarity in statistics  
+- Earth mover’s distance for image retrieval
+
+- Distributional similarity in statistics
+
 - Generative modeling (e.g. Wasserstein GANs)
 
 ## Further Reading
@@ -885,7 +930,8 @@ This appears in
 ### Optimal Transport Theory
 
 - Peyré, G., & Cuturi, M. (2019). *Computational Optimal Transport*.
-  Foundations and Trends in Machine Learning.  
+  Foundations and Trends in Machine Learning.
+
 - Villani, C. (2008). *Optimal Transport: Old and New*. Springer.
 
 ### Scientific Applications
@@ -893,27 +939,31 @@ This appears in
 **Ecology**
 
 - Anderson, M. J. et al. (2011). Navigating the multiple meanings of
-  beta diversity. *Ecology Letters*.  
+  beta diversity. *Ecology Letters*.
+
 - Legendre, P., & Legendre, L. (2012). *Numerical Ecology*. Elsevier.
 
 **Physics**
 
 - Adrian, R. J., & Westerweel, J. (2011). *Particle Image Velocimetry*.
-  Cambridge University Press.  
+  Cambridge University Press.
+
 - Crocker, J. C., & Grier, D. G. (1996). Methods of digital video
   microscopy. *Journal of Colloid and Interface Science*.
 
 **Chemistry**
 
 - Kabsch, W. (1976). A solution for the best rotation to relate two sets
-  of vectors. *Acta Crystallographica*.  
+  of vectors. *Acta Crystallographica*.
+
 - Coutsias, E. A. et al. (2004). Using quaternions to calculate RMSD.
   *Journal of Computational Chemistry*.
 
 ### Assignment Algorithms
 
 - Burkard, R., Dell’Amico, M., & Martello, S. (2009). *Assignment
-  Problems*. SIAM.  
+  Problems*. SIAM.
+
 - For implementation details in this package see
   [`vignette("algorithms")`](https://gillescolling.com/couplr/articles/algorithms.md).
 
@@ -981,10 +1031,13 @@ morphing and scientific applications.
 
 1.  **Assignment = matching**: LAP finds optimal correspondences between
     two sets
+
 2.  **Scalability matters**: $`O(n^3)`$ becomes prohibitive for
     $`n > 3{,}000`$
+
 3.  **Three approximations**: Feature quantization, hierarchical
     decomposition, resolution reduction
+
 4.  **Same math, different domains**: Pixels, particles, plots, and
     atoms all use the same algorithms
 
@@ -1000,10 +1053,13 @@ size and accuracy requirements.
 
 - [`vignette("getting-started")`](https://gillescolling.com/couplr/articles/getting-started.md) -
   Basic LAP solving
+
 - [`vignette("algorithms")`](https://gillescolling.com/couplr/articles/algorithms.md) -
   Mathematical foundations
+
 - [`vignette("matching-workflows")`](https://gillescolling.com/couplr/articles/matching-workflows.md) -
   Production matching pipelines
+
 - [`?lap_solve`](https://gillescolling.com/couplr/reference/lap_solve.md),
   [`?match_couples`](https://gillescolling.com/couplr/reference/match_couples.md),
   [`?greedy_couples`](https://gillescolling.com/couplr/reference/greedy_couples.md)

@@ -138,18 +138,11 @@ for animated version
 ## Examples
 
 ``` r
-# \donttest{
-# Use bundled example images
-imgA <- system.file("extdata/icons/circleA_40.png", package = "couplr")
-imgB <- system.file("extdata/icons/circleB_40.png", package = "couplr")
-
-# Basic morph
-result <- pixel_morph(imgA, imgB, n_frames = 4, show = FALSE)
-
-# Pure spatial rearrangement
-result <- pixel_morph(imgA, imgB, alpha = 0, beta = 1, show = FALSE)
-
-# Exact mode for small images (guaranteed permutation)
-result <- pixel_morph(imgA, imgB, mode = "exact", downscale_steps = 0, show = FALSE)
-# }
+if (requireNamespace("magick", quietly = TRUE)) {
+  imgA <- system.file("extdata/icons/circleA_40.png", package = "couplr")
+  imgB <- system.file("extdata/icons/circleB_40.png", package = "couplr")
+  if (nzchar(imgA) && nzchar(imgB)) {
+    result <- pixel_morph(imgA, imgB, n_frames = 4, show = FALSE)
+  }
+}
 ```

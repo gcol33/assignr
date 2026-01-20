@@ -165,8 +165,11 @@ print(balance)
 ### Causes
 
 1. **Weak overlap**: Groups are too different on key variables
+
 2. **Missing confounders**: Important variables not included in matching
+
 3. **Caliper too loose**: Accepting poor matches
+
 4. **Wrong scaling**: Variables not properly weighted
 
 ### Solutions
@@ -645,7 +648,9 @@ stopifnot(nrow(left) > 0, nrow(right) > 0)
 If you encounter an issue not covered here:
 
 1. **Check function documentation**: `?match_couples`, `?lap_solve`
+
 2. **Search GitHub issues**: [github.com/gcol33/couplr/issues](https://github.com/gcol33/couplr/issues)
+
 3. **Create a minimal reproducible example**:
 
 ```{r, eval=FALSE}
@@ -675,6 +680,9 @@ sessionInfo()
 ## See Also
 
 - `vignette("getting-started")` - Basic usage
+
 - `vignette("matching-workflows")` - Production matching pipelines
+
 - `vignette("algorithms")` - Algorithm selection guide
+
 - `vignette("comparison")` - Comparison with other packages

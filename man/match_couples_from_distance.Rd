@@ -16,6 +16,9 @@ match_couples_from_distance(
   check_costs = TRUE
 )
 }
+\value{
+A matching_result object with pairs, info, and optional diagnostics.
+}
 \description{
 Internal function to handle matching when a distance_object is provided
 }

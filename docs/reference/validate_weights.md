@@ -7,3 +7,7 @@ Validate weights parameter
 ``` r
 validate_weights(weights, vars)
 ```
+
+## Value
+
+Numeric vector of validated weights.

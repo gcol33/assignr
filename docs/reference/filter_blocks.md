@@ -14,3 +14,7 @@ filter_blocks(
   imbalance_threshold
 )
 ```
+
+## Value
+
+List with filtered left/right data frames and dropped block info.

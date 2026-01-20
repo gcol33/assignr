@@ -6,6 +6,9 @@
 \usage{
 get_block_id_column(df)
 }
+\value{
+Character string with column name, or NULL if not found.
+}
 \description{
 Standardize block ID column name
 }

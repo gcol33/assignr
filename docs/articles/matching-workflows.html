@@ -14,6 +14,20 @@
 <meta property="og:title" content="Matching Workflows">
 </head>
 <body>
+<p>
+
+
+
+
+
+
+
+
+  pkgdown/mathjax-config.html
+
+  
+
+  </p>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -21,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">couplr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +103,7 @@
                         <h4 data-toc-skip class="author">Gilles
 Colling</h4>
             
-            <h4 data-toc-skip class="date">2026-01-09</h4>
+            <h4 data-toc-skip class="date">2026-01-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gcol33/couplr/blob/HEAD/vignettes/matching-workflows.Rmd" class="external-link"><code>vignettes/matching-workflows.Rmd</code></a></small>
       <div class="d-none name"><code>matching-workflows.Rmd</code></div>
@@ -117,23 +131,22 @@ pipeline: preprocessing, matching, assessment, and reporting.</p>
 data scientists working with observational data</p>
 <p><strong>Prerequisites</strong>:</p>
 <ul>
-<li>Familiarity with basic <code>couplr</code> usage
-(<code><a href="../articles/getting-started.html">vignette("getting-started")</a></code>)</li>
-<li>Understanding of causal inference concepts (treatment effects,
-confounding)</li>
-<li>Basic statistics (means, standard deviations, t-tests)</li>
+<li><p>Familiarity with basic <code>couplr</code> usage
+(<code><a href="../articles/getting-started.html">vignette("getting-started")</a></code>)</p></li>
+<li><p>Understanding of causal inference concepts (treatment effects,
+confounding)</p></li>
+<li><p>Basic statistics (means, standard deviations, t-tests)</p></li>
 </ul>
 <p><strong>What You’ll Learn</strong>:</p>
 <ul>
-<li>How to match treatment and control units with
-<code><a href="../reference/match_couples.html">match_couples()</a></code>
-</li>
-<li>Automatic preprocessing: scaling, health checks, categorical
-encoding</li>
-<li>Assessing match quality with <code><a href="../reference/balance_diagnostics.html">balance_diagnostics()</a></code>
-</li>
-<li>When to use optimal vs greedy matching</li>
-<li>Creating publication-ready balance tables</li>
+<li><p>How to match treatment and control units with
+<code><a href="../reference/match_couples.html">match_couples()</a></code></p></li>
+<li><p>Automatic preprocessing: scaling, health checks, categorical
+encoding</p></li>
+<li><p>Assessing match quality with
+<code><a href="../reference/balance_diagnostics.html">balance_diagnostics()</a></code></p></li>
+<li><p>When to use optimal vs greedy matching</p></li>
+<li><p>Creating publication-ready balance tables</p></li>
 </ul>
 <p><strong>Time to complete</strong>: 30-45 minutes</p>
 </div>
@@ -193,12 +206,13 @@ credibly.</p>
 <h3 id="key-features">Key Features<a class="anchor" aria-label="anchor" href="#key-features"></a>
 </h3>
 <ul>
-<li>Automatic preprocessing with health checks and smart scaling</li>
-<li>Optimal matching via linear assignment algorithms</li>
-<li>Fast greedy matching for large datasets (n &gt; 5,000)</li>
-<li>Blocking and stratification support</li>
-<li>Comprehensive balance diagnostics</li>
-<li>Publication-ready output tables</li>
+<li><p>Automatic preprocessing with health checks and smart
+scaling</p></li>
+<li><p>Optimal matching via linear assignment algorithms</p></li>
+<li><p>Fast greedy matching for large datasets (n &gt; 5,000)</p></li>
+<li><p>Blocking and stratification support</p></li>
+<li><p>Comprehensive balance diagnostics</p></li>
+<li><p>Publication-ready output tables</p></li>
 </ul>
 </div>
 </div>
@@ -210,14 +224,12 @@ credibly.</p>
 </h3>
 <p>Given two groups of units:</p>
 <ul>
-<li>
-<strong>Left group</strong> (treatment, exposed, cases):
+<li><p><strong>Left group</strong> (treatment, exposed, cases):
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mi>L</mi></msub><annotation encoding="application/x-tex">n_L</annotation></semantics></math>
-units</li>
-<li>
-<strong>Right group</strong> (control, unexposed, controls):
+units</p></li>
+<li><p><strong>Right group</strong> (control, unexposed, controls):
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mi>R</mi></msub><annotation encoding="application/x-tex">n_R</annotation></semantics></math>
-units</li>
+units</p></li>
 </ul>
 <p>Each unit
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
@@ -241,18 +253,20 @@ is a matching assignment.</p>
 </h3>
 <p><strong>Without matching:</strong></p>
 <ul>
-<li>Groups may differ systematically on important covariates</li>
-<li>Treatment effect estimates are confounded by these differences</li>
-<li>Statistical adjustments (regression) rely on untestable
-assumptions</li>
+<li><p>Groups may differ systematically on important covariates</p></li>
+<li><p>Treatment effect estimates are confounded by these
+differences</p></li>
+<li><p>Statistical adjustments (regression) rely on untestable
+assumptions</p></li>
 </ul>
 <p><strong>With matching:</strong></p>
 <ul>
-<li>Create comparable groups that differ primarily in treatment
-status</li>
-<li>Balance covariates to reduce confounding</li>
-<li>Improve causal inference by mimicking randomized experiments</li>
-<li>Transparent, non-parametric preprocessing step</li>
+<li><p>Create comparable groups that differ primarily in treatment
+status</p></li>
+<li><p>Balance covariates to reduce confounding</p></li>
+<li><p>Improve causal inference by mimicking randomized
+experiments</p></li>
+<li><p>Transparent, non-parametric preprocessing step</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -293,7 +307,7 @@ automatic preprocessing:</p>
 <span><span class="va">n_right</span> <span class="op">&lt;-</span> <span class="fl">150</span></span>
 <span></span>
 <span><span class="co"># Treatment group (tends to be younger, higher income)</span></span>
-<span><span class="va">left_data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="va">left_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_left</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n_left</span>, mean <span class="op">=</span> <span class="fl">45</span>, sd <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
 <span>  income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n_left</span>, mean <span class="op">=</span> <span class="fl">60000</span>, sd <span class="op">=</span> <span class="fl">15000</span><span class="op">)</span>,</span>
@@ -302,7 +316,7 @@ automatic preprocessing:</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Control group (older, lower income on average)</span></span>
-<span><span class="va">right_data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="va">right_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n_right</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n_right</span>, mean <span class="op">=</span> <span class="fl">52</span>, sd <span class="op">=</span> <span class="fl">12</span><span class="op">)</span>,</span>
 <span>  income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n_right</span>, mean <span class="op">=</span> <span class="fl">50000</span>, sd <span class="op">=</span> <span class="fl">18000</span><span class="op">)</span>,</span>
@@ -359,16 +373,13 @@ automatic preprocessing:</p>
 <span><span class="co">#&gt; [1] 150</span></span></code></pre></div>
 <p>The result contains:</p>
 <ul>
-<li>
-<code>pairs</code>: Matched pairs with IDs and distances</li>
-<li>
-<code>info</code>: Matching method, counts, total distance</li>
-<li>
-<code>left_unmatched</code>, <code>right_unmatched</code>: Units
-without matches</li>
-<li>
-<code>cost_matrix</code>: Full distance matrix (if
-<code>return_diagnostics = TRUE</code>)</li>
+<li><p><code>pairs</code>: Matched pairs with IDs and distances</p></li>
+<li><p><code>info</code>: Matching method, counts, total
+distance</p></li>
+<li><p><code>left_unmatched</code>, <code>right_unmatched</code>: Units
+without matches</p></li>
+<li><p><code>cost_matrix</code>: Full distance matrix (if
+<code>return_diagnostics = TRUE</code>)</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -478,15 +489,15 @@ without matches</li>
 <rect x='463.26' y='296.12' width='14.10' height='18.50' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #29ABE0; fill-opacity: 0.70;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA=)'>
-<text x='28.20' y='317.78' text-anchor='end' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='28.20' y='225.25' text-anchor='end' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>5</text>
-<text x='28.20' y='132.73' text-anchor='end' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>10</text>
-<text x='28.20' y='40.21' text-anchor='end' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>15</text>
-<text x='60.90' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='166.44' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='271.97' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>1.0</text>
-<text x='377.51' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>1.5</text>
-<text x='483.04' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>2.0</text>
+<text x='28.20' y='317.78' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='28.20' y='225.25' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>5</text>
+<text x='28.20' y='132.73' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='28.20' y='40.21' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>15</text>
+<text x='60.90' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='166.44' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='271.97' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='377.51' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>1.5</text>
+<text x='483.04' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>2.0</text>
 <text x='265.82' y='352.20' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='136.41px' lengthAdjust='spacingAndGlyphs'>Euclidean Distance (scaled)</text>
 <text transform='translate(13.36,175.84) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='29.38px' lengthAdjust='spacingAndGlyphs'>Count</text>
 <text x='33.13' y='14.93' style='font-size: 13.20px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='181.69px' lengthAdjust='spacingAndGlyphs'>Distribution of Match Distances</text>
@@ -495,10 +506,11 @@ without matches</li>
 </svg></div></p>
 <p><strong>Interpretation:</strong></p>
 <ul>
-<li>Lower distances indicate better matches (more similar units)</li>
-<li>Median distance provides typical match quality</li>
-<li>Large distances suggest poor matches (consider caliper
-constraints)</li>
+<li><p>Lower distances indicate better matches (more similar
+units)</p></li>
+<li><p>Median distance provides typical match quality</p></li>
+<li><p>Large distances suggest poor matches (consider caliper
+constraints)</p></li>
 </ul>
 </div>
 </div>
@@ -510,15 +522,12 @@ constraints)</li>
 </h3>
 <p>Raw covariates often have:</p>
 <ul>
-<li>
-<strong>Different scales</strong>: Age in years (20-80), income in
-dollars (20,000-200,000)</li>
-<li>
-<strong>Different units</strong>: Continuous (age), categorical
-(education), binary (smoker)</li>
-<li>
-<strong>Data quality issues</strong>: Missing values, constant
-variables, extreme outliers</li>
+<li><p><strong>Different scales</strong>: Age in years (20-80), income
+in dollars (20,000-200,000)</p></li>
+<li><p><strong>Different units</strong>: Continuous (age), categorical
+(education), binary (smoker)</p></li>
+<li><p><strong>Data quality issues</strong>: Missing values, constant
+variables, extreme outliers</p></li>
 </ul>
 <p>Without preprocessing, high-variance variables dominate distance
 calculations.</p>
@@ -530,33 +539,33 @@ calculations.</p>
 automatically:</p>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Detects problematic variables</strong>
+<p><strong>Detects problematic variables</strong></p>
 <ul>
-<li>Constant variables (SD = 0) → excluded with warning</li>
-<li>High missingness (&gt;50%) → warned</li>
-<li>Extreme skewness (|skew| &gt; 2) → informed</li>
+<li><p>Constant variables (SD = 0) → excluded with warning</p></li>
+<li><p>High missingness (&gt;50%) → warned</p></li>
+<li><p>Extreme skewness (|skew| &gt; 2) → informed</p></li>
 </ul>
 </li>
 <li>
-<strong>Applies appropriate scaling</strong>
+<p><strong>Applies appropriate scaling</strong></p>
 <ul>
-<li>Continuous variables → scaled by selected method</li>
-<li>Binary variables (0/1) → used as-is</li>
-<li>Categorical → converted to numeric if ordered</li>
+<li><p>Continuous variables → scaled by selected method</p></li>
+<li><p>Binary variables (0/1) → used as-is</p></li>
+<li><p>Categorical → converted to numeric if ordered</p></li>
 </ul>
 </li>
 <li>
-<strong>Handles categorical variables</strong>
+<p><strong>Handles categorical variables</strong></p>
 <ul>
-<li>Unordered factors → converted to binary indicators</li>
-<li>Ordered factors → converted to numeric ranks</li>
+<li><p>Unordered factors → converted to binary indicators</p></li>
+<li><p>Ordered factors → converted to numeric ranks</p></li>
 </ul>
 </li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create data with scaling challenges</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">456</span><span class="op">)</span></span>
-<span><span class="va">challenging_data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="va">challenging_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">50</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span>,                    <span class="co"># Years (reasonable scale)</span></span>
 <span>  income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">60000</span>, <span class="fl">20000</span><span class="op">)</span>,           <span class="co"># Dollars (large scale)</span></span>
@@ -604,9 +613,9 @@ default):
 x_{\text{scaled}} = \frac{x - \text{median}(x)}{\text{MAD}(x)}
 </annotation></semantics></math></p>
 <ul>
-<li>Uses median and median absolute deviation (MAD)</li>
-<li>Resistant to outliers and skewness</li>
-<li>Best for: Real-world data with potential outliers</li>
+<li><p>Uses median and median absolute deviation (MAD)</p></li>
+<li><p>Resistant to outliers and skewness</p></li>
+<li><p>Best for: Real-world data with potential outliers</p></li>
 </ul>
 <p><strong>2. Standardization</strong>
 (<code>scale = "standardize"</code>):
@@ -614,18 +623,18 @@ x_{\text{scaled}} = \frac{x - \text{median}(x)}{\text{MAD}(x)}
 x_{\text{scaled}} = \frac{x - \text{mean}(x)}{\text{SD}(x)}
 </annotation></semantics></math></p>
 <ul>
-<li>Classical z-score normalization</li>
-<li>Assumes approximate normality</li>
-<li>Best for: Clean, normally-distributed data</li>
+<li><p>Classical z-score normalization</p></li>
+<li><p>Assumes approximate normality</p></li>
+<li><p>Best for: Clean, normally-distributed data</p></li>
 </ul>
 <p><strong>3. Range scaling</strong> (<code>scale = "range"</code>):
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mtext mathvariant="normal">scaled</mtext></msub><mo>=</mo><mfrac><mrow><mi>x</mi><mo>−</mo><mrow><mi mathvariant="normal">min</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mrow><mi mathvariant="normal">max</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mrow><mi mathvariant="normal">min</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">
 x_{\text{scaled}} = \frac{x - \min(x)}{\max(x) - \min(x)}
 </annotation></semantics></math></p>
 <ul>
-<li>Scales to [0, 1] range</li>
-<li>Preserves exact relationships</li>
-<li>Best for: Bounded variables, visualization</li>
+<li><p>Scales to [0, 1] range</p></li>
+<li><p>Preserves exact relationships</p></li>
+<li><p>Best for: Bounded variables, visualization</p></li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Demonstrate scaling methods</span></span>
@@ -633,8 +642,8 @@ x_{\text{scaled}} = \frac{x - \min(x)}{\max(x) - \min(x)}
 <span></span>
 <span><span class="co"># Function to show scaling</span></span>
 <span><span class="va">show_scaling</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">method</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">left_demo</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, var <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
-<span>  <span class="va">right_demo</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, var <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">left_demo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, var <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">right_demo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, var <span class="op">=</span> <span class="va">x</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/match_couples.html">match_couples</a></span><span class="op">(</span></span>
 <span>    <span class="va">left_demo</span>, <span class="va">right_demo</span>,</span>
@@ -669,7 +678,7 @@ x_{\text{scaled}} = \frac{x - \min(x)}{\max(x) - \min(x)}
 <p>The preprocessing system provides informative diagnostics:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create data with issues</span></span>
-<span><span class="va">problematic_data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="va">problematic_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span>,</span>
 <span>  constant_var <span class="op">=</span> <span class="fl">5</span>,                           <span class="co"># No variation - will warn</span></span>
@@ -703,34 +712,34 @@ alternatives.</p>
 <p><strong>Optimal matching</strong>
 (<code>method = "optimal"</code>):</p>
 <ul>
-<li>Minimizes total distance (globally optimal solution)</li>
-<li>Uses linear assignment algorithms
+<li><p>Minimizes total distance (globally optimal solution)</p></li>
+<li><p>Uses linear assignment algorithms
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math>
-complexity)</li>
-<li>Suitable for: n &lt; 5,000, when optimality is critical</li>
-<li>Typical runtime: &lt;1 second for n=1,000, ~10 seconds for
-n=3,000</li>
+complexity)</p></li>
+<li><p>Suitable for: n &lt; 5,000, when optimality is critical</p></li>
+<li><p>Typical runtime: &lt;1 second for n=1,000, ~10 seconds for
+n=3,000</p></li>
 </ul>
 <p><strong>Greedy matching</strong>
 (<code>method = "greedy"</code>):</p>
 <ul>
-<li>Fast approximation (10-100x faster)</li>
-<li>Three strategies: sorted, row_best, pq</li>
-<li>Suitable for: n &gt; 5,000, exploratory analysis, when speed
-matters</li>
-<li>Typical runtime: &lt;1 second for n=10,000</li>
+<li><p>Fast approximation (10-100x faster)</p></li>
+<li><p>Three strategies: sorted, row_best, pq</p></li>
+<li><p>Suitable for: n &gt; 5,000, exploratory analysis, when speed
+matters</p></li>
+<li><p>Typical runtime: &lt;1 second for n=10,000</p></li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create moderately large dataset</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">789</span><span class="op">)</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
-<span><span class="va">large_left</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="va">large_left</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span>,</span>
 <span>  x1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>,</span>
 <span>  x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>,</span>
 <span>  x3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">large_right</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="va">large_right</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span>,</span>
 <span>  x1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>,</span>
 <span>  x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>,</span>
@@ -759,18 +768,18 @@ matters</li>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Optimal matching:\n"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Optimal matching:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  Time:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">time_optimal</span><span class="op">[</span><span class="st">"elapsed"</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"seconds\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Time: 19.99 seconds</span></span>
+<span><span class="co">#&gt;   Time: 135.64 seconds</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  Mean distance:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">result_optimal</span><span class="op">$</span><span class="va">pairs</span><span class="op">$</span><span class="va">distance</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>, <span class="st">"\n\n"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Mean distance: 0.3368</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Greedy matching:\n"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Greedy matching:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  Time:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">time_greedy</span><span class="op">[</span><span class="st">"elapsed"</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>, <span class="st">"seconds\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Time: 0.94 seconds</span></span>
+<span><span class="co">#&gt;   Time: 1.42 seconds</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  Mean distance:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">result_greedy</span><span class="op">$</span><span class="va">pairs</span><span class="op">$</span><span class="va">distance</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Mean distance: 0.4667</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"  Speedup:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">time_optimal</span><span class="op">[</span><span class="st">"elapsed"</span><span class="op">]</span> <span class="op">/</span> <span class="va">time_greedy</span><span class="op">[</span><span class="st">"elapsed"</span><span class="op">]</span>, <span class="fl">1</span><span class="op">)</span>, <span class="st">"x\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Speedup: 21.3 x</span></span></code></pre></div>
+<span><span class="co">#&gt;   Speedup: 95.5 x</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="greedy-strategies">Greedy Strategies<a class="anchor" aria-label="anchor" href="#greedy-strategies"></a>
@@ -779,43 +788,50 @@ matters</li>
 <code><a href="../reference/greedy_couples.html">greedy_couples()</a></code>:</p>
 <p><strong>1. Sorted</strong> (<code>strategy = "sorted"</code>):</p>
 <ul>
-<li>Sort all possible pairs by distance</li>
-<li>Assign greedily from best to worst</li>
-<li>Best quality among greedy methods</li>
-<li>Slowest greedy option (still much faster than optimal)</li>
+<li><p>Sort all possible pairs by distance</p></li>
+<li><p>Assign greedily from best to worst</p></li>
+<li><p>Best quality among greedy methods</p></li>
+<li><p>Slowest greedy option (still much faster than optimal)</p></li>
 </ul>
 <pre><code>Algorithm:
 1. Compute all n_L × n_R distances
+
 2. Sort pairs by distance (ascending)
+
 3. For each pair in sorted order:
+
    - If both units unmatched, assign them
+
 4. Stop when no more matches possible</code></pre>
 <p><strong>2. Row-best</strong> (<code>strategy = "row_best"</code>,
 default):</p>
 <ul>
-<li>For each left unit, find best available right unit</li>
-<li>Process left units in order</li>
-<li>Fast and simple</li>
-<li>Medium quality</li>
+<li><p>For each left unit, find best available right unit</p></li>
+<li><p>Process left units in order</p></li>
+<li><p>Fast and simple</p></li>
+<li><p>Medium quality</p></li>
 </ul>
 <pre><code>Algorithm:
 1. For i = 1 to n_L:
+
    - Find unmatched right unit j with minimum distance to i
+
    - Assign (i, j)
+
 2. Return all assignments</code></pre>
 <p><strong>3. Priority queue</strong>
 (<code>strategy = "pq"</code>):</p>
 <ul>
-<li>Maintains priority queue of potential matches</li>
-<li>Updates dynamically as assignments made</li>
-<li>Best for very large problems</li>
-<li>Fastest option</li>
+<li><p>Maintains priority queue of potential matches</p></li>
+<li><p>Updates dynamically as assignments made</p></li>
+<li><p>Best for very large problems</p></li>
+<li><p>Fastest option</p></li>
 </ul>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compare greedy strategies on same data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">101</span><span class="op">)</span></span>
-<span><span class="va">test_left</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">200</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">test_right</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">200</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">test_left</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">200</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">test_right</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">200</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">strategies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sorted"</span>, <span class="st">"row_best"</span>, <span class="st">"pq"</span><span class="op">)</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -848,16 +864,16 @@ default):</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">comparison</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          strategy time_sec mean_distance total_distance</span></span>
-<span><span class="co">#&gt; elapsed    sorted     0.05        0.0912          18.24</span></span>
-<span><span class="co">#&gt; elapsed1 row_best     0.04        0.0968          19.36</span></span>
-<span><span class="co">#&gt; elapsed2       pq     0.05        0.0912          18.24</span></span></code></pre></div>
+<span><span class="co">#&gt; elapsed    sorted     0.04        0.0912          18.24</span></span>
+<span><span class="co">#&gt; elapsed1 row_best     0.05        0.0968          19.36</span></span>
+<span><span class="co">#&gt; elapsed2       pq     0.07        0.0912          18.24</span></span></code></pre></div>
 <p><strong>Recommendation:</strong></p>
 <ul>
-<li>Default to <code>strategy = "row_best"</code> for good speed/quality
-balance</li>
-<li>Use <code>strategy = "sorted"</code> when quality is important but
-optimal is too slow</li>
-<li>Use <code>strategy = "pq"</code> for n &gt; 10,000</li>
+<li><p>Default to <code>strategy = "row_best"</code> for good
+speed/quality balance</p></li>
+<li><p>Use <code>strategy = "sorted"</code> when quality is important
+but optimal is too slow</p></li>
+<li><p>Use <code>strategy = "pq"</code> for n &gt; 10,000</p></li>
 </ul>
 </div>
 </div>
@@ -872,19 +888,21 @@ quality.</p>
 <p>Without calipers, optimal matching may pair very dissimilar units
 just to maximize the number of matches. Calipers prevent this by:</p>
 <ul>
-<li>Setting a distance threshold beyond which matches are forbidden</li>
-<li>Reducing the number of matches to improve average quality</li>
-<li>Implementing the “common support” requirement in propensity score
-matching</li>
+<li><p>Setting a distance threshold beyond which matches are
+forbidden</p></li>
+<li><p>Reducing the number of matches to improve average
+quality</p></li>
+<li><p>Implementing the “common support” requirement in propensity score
+matching</p></li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create data where some units are far apart</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">202</span><span class="op">)</span></span>
-<span><span class="va">left_cal</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="va">left_cal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">50</span>,</span>
 <span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">40</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">5</span>, sd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Some outliers</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">right_cal</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="va">right_cal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">50</span>,</span>
 <span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -1052,14 +1070,14 @@ matching</li>
 <line x1='146.35' y1='328.50' x2='146.35' y2='23.18' style='stroke-width: 1.07; stroke: #FF0000; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA=)'>
-<text x='28.20' y='317.78' text-anchor='end' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='28.20' y='251.69' text-anchor='end' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>5</text>
-<text x='28.20' y='185.60' text-anchor='end' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>10</text>
-<text x='28.20' y='119.51' text-anchor='end' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>15</text>
-<text x='28.20' y='53.42' text-anchor='end' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>20</text>
-<text x='55.72' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='176.56' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='297.40' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='28.20' y='317.78' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='28.20' y='251.69' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>5</text>
+<text x='28.20' y='185.60' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='28.20' y='119.51' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>15</text>
+<text x='28.20' y='53.42' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>20</text>
+<text x='55.72' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='176.56' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='297.40' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>4</text>
 <text x='220.52' y='352.20' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='42.81px' lengthAdjust='spacingAndGlyphs'>Distance</text>
 <text transform='translate(13.36,175.84) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='29.38px' lengthAdjust='spacingAndGlyphs'>Count</text>
 <rect x='418.88' y='145.24' width='79.64' height='61.19' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
@@ -1081,9 +1099,9 @@ matching</li>
 pooled SD</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculate pooled SD</span></span>
-<span><span class="va">combined</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span></span>
-<span>  <span class="va">left_data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>group <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span>,</span>
-<span>  <span class="va">right_data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>group <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span>
+<span><span class="va">combined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
+<span>  <span class="va">left_data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span>,</span>
+<span>  <span class="va">right_data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">pooled_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">combined</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>  <span class="co"># For single variable</span></span>
@@ -1129,19 +1147,21 @@ matching on remaining covariates is a powerful strategy.</p>
 </h3>
 <p><strong>Benefits:</strong></p>
 <ul>
-<li>Ensures exact balance on critical variables (site, gender, age
-category)</li>
-<li>Reduces problem size (smaller within-block matching problems)</li>
-<li>Prevents poor cross-block matches</li>
-<li>Transparent and interpretable</li>
+<li><p>Ensures exact balance on critical variables (site, gender, age
+category)</p></li>
+<li><p>Reduces problem size (smaller within-block matching
+problems)</p></li>
+<li><p>Prevents poor cross-block matches</p></li>
+<li><p>Transparent and interpretable</p></li>
 </ul>
 <p><strong>When to use:</strong></p>
 <ul>
-<li>Strong domain knowledge about important stratification
-variables</li>
-<li>Variables that absolutely must be balanced (e.g., study site in
-multi-center trials)</li>
-<li>Large datasets where blocking reduces computational burden</li>
+<li><p>Strong domain knowledge about important stratification
+variables</p></li>
+<li><p>Variables that absolutely must be balanced (e.g., study site in
+multi-center trials)</p></li>
+<li><p>Large datasets where blocking reduces computational
+burden</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -1150,15 +1170,15 @@ multi-center trials)</li>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create multi-site data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">303</span><span class="op">)</span></span>
-<span><span class="va">multi_site</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span></span>
-<span>  <span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="va">multi_site</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>    id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>,</span>
 <span>    site <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>, <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>    age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span>,</span>
 <span>    income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">55000</span>, <span class="fl">15000</span><span class="op">)</span>,</span>
 <span>    group <span class="op">=</span> <span class="st">"treatment"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  <span class="fu">tibble</span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>    id <span class="op">=</span> <span class="fl">101</span><span class="op">:</span><span class="fl">250</span>,</span>
 <span>    site <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>, <span class="fl">150</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>    age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span>,</span>
@@ -1167,8 +1187,8 @@ multi-center trials)</li>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">left_site</span> <span class="op">&lt;-</span> <span class="va">multi_site</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">==</span> <span class="st">"treatment"</span><span class="op">)</span></span>
-<span><span class="va">right_site</span> <span class="op">&lt;-</span> <span class="va">multi_site</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">==</span> <span class="st">"control"</span><span class="op">)</span></span>
+<span><span class="va">left_site</span> <span class="op">&lt;-</span> <span class="va">multi_site</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">==</span> <span class="st">"treatment"</span><span class="op">)</span></span>
+<span><span class="va">right_site</span> <span class="op">&lt;-</span> <span class="va">multi_site</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">==</span> <span class="st">"control"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create exact blocks by site</span></span>
 <span><span class="va">blocks</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matchmaker.html">matchmaker</a></span><span class="op">(</span></span>
@@ -1200,10 +1220,10 @@ multi-center trials)</li>
 <span></span>
 <span><span class="co"># Verify exact site balance</span></span>
 <span><span class="va">result_blocked</span><span class="op">$</span><span class="va">pairs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>left_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">left_id</span><span class="op">)</span>, right_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">right_id</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">left_site</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>, <span class="va">site</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"left_id"</span> <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">right_site</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>, <span class="va">site</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"right_id"</span> <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span>, suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"_left"</span>, <span class="st">"_right"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">count</span><span class="op">(</span><span class="va">site_left</span>, <span class="va">site_right</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>left_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">left_id</span><span class="op">)</span>, right_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">right_id</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">left_site</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">site</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"left_id"</span> <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">right_site</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">site</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"right_id"</span> <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span>, suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"_left"</span>, <span class="st">"_right"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">site_left</span>, <span class="va">site_right</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 3</span></span></span>
 <span><span class="co">#&gt;   site_left site_right     n</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
@@ -1249,8 +1269,8 @@ blocks:</p>
 <span><span class="co"># Show age distribution by cluster</span></span>
 <span><span class="va">cluster_blocks</span><span class="op">$</span><span class="va">left</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">block_id</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">summarise</span><span class="op">(</span></span>
-<span>    n <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
+<span>    n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    mean_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span>,</span>
 <span>    sd_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
@@ -1276,9 +1296,9 @@ blocks:</p>
 </annotation></semantics></math></p>
 <p><strong>Thresholds:</strong></p>
 <ul>
-<li>&lt; 0.1: Excellent balance</li>
-<li>0.1 - 0.25: Good balance</li>
-<li>0.25 - 0.5: Acceptable (may need further adjustment)</li>
+<li><p>&lt; 0.1: Excellent balance</p></li>
+<li><p>0.1 - 0.25: Good balance</p></li>
+<li><p>0.25 - 0.5: Acceptable (may need further adjustment)</p></li>
 <li><blockquote>
 <p>0.5: Poor balance (reconsider matching strategy)</p>
 </blockquote></li>
@@ -1289,14 +1309,14 @@ blocks:</p>
 </annotation></semantics></math></p>
 <p><strong>Interpretation:</strong></p>
 <ul>
-<li>Close to 1.0: Similar variability (good)</li>
-<li>&lt; 0.5 or &gt; 2.0: Concerning imbalance in spread</li>
+<li><p>Close to 1.0: Similar variability (good)</p></li>
+<li><p>&lt; 0.5 or &gt; 2.0: Concerning imbalance in spread</p></li>
 </ul>
 <p><strong>3. Kolmogorov-Smirnov tests:</strong></p>
 <ul>
-<li>Non-parametric test for distributional differences</li>
-<li>Sensitive to differences beyond mean/variance</li>
-<li>P-value &gt; 0.05 suggests similar distributions</li>
+<li><p>Non-parametric test for distributional differences</p></li>
+<li><p>Sensitive to differences beyond mean/variance</p></li>
+<li><p>P-value &gt; 0.05 suggests similar distributions</p></li>
 </ul>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform matching</span></span>
@@ -1310,10 +1330,10 @@ blocks:</p>
 <span></span>
 <span><span class="co"># Get matched samples</span></span>
 <span><span class="va">matched_left</span> <span class="op">&lt;-</span> <span class="va">left_data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">match_result</span><span class="op">$</span><span class="va">pairs</span><span class="op">$</span><span class="va">left_id</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">match_result</span><span class="op">$</span><span class="va">pairs</span><span class="op">$</span><span class="va">left_id</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">matched_right</span> <span class="op">&lt;-</span> <span class="va">right_data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">match_result</span><span class="op">$</span><span class="va">pairs</span><span class="op">$</span><span class="va">right_id</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">match_result</span><span class="op">$</span><span class="va">pairs</span><span class="op">$</span><span class="va">right_id</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Compute balance diagnostics</span></span>
 <span><span class="va">balance</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/balance_diagnostics.html">balance_diagnostics</a></span><span class="op">(</span></span>
@@ -1411,31 +1431,25 @@ Variable Statistics:
 </table>
 <p><strong>Quality thresholds</strong> for standardized differences:</p>
 <ul>
-<li>
-<strong>&lt; 0.1</strong>: Excellent balance (treat as successfully
-matched)</li>
-<li>
-<strong>0.1-0.25</strong>: Good balance (acceptable for most
-purposes)</li>
-<li>
-<strong>0.25-0.5</strong>: Marginal (consider refinement or
-sensitivity analysis)</li>
-<li>
-<strong>&gt; 0.5</strong>: Poor balance (matching strategy needs
-revision)</li>
+<li><p><strong>&lt; 0.1</strong>: Excellent balance (treat as
+successfully matched)</p></li>
+<li><p><strong>0.1-0.25</strong>: Good balance (acceptable for most
+purposes)</p></li>
+<li><p><strong>0.25-0.5</strong>: Marginal (consider refinement or
+sensitivity analysis)</p></li>
+<li><p><strong>&gt; 0.5</strong>: Poor balance (matching strategy needs
+revision)</p></li>
 </ul>
 <p><strong>What to do if balance is poor</strong>:</p>
 <ol style="list-style-type: decimal">
-<li>
-<strong>Add more matching variables</strong> that explain the
-imbalance</li>
-<li>
-<strong>Tighten calipers</strong> (accept fewer matches but better
-quality)</li>
-<li>
-<strong>Try blocking</strong> on the problematic variable</li>
-<li>
-<strong>Report and discuss</strong> in limitations section</li>
+<li><p><strong>Add more matching variables</strong> that explain the
+imbalance</p></li>
+<li><p><strong>Tighten calipers</strong> (accept fewer matches but
+better quality)</p></li>
+<li><p><strong>Try blocking</strong> on the problematic
+variable</p></li>
+<li><p><strong>Report and discuss</strong> in limitations
+section</p></li>
 </ol>
 </div>
 <div class="section level3">
@@ -1446,7 +1460,7 @@ quality)</li>
 <span><span class="co"># (Requires creating pre-match balance for comparison)</span></span>
 <span></span>
 <span><span class="co"># For pre-match comparison, just compute summary statistics directly</span></span>
-<span><span class="va">pre_match_stats</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="va">pre_match_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"income"</span><span class="op">)</span>,</span>
 <span>  std_diff <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">left_data</span><span class="op">$</span><span class="va">age</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">right_data</span><span class="op">$</span><span class="va">age</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">left_data</span><span class="op">$</span><span class="va">age</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">right_data</span><span class="op">$</span><span class="va">age</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span>,</span>
@@ -1456,9 +1470,9 @@ quality)</li>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Combine for plotting</span></span>
-<span><span class="va">balance_comparison</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span></span>
+<span><span class="va">balance_comparison</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
 <span>  <span class="va">pre_match_stats</span>,</span>
-<span>  <span class="va">balance</span><span class="op">$</span><span class="va">var_stats</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">select</span><span class="op">(</span><span class="va">variable</span>, <span class="va">std_diff</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>when <span class="op">=</span> <span class="st">"After"</span><span class="op">)</span></span>
+<span>  <span class="va">balance</span><span class="op">$</span><span class="va">var_stats</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">variable</span>, <span class="va">std_diff</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>when <span class="op">=</span> <span class="st">"After"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span><span class="va">balance_comparison</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">variable</span>, y <span class="op">=</span> <span class="va">std_diff</span>, fill <span class="op">=</span> <span class="va">when</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1544,31 +1558,31 @@ quality)</li>
 <rect x='216.70' y='245.23' width='52.03' height='34.70' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
 <rect x='268.73' y='106.45' width='54.56' height='34.70' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #F8766D;' />
 <polygon points='205.27,180.95 261.80,180.95 261.73,180.94 261.98,180.93 262.22,180.88 262.45,180.80 262.67,180.67 262.86,180.52 263.02,180.33 263.16,180.12 263.25,179.90 263.31,179.66 263.33,179.41 263.33,179.41 263.33,172.27 263.33,172.27 263.31,172.03 263.25,171.79 263.16,171.56 263.02,171.35 262.86,171.16 262.67,171.01 262.45,170.88 262.22,170.80 261.98,170.75 261.80,170.74 205.27,170.74 205.46,170.75 205.21,170.74 204.96,170.77 204.73,170.84 204.50,170.94 204.30,171.08 204.12,171.25 203.97,171.45 203.86,171.67 203.78,171.90 203.74,172.15 203.74,172.27 203.74,179.41 203.74,179.29 203.74,179.53 203.78,179.78 203.86,180.01 203.97,180.23 204.12,180.43 204.30,180.60 204.50,180.74 204.73,180.85 204.96,180.91 205.21,180.94 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
-<text class='preserve-color' x='233.53' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='55.50px' lengthAdjust='spacingAndGlyphs'>±0.1 excellent</text>
+<text x='233.53' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='55.50px' lengthAdjust='spacingAndGlyphs'>±0.1 excellent</text>
 <polygon points='205.27,180.95 261.80,180.95 261.73,180.94 261.98,180.93 262.22,180.88 262.45,180.80 262.67,180.67 262.86,180.52 263.02,180.33 263.16,180.12 263.25,179.90 263.31,179.66 263.33,179.41 263.33,179.41 263.33,172.27 263.33,172.27 263.31,172.03 263.25,171.79 263.16,171.56 263.02,171.35 262.86,171.16 262.67,171.01 262.45,170.88 262.22,170.80 261.98,170.75 261.80,170.74 205.27,170.74 205.46,170.75 205.21,170.74 204.96,170.77 204.73,170.84 204.50,170.94 204.30,171.08 204.12,171.25 203.97,171.45 203.86,171.67 203.78,171.90 203.74,172.15 203.74,172.27 203.74,179.41 203.74,179.29 203.74,179.53 203.78,179.78 203.86,180.01 203.97,180.23 204.12,180.43 204.30,180.60 204.50,180.74 204.73,180.85 204.96,180.91 205.21,180.94 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
-<text class='preserve-color' x='233.53' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='55.50px' lengthAdjust='spacingAndGlyphs'>±0.1 excellent</text>
+<text x='233.53' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='55.50px' lengthAdjust='spacingAndGlyphs'>±0.1 excellent</text>
 <polygon points='205.27,180.95 261.80,180.95 261.73,180.94 261.98,180.93 262.22,180.88 262.45,180.80 262.67,180.67 262.86,180.52 263.02,180.33 263.16,180.12 263.25,179.90 263.31,179.66 263.33,179.41 263.33,179.41 263.33,172.27 263.33,172.27 263.31,172.03 263.25,171.79 263.16,171.56 263.02,171.35 262.86,171.16 262.67,171.01 262.45,170.88 262.22,170.80 261.98,170.75 261.80,170.74 205.27,170.74 205.46,170.75 205.21,170.74 204.96,170.77 204.73,170.84 204.50,170.94 204.30,171.08 204.12,171.25 203.97,171.45 203.86,171.67 203.78,171.90 203.74,172.15 203.74,172.27 203.74,179.41 203.74,179.29 203.74,179.53 203.78,179.78 203.86,180.01 203.97,180.23 204.12,180.43 204.30,180.60 204.50,180.74 204.73,180.85 204.96,180.91 205.21,180.94 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
-<text class='preserve-color' x='233.53' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='55.50px' lengthAdjust='spacingAndGlyphs'>±0.1 excellent</text>
+<text x='233.53' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='55.50px' lengthAdjust='spacingAndGlyphs'>±0.1 excellent</text>
 <polygon points='205.27,180.95 261.80,180.95 261.73,180.94 261.98,180.93 262.22,180.88 262.45,180.80 262.67,180.67 262.86,180.52 263.02,180.33 263.16,180.12 263.25,179.90 263.31,179.66 263.33,179.41 263.33,179.41 263.33,172.27 263.33,172.27 263.31,172.03 263.25,171.79 263.16,171.56 263.02,171.35 262.86,171.16 262.67,171.01 262.45,170.88 262.22,170.80 261.98,170.75 261.80,170.74 205.27,170.74 205.46,170.75 205.21,170.74 204.96,170.77 204.73,170.84 204.50,170.94 204.30,171.08 204.12,171.25 203.97,171.45 203.86,171.67 203.78,171.90 203.74,172.15 203.74,172.27 203.74,179.41 203.74,179.29 203.74,179.53 203.78,179.78 203.86,180.01 203.97,180.23 204.12,180.43 204.30,180.60 204.50,180.74 204.73,180.85 204.96,180.91 205.21,180.94 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #93C54B;' />
-<text class='preserve-color' x='233.53' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='55.50px' lengthAdjust='spacingAndGlyphs'>±0.1 excellent</text>
+<text x='233.53' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='55.50px' lengthAdjust='spacingAndGlyphs'>±0.1 excellent</text>
 <polygon points='322.29,180.95 391.16,180.95 391.09,180.94 391.34,180.93 391.58,180.88 391.81,180.80 392.03,180.67 392.22,180.52 392.38,180.33 392.52,180.12 392.61,179.90 392.67,179.66 392.69,179.41 392.69,179.41 392.69,172.27 392.69,172.27 392.67,172.03 392.61,171.79 392.52,171.56 392.38,171.35 392.22,171.16 392.03,171.01 391.81,170.88 391.58,170.80 391.34,170.75 391.16,170.74 322.29,170.74 322.47,170.75 322.23,170.74 321.98,170.77 321.74,170.84 321.52,170.94 321.32,171.08 321.14,171.25 320.99,171.45 320.87,171.67 320.80,171.90 320.76,172.15 320.75,172.27 320.75,179.41 320.76,179.29 320.76,179.53 320.80,179.78 320.87,180.01 320.99,180.23 321.14,180.43 321.32,180.60 321.52,180.74 321.74,180.85 321.98,180.91 322.23,180.94 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #F47C3C;' />
-<text class='preserve-color' x='356.72' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='67.84px' lengthAdjust='spacingAndGlyphs'>±0.25 acceptable</text>
+<text x='356.72' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='67.84px' lengthAdjust='spacingAndGlyphs'>±0.25 acceptable</text>
 <polygon points='322.29,180.95 391.16,180.95 391.09,180.94 391.34,180.93 391.58,180.88 391.81,180.80 392.03,180.67 392.22,180.52 392.38,180.33 392.52,180.12 392.61,179.90 392.67,179.66 392.69,179.41 392.69,179.41 392.69,172.27 392.69,172.27 392.67,172.03 392.61,171.79 392.52,171.56 392.38,171.35 392.22,171.16 392.03,171.01 391.81,170.88 391.58,170.80 391.34,170.75 391.16,170.74 322.29,170.74 322.47,170.75 322.23,170.74 321.98,170.77 321.74,170.84 321.52,170.94 321.32,171.08 321.14,171.25 320.99,171.45 320.87,171.67 320.80,171.90 320.76,172.15 320.75,172.27 320.75,179.41 320.76,179.29 320.76,179.53 320.80,179.78 320.87,180.01 320.99,180.23 321.14,180.43 321.32,180.60 321.52,180.74 321.74,180.85 321.98,180.91 322.23,180.94 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #F47C3C;' />
-<text class='preserve-color' x='356.72' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='67.84px' lengthAdjust='spacingAndGlyphs'>±0.25 acceptable</text>
+<text x='356.72' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='67.84px' lengthAdjust='spacingAndGlyphs'>±0.25 acceptable</text>
 <polygon points='322.29,180.95 391.16,180.95 391.09,180.94 391.34,180.93 391.58,180.88 391.81,180.80 392.03,180.67 392.22,180.52 392.38,180.33 392.52,180.12 392.61,179.90 392.67,179.66 392.69,179.41 392.69,179.41 392.69,172.27 392.69,172.27 392.67,172.03 392.61,171.79 392.52,171.56 392.38,171.35 392.22,171.16 392.03,171.01 391.81,170.88 391.58,170.80 391.34,170.75 391.16,170.74 322.29,170.74 322.47,170.75 322.23,170.74 321.98,170.77 321.74,170.84 321.52,170.94 321.32,171.08 321.14,171.25 320.99,171.45 320.87,171.67 320.80,171.90 320.76,172.15 320.75,172.27 320.75,179.41 320.76,179.29 320.76,179.53 320.80,179.78 320.87,180.01 320.99,180.23 321.14,180.43 321.32,180.60 321.52,180.74 321.74,180.85 321.98,180.91 322.23,180.94 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #F47C3C;' />
-<text class='preserve-color' x='356.72' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='67.84px' lengthAdjust='spacingAndGlyphs'>±0.25 acceptable</text>
+<text x='356.72' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='67.84px' lengthAdjust='spacingAndGlyphs'>±0.25 acceptable</text>
 <polygon points='322.29,180.95 391.16,180.95 391.09,180.94 391.34,180.93 391.58,180.88 391.81,180.80 392.03,180.67 392.22,180.52 392.38,180.33 392.52,180.12 392.61,179.90 392.67,179.66 392.69,179.41 392.69,179.41 392.69,172.27 392.69,172.27 392.67,172.03 392.61,171.79 392.52,171.56 392.38,171.35 392.22,171.16 392.03,171.01 391.81,170.88 391.58,170.80 391.34,170.75 391.16,170.74 322.29,170.74 322.47,170.75 322.23,170.74 321.98,170.77 321.74,170.84 321.52,170.94 321.32,171.08 321.14,171.25 320.99,171.45 320.87,171.67 320.80,171.90 320.76,172.15 320.75,172.27 320.75,179.41 320.76,179.29 320.76,179.53 320.80,179.78 320.87,180.01 320.99,180.23 321.14,180.43 321.32,180.60 321.52,180.74 321.74,180.85 321.98,180.91 322.23,180.94 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #F47C3C;' />
-<text class='preserve-color' x='356.72' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='67.84px' lengthAdjust='spacingAndGlyphs'>±0.25 acceptable</text>
+<text x='356.72' y='178.90' text-anchor='middle' style='font-size: 8.54px; font-weight: bold;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='67.84px' lengthAdjust='spacingAndGlyphs'>±0.25 acceptable</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA=)'>
-<text x='46.77' y='248.38' text-anchor='end' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>age</text>
-<text x='46.77' y='109.60' text-anchor='end' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='28.36px' lengthAdjust='spacingAndGlyphs'>income</text>
-<text x='57.55' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>-0.6</text>
-<text x='127.94' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>-0.4</text>
-<text x='198.34' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>-0.2</text>
-<text x='268.73' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='339.12' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>0.2</text>
-<text x='409.52' y='339.74' text-anchor='middle' style='font-size: 8.80px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>0.4</text>
+<text x='46.77' y='248.38' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.67px' lengthAdjust='spacingAndGlyphs'>age</text>
+<text x='46.77' y='109.60' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='28.36px' lengthAdjust='spacingAndGlyphs'>income</text>
+<text x='57.55' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>-0.6</text>
+<text x='127.94' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>-0.4</text>
+<text x='198.34' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>-0.2</text>
+<text x='268.73' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='339.12' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>0.2</text>
+<text x='409.52' y='339.74' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='12.22px' lengthAdjust='spacingAndGlyphs'>0.4</text>
 <text x='239.82' y='352.20' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='117.89px' lengthAdjust='spacingAndGlyphs'>Standardized Difference</text>
 <text transform='translate(13.36,175.84) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='39.56px' lengthAdjust='spacingAndGlyphs'>Variable</text>
 <rect x='438.90' y='145.24' width='59.62' height='61.19' style='stroke-width: 1.07; stroke: none;' /> fill: #F5F6F8;' />
@@ -1596,10 +1610,11 @@ Participants self-selected into the program, creating potential
 selection bias.</p>
 <p><strong>Data:</strong></p>
 <ul>
-<li>Treatment: 200 program participants</li>
-<li>Control: 500 non-participants</li>
-<li>Covariates: age, education, prior earnings, employment status</li>
-<li>Outcome: Earnings one year after program</li>
+<li><p>Treatment: 200 program participants</p></li>
+<li><p>Control: 500 non-participants</p></li>
+<li><p>Covariates: age, education, prior earnings, employment
+status</p></li>
+<li><p>Outcome: Earnings one year after program</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -1612,7 +1627,7 @@ selection bias.</p>
 <span><span class="co"># Program attracts younger, more educated, currently employed individuals</span></span>
 <span><span class="va">create_participant</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span>, <span class="va">is_treatment</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="va">is_treatment</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="fu">tibble</span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>      id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span>,</span>
 <span>      age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span>, mean <span class="op">=</span> <span class="fl">35</span>, sd <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
 <span>      education_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span>, mean <span class="op">=</span> <span class="fl">14</span>, sd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
@@ -1621,7 +1636,7 @@ selection bias.</p>
 <span>      treatment <span class="op">=</span> <span class="fl">1</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>    <span class="fu">tibble</span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>      id <span class="op">=</span> <span class="op">(</span><span class="va">n</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="va">n</span><span class="op">+</span><span class="fl">500</span><span class="op">)</span>,</span>
 <span>      age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">500</span>, mean <span class="op">=</span> <span class="fl">42</span>, sd <span class="op">=</span> <span class="fl">12</span><span class="op">)</span>,</span>
 <span>      education_years <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">500</span>, mean <span class="op">=</span> <span class="fl">12</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
@@ -1638,17 +1653,17 @@ selection bias.</p>
 <span><span class="co"># Simulate outcome (earnings) with treatment effect</span></span>
 <span><span class="co"># True effect: +$5,000, with heterogeneity</span></span>
 <span><span class="va">treatment_group</span> <span class="op">&lt;-</span> <span class="va">treatment_group</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    earnings <span class="op">=</span> <span class="va">prior_earnings</span> <span class="op">+</span></span>
 <span>      <span class="fl">5000</span> <span class="op">+</span>  <span class="co"># True treatment effect</span></span>
-<span>      <span class="fl">2000</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>  <span class="co"># Random variation</span></span>
+<span>      <span class="fl">2000</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>  <span class="co"># Random variation</span></span>
 <span>      <span class="fl">100</span> <span class="op">*</span> <span class="va">education_years</span>  <span class="co"># Education effect</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="va">control_group</span> <span class="op">&lt;-</span> <span class="va">control_group</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    earnings <span class="op">=</span> <span class="va">prior_earnings</span> <span class="op">+</span></span>
-<span>      <span class="fl">2000</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fl">2000</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>      <span class="fl">100</span> <span class="op">*</span> <span class="va">education_years</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
@@ -1695,10 +1710,10 @@ selection bias.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Extract matched samples</span></span>
 <span><span class="va">matched_treated</span> <span class="op">&lt;-</span> <span class="va">treatment_group</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">job_match</span><span class="op">$</span><span class="va">pairs</span><span class="op">$</span><span class="va">left_id</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">job_match</span><span class="op">$</span><span class="va">pairs</span><span class="op">$</span><span class="va">left_id</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">matched_control</span> <span class="op">&lt;-</span> <span class="va">control_group</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">job_match</span><span class="op">$</span><span class="va">pairs</span><span class="op">$</span><span class="va">right_id</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">id</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">job_match</span><span class="op">$</span><span class="va">pairs</span><span class="op">$</span><span class="va">right_id</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Compute balance</span></span>
 <span><span class="va">job_balance</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/balance_diagnostics.html">balance_diagnostics</a></span><span class="op">(</span></span>
@@ -1764,7 +1779,7 @@ selection bias.</p>
 <span><span class="va">matched_effect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">matched_treated</span><span class="op">$</span><span class="va">earnings</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">matched_control</span><span class="op">$</span><span class="va">earnings</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Paired t-test for significance</span></span>
-<span><span class="va">paired_comparison</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="va">paired_comparison</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  treated <span class="op">=</span> <span class="va">matched_treated</span><span class="op">$</span><span class="va">earnings</span>,</span>
 <span>  control <span class="op">=</span> <span class="va">matched_control</span><span class="op">$</span><span class="va">earnings</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span></span>
 <span>    <span class="va">matched_treated</span><span class="op">$</span><span class="va">id</span>,</span>
@@ -1805,11 +1820,11 @@ selection bias.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">balance_publication</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Table 2: Sample characteristics</span></span>
-<span><span class="va">sample_table</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span></span>
+<span><span class="va">sample_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
 <span>  <span class="va">matched_treated</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
 <span>      Group <span class="op">=</span> <span class="st">"Treatment"</span>,</span>
-<span>      N <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      N <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>      `Age (mean ± SD)` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"%.1f ± %.1f"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>      `Education (years)` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"%.1f ± %.1f"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">education_years</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">education_years</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>      `Prior Earnings` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"$%s ± %s"</span>,</span>
@@ -1818,9 +1833,9 @@ selection bias.</p>
 <span>      `Employed (%)` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"%.1f"</span>, <span class="fl">100</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">employed</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="op">)</span>,</span>
 <span>  <span class="va">matched_control</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
 <span>      Group <span class="op">=</span> <span class="st">"Control"</span>,</span>
-<span>      N <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      N <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>      `Age (mean ± SD)` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"%.1f ± %.1f"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>      `Education (years)` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"%.1f ± %.1f"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">education_years</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">education_years</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>      `Prior Earnings` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"$%s ± %s"</span>,</span>
@@ -1833,7 +1848,7 @@ selection bias.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sample_table</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Table 3: Treatment effect</span></span>
-<span><span class="va">effect_table</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span><span class="va">effect_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  Method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Unmatched"</span>, <span class="st">"Matched"</span><span class="op">)</span>,</span>
 <span>  `N (Treated)` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">treatment_group</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">matched_treated</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  `N (Control)` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">control_group</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">matched_control</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -1856,11 +1871,11 @@ selection bias.</p>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^3)</annotation></semantics></math>
 using Jonker-Volgenant</p>
 <ul>
-<li>n = 100: &lt; 0.01 seconds</li>
-<li>n = 500: ~ 0.1 seconds</li>
-<li>n = 1,000: ~ 1 second</li>
-<li>n = 3,000: ~ 10 seconds</li>
-<li>n = 5,000: ~ 30-60 seconds</li>
+<li><p>n = 100: &lt; 0.01 seconds</p></li>
+<li><p>n = 500: ~ 0.1 seconds</p></li>
+<li><p>n = 1,000: ~ 1 second</p></li>
+<li><p>n = 3,000: ~ 10 seconds</p></li>
+<li><p>n = 5,000: ~ 30-60 seconds</p></li>
 </ul>
 <p><strong>Greedy matching complexity:</strong>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2 \log n)</annotation></semantics></math>
@@ -1868,25 +1883,25 @@ for sorted,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
 for row-best</p>
 <ul>
-<li>n = 5,000: ~ 1 second</li>
-<li>n = 10,000: ~ 3-5 seconds</li>
-<li>n = 50,000: ~ 30-60 seconds</li>
+<li><p>n = 5,000: ~ 1 second</p></li>
+<li><p>n = 10,000: ~ 3-5 seconds</p></li>
+<li><p>n = 50,000: ~ 30-60 seconds</p></li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="memory-usage">Memory Usage<a class="anchor" aria-label="anchor" href="#memory-usage"></a>
 </h3>
 <ul>
-<li>Cost matrix: 8n² bytes (for n×n problem)</li>
-<li>n = 1,000: ~ 8 MB</li>
-<li>n = 5,000: ~ 200 MB</li>
-<li>n = 10,000: ~ 800 MB</li>
+<li><p>Cost matrix: 8n² bytes (for n×n problem)</p></li>
+<li><p>n = 1,000: ~ 8 MB</p></li>
+<li><p>n = 5,000: ~ 200 MB</p></li>
+<li><p>n = 10,000: ~ 800 MB</p></li>
 </ul>
 <p>For very large problems:</p>
 <ol style="list-style-type: decimal">
-<li>Use greedy matching to avoid full cost matrix</li>
-<li>Use blocking to reduce within-block size</li>
-<li>Consider approximate methods (upcoming vignette)</li>
+<li><p>Use greedy matching to avoid full cost matrix</p></li>
+<li><p>Use blocking to reduce within-block size</p></li>
+<li><p>Consider approximate methods (upcoming vignette)</p></li>
 </ol>
 </div>
 <div class="section level3">
@@ -1946,8 +1961,11 @@ solutions.</p>
 <p><strong>Symptom</strong>: <code><a href="../reference/balance_diagnostics.html">balance_diagnostics()</a></code> shows
 |std_diff| &gt; 0.25 for some variables.</p>
 <p><strong>Causes</strong>: - Groups are fundamentally too different
-(weak overlap) - Important confounders not included in matching
-variables - Caliper too loose</p>
+(weak overlap)</p>
+<ul>
+<li><p>Important confounders not included in matching variables</p></li>
+<li><p>Caliper too loose</p></li>
+</ul>
 <p><strong>Solutions</strong>:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1. Add more matching variables</span></span>
@@ -1969,22 +1987,28 @@ variables - Caliper too loose</p>
 </h3>
 <p><strong>Symptom</strong>: <code>n_matched</code> is much smaller than
 <code>nrow(left)</code>.</p>
-<p><strong>Causes</strong>: - Caliper too strict - Non-overlapping
-covariate distributions - Blocking creates small strata</p>
+<p><strong>Causes</strong>: - Caliper too strict</p>
+<ul>
+<li><p>Non-overlapping covariate distributions</p></li>
+<li><p>Blocking creates small strata</p></li>
+</ul>
 <p><strong>Diagnosis</strong>:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Check covariate overlap</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="va">combined</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span></span>
-<span>  <span class="va">left</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>group <span class="op">=</span> <span class="st">"treatment"</span><span class="op">)</span>,</span>
-<span>  <span class="va">right</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span>group <span class="op">=</span> <span class="st">"control"</span><span class="op">)</span></span>
+<span><span class="va">combined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
+<span>  <span class="va">left</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"treatment"</span><span class="op">)</span>,</span>
+<span>  <span class="va">right</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"control"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">combined</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>, fill <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">geom_density</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Check for Overlap"</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Solutions</strong>: - Relax caliper - Use coarser blocking
-categories - Accept that some treatment units are unmatchable (report
-this!)</p>
+<p><strong>Solutions</strong>: - Relax caliper</p>
+<ul>
+<li><p>Use coarser blocking categories</p></li>
+<li><p>Accept that some treatment units are unmatchable (report
+this!)</p></li>
+</ul>
 </div>
 <div class="section level3">
 <h3 id="problem-matching-takes-too-long">Problem: Matching Takes Too Long<a class="anchor" aria-label="anchor" href="#problem-matching-takes-too-long"></a>
@@ -2011,8 +2035,11 @@ vector of size X”.</p>
 <p><strong>Cause</strong>: Full cost matrix doesn’t fit in RAM. A
 10,000×10,000 matrix needs ~800 MB.</p>
 <p><strong>Solutions</strong>: - Use <code><a href="../reference/greedy_couples.html">greedy_couples()</a></code> which
-doesn’t require full matrix - Use blocking to create smaller
-sub-problems - Consider random sampling if sample size permits</p>
+doesn’t require full matrix</p>
+<ul>
+<li><p>Use blocking to create smaller sub-problems</p></li>
+<li><p>Consider random sampling if sample size permits</p></li>
+</ul>
 </div>
 </div>
 <div class="section level2">
@@ -2021,25 +2048,18 @@ sub-problems - Consider random sampling if sample size permits</p>
 <p>This vignette walked through a complete matching workflow using the
 job training evaluation example:</p>
 <ol style="list-style-type: decimal">
-<li>
-<strong>Problem framing</strong>: Treatment effect estimation with
-selection bias</li>
-<li>
-<strong>Matching</strong>: Creating comparable groups with
-<code><a href="../reference/match_couples.html">match_couples()</a></code>
-</li>
-<li>
-<strong>Preprocessing</strong>: Automatic scaling and variable
-health checks</li>
-<li>
-<strong>Assessment</strong>: Balance diagnostics and
-interpretation</li>
-<li>
-<strong>Refinement</strong>: Calipers, blocking, and greedy
-alternatives</li>
-<li>
-<strong>Estimation</strong>: Treatment effect with confidence
-intervals</li>
+<li><p><strong>Problem framing</strong>: Treatment effect estimation
+with selection bias</p></li>
+<li><p><strong>Matching</strong>: Creating comparable groups with
+<code><a href="../reference/match_couples.html">match_couples()</a></code></p></li>
+<li><p><strong>Preprocessing</strong>: Automatic scaling and variable
+health checks</p></li>
+<li><p><strong>Assessment</strong>: Balance diagnostics and
+interpretation</p></li>
+<li><p><strong>Refinement</strong>: Calipers, blocking, and greedy
+alternatives</p></li>
+<li><p><strong>Estimation</strong>: Treatment effect with confidence
+intervals</p></li>
 </ol>
 <p><strong>Key Takeaways</strong>:</p>
 <table class="table">
@@ -2137,20 +2157,20 @@ reason not to</td>
 <text x='210.95' y='330.30' text-anchor='middle' style='font-size: 8.54px; font-style: italic; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='14.23px' lengthAdjust='spacingAndGlyphs'>Yes</text>
 <text x='365.05' y='330.30' text-anchor='middle' style='font-size: 8.54px; font-style: italic; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='10.91px' lengthAdjust='spacingAndGlyphs'>No</text>
 <polygon points='246.99,88.99 329.01,88.99 328.95,88.99 329.20,88.98 329.44,88.93 329.67,88.84 329.89,88.72 330.08,88.56 330.24,88.38 330.37,88.17 330.47,87.94 330.53,87.70 330.55,87.45 330.55,87.45 330.55,67.00 330.55,67.00 330.53,66.75 330.47,66.51 330.37,66.29 330.24,66.08 330.08,65.89 329.89,65.74 329.67,65.61 329.44,65.52 329.20,65.48 329.01,65.46 246.99,65.46 247.17,65.48 246.92,65.47 246.68,65.50 246.44,65.56 246.22,65.67 246.01,65.81 245.84,65.98 245.69,66.18 245.57,66.40 245.49,66.63 245.45,66.88 245.45,67.00 245.45,87.45 245.45,87.33 245.45,87.58 245.49,87.82 245.57,88.06 245.69,88.27 245.84,88.47 246.01,88.64 246.22,88.78 246.44,88.89 246.68,88.96 246.92,88.99 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #29ABE0;' />
-<text class='preserve-color' x='288.00' y='75.67' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='57.44px' lengthAdjust='spacingAndGlyphs'>1. Explore data</text>
-<text class='preserve-color' x='288.00' y='84.89' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='76.91px' lengthAdjust='spacingAndGlyphs'>Identify confounders</text>
+<text x='288.00' y='75.67' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='57.44px' lengthAdjust='spacingAndGlyphs'>1. Explore data</text>
+<text x='288.00' y='84.89' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='76.91px' lengthAdjust='spacingAndGlyphs'>Identify confounders</text>
 <polygon points='253.88,162.53 322.12,162.53 322.05,162.52 322.30,162.51 322.54,162.46 322.77,162.38 322.99,162.25 323.18,162.10 323.34,161.91 323.48,161.70 323.57,161.48 323.63,161.24 323.65,160.99 323.65,160.99 323.65,140.54 323.65,140.54 323.63,140.29 323.57,140.05 323.48,139.82 323.34,139.61 323.18,139.43 322.99,139.27 322.77,139.15 322.54,139.06 322.30,139.01 322.12,139.00 253.88,139.00 254.07,139.01 253.82,139.00 253.58,139.03 253.34,139.10 253.12,139.21 252.91,139.35 252.73,139.52 252.59,139.72 252.47,139.93 252.39,140.17 252.35,140.41 252.35,140.54 252.35,160.99 252.35,160.87 252.35,161.11 252.39,161.36 252.47,161.59 252.59,161.81 252.73,162.01 252.91,162.18 253.12,162.32 253.34,162.43 253.58,162.49 253.82,162.52 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #29ABE0;' />
-<text class='preserve-color' x='288.00' y='149.21' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='51.72px' lengthAdjust='spacingAndGlyphs'>2. First match</text>
-<text class='preserve-color' x='288.00' y='158.43' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='63.11px' lengthAdjust='spacingAndGlyphs'>match_couples()</text>
+<text x='288.00' y='149.21' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='51.72px' lengthAdjust='spacingAndGlyphs'>2. First match</text>
+<text x='288.00' y='158.43' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='63.11px' lengthAdjust='spacingAndGlyphs'>match_couples()</text>
 <polygon points='243.92,236.06 332.08,236.06 332.02,236.06 332.27,236.05 332.51,236.00 332.74,235.91 332.96,235.79 333.15,235.63 333.31,235.45 333.44,235.24 333.54,235.01 333.60,234.77 333.62,234.52 333.62,234.52 333.62,214.07 333.62,214.07 333.60,213.83 333.54,213.59 333.44,213.36 333.31,213.15 333.15,212.96 332.96,212.81 332.74,212.68 332.51,212.60 332.27,212.55 332.08,212.54 243.92,212.54 244.10,212.55 243.85,212.54 243.61,212.57 243.37,212.64 243.15,212.74 242.94,212.88 242.77,213.05 242.62,213.25 242.50,213.47 242.42,213.70 242.38,213.95 242.38,214.07 242.38,234.52 242.38,234.40 242.38,234.65 242.42,234.89 242.50,235.13 242.62,235.35 242.77,235.54 242.94,235.71 243.15,235.86 243.37,235.96 243.61,236.03 243.85,236.06 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #29ABE0;' />
-<text class='preserve-color' x='288.00' y='222.75' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='65.97px' lengthAdjust='spacingAndGlyphs'>3. Check balance</text>
-<text class='preserve-color' x='288.00' y='231.96' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='83.05px' lengthAdjust='spacingAndGlyphs'>balance_diagnostics()</text>
+<text x='288.00' y='222.75' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='65.97px' lengthAdjust='spacingAndGlyphs'>3. Check balance</text>
+<text x='288.00' y='231.96' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='83.05px' lengthAdjust='spacingAndGlyphs'>balance_diagnostics()</text>
 <polygon points='135.67,383.13 183.49,383.13 183.43,383.13 183.68,383.12 183.92,383.07 184.15,382.98 184.37,382.86 184.56,382.70 184.72,382.52 184.85,382.31 184.95,382.08 185.01,381.84 185.03,381.60 185.03,381.60 185.03,361.14 185.03,361.14 185.01,360.90 184.95,360.66 184.85,360.43 184.72,360.22 184.56,360.03 184.37,359.88 184.15,359.75 183.92,359.67 183.68,359.62 183.49,359.61 135.67,359.61 135.85,359.62 135.61,359.61 135.36,359.64 135.12,359.71 134.90,359.81 134.70,359.95 134.52,360.12 134.37,360.32 134.26,360.54 134.18,360.77 134.14,361.02 134.13,361.14 134.13,381.60 134.14,381.47 134.14,381.72 134.18,381.96 134.26,382.20 134.37,382.42 134.52,382.61 134.70,382.79 134.90,382.93 135.12,383.03 135.36,383.10 135.61,383.13 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #29ABE0;' />
-<text class='preserve-color' x='159.58' y='369.82' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='42.70px' lengthAdjust='spacingAndGlyphs'>4. Estimate</text>
-<text class='preserve-color' x='159.58' y='379.03' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='20.73px' lengthAdjust='spacingAndGlyphs'>effect</text>
+<text x='159.58' y='369.82' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='42.70px' lengthAdjust='spacingAndGlyphs'>4. Estimate</text>
+<text x='159.58' y='379.03' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='20.73px' lengthAdjust='spacingAndGlyphs'>effect</text>
 <polygon points='376.85,383.13 455.99,383.13 455.93,383.13 456.17,383.12 456.41,383.07 456.65,382.98 456.86,382.86 457.05,382.70 457.22,382.52 457.35,382.31 457.44,382.08 457.50,381.84 457.52,381.60 457.52,381.60 457.52,361.14 457.52,361.14 457.50,360.90 457.44,360.66 457.35,360.43 457.22,360.22 457.05,360.03 456.86,359.88 456.65,359.75 456.41,359.67 456.17,359.62 455.99,359.61 376.85,359.61 377.04,359.62 376.79,359.61 376.54,359.64 376.31,359.71 376.08,359.81 375.88,359.95 375.70,360.12 375.55,360.32 375.44,360.54 375.36,360.77 375.32,361.02 375.31,361.14 375.31,381.60 375.32,381.47 375.32,381.72 375.36,381.96 375.44,382.20 375.55,382.42 375.70,382.61 375.88,382.79 376.08,382.93 376.31,383.03 376.54,383.10 376.79,383.13 ' style='stroke-width: 0.53; stroke: #FFFFFF; fill: #29ABE0;' />
-<text class='preserve-color' x='416.42' y='369.82' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='56.47px' lengthAdjust='spacingAndGlyphs'>Refine: caliper,</text>
-<text class='preserve-color' x='416.42' y='379.03' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='74.02px' lengthAdjust='spacingAndGlyphs'>blocking, more vars</text>
+<text x='416.42' y='369.82' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='56.47px' lengthAdjust='spacingAndGlyphs'>Refine: caliper,</text>
+<text x='416.42' y='379.03' text-anchor='middle' style='font-size: 8.54px;fill: #FFFFFF; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='74.02px' lengthAdjust='spacingAndGlyphs'>blocking, more vars</text>
 <polygon points='288.00,325.91 316.08,297.83 288.00,269.76 259.92,297.83 ' style='stroke-width: 2.13; stroke: #F47C3C; fill: #FFC107;' />
 <text x='288.00' y='296.54' text-anchor='middle' style='font-size: 8.54px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='30.84px' lengthAdjust='spacingAndGlyphs'>Balance</text>
 <text x='288.00' y='305.24' text-anchor='middle' style='font-size: 8.54px; font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;' textLength='17.08px' lengthAdjust='spacingAndGlyphs'>OK?</text>
@@ -2166,23 +2186,18 @@ reason not to</td>
 <h2 id="see-also">See Also<a class="anchor" aria-label="anchor" href="#see-also"></a>
 </h2>
 <ul>
-<li>
-<code><a href="../articles/getting-started.html">vignette("getting-started")</a></code> - Basic LAP solving</li>
-<li>
-<code><a href="../articles/algorithms.html">vignette("algorithms")</a></code> - Mathematical foundations</li>
-<li>
-<code><a href="../articles/comparison.html">vignette("comparison")</a></code> - How couplr compares to
-MatchIt, optmatch, designmatch</li>
-<li>
-<code><a href="../articles/troubleshooting.html">vignette("troubleshooting")</a></code> - Common issues and
-solutions</li>
-<li>
-<code><a href="../articles/pixel-morphing.html">vignette("pixel-morphing")</a></code> - Large-scale approximation
-strategies</li>
-<li>
-<code><a href="../reference/match_couples.html">?match_couples</a></code>, <code><a href="../reference/greedy_couples.html">?greedy_couples</a></code>,
-<code><a href="../reference/balance_diagnostics.html">?balance_diagnostics</a></code>, <code><a href="../reference/matchmaker.html">?matchmaker</a></code>
-</li>
+<li><p><code><a href="../articles/getting-started.html">vignette("getting-started")</a></code> - Basic LAP
+solving</p></li>
+<li><p><code><a href="../articles/algorithms.html">vignette("algorithms")</a></code> - Mathematical
+foundations</p></li>
+<li><p><code><a href="../articles/comparison.html">vignette("comparison")</a></code> - How couplr compares to
+MatchIt, optmatch, designmatch</p></li>
+<li><p><code><a href="../articles/troubleshooting.html">vignette("troubleshooting")</a></code> - Common issues and
+solutions</p></li>
+<li><p><code><a href="../articles/pixel-morphing.html">vignette("pixel-morphing")</a></code> - Large-scale
+approximation strategies</p></li>
+<li><p><code><a href="../reference/match_couples.html">?match_couples</a></code>, <code><a href="../reference/greedy_couples.html">?greedy_couples</a></code>,
+<code><a href="../reference/balance_diagnostics.html">?balance_diagnostics</a></code>, <code><a href="../reference/matchmaker.html">?matchmaker</a></code></p></li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -2206,7 +2221,8 @@ strategies</li>
 
 
 
-  <script>
+  
+<script>
 /* SVG Copy Button Functionality */
 (function() {
   "use strict";

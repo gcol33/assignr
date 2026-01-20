@@ -6,6 +6,9 @@
 \usage{
 has_valid_pairs(cost_matrix)
 }
+\value{
+Logical indicating whether any valid pairs exist.
+}
 \description{
 Check if any valid pairs exist
 }

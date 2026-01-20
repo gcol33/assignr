@@ -13,3 +13,7 @@ restore_parallel(parallel_state)
 - parallel_state:
 
   State from setup_parallel()
+
+## Value
+
+No return value, called for side effects (restores parallel plan).

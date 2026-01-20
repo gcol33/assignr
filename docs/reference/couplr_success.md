@@ -7,3 +7,7 @@ Success message with emoji
 ``` r
 couplr_success(...)
 ```
+
+## Value
+
+No return value, called for side effects (issues a message).

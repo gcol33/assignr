@@ -6,6 +6,9 @@
 \usage{
 warn_poor_quality(pct_poor, threshold)
 }
+\value{
+No return value, called for side effects (issues a warning).
+}
 \description{
 High distance matches warning
 }

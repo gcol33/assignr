@@ -7,3 +7,7 @@ Missing variables error
 ``` r
 err_missing_vars(vars, dataset = "left")
 ```
+
+## Value
+
+No return value, throws an error.

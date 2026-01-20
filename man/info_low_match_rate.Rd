@@ -6,6 +6,9 @@
 \usage{
 info_low_match_rate(n_matched, n_left, pct)
 }
+\value{
+No return value, called for side effects (issues a message or warning).
+}
 \description{
 Low match rate info
 }

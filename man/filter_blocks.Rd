@@ -13,6 +13,9 @@ filter_blocks(
   imbalance_threshold
 )
 }
+\value{
+List with filtered left/right data frames and dropped block info.
+}
 \description{
 Filter blocks based on size and balance criteria
 }

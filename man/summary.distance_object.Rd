@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments (ignored)}
 }
+\value{
+Invisibly returns the input object.
+}
 \description{
 Summary Method for Distance Objects
 }

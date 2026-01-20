@@ -441,6 +441,7 @@ lap_solve_grouped <- function(df, source_col, target_col, cost_col,
 #' @param x A `lap_solve_result` object.
 #' @param ... Additional arguments passed to `print()`. Currently ignored.
 #'
+#' @return Invisibly returns the input object `x`.
 #' @export
 #' @method print lap_solve_result
 print.lap_solve_result <- function(x, ...) {

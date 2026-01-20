@@ -1,4 +1,4 @@
-# couplr 1.0.2
+# couplr 1.0.6
 
 ## Documentation
 

@@ -6,6 +6,9 @@
 \usage{
 compute_distance_matrix(left_mat, right_mat, distance = "euclidean")
 }
+\value{
+Numeric matrix of pairwise distances (n_left x n_right).
+}
 \description{
 Compute pairwise distance matrix
 }

@@ -6,6 +6,9 @@
 \usage{
 detect_blocking(left, right, block_id, ignore_blocks)
 }
+\value{
+List with use_blocking (logical) and block_col (character or NULL).
+}
 \description{
 Detect and validate blocking
 }

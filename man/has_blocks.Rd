@@ -6,6 +6,9 @@
 \usage{
 has_blocks(df)
 }
+\value{
+Logical indicating whether data frame has block ID column.
+}
 \description{
 Check if data frame has blocking information
 }

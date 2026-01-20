@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments passed to \code{print()}. Ignored.}
 }
+\value{
+Invisibly returns the input object \code{x}.
+}
 \description{
 Print method for k-best assignment results
 }

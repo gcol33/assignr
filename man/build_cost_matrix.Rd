@@ -13,6 +13,9 @@ build_cost_matrix(
   scale = FALSE
 )
 }
+\value{
+Numeric matrix of distances with optional scaling/weights applied.
+}
 \description{
 This is the main entry point for distance computation.
 }

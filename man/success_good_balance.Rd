@@ -6,6 +6,9 @@
 \usage{
 success_good_balance(mean_std_diff)
 }
+\value{
+No return value, called for side effects (issues a message).
+}
 \description{
 Perfect balance success message
 }

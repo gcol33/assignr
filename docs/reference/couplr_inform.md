@@ -7,3 +7,7 @@ Info message with emoji
 ``` r
 couplr_inform(...)
 ```
+
+## Value
+
+No return value, called for side effects (issues a message).

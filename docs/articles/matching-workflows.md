@@ -23,18 +23,24 @@ working with observational data
 
 - Familiarity with basic `couplr` usage
   ([`vignette("getting-started")`](https://gillescolling.com/couplr/articles/getting-started.md))
+
 - Understanding of causal inference concepts (treatment effects,
   confounding)
+
 - Basic statistics (means, standard deviations, t-tests)
 
 **What You’ll Learn**:
 
 - How to match treatment and control units with
   [`match_couples()`](https://gillescolling.com/couplr/reference/match_couples.md)
+
 - Automatic preprocessing: scaling, health checks, categorical encoding
+
 - Assessing match quality with
   [`balance_diagnostics()`](https://gillescolling.com/couplr/reference/balance_diagnostics.md)
+
 - When to use optimal vs greedy matching
+
 - Creating publication-ready balance tables
 
 **Time to complete**: 30-45 minutes
@@ -65,10 +71,15 @@ balance quality, and estimate the treatment effect credibly.
 ### Key Features
 
 - Automatic preprocessing with health checks and smart scaling
+
 - Optimal matching via linear assignment algorithms
+
 - Fast greedy matching for large datasets (n \> 5,000)
+
 - Blocking and stratification support
+
 - Comprehensive balance diagnostics
+
 - Publication-ready output tables
 
 ## Problem Definition
@@ -78,6 +89,7 @@ balance quality, and estimate the treatment effect credibly.
 Given two groups of units:
 
 - **Left group** (treatment, exposed, cases): $`n_L`$ units
+
 - **Right group** (control, unexposed, controls): $`n_R`$ units
 
 Each unit $`i`$ has a covariate vector $`\mathbf{x}_i \in \mathbb{R}^p`$
@@ -98,14 +110,19 @@ Mahalanobis) and $`\pi`$ is a matching assignment.
 **Without matching:**
 
 - Groups may differ systematically on important covariates
+
 - Treatment effect estimates are confounded by these differences
+
 - Statistical adjustments (regression) rely on untestable assumptions
 
 **With matching:**
 
 - Create comparable groups that differ primarily in treatment status
+
 - Balance covariates to reduce confounding
+
 - Improve causal inference by mimicking randomized experiments
+
 - Transparent, non-parametric preprocessing step
 
 ### Distance Metrics
@@ -218,8 +235,11 @@ result$info
 The result contains:
 
 - `pairs`: Matched pairs with IDs and distances
+
 - `info`: Matching method, counts, total distance
+
 - `left_unmatched`, `right_unmatched`: Units without matches
+
 - `cost_matrix`: Full distance matrix (if `return_diagnostics = TRUE`)
 
 ### Understanding the Output
@@ -249,7 +269,8 @@ ggplot(result$pairs, aes(x = distance)) +
   ) +
   theme_minimal() +
   theme(plot.background = element_rect(fill = "transparent", color = NA),
-        panel.background = element_rect(fill = "transparent", color = NA))
+        panel.background = element_rect(fill = "transparent", color = NA),
+        panel.grid = element_blank())
 ```
 
 ![Histogram showing the distribution of match distances, with most
@@ -259,7 +280,9 @@ quality](matching-workflows_files/figure-html/inspect-output-1.svg)
 **Interpretation:**
 
 - Lower distances indicate better matches (more similar units)
+
 - Median distance provides typical match quality
+
 - Large distances suggest poor matches (consider caliper constraints)
 
 ## Automatic Preprocessing
@@ -270,8 +293,10 @@ Raw covariates often have:
 
 - **Different scales**: Age in years (20-80), income in dollars
   (20,000-200,000)
+
 - **Different units**: Continuous (age), categorical (education), binary
   (smoker)
+
 - **Data quality issues**: Missing values, constant variables, extreme
   outliers
 
@@ -285,15 +310,25 @@ When `auto_scale = TRUE`,
 automatically:
 
 1.  **Detects problematic variables**
+
     - Constant variables (SD = 0) → excluded with warning
+
     - High missingness (\>50%) → warned
+
     - Extreme skewness (\|skew\| \> 2) → informed
+
 2.  **Applies appropriate scaling**
+
     - Continuous variables → scaled by selected method
+
     - Binary variables (0/1) → used as-is
+
     - Categorical → converted to numeric if ordered
+
 3.  **Handles categorical variables**
+
     - Unordered factors → converted to binary indicators
+
     - Ordered factors → converted to numeric ranks
 
 ``` r
@@ -348,7 +383,9 @@ x_{\text{scaled}} = \frac{x - \text{median}(x)}{\text{MAD}(x)}
 ```
 
 - Uses median and median absolute deviation (MAD)
+
 - Resistant to outliers and skewness
+
 - Best for: Real-world data with potential outliers
 
 **2. Standardization** (`scale = "standardize"`):
@@ -357,7 +394,9 @@ x_{\text{scaled}} = \frac{x - \text{mean}(x)}{\text{SD}(x)}
 ```
 
 - Classical z-score normalization
+
 - Assumes approximate normality
+
 - Best for: Clean, normally-distributed data
 
 **3. Range scaling** (`scale = "range"`):
@@ -366,7 +405,9 @@ x_{\text{scaled}} = \frac{x - \min(x)}{\max(x) - \min(x)}
 ```
 
 - Scales to \[0, 1\] range
+
 - Preserves exact relationships
+
 - Best for: Bounded variables, visualization
 
 ``` r
@@ -446,15 +487,21 @@ computationally expensive. `couplr` provides fast greedy alternatives.
 **Optimal matching** (`method = "optimal"`):
 
 - Minimizes total distance (globally optimal solution)
+
 - Uses linear assignment algorithms ($`O(n^3)`$ complexity)
+
 - Suitable for: n \< 5,000, when optimality is critical
+
 - Typical runtime: \<1 second for n=1,000, ~10 seconds for n=3,000
 
 **Greedy matching** (`method = "greedy"`):
 
 - Fast approximation (10-100x faster)
+
 - Three strategies: sorted, row_best, pq
+
 - Suitable for: n \> 5,000, exploratory analysis, when speed matters
+
 - Typical runtime: \<1 second for n=10,000
 
 ``` r
@@ -497,18 +544,18 @@ time_greedy <- system.time({
 cat("Optimal matching:\n")
 #> Optimal matching:
 cat("  Time:", round(time_optimal["elapsed"], 3), "seconds\n")
-#>   Time: 86.25 seconds
+#>   Time: 135.64 seconds
 cat("  Mean distance:", round(mean(result_optimal$pairs$distance), 4), "\n\n")
 #>   Mean distance: 0.3368
 
 cat("Greedy matching:\n")
 #> Greedy matching:
 cat("  Time:", round(time_greedy["elapsed"], 3), "seconds\n")
-#>   Time: 0.93 seconds
+#>   Time: 1.42 seconds
 cat("  Mean distance:", round(mean(result_greedy$pairs$distance), 4), "\n")
 #>   Mean distance: 0.4667
 cat("  Speedup:", round(time_optimal["elapsed"] / time_greedy["elapsed"], 1), "x\n")
-#>   Speedup: 92.7 x
+#>   Speedup: 95.5 x
 ```
 
 ### Greedy Strategies
@@ -519,39 +566,55 @@ Three greedy strategies available via
 **1. Sorted** (`strategy = "sorted"`):
 
 - Sort all possible pairs by distance
+
 - Assign greedily from best to worst
+
 - Best quality among greedy methods
+
 - Slowest greedy option (still much faster than optimal)
 
 &nbsp;
 
     Algorithm:
     1. Compute all n_L × n_R distances
+
     2. Sort pairs by distance (ascending)
+
     3. For each pair in sorted order:
+
        - If both units unmatched, assign them
+
     4. Stop when no more matches possible
 
 **2. Row-best** (`strategy = "row_best"`, default):
 
 - For each left unit, find best available right unit
+
 - Process left units in order
+
 - Fast and simple
+
 - Medium quality
 
 &nbsp;
 
     Algorithm:
     1. For i = 1 to n_L:
+
        - Find unmatched right unit j with minimum distance to i
+
        - Assign (i, j)
+
     2. Return all assignments
 
 **3. Priority queue** (`strategy = "pq"`):
 
 - Maintains priority queue of potential matches
+
 - Updates dynamically as assignments made
+
 - Best for very large problems
+
 - Fastest option
 
 ``` r
@@ -594,14 +657,16 @@ print(comparison)
 #>          strategy time_sec mean_distance total_distance
 #> elapsed    sorted     0.04        0.0912          18.24
 #> elapsed1 row_best     0.05        0.0968          19.36
-#> elapsed2       pq     0.05        0.0912          18.24
+#> elapsed2       pq     0.07        0.0912          18.24
 ```
 
 **Recommendation:**
 
 - Default to `strategy = "row_best"` for good speed/quality balance
+
 - Use `strategy = "sorted"` when quality is important but optimal is too
   slow
+
 - Use `strategy = "pq"` for n \> 10,000
 
 ## Caliper Constraints
@@ -615,7 +680,9 @@ Without calipers, optimal matching may pair very dissimilar units just
 to maximize the number of matches. Calipers prevent this by:
 
 - Setting a distance threshold beyond which matches are forbidden
+
 - Reducing the number of matches to improve average quality
+
 - Implementing the “common support” requirement in propensity score
   matching
 
@@ -684,7 +751,8 @@ ggplot(result_no_cal$pairs, aes(x = distance)) +
   theme_minimal() +
   theme(plot.background = element_rect(fill = "transparent", color = NA),
         panel.background = element_rect(fill = "transparent", color = NA),
-        legend.background = element_rect(fill = "transparent", color = NA))
+        legend.background = element_rect(fill = "transparent", color = NA),
+        panel.grid = element_blank())
 ```
 
 ![Overlapping histograms comparing match distances with and without
@@ -753,15 +821,20 @@ matching on remaining covariates is a powerful strategy.
 
 - Ensures exact balance on critical variables (site, gender, age
   category)
+
 - Reduces problem size (smaller within-block matching problems)
+
 - Prevents poor cross-block matches
+
 - Transparent and interpretable
 
 **When to use:**
 
 - Strong domain knowledge about important stratification variables
+
 - Variables that absolutely must be balanced (e.g., study site in
   multi-center trials)
+
 - Large datasets where blocking reduces computational burden
 
 ### Exact Blocking with `matchmaker()`
@@ -913,12 +986,15 @@ After matching, assess balance quality using
 **Interpretation:**
 
 - Close to 1.0: Similar variability (good)
+
 - \< 0.5 or \> 2.0: Concerning imbalance in spread
 
 **3. Kolmogorov-Smirnov tests:**
 
 - Non-parametric test for distributional differences
+
 - Sensitive to differences beyond mean/variance
+
 - P-value \> 0.05 suggests similar distributions
 
 ``` r
@@ -1012,15 +1088,21 @@ Here’s how to read it:
 **Quality thresholds** for standardized differences:
 
 - **\< 0.1**: Excellent balance (treat as successfully matched)
+
 - **0.1-0.25**: Good balance (acceptable for most purposes)
+
 - **0.25-0.5**: Marginal (consider refinement or sensitivity analysis)
+
 - **\> 0.5**: Poor balance (matching strategy needs revision)
 
 **What to do if balance is poor**:
 
 1.  **Add more matching variables** that explain the imbalance
+
 2.  **Tighten calipers** (accept fewer matches but better quality)
+
 3.  **Try blocking** on the problematic variable
+
 4.  **Report and discuss** in limitations section
 
 ### Visualizing Balance
@@ -1047,9 +1129,15 @@ balance_comparison <- bind_rows(
 )
 
 ggplot(balance_comparison, aes(x = variable, y = std_diff, fill = when)) +
-  geom_col(position = "dodge") +
-  geom_hline(yintercept = c(-0.1, 0.1), linetype = "dashed", color = "#93c54b") +
-  geom_hline(yintercept = c(-0.25, 0.25), linetype = "dashed", color = "#f47c3c") +
+  geom_hline(yintercept = c(-0.1, 0.1), linetype = "dashed", color = "#93c54b", linewidth = 0.8) +
+  geom_hline(yintercept = c(-0.25, 0.25), linetype = "dashed", color = "#f47c3c", linewidth = 0.8) +
+  geom_col(position = "dodge", width = 0.5) +
+  geom_label(aes(x = 1.5, y = -0.1, label = "±0.1 excellent"),
+             fill = "#93c54b", color = "white", inherit.aes = FALSE,
+             size = 3, fontface = "bold", label.padding = unit(0.2, "lines")) +
+  geom_label(aes(x = 1.5, y = 0.25, label = "±0.25 acceptable"),
+             fill = "#f47c3c", color = "white", inherit.aes = FALSE,
+             size = 3, fontface = "bold", label.padding = unit(0.2, "lines")) +
   labs(
     title = "Covariate Balance Before and After Matching",
     x = "Variable",
@@ -1059,8 +1147,15 @@ ggplot(balance_comparison, aes(x = variable, y = std_diff, fill = when)) +
   theme_minimal() +
   theme(plot.background = element_rect(fill = "transparent", color = NA),
         panel.background = element_rect(fill = "transparent", color = NA),
-        legend.background = element_rect(fill = "transparent", color = NA)) +
+        legend.background = element_rect(fill = "transparent", color = NA),
+        panel.grid = element_blank()) +
   coord_flip()
+#> Warning in geom_label(aes(x = 1.5, y = -0.1, label = "±0.1 excellent"), : All aesthetics have length 1, but the data has 4 rows.
+#> ℹ Please consider using `annotate()` or provide this layer with data containing
+#>   a single row.
+#> Warning in geom_label(aes(x = 1.5, y = 0.25, label = "±0.25 acceptable"), : All aesthetics have length 1, but the data has 4 rows.
+#> ℹ Please consider using `annotate()` or provide this layer with data containing
+#>   a single row.
 ```
 
 ![Bar chart comparing standardized differences before and after
@@ -1081,8 +1176,11 @@ self-selected into the program, creating potential selection bias.
 **Data:**
 
 - Treatment: 200 program participants
+
 - Control: 500 non-participants
+
 - Covariates: age, education, prior earnings, employment status
+
 - Outcome: Earnings one year after program
 
 ### Step 1: Data Preparation
@@ -1340,29 +1438,40 @@ print(effect_table)
 **Optimal matching complexity:** $`O(n^3)`$ using Jonker-Volgenant
 
 - n = 100: \< 0.01 seconds
+
 - n = 500: ~ 0.1 seconds
+
 - n = 1,000: ~ 1 second
+
 - n = 3,000: ~ 10 seconds
+
 - n = 5,000: ~ 30-60 seconds
 
 **Greedy matching complexity:** $`O(n^2 \log n)`$ for sorted, $`O(n^2)`$
 for row-best
 
 - n = 5,000: ~ 1 second
+
 - n = 10,000: ~ 3-5 seconds
+
 - n = 50,000: ~ 30-60 seconds
 
 ### Memory Usage
 
 - Cost matrix: 8n² bytes (for n×n problem)
+
 - n = 1,000: ~ 8 MB
+
 - n = 5,000: ~ 200 MB
+
 - n = 10,000: ~ 800 MB
 
 For very large problems:
 
 1.  Use greedy matching to avoid full cost matrix
+
 2.  Use blocking to reduce within-block size
+
 3.  Consider approximate methods (upcoming vignette)
 
 ### Optimization Tips
@@ -1430,9 +1539,11 @@ Matching doesn’t always succeed. Here are common problems and solutions.
 [`balance_diagnostics()`](https://gillescolling.com/couplr/reference/balance_diagnostics.md)
 shows \|std_diff\| \> 0.25 for some variables.
 
-**Causes**: - Groups are fundamentally too different (weak overlap) -
-Important confounders not included in matching variables - Caliper too
-loose
+**Causes**: - Groups are fundamentally too different (weak overlap)
+
+- Important confounders not included in matching variables
+
+- Caliper too loose
 
 **Solutions**:
 
@@ -1457,8 +1568,11 @@ result <- match_couples(blocks$left, blocks$right, vars = other_vars,
 
 **Symptom**: `n_matched` is much smaller than `nrow(left)`.
 
-**Causes**: - Caliper too strict - Non-overlapping covariate
-distributions - Blocking creates small strata
+**Causes**: - Caliper too strict
+
+- Non-overlapping covariate distributions
+
+- Blocking creates small strata
 
 **Diagnosis**:
 
@@ -1475,8 +1589,11 @@ ggplot(combined, aes(x = age, fill = group)) +
   labs(title = "Check for Overlap")
 ```
 
-**Solutions**: - Relax caliper - Use coarser blocking categories -
-Accept that some treatment units are unmatchable (report this!)
+**Solutions**: - Relax caliper
+
+- Use coarser blocking categories
+
+- Accept that some treatment units are unmatchable (report this!)
 
 ### Problem: Matching Takes Too Long
 
@@ -1507,8 +1624,11 @@ needs ~800 MB.
 
 **Solutions**: - Use
 [`greedy_couples()`](https://gillescolling.com/couplr/reference/greedy_couples.md)
-which doesn’t require full matrix - Use blocking to create smaller
-sub-problems - Consider random sampling if sample size permits
+which doesn’t require full matrix
+
+- Use blocking to create smaller sub-problems
+
+- Consider random sampling if sample size permits
 
 ## Summary
 
@@ -1516,11 +1636,16 @@ This vignette walked through a complete matching workflow using the job
 training evaluation example:
 
 1.  **Problem framing**: Treatment effect estimation with selection bias
+
 2.  **Matching**: Creating comparable groups with
     [`match_couples()`](https://gillescolling.com/couplr/reference/match_couples.md)
+
 3.  **Preprocessing**: Automatic scaling and variable health checks
+
 4.  **Assessment**: Balance diagnostics and interpretation
+
 5.  **Refinement**: Calipers, blocking, and greedy alternatives
+
 6.  **Estimation**: Treatment effect with confidence intervals
 
 **Key Takeaways**:
@@ -1545,14 +1670,19 @@ loop](matching-workflows_files/figure-html/workflow-diagram-1.svg)
 
 - [`vignette("getting-started")`](https://gillescolling.com/couplr/articles/getting-started.md) -
   Basic LAP solving
+
 - [`vignette("algorithms")`](https://gillescolling.com/couplr/articles/algorithms.md) -
   Mathematical foundations
+
 - [`vignette("comparison")`](https://gillescolling.com/couplr/articles/comparison.md) -
   How couplr compares to MatchIt, optmatch, designmatch
+
 - [`vignette("troubleshooting")`](https://gillescolling.com/couplr/articles/troubleshooting.md) -
   Common issues and solutions
+
 - [`vignette("pixel-morphing")`](https://gillescolling.com/couplr/articles/pixel-morphing.md) -
   Large-scale approximation strategies
+
 - [`?match_couples`](https://gillescolling.com/couplr/reference/match_couples.md),
   [`?greedy_couples`](https://gillescolling.com/couplr/reference/greedy_couples.md),
   [`?balance_diagnostics`](https://gillescolling.com/couplr/reference/balance_diagnostics.md),

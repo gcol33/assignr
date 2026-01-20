@@ -14,6 +14,20 @@
 <meta property="og:title" content="Troubleshooting Guide">
 </head>
 <body>
+<p>
+
+
+
+
+
+
+
+
+  pkgdown/mathjax-config.html
+
+  
+
+  </p>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -21,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">couplr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +103,7 @@
                         <h4 data-toc-skip class="author">Gilles
 Colling</h4>
             
-            <h4 data-toc-skip class="date">2026-01-09</h4>
+            <h4 data-toc-skip class="date">2026-01-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/gcol33/couplr/blob/HEAD/vignettes/troubleshooting.Rmd" class="external-link"><code>vignettes/troubleshooting.Rmd</code></a></small>
       <div class="d-none name"><code>troubleshooting.Rmd</code></div>
@@ -406,16 +420,14 @@ entries, no valid assignment exists.</p>
 <h3 id="causes">Causes<a class="anchor" aria-label="anchor" href="#causes"></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li>
-<strong>Weak overlap</strong>: Groups are too different on key
-variables</li>
-<li>
-<strong>Missing confounders</strong>: Important variables not
-included in matching</li>
-<li>
-<strong>Caliper too loose</strong>: Accepting poor matches</li>
-<li>
-<strong>Wrong scaling</strong>: Variables not properly weighted</li>
+<li><p><strong>Weak overlap</strong>: Groups are too different on key
+variables</p></li>
+<li><p><strong>Missing confounders</strong>: Important variables not
+included in matching</p></li>
+<li><p><strong>Caliper too loose</strong>: Accepting poor
+matches</p></li>
+<li><p><strong>Wrong scaling</strong>: Variables not properly
+weighted</p></li>
 </ol>
 </div>
 <div class="section level3">
@@ -547,7 +559,7 @@ complexity. For n = 5,000, this means ~125 billion operations.</p>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Greedy matching (n=500):"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">time_greedy</span><span class="op">[</span><span class="st">"elapsed"</span><span class="op">]</span>, <span class="fl">2</span><span class="op">)</span>, <span class="st">"seconds\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Greedy matching (n=500): 0.23 seconds</span></span>
+<span><span class="co">#&gt; Greedy matching (n=500): 0.37 seconds</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Quality (mean distance):"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">result_greedy</span><span class="op">$</span><span class="va">pairs</span><span class="op">$</span><span class="va">distance</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Quality (mean distance): 0.2886</span></span></code></pre></div>
 <p><strong>2. Use blocking to divide the problem:</strong></p>
@@ -904,15 +916,10 @@ consistency.</p>
 </h2>
 <p>If you encounter an issue not covered here:</p>
 <ol style="list-style-type: decimal">
-<li>
-<strong>Check function documentation</strong>:
-<code><a href="../reference/match_couples.html">?match_couples</a></code>, <code><a href="../reference/lap_solve.html">?lap_solve</a></code>
-</li>
-<li>
-<strong>Search GitHub issues</strong>: <a href="https://github.com/gcol33/couplr/issues" class="external-link">github.com/gcol33/couplr/issues</a>
-</li>
-<li>
-<strong>Create a minimal reproducible example</strong>:</li>
+<li><p><strong>Check function documentation</strong>:
+<code><a href="../reference/match_couples.html">?match_couples</a></code>, <code><a href="../reference/lap_solve.html">?lap_solve</a></code></p></li>
+<li><p><strong>Search GitHub issues</strong>: <a href="https://github.com/gcol33/couplr/issues" class="external-link">github.com/gcol33/couplr/issues</a></p></li>
+<li><p><strong>Create a minimal reproducible example</strong>:</p></li>
 </ol>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Minimal example template</span></span>
@@ -943,16 +950,13 @@ consistency.</p>
 <h2 id="see-also">See Also<a class="anchor" aria-label="anchor" href="#see-also"></a>
 </h2>
 <ul>
-<li>
-<code><a href="../articles/getting-started.html">vignette("getting-started")</a></code> - Basic usage</li>
-<li>
-<code><a href="../articles/matching-workflows.html">vignette("matching-workflows")</a></code> - Production matching
-pipelines</li>
-<li>
-<code><a href="../articles/algorithms.html">vignette("algorithms")</a></code> - Algorithm selection guide</li>
-<li>
-<code><a href="../articles/comparison.html">vignette("comparison")</a></code> - Comparison with other
-packages</li>
+<li><p><code><a href="../articles/getting-started.html">vignette("getting-started")</a></code> - Basic usage</p></li>
+<li><p><code><a href="../articles/matching-workflows.html">vignette("matching-workflows")</a></code> - Production matching
+pipelines</p></li>
+<li><p><code><a href="../articles/algorithms.html">vignette("algorithms")</a></code> - Algorithm selection
+guide</p></li>
+<li><p><code><a href="../articles/comparison.html">vignette("comparison")</a></code> - Comparison with other
+packages</p></li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -976,7 +980,8 @@ packages</li>
 
 
 
-  <script>
+  
+<script>
 /* SVG Copy Button Functionality */
 (function() {
   "use strict";

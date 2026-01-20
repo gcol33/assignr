@@ -6,6 +6,9 @@
 \usage{
 mark_forbidden_pairs(cost_matrix, forbidden_indices)
 }
+\value{
+Modified cost matrix with forbidden pairs marked.
+}
 \description{
 Generic function to mark specific pairs as forbidden.
 }

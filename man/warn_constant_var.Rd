@@ -6,6 +6,9 @@
 \usage{
 warn_constant_var(var)
 }
+\value{
+No return value, called for side effects (issues a warning).
+}
 \description{
 Constant variable warning
 }

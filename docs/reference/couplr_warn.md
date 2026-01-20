@@ -7,3 +7,7 @@ Warn with a fun, themed warning message
 ``` r
 couplr_warn(..., call. = FALSE)
 ```
+
+## Value
+
+No return value, called for side effects (issues a warning).

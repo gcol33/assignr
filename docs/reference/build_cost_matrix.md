@@ -14,3 +14,7 @@ build_cost_matrix(
   scale = FALSE
 )
 ```
+
+## Value
+
+Numeric matrix of distances with optional scaling/weights applied.

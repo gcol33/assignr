@@ -10,7 +10,9 @@ you specify.
 **Common use cases:**
 
 - Matching treated patients to similar controls in observational studies
+
 - Pairing survey respondents for comparison
+
 - Creating balanced samples for causal inference
 
 ### Documentation Roadmap
@@ -77,8 +79,10 @@ head(result$pairs)
 
 1.  couplr calculated how similar each treatment unit is to each control
     unit
+
 2.  It found the optimal one-to-one pairing that minimizes total
     distance
+
 3.  Each treatment unit gets matched to exactly one control unit
 
 ### Understanding the Output
@@ -112,7 +116,9 @@ result$info$n_matched
 The `result$pairs` table contains:
 
 - `left_id`: Row number from the treatment group
+
 - `right_id`: Row number from the control group
+
 - `distance`: How different the matched units are (lower = more similar)
 
 ------------------------------------------------------------------------
@@ -598,9 +604,12 @@ print(kbest)
 
 - [`?match_couples`](https://gillescolling.com/couplr/reference/match_couples.md) -
   Optimal matching function reference
+
 - [`?greedy_couples`](https://gillescolling.com/couplr/reference/greedy_couples.md) -
   Fast approximate matching
+
 - [`?balance_diagnostics`](https://gillescolling.com/couplr/reference/balance_diagnostics.md) -
   Formal balance assessment
+
 - [`?lap_solve`](https://gillescolling.com/couplr/reference/lap_solve.md) -
   Direct assignment problem solving

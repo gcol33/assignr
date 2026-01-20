@@ -206,9 +206,12 @@ print(balance)
 ### Causes
 
 1.  **Weak overlap**: Groups are too different on key variables
+
 2.  **Missing confounders**: Important variables not included in
     matching
+
 3.  **Caliper too loose**: Accepting poor matches
+
 4.  **Wrong scaling**: Variables not properly weighted
 
 ### Solutions
@@ -354,7 +357,7 @@ time_greedy <- system.time({
 })
 
 cat("Greedy matching (n=500):", round(time_greedy["elapsed"], 2), "seconds\n")
-#> Greedy matching (n=500): 0.23 seconds
+#> Greedy matching (n=500): 0.37 seconds
 cat("Quality (mean distance):", round(mean(result_greedy$pairs$distance), 4), "\n")
 #> Quality (mean distance): 0.2886
 ```
@@ -780,8 +783,10 @@ If you encounter an issue not covered here:
 1.  **Check function documentation**:
     [`?match_couples`](https://gillescolling.com/couplr/reference/match_couples.md),
     [`?lap_solve`](https://gillescolling.com/couplr/reference/lap_solve.md)
+
 2.  **Search GitHub issues**:
     [github.com/gcol33/couplr/issues](https://github.com/gcol33/couplr/issues)
+
 3.  **Create a minimal reproducible example**:
 
 ``` r
@@ -814,9 +819,12 @@ sessionInfo()
 
 - [`vignette("getting-started")`](https://gillescolling.com/couplr/articles/getting-started.md) -
   Basic usage
+
 - [`vignette("matching-workflows")`](https://gillescolling.com/couplr/articles/matching-workflows.md) -
   Production matching pipelines
+
 - [`vignette("algorithms")`](https://gillescolling.com/couplr/articles/algorithms.md) -
   Algorithm selection guide
+
 - [`vignette("comparison")`](https://gillescolling.com/couplr/articles/comparison.md) -
   Comparison with other packages

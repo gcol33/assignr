@@ -6,6 +6,9 @@
 \usage{
 extract_matching_vars(df, vars)
 }
+\value{
+Numeric matrix of matching variables.
+}
 \description{
 Extract matching variables from data frame
 }

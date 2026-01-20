@@ -6,6 +6,9 @@
 \usage{
 check_full_matching(result)
 }
+\value{
+No return value; throws error if unmatched units exist.
+}
 \description{
 Check if full matching was achieved
 }

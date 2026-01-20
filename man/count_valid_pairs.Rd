@@ -6,6 +6,9 @@
 \usage{
 count_valid_pairs(cost_matrix)
 }
+\value{
+Integer count of valid (non-forbidden) pairs.
+}
 \description{
 Count valid pairs in cost matrix
 }

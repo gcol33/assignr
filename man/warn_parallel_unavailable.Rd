@@ -6,6 +6,9 @@
 \usage{
 warn_parallel_unavailable()
 }
+\value{
+No return value, called for side effects (issues a warning).
+}
 \description{
 Parallel package missing warning (reuse from matching_parallel.R)
 }

@@ -21,3 +21,7 @@ greedy_couples_blocked(
   parallel = FALSE
 )
 ```
+
+## Value
+
+List with pairs tibble and matching info.

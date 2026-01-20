@@ -9,6 +9,9 @@ couplr_emoji(
     "search", "chart", "warning_sign", "stop", "check")
 )
 }
+\value{
+Character string with the emoji (or empty string if emoji disabled).
+}
 \description{
 Get a themed emoji
 }

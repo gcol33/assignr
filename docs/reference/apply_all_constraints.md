@@ -15,3 +15,7 @@ apply_all_constraints(
   forbidden = NULL
 )
 ```
+
+## Value
+
+Modified cost matrix with all constraints applied.

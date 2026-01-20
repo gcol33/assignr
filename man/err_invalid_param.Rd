@@ -6,6 +6,9 @@
 \usage{
 err_invalid_param(param, value, expected)
 }
+\value{
+No return value, throws an error.
+}
 \description{
 Invalid parameter error
 }
