@@ -216,13 +216,13 @@ match_blocks_parallel <- function(blocks, left, right, left_ids, right_ids,
   )
 
   # Combine results
-  all_pairs <- do.call(rbind, lapply(block_results, function(x) x$pairs))
+  all_pairs <- dplyr::bind_rows(lapply(block_results, function(x) x$pairs))
   all_unmatched_left <- unlist(lapply(block_results, function(x) x$unmatched_left))
   all_unmatched_right <- unlist(lapply(block_results, function(x) x$unmatched_right))
-  all_summaries <- do.call(rbind, lapply(block_results, function(x) x$summary))
+  all_summaries <- dplyr::bind_rows(lapply(block_results, function(x) x$summary))
 
   # Handle empty results
-  if (is.null(all_pairs) || nrow(all_pairs) == 0) {
+  if (nrow(all_pairs) == 0) {
     all_pairs <- tibble::tibble(
       left_id = character(0),
       right_id = character(0),
@@ -347,13 +347,13 @@ greedy_blocks_parallel <- function(blocks, left, right, left_ids, right_ids,
   )
 
   # Combine results
-  all_pairs <- do.call(rbind, lapply(block_results, function(x) x$pairs))
+  all_pairs <- dplyr::bind_rows(lapply(block_results, function(x) x$pairs))
   all_unmatched_left <- unlist(lapply(block_results, function(x) x$unmatched_left))
   all_unmatched_right <- unlist(lapply(block_results, function(x) x$unmatched_right))
-  all_summaries <- do.call(rbind, lapply(block_results, function(x) x$summary))
+  all_summaries <- dplyr::bind_rows(lapply(block_results, function(x) x$summary))
 
   # Handle empty results
-  if (is.null(all_pairs) || nrow(all_pairs) == 0) {
+  if (nrow(all_pairs) == 0) {
     all_pairs <- tibble::tibble(
       left_id = character(0),
       right_id = character(0),

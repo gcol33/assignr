@@ -258,8 +258,8 @@ balance_diagnostics <- function(result,
     calculate_var_balance(left_vals, right_vals, v)
   })
 
-  # Convert to tibble
-  var_stats <- tibble::as_tibble(do.call(rbind, lapply(var_stats_list, as.data.frame)))
+  # Convert to tibble (use bind_rows for robust column name preservation)
+  var_stats <- dplyr::bind_rows(lapply(var_stats_list, tibble::as_tibble))
 
   # Overall balance metrics
   abs_std_diffs <- abs(var_stats$std_diff)
@@ -336,7 +336,7 @@ balance_diagnostics <- function(result,
       )
     })
 
-    block_stats <- tibble::as_tibble(do.call(rbind, block_stats_list))
+    block_stats <- dplyr::bind_rows(block_stats_list)
   }
 
   # Build result object

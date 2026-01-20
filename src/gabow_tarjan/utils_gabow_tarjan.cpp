@@ -1380,9 +1380,9 @@ void solve_gabow_tarjan_inner(const CostMatrix& cost,
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < m; ++j) {
                 if (scaled_cost[i][j] < BIG_INT) {
-                    // Double current cost
-                    c_current[i][j] = c_current[i][j] << 1;
-                    
+                    // Double current cost (use multiplication to avoid UB on negative values)
+                    c_current[i][j] = c_current[i][j] * 2;
+
                     // Add bit s
                     long long bit_s = (scaled_cost[i][j] >> s) & 1LL;
                     c_current[i][j] += bit_s;

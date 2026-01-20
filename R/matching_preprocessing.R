@@ -159,8 +159,8 @@ check_variable_health <- function(left, right, vars,
     summary_list[[length(summary_list) + 1]] <- var_summary
   }
 
-  # Convert to tibble
-  summary_df <- tibble::as_tibble(do.call(rbind, lapply(summary_list, as.data.frame)))
+  # Convert to tibble (use bind_rows for robust column name preservation)
+  summary_df <- dplyr::bind_rows(lapply(summary_list, tibble::as_tibble))
 
   structure(
     list(
